@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './dist/css/compiled/main.css'
 
 const App = () => {
   return (
