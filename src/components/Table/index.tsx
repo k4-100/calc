@@ -1,9 +1,9 @@
-
+import React from 'react'
 /**
  * 
  * @returns Table with cells 
  */
-const Table = () =>{
+const Table: React.FC = () =>{
 
     return(
         <div className="Table">

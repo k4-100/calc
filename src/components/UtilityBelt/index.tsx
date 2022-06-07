@@ -1,8 +1,9 @@
+import React from 'react'
 /**
  * 
  * @returns Belt with Utilities
  */
-const UtilityBelt = () =>{
+const UtilityBelt: React.FC = () =>{
 
     return(
         <div className="UtilityBelt">

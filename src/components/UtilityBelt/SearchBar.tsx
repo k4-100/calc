@@ -1,8 +1,9 @@
+import React from 'react'
 /**
  * 
  * @returns Search Bar
  */
-const SearchBar = () =>{
+const SearchBar: React.FC = () =>{
 
     return(
         <div className="SearchBar">
