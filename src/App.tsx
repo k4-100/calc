@@ -1,4 +1,5 @@
 import React from 'react';
+import CustomTable from './components/CustomTable/index'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './dist/css/compiled/main.css';
 
@@ -7,6 +8,7 @@ const App: React.FC = () => {
     <div className="App">
         <h1>
             words
+            <CustomTable />
         </h1>
     </div>
   );
