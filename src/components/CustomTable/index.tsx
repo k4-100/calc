@@ -9,8 +9,8 @@ const CustomTable: React.FC = () =>{
       Array(9).fill( Array(9).fill('*') )
     )
 
-    const changeTableCell = () =>{
-
+    const changeTableCell = ( x:Number ,y:Number ) =>{
+      alert( `${x}-${y}` )
     }
 
     return(
@@ -18,7 +18,7 @@ const CustomTable: React.FC = () =>{
           <Table striped bordered hover>
             <thead>
               <tr>
-              <th>0</th>
+              <th>X</th>
               {
                 table.map( (_,i) => <th key={i}>{i}</th> )
               }
@@ -31,7 +31,12 @@ const CustomTable: React.FC = () =>{
                   <td>{x}</td>
                   {
                     table[x].map( 
-                      (data,y) => <td key={y} contentEditable>
+                      (data,y) => 
+                      <td 
+                        key={y} 
+                        contentEditable
+                        onClick={ ()=>  changeTableCell(x,y) }
+                      >
                         {data}
                       </td>
                     )
