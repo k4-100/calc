@@ -8,7 +8,7 @@ const CustomTable: React.FC = () =>{
 
     const table: Array<Array<String> > = Array(9).fill( Array(9).fill('*') )
     return(
-        <div className="Table">
+        <div className="CustomTable">
           <Table striped bordered hover>
             <thead>
               <tr>
