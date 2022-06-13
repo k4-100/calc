@@ -7,7 +7,6 @@ const App: React.FC = () => {
   return (
     <div className="App">
         <h1>
-            words
             <CustomTable />
         </h1>
     </div>

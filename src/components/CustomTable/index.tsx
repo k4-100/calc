@@ -8,7 +8,6 @@ const CustomTable: React.FC = () =>{
 
     return(
         <div className="Table">
-            Table
           <Table striped bordered hover>
             <thead>
               <tr>
