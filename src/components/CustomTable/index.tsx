@@ -6,35 +6,33 @@ import { Table } from 'react-bootstrap'
  */
 const CustomTable: React.FC = () =>{
 
+    const table: Array<Array<String> > = Array(9).fill( Array(9).fill('*') )
     return(
         <div className="Table">
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Username</th>
+              <th>0</th>
+              {
+                table.map( (_,i) => <th key={i}>{i}</th> )
+              }
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td colSpan={2}>Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+            {
+              table.map( 
+                (_,x) => <tr key={x}>
+                  <td>{x}</td>
+                  {
+                    table[x].map( 
+                      (data,y) => <td key={y}>
+                        {data}
+                      </td>
+                    )
+                  }
+                </tr>
+              )
+            }
             </tbody>
           </Table>
         </div>
