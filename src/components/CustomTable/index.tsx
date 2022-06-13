@@ -1,12 +1,18 @@
-import React from 'react'
+import React, { useState} from 'react'
 import { Table } from 'react-bootstrap'
 /**
  * 
  * @returns Table with cells 
  */
 const CustomTable: React.FC = () =>{
+    const [table, setTable] = useState< Array< Array<String> > >(
+      Array(9).fill( Array(9).fill('*') )
+    )
 
-    const table: Array<Array<String> > = Array(9).fill( Array(9).fill('*') )
+    const changeTableCell = () =>{
+
+    }
+
     return(
         <div className="CustomTable">
           <Table striped bordered hover>
@@ -25,7 +31,7 @@ const CustomTable: React.FC = () =>{
                   <td>{x}</td>
                   {
                     table[x].map( 
-                      (data,y) => <td key={y}>
+                      (data,y) => <td key={y} contentEditable>
                         {data}
                       </td>
                     )
