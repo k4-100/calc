@@ -1,12 +1,13 @@
 import React, { useState} from 'react'
 import { Table } from 'react-bootstrap'
+import { TableClass } from '../../utility/TableClass'
 /**
  * 
  * @returns Table with cells 
  */
 const CustomTable: React.FC = () =>{
-    const [table, setTable] = useState< Array< Array<String> > >(
-      Array(9).fill( Array(9).fill('*') )
+    const [table, setTable] = useState<TableClass>( 
+      new TableClass(5,3)
     )
 
     const changeTableCell = ( x:Number ,y:Number ) =>{
@@ -20,24 +21,24 @@ const CustomTable: React.FC = () =>{
               <tr>
               <th>X</th>
               {
-                table.map( (_,i) => <th key={i}>{i}</th> )
+                table.cells.map( (_,i) => <th key={i}>{i}</th> )
               }
               </tr>
             </thead>
             <tbody>
             {
-              table.map( 
+              table.cells.map( 
                 (_,x) => <tr key={x}>
                   <td>{x}</td>
                   {
-                    table[x].map( 
+                    table.cells[x].map( 
                       (data,y) => 
                       <td 
                         key={y} 
                         contentEditable
                         onClick={ ()=>  changeTableCell(x,y) }
                       >
-                        {data}
+                        {data.text}
                       </td>
                     )
                   }
