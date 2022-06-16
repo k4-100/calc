@@ -1,14 +1,15 @@
 import React, { useState} from 'react'
 import { Table } from 'react-bootstrap'
 import { TableClass } from '../../utility/TableClass'
+
 /**
  * 
  * @returns Table with cells 
  */
 const CustomTable: React.FC = () =>{
     const [table, setTable] = useState<TableClass>( 
-      new TableClass(5,3)
-    )
+      new TableClass(4,3)
+    );
 
     const changeTableCell = ( x:Number ,y:Number ) =>{
       alert( `${x}-${y}` )
@@ -20,8 +21,9 @@ const CustomTable: React.FC = () =>{
             <thead>
               <tr>
               <th>X</th>
-              {
-                table.cells.map( (_,i) => <th key={i}>{i}</th> )
+              { 
+                table.cells[0]
+                && table.cells[0].map( (_,i) => <th key={i}>{i}</th> )
               }
               </tr>
             </thead>

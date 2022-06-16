@@ -47,8 +47,9 @@ export class TableClass{
         );
 
         this.cells = _cells
-        .map( ( row, x ) => row
-            .map( ( _, y ) => new Cell(x,y,'|=|') )
+        .map( ( row, y ) => row
+            .map( ( _, x ) => new Cell(x,y,`${x}-${y}`) )
         );
+        debugger
     }
 }
