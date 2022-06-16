@@ -50,6 +50,14 @@ export class TableClass{
         .map( ( row, y ) => row
             .map( ( _, x ) => new Cell(x,y,`${x}-${y}`) )
         );
-        debugger
     }
+
+    /**
+     * @param id id of the cell
+     * @returns deep clone of the cell specified by id
+     */
+    getCellByID = (id:number) => {
+        
+    }
+    
 }
