@@ -1,12 +1,23 @@
+
 /**
  * represents Cell inside a table
  */
 class Cell{
+    /** x position of the cell in a table */
     x: number;
+    /** y position of the cell in a table */
     y: number;
+    /** text content of the cell */
     text: string;
+    /** unique id number */
     id: number;
 
+    /**
+     * 
+     * @param x x position of the cell in a table 
+     * @param y y position of the cell in a table 
+     * @param text text content of the cell
+     */
     constructor(x:number, y:number, text:string){
         this.x = x;
         this.y = y;
@@ -15,9 +26,18 @@ class Cell{
     }
 }
 
+/**
+ * class representing a table filled with cells
+ */
 export class TableClass{
+    /** 2d array storing cells representing table */
     cells: Array< Array<Cell> >;
 
+    /**
+     * 
+     * @param width horizontal width of an array
+     * @param height vertical hight of an array
+     */
     constructor(width:number, height:number){
         /**
          *  dummy cells 2d array for generating stuff
