@@ -11,8 +11,11 @@ const CustomTable: React.FC = () =>{
       new TableClass(4,3)
     );
 
-    const changeTableCell = ( x:Number ,y:Number ) =>{
-      alert( `${x}-${y}` )
+    /**
+     * @param id id of the cell
+     */
+    const handleCellChange = ( id: number ) =>{
+      
     }
 
     return(
@@ -38,7 +41,7 @@ const CustomTable: React.FC = () =>{
                       <td 
                         key={y} 
                         contentEditable
-                        onClick={ ()=>  changeTableCell(x,y) }
+                        onClick={ ()=>  handleCellChange(0) }
                       >
                         {data.text}
                       </td>

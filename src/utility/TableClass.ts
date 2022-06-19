@@ -52,12 +52,5 @@ export class TableClass{
         );
     }
 
-    /**
-     * @param id id of the cell
-     * @returns deep clone of the cell specified by id
-     */
-    getCellByID = (id:number) => {
-        
-    }
     
 }
