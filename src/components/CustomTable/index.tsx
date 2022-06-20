@@ -15,7 +15,7 @@ const CustomTable: React.FC = () =>{
      * @param id id of the cell
      */
     const handleCellChange = ( id: number ) =>{
-      
+     
     }
 
     return(

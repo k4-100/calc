@@ -1,3 +1,7 @@
+/**
+ * id for the cell
+ */
+let cellIDSrc = 0;
 
 /**
  * represents Cell inside a table
@@ -22,7 +26,7 @@ class Cell{
         this.x = x;
         this.y = y;
         this.text = text;
-        this.id = 0;
+        this.id = ++cellIDSrc;
     }
 }
 
