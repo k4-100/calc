@@ -12,10 +12,12 @@ const CustomTable: React.FC = () =>{
     );
 
     /**
-     * @param id id of the cell
+     * 
+     * @param x horizontal (column/cell) cell coords
+     * @param y vertical (row) cell coords
      */
-    const handleCellChange = ( id: number ) =>{
-     
+    const handleCellChange = ( x:number, y:number ) =>{
+      alert(`${x}-${y}`)
     }
 
     return(
@@ -33,15 +35,15 @@ const CustomTable: React.FC = () =>{
             <tbody>
             {
               table.cells.map( 
-                (_,x) => <tr key={x}>
-                  <td>{x}</td>
+                (_,y) => <tr key={y}>
+                  <td>{y}</td>
                   {
-                    table.cells[x].map( 
-                      (data,y) => 
+                    table.cells[y].map( 
+                      (data,x) => 
                       <td 
-                        key={y} 
+                        key={x} 
                         contentEditable
-                        onClick={ ()=>  handleCellChange(0) }
+                        onClick={ ()=>  handleCellChange(x,y) }
                       >
                         {data.text}
                       </td>
