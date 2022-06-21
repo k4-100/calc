@@ -1,5 +1,6 @@
 import React, { useState} from 'react'
 import { Table } from 'react-bootstrap'
+import _ from 'lodash'
 import { TableClass } from '../../utility/TableClass'
 
 /**
@@ -15,9 +16,19 @@ const CustomTable: React.FC = () =>{
      * 
      * @param x horizontal (column/cell) cell coords
      * @param y vertical (row) cell coords
+     * @param e event object
      */
-    const handleCellChange = ( x:number, y:number ) =>{
-      alert(`${x}-${y}`)
+    const handleCellChange = ( 
+      x:number, 
+      y:number, 
+      e: any
+      ) =>{
+        alert('wersa')
+        const _table = _.cloneDeep( table )
+        const _cell =  _.cloneDeep( _table.cells[y][x] )
+        _cell.text = e.target.textContent
+        _table.cells[y][x] = _cell
+        setTable( _table )
     }
 
     return(
@@ -43,9 +54,8 @@ const CustomTable: React.FC = () =>{
                       <td 
                         key={x} 
                         contentEditable
-                        onClick={ ()=>  handleCellChange(x,y) }
+                        onChange={ (e)=>  handleCellChange(x,y,e) }
                       >
-                        {data.text}
                       </td>
                     )
                   }
