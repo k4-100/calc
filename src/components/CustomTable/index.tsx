@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
-import { TableClass } from "../../utility/TableClass";
+import { TableClass, CellClass } from "../../utility/TableClass";
 
 /**
  *
@@ -9,7 +9,7 @@ import { TableClass } from "../../utility/TableClass";
  */
 const CustomTable: React.FC = () => {
   const [table, setTable] = useState<TableClass>(new TableClass(4, 3));
-
+  const [currentCell, setCurrentCell] = useState<CellClass | null>(null);
   /**
    *
    * @param x horizontal (column/cell) cell coords
@@ -23,6 +23,16 @@ const CustomTable: React.FC = () => {
     _cell.text = e.target.textContent;
     _table.cells[y][x] = _cell;
     setTable(_table);
+  };
+
+  /**
+   *
+   * @param x horizontal (column/cell) cell coords
+   * @param y vertical (row) cell coords
+   */
+  const handleCellFocus = (x: number, y: number, e: any) => {
+    const target: any = e.target;
+    console.log(target);
   };
 
   return (
@@ -43,8 +53,7 @@ const CustomTable: React.FC = () => {
                 <td
                   key={x}
                   contentEditable
-                  onBlur={(e) => console.log("lost focus")}
-                  onFocus={(e) => console.log("gained focus")}
+                  onFocus={(e) => handleCellFocus(x, y, e)}
                 ></td>
               ))}
             </tr>
