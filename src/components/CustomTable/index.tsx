@@ -17,12 +17,33 @@ const CustomTable: React.FC = () => {
    * @param e event object
    */
   const handleCellBlur = (x: number, y: number, e: any) => {
+    console.log('lost focus')
     const _table = _.cloneDeep(table);
     const _cell = _.cloneDeep(_table.cells[y][x]);
     _cell.text = e.target.textContent;
     _table.cells[y][x] = _cell;
     setTable(_table);
   };
+
+  /**
+   *
+   * @param x horizontal (column/cell) cell coords
+   * @param y vertical (row) cell coords
+   * @param e event object
+   */
+  const handleCellKeyDown = (x: number, y: number, e: any) => {
+    const { keyCode } = e;
+    // if keyCode is either Enter
+    if(keyCode ===  13){
+      e.preventDefault();
+      const _table = _.cloneDeep(table);
+      const _cell = _.cloneDeep(_table.cells[y][x]);
+      _cell.text = e.target.textContent;
+      _table.cells[y][x] = _cell;
+      setTable(_table);
+    }
+  }
+
 
   return (
     <div className="CustomTable">
@@ -41,8 +62,10 @@ const CustomTable: React.FC = () => {
               {table.cells[y].map((data, x) => (
                 <td
                   key={x}
+                  id={`td-${x}-${y}`}
                   contentEditable
-                  onBlur={(e) => handleCellBlur(x, y, e)}
+                  onBlur={e => handleCellBlur(x, y, e)}
+                  onKeyDown={ e => handleCellKeyDown(x,y,e) }
                 >
                   {data.text}
                 </td>
