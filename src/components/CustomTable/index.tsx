@@ -38,8 +38,14 @@ const CustomTable = () =>{
       []
     )
 
-    const tableInstance = useTable({ columns, data })
-
+    const tableInstance =useTable<any>({ columns, data })
+    const {
+      getTableProps,
+      getTableBodyProps,
+      headerGroups,
+      rows,
+      prepareRow,
+    } = tableInstance
     /**
      * 
      * @param x horizontal (column/cell) cell coords
@@ -61,19 +67,7 @@ const CustomTable = () =>{
 
  
 
- const {
 
-   getTableProps,
-
-   getTableBodyProps,
-
-   headerGroups,
-
-   rows,
-
-   prepareRow,
-
- } = tableInstance
 
  
 
