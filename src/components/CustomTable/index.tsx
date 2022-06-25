@@ -9,30 +9,19 @@ import { TableClass, CellClass } from "../../utility/TableClass";
  */
 const CustomTable: React.FC = () => {
   const [table, setTable] = useState<TableClass>(new TableClass(4, 3));
-  const [currentCell, setCurrentCell] = useState<CellClass | null>(null);
+
   /**
    *
    * @param x horizontal (column/cell) cell coords
    * @param y vertical (row) cell coords
    * @param e event object
    */
-  const handleCellChange = (x: number, y: number, e: any) => {
-    alert("wersa");
+  const handleCellFocus = (x: number, y: number, e: any) => {
     const _table = _.cloneDeep(table);
     const _cell = _.cloneDeep(_table.cells[y][x]);
     _cell.text = e.target.textContent;
     _table.cells[y][x] = _cell;
     setTable(_table);
-  };
-
-  /**
-   *
-   * @param x horizontal (column/cell) cell coords
-   * @param y vertical (row) cell coords
-   */
-  const handleCellFocus = (x: number, y: number, e: any) => {
-    const target: any = e.target;
-    console.log(target);
   };
 
   return (
@@ -54,7 +43,9 @@ const CustomTable: React.FC = () => {
                   key={x}
                   contentEditable
                   onFocus={(e) => handleCellFocus(x, y, e)}
-                ></td>
+                >
+                  {data.text}
+                </td>
               ))}
             </tr>
           ))}
