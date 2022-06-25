@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
-import { TableClass, CellClass } from "../../utility/TableClass";
+import { TableClass } from "../../utility/TableClass";
 
 /**
  *
@@ -16,7 +16,7 @@ const CustomTable: React.FC = () => {
    * @param y vertical (row) cell coords
    * @param e event object
    */
-  const handleCellFocus = (x: number, y: number, e: any) => {
+  const handleCellBlur = (x: number, y: number, e: any) => {
     const _table = _.cloneDeep(table);
     const _cell = _.cloneDeep(_table.cells[y][x]);
     _cell.text = e.target.textContent;
@@ -42,7 +42,7 @@ const CustomTable: React.FC = () => {
                 <td
                   key={x}
                   contentEditable
-                  onFocus={(e) => handleCellFocus(x, y, e)}
+                  onBlur={(e) => handleCellBlur(x, y, e)}
                 >
                   {data.text}
                 </td>
