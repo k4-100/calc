@@ -13,6 +13,8 @@ export class CellClass {
   y: number;
   /** text content of the cell */
   text: string;
+  /** content of the cell */
+  content: string;
   /** unique id number */
   id: number;
 
@@ -20,12 +22,13 @@ export class CellClass {
    *
    * @param x x position of the cell in a table
    * @param y y position of the cell in a table
-   * @param text text content of the cell
+   * @param text text and content of the cell
    */
   constructor(x: number, y: number, text: string) {
     this.x = x;
     this.y = y;
     this.text = text;
+    this.content = text;
     this.id = ++cellIDSrc;
   }
 }
