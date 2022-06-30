@@ -15,6 +15,8 @@ export class CellClass {
   text: string;
   /** content of the cell */
   content: string;
+  /**  number of times cell has been clicked*/
+  clicks: number;
   /** unique id number */
   id: number;
 
@@ -28,7 +30,8 @@ export class CellClass {
     this.x = x;
     this.y = y;
     this.text = text;
-    this.content = text;
+    this.content = `c-${text}`;
+    this.clicks = 0;
     this.id = ++cellIDSrc;
   }
 }

@@ -33,15 +33,33 @@ const CustomTable: React.FC = () => {
    */
   const handleCellKeyDown = (x: number, y: number, e: any) => {
     const { keyCode } = e;
-    // if keyCode is either Enter
+    // if keyCode is Enter
     if(keyCode ===  13){
       e.preventDefault();
       const _table = _.cloneDeep(table);
       const _cell = _.cloneDeep(_table.cells[y][x]);
       _cell.text = e.target.textContent;
+      _cell.clicks = 2;
       _table.cells[y][x] = _cell;
       setTable(_table);
     }
+  }
+
+
+  /**
+   *
+   * @param x horizontal (column/cell) cell coords
+   * @param y vertical (row) cell coords
+   * @param e event object
+   */
+  const handleCellClick = (x: number, y: number, e: any) => {
+      const _table = _.cloneDeep(table);
+      const _cell = _.cloneDeep(_table.cells[y][x]);
+      if( _cell.clicks < 2)
+        _cell.clicks = ++_cell.clicks;
+
+      _table.cells[y][x] = _cell;
+      setTable(_table);
   }
 
 
@@ -66,8 +84,9 @@ const CustomTable: React.FC = () => {
                   contentEditable
                   onBlur={e => handleCellBlur(x, y, e)}
                   onKeyDown={ e => handleCellKeyDown(x,y,e) }
+                  onClick={ e => handleCellClick(x,y,e) }
                 >
-                  {data.text}
+                  { data.clicks < 2 ? data.text : data.content}
                 </td>
               ))}
             </tr>
