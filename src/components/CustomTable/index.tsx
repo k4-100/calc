@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
-import { TableClass } from "../../utility/TableClass";
+import { CellClass, TableClass } from "../../utility/TableClass";
 
 /**
  *
@@ -11,15 +11,19 @@ const CustomTable: React.FC = () => {
   const [table, setTable] = useState<TableClass>(new TableClass(4, 3));
 
   /**
-   *
+   * deep clones table and cell, performs callback and sets new table with changed cell
    * @param x horizontal (column/cell) cell coords
    * @param y vertical (row) cell coords
-   * @param callback function to be used i
+   * @param callback function to be used between cloning and setting
    */
-  const copyAndSetWith = (x: number, y: number, callback: () => any) => {
+  const cloneAndSetTableCell = (
+    x: number,
+    y: number,
+    callback: (cl: CellClass) => any
+  ) => {
     const _table = _.cloneDeep(table);
     const _cell = _.cloneDeep(_table.cells[y][x]);
-    callback();
+    callback(_cell);
     _table.cells[y][x] = _cell;
     setTable(_table);
   };
@@ -32,11 +36,9 @@ const CustomTable: React.FC = () => {
    */
   const handleCellBlur = (x: number, y: number, e: any) => {
     console.log("lost focus");
-    const _table = _.cloneDeep(table);
-    const _cell = _.cloneDeep(_table.cells[y][x]);
-    _cell.text = e.target.textContent;
-    _table.cells[y][x] = _cell;
-    setTable(_table);
+    cloneAndSetTableCell(x, y, (cl) => {
+      cl.text = e.target.textContent;
+    });
   };
 
   /**
@@ -50,12 +52,10 @@ const CustomTable: React.FC = () => {
     // if keyCode is Enter
     if (keyCode === 13) {
       e.preventDefault();
-      const _table = _.cloneDeep(table);
-      const _cell = _.cloneDeep(_table.cells[y][x]);
-      _cell.text = e.target.textContent;
-      _cell.clicks = 2;
-      _table.cells[y][x] = _cell;
-      setTable(_table);
+      cloneAndSetTableCell(x, y, (cl) => {
+        cl.text = e.target.textContent;
+      });
+      // _cell.clicks = 2;
     }
   };
 
@@ -66,12 +66,8 @@ const CustomTable: React.FC = () => {
    * @param e event object
    */
   const handleCellClick = (x: number, y: number, e: any) => {
-    const _table = _.cloneDeep(table);
-    const _cell = _.cloneDeep(_table.cells[y][x]);
-    if (_cell.clicks < 2) _cell.clicks = ++_cell.clicks;
-
-    _table.cells[y][x] = _cell;
-    setTable(_table);
+    cloneAndSetTableCell(x, y, () => {});
+    // if (_cell.clicks < 2) _cell.clicks = ++_cell.clicks;
   };
 
   return (
