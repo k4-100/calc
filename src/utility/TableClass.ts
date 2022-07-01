@@ -13,8 +13,6 @@ export class CellClass {
   y: number;
   /** text content of the cell */
   text: string;
-  /** content of the cell */
-  content: string;
   /**  number of times cell has been clicked*/
   clicks: number;
   /** unique id number */
@@ -30,10 +28,17 @@ export class CellClass {
     this.x = x;
     this.y = y;
     this.text = text;
-    this.content = `c-${text}`;
     this.clicks = 0;
     this.id = ++cellIDSrc;
   }
+
+  /**
+   *
+   * @returns evaulated this.text used for display in a table
+   */
+  getEvaluatedText = (): string => {
+    return this.text;
+  };
 }
 
 /**
