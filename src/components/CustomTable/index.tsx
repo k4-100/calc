@@ -14,10 +14,24 @@ const CustomTable: React.FC = () => {
    *
    * @param x horizontal (column/cell) cell coords
    * @param y vertical (row) cell coords
+   * @param callback function to be used i
+   */
+  const copyAndSetWith = (x: number, y: number, callback: () => any) => {
+    const _table = _.cloneDeep(table);
+    const _cell = _.cloneDeep(_table.cells[y][x]);
+    callback();
+    _table.cells[y][x] = _cell;
+    setTable(_table);
+  };
+
+  /**
+   *
+   * @param x horizontal (column/cell) cell coords
+   * @param y vertical (row) cell coords
    * @param e event object
    */
   const handleCellBlur = (x: number, y: number, e: any) => {
-    console.log('lost focus')
+    console.log("lost focus");
     const _table = _.cloneDeep(table);
     const _cell = _.cloneDeep(_table.cells[y][x]);
     _cell.text = e.target.textContent;
@@ -34,7 +48,7 @@ const CustomTable: React.FC = () => {
   const handleCellKeyDown = (x: number, y: number, e: any) => {
     const { keyCode } = e;
     // if keyCode is Enter
-    if(keyCode ===  13){
+    if (keyCode === 13) {
       e.preventDefault();
       const _table = _.cloneDeep(table);
       const _cell = _.cloneDeep(_table.cells[y][x]);
@@ -43,8 +57,7 @@ const CustomTable: React.FC = () => {
       _table.cells[y][x] = _cell;
       setTable(_table);
     }
-  }
-
+  };
 
   /**
    *
@@ -53,15 +66,13 @@ const CustomTable: React.FC = () => {
    * @param e event object
    */
   const handleCellClick = (x: number, y: number, e: any) => {
-      const _table = _.cloneDeep(table);
-      const _cell = _.cloneDeep(_table.cells[y][x]);
-      if( _cell.clicks < 2)
-        _cell.clicks = ++_cell.clicks;
+    const _table = _.cloneDeep(table);
+    const _cell = _.cloneDeep(_table.cells[y][x]);
+    if (_cell.clicks < 2) _cell.clicks = ++_cell.clicks;
 
-      _table.cells[y][x] = _cell;
-      setTable(_table);
-  }
-
+    _table.cells[y][x] = _cell;
+    setTable(_table);
+  };
 
   return (
     <div className="CustomTable">
@@ -82,11 +93,12 @@ const CustomTable: React.FC = () => {
                   key={x}
                   id={`td-${x}-${y}`}
                   contentEditable
-                  onBlur={e => handleCellBlur(x, y, e)}
-                  onKeyDown={ e => handleCellKeyDown(x,y,e) }
-                  onClick={ e => handleCellClick(x,y,e) }
+                  onBlur={(e) => handleCellBlur(x, y, e)}
+                  onKeyDown={(e) => handleCellKeyDown(x, y, e)}
+                  onClick={(e) => handleCellClick(x, y, e)}
                 >
-                  { data.clicks < 2 ? data.text : data.content}
+                  {data.text}
+                  {/* {data.clicks < 2 ? data.text : data.content} */}
                 </td>
               ))}
             </tr>
