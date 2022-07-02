@@ -38,6 +38,7 @@ const CustomTable: React.FC = () => {
     console.log("lost focus");
     cloneAndSetTableCell(x, y, (cl) => {
       cl.text = e.target.textContent;
+      cl.clicks = 0;
     });
   };
 
@@ -49,11 +50,12 @@ const CustomTable: React.FC = () => {
    */
   const handleCellKeyDown = (x: number, y: number, e: any) => {
     const { keyCode } = e;
-    // if keyCode is Enter
+    // if keyCode is Enter save content
     if (keyCode === 13) {
       e.preventDefault();
+
       cloneAndSetTableCell(x, y, (cl) => {
-        cl.text = e.target.textContent;
+        if (cl.clicks === 2) cl.text = e.target.textContent;
       });
       // _cell.clicks = 2;
     }
@@ -66,8 +68,9 @@ const CustomTable: React.FC = () => {
    * @param e event object
    */
   const handleCellClick = (x: number, y: number, e: any) => {
-    cloneAndSetTableCell(x, y, () => {});
-    // if (_cell.clicks < 2) _cell.clicks = ++_cell.clicks;
+    cloneAndSetTableCell(x, y, (cl) => {
+      if (cl.clicks < 2) cl.clicks = ++cl.clicks;
+    });
   };
 
   return (
@@ -84,7 +87,7 @@ const CustomTable: React.FC = () => {
           {table.cells.map((_, y) => (
             <tr key={y}>
               <td>{y}</td>
-              {table.cells[y].map((data, x) => (
+              {table.cells[y].map((data: CellClass, x) => (
                 <td
                   key={x}
                   id={`td-${x}-${y}`}
@@ -93,8 +96,7 @@ const CustomTable: React.FC = () => {
                   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
                   onClick={(e) => handleCellClick(x, y, e)}
                 >
-                  {data.text}
-                  {/* {data.clicks < 2 ? data.text : data.content} */}
+                  {data.clicks === 2 ? data.text : data.getEvaluatedText()}
                 </td>
               ))}
             </tr>

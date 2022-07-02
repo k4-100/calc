@@ -30,6 +30,7 @@ export class CellClass {
     this.text = text;
     this.clicks = 0;
     this.id = ++cellIDSrc;
+    this.getEvaluatedText = this.getEvaluatedText.bind(this);
   }
 
   /**
@@ -37,7 +38,10 @@ export class CellClass {
    * @returns evaulated this.text used for display in a table
    */
   getEvaluatedText = (): string => {
-    return this.text;
+    const txt = "e" + this.text + "e";
+    console.log("text ", this.text, " txt", txt);
+    // console.log(this);
+    return txt;
   };
 }
 
