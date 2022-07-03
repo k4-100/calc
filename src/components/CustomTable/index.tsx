@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
 import { CellClass, TableClass } from "../../utility/TableClass";
@@ -10,6 +10,9 @@ import { CellClass, TableClass } from "../../utility/TableClass";
 const CustomTable: React.FC = () => {
   const [table, setTable] = useState<TableClass>(new TableClass(4, 3));
 
+  // useEffect(() => {
+  //   debugger;
+  // }, [table]);
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
    * @param x horizontal (column/cell) cell coords
@@ -19,13 +22,18 @@ const CustomTable: React.FC = () => {
   const cloneAndSetTableCell = (
     x: number,
     y: number,
-    callback: (cl: CellClass) => any
+    callback: (cl: CellClass) => void
   ) => {
-    const _table = _.cloneDeep(table);
-    const _cell = _.cloneDeep(_table.cells[y][x]);
+    // debugger;
+    const _table: TableClass = _.cloneDeep(table);
+    // const _cell : CellClass = { ..._table.cells[y][x] };
+    const _cell = _table.cells[y][x];
+    // debugger;
+    // debugger;
     callback(_cell);
     _table.cells[y][x] = _cell;
     setTable(_table);
+    // debugger;
   };
 
   /**
@@ -70,6 +78,7 @@ const CustomTable: React.FC = () => {
   const handleCellClick = (x: number, y: number, e: any) => {
     cloneAndSetTableCell(x, y, (cl) => {
       if (cl.clicks < 2) cl.clicks = ++cl.clicks;
+      cl.dummy = cl.dummy + 1;
     });
   };
 

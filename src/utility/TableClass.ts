@@ -17,7 +17,7 @@ export class CellClass {
   clicks: number;
   /** unique id number */
   id: number;
-
+  dummy: number;
   /**
    *
    * @param x x position of the cell in a table
@@ -30,19 +30,17 @@ export class CellClass {
     this.text = text;
     this.clicks = 0;
     this.id = ++cellIDSrc;
-    this.getEvaluatedText = this.getEvaluatedText.bind(this);
+    this.dummy = 0;
   }
 
   /**
    *
    * @returns evaulated this.text used for display in a table
    */
-  getEvaluatedText = (): string => {
+  getEvaluatedText() {
     const txt = "e" + this.text + "e";
-    console.log("text ", this.text, " txt", txt);
-    // console.log(this);
     return txt;
-  };
+  }
 }
 
 /**
