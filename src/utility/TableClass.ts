@@ -37,7 +37,7 @@ export class CellClass {
    * @returns evaulated this.text used for display in a table
    */
   getEvaluatedText() {
-    const txt = this.text;
+    const txt = "|" + this.text + "|";
     return txt;
   }
 }

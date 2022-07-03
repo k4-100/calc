@@ -66,6 +66,10 @@ const CustomTable: React.FC = () => {
         if (cl.clicks === 2) cl.text = e.target.textContent;
       });
       // _cell.clicks = 2;
+    } else {
+      cloneAndSetTableCell(x, y, (cl) => {
+        if (cl.clicks < 2) cl.clicks = 2;
+      });
     }
   };
 
