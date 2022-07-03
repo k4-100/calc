@@ -17,7 +17,7 @@ export class CellClass {
   clicks: number;
   /** unique id number */
   id: number;
-  dummy: number;
+
   /**
    *
    * @param x x position of the cell in a table
@@ -30,7 +30,6 @@ export class CellClass {
     this.text = text;
     this.clicks = 0;
     this.id = ++cellIDSrc;
-    this.dummy = 0;
   }
 
   /**
@@ -38,7 +37,7 @@ export class CellClass {
    * @returns evaulated this.text used for display in a table
    */
   getEvaluatedText() {
-    const txt = "e" + this.text + "e";
+    const txt = this.text;
     return txt;
   }
 }

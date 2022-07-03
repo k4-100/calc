@@ -45,7 +45,7 @@ const CustomTable: React.FC = () => {
   const handleCellBlur = (x: number, y: number, e: any) => {
     console.log("lost focus");
     cloneAndSetTableCell(x, y, (cl) => {
-      cl.text = e.target.textContent;
+      if (cl.clicks === 2) cl.text = e.target.textContent;
       cl.clicks = 0;
     });
   };
@@ -78,7 +78,6 @@ const CustomTable: React.FC = () => {
   const handleCellClick = (x: number, y: number, e: any) => {
     cloneAndSetTableCell(x, y, (cl) => {
       if (cl.clicks < 2) cl.clicks = ++cl.clicks;
-      cl.dummy = cl.dummy + 1;
     });
   };
 
