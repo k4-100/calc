@@ -1,7 +1,7 @@
 /**
  * id for the cell
  */
-let cellIDSrc = 0;
+let cellIDSrc: number = 0;
 
 /**
  * represents Cell inside a table
