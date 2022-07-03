@@ -1,3 +1,5 @@
+import { evaluate } from "mathjs";
+
 /**
  * id for the cell
  */
@@ -37,8 +39,9 @@ export class CellClass {
    * @returns evaulated this.text used for display in a table
    */
   getEvaluatedText() {
-    const txt = "|" + this.text + "|";
-    return txt;
+    if (this.text[0] === "=") return evaluate(this.text.substring(1));
+
+    return this.text;
   }
 }
 
