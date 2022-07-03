@@ -66,7 +66,7 @@ export class TableClass {
     );
 
     this.cells = _cells.map((row, y) =>
-      row.map((_, x) => new CellClass(x, y, `${x}-${y}`))
+      row.map((_, x) => new CellClass(x, y, ""))
     );
   }
 }
