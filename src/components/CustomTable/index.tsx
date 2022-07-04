@@ -24,16 +24,11 @@ const CustomTable: React.FC = () => {
     y: number,
     callback: (cl: CellClass) => void
   ) => {
-    // debugger;
     const _table: TableClass = _.cloneDeep(table);
-    // const _cell : CellClass = { ..._table.cells[y][x] };
     const _cell = _table.cells[y][x];
-    // debugger;
-    // debugger;
     callback(_cell);
     _table.cells[y][x] = _cell;
     setTable(_table);
-    // debugger;
   };
 
   /**
@@ -68,8 +63,9 @@ const CustomTable: React.FC = () => {
           cl.clicks = 0;
         }
       });
-      // _cell.clicks = 2;
-    } else {
+    }
+    // on non-ENTER key press if cell was clicked on once
+    else {
       cloneAndSetTableCell(x, y, (cl) => {
         if (cl.clicks < 2) cl.clicks = 2;
       });
