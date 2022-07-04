@@ -9,7 +9,6 @@ import { evaluate } from "mathjs";
  */
 const CustomTable: React.FC = () => {
   const [table, setTable] = useState<TableClass>(new TableClass(4, 3));
-
   //#region utils
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
@@ -44,15 +43,32 @@ const CustomTable: React.FC = () => {
   const getEvaluatedText = (text: string) => {
     // if this.text is a mathematical expression:
     if (text[0] === "=") {
-      const _text: string = "";
       const regex: RegExp = /([A-Z][1-9]+)/;
       if (regex.test(text)) {
-        console.log(text.split(regex));
-        return "EXPRESSION";
-      } else return "NO EXPRESSION";
-      // return evaluate(text.substring(1));
+        let _text: string = "";
+        const chunks: string[] = text
+          .trim()
+          .split(regex)
+          .filter((str) => str !== "");
+        console.log("chunks", chunks);
+        chunks.forEach((chunk) => {
+          if (regex.test(chunk)) {
+            console.log("chunk", chunk);
+            // split string
+            const coords = chunk.split(/([A-Z])/).filter((str) => str !== "");
+            console.log("coords", coords);
+            _text += table.cells[0][0].text;
+            // table.cells[coords[0].charCodeAt(0) - 65][Number(coords[1])].text;
+            console.log("_text", _text);
+          } else {
+            _text += chunk;
+          }
+        });
+        return evaluate(_text.substring(1));
+      } else {
+        return evaluate(text.substring(1));
+      }
     }
-
     return text;
   };
   //#endregion utils
