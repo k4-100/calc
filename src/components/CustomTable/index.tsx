@@ -44,7 +44,13 @@ const CustomTable: React.FC = () => {
   const getEvaluatedText = (text: string) => {
     // if this.text is a mathematical expression:
     if (text[0] === "=") {
-      return evaluate(text.substring(1));
+      const _text: string = "";
+      const regex: RegExp = /([A-Z][1-9]+)/;
+      if (regex.test(text)) {
+        console.log(text.split(regex));
+        return "EXPRESSION";
+      } else return "NO EXPRESSION";
+      // return evaluate(text.substring(1));
     }
 
     return text;
