@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
 import { CellClass, TableClass } from "../../utility/TableClass";
+import { number } from "mathjs";
 
 /**
  *
@@ -10,9 +11,7 @@ import { CellClass, TableClass } from "../../utility/TableClass";
 const CustomTable: React.FC = () => {
   const [table, setTable] = useState<TableClass>(new TableClass(4, 3));
 
-  // useEffect(() => {
-  //   debugger;
-  // }, [table]);
+  //#region utils
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
    * @param x horizontal (column/cell) cell coords
@@ -30,6 +29,15 @@ const CustomTable: React.FC = () => {
     _table.cells[y][x] = _cell;
     setTable(_table);
   };
+
+  /**
+   * @param colName name (string) at the top of the column
+   * @returns column number
+   */
+  const getColumnNumberFromColName = (colName: string): number => {
+    return colName.charCodeAt(0) - 65;
+  };
+  //#endregion utils
 
   /**
    *
