@@ -89,9 +89,11 @@ const CustomTable: React.FC = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>X</th>
+            <th>#</th>
             {table.cells[0] &&
-              table.cells[0].map((_, i) => <th key={i}>{i}</th>)}
+              table.cells[0].map((_, i) => (
+                <th key={i}>{String.fromCharCode(65 + i)}</th>
+              ))}
           </tr>
         </thead>
         <tbody>
