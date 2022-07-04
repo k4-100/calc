@@ -1,5 +1,3 @@
-import { evaluate } from "mathjs";
-
 /**
  * id for the cell
  */
@@ -32,16 +30,6 @@ export class CellClass {
     this.text = text;
     this.clicks = 0;
     this.id = ++cellIDSrc;
-  }
-
-  /**
-   *
-   * @returns evaulated this.text used for display in a table
-   */
-  getEvaluatedText() {
-    if (this.text[0] === "=") return evaluate(this.text.substring(1));
-
-    return this.text;
   }
 }
 

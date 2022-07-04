@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
 import { CellClass, TableClass } from "../../utility/TableClass";
-import { number } from "mathjs";
-
+import { evaluate } from "mathjs";
 /**
  *
  * @returns Table with cells
@@ -36,6 +35,19 @@ const CustomTable: React.FC = () => {
    */
   const getColumnNumberFromColName = (colName: string): number => {
     return colName.charCodeAt(0) - 65;
+  };
+
+  /**
+   * @param text to evaluate
+   * @returns evaulated this.text used for display in a table
+   */
+  const getEvaluatedText = (text: string) => {
+    // if this.text is a mathematical expression:
+    if (text[0] === "=") {
+      return evaluate(text.substring(1));
+    }
+
+    return text;
   };
   //#endregion utils
 
@@ -117,7 +129,7 @@ const CustomTable: React.FC = () => {
                   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
                   onClick={(e) => handleCellClick(x, y, e)}
                 >
-                  {data.clicks === 2 ? data.text : data.getEvaluatedText()}
+                  {data.clicks === 2 ? data.text : getEvaluatedText(data.text)}
                 </td>
               ))}
             </tr>
