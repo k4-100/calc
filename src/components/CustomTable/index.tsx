@@ -58,12 +58,11 @@ const CustomTable: React.FC = () => {
             return (prev +=
               table.cells[Number(coords[1]) - 1][
                 getColumnNumberFromColName(coords[0])
-              ].value);
+              ].value || "0");
           } else {
             return (prev += next);
           }
         });
-
         return evaluate(_text.substring(1));
       } else {
         return evaluate(text.substring(1));
@@ -151,6 +150,7 @@ const CustomTable: React.FC = () => {
                   key={x}
                   id={`td-${x}-${y}`}
                   contentEditable
+                  suppressContentEditableWarning
                   onBlur={(e) => handleCellBlur(x, y, e)}
                   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
                   onClick={(e) => handleCellClick(x, y, e)}
