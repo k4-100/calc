@@ -54,8 +54,12 @@ const CustomTable: React.FC = () => {
           if (regex.test(chunk)) {
             // split string
             const coords = chunk.split(/([A-Z])/).filter((str) => str !== "");
-            _text += table.cells[0][0].value;
-            // table.cells[coords[0].charCodeAt(0) - 65][Number(coords[1])].text;
+            console.log("coords", coords);
+            // _text += table.cells[0][0].value;
+            _text +=
+              table.cells[Number(coords[1]) - 1][
+                getColumnNumberFromColName(coords[0])
+              ].value;
           } else {
             _text += chunk;
           }
