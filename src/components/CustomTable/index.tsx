@@ -140,8 +140,8 @@ const CustomTable: React.FC = () => {
         </thead>
         <tbody>
           {table.cells.map((_, y) => (
-            <tr key={y}>
-              <td>{y}</td>
+            <tr key={y + 1}>
+              <td>{y + 1}</td>
               {table.cells[y].map((data: CellClass, x) => (
                 <td
                   key={x}
