@@ -58,7 +58,7 @@ const CustomTable: React.FC = () => {
             // split string
             const coords = chunk.split(/([A-Z])/).filter((str) => str !== "");
             console.log("coords", coords);
-            _text += table.cells[0][0].text;
+            _text += table.cells[0][0].value;
             // table.cells[coords[0].charCodeAt(0) - 65][Number(coords[1])].text;
             console.log("_text", _text);
           } else {
@@ -83,7 +83,10 @@ const CustomTable: React.FC = () => {
   const handleCellBlur = (x: number, y: number, e: any) => {
     console.log("lost focus");
     cloneAndSetTableCell(x, y, (cl) => {
-      if (cl.clicks === 2) cl.text = e.target.textContent;
+      if (cl.clicks === 2) {
+        cl.text = e.target.textContent;
+        cl.value = getEvaluatedText(e.target.textContent);
+      }
       cl.clicks = 0;
     });
   };
@@ -103,6 +106,7 @@ const CustomTable: React.FC = () => {
       cloneAndSetTableCell(x, y, (cl) => {
         if (cl.clicks === 2) {
           cl.text = e.target.textContent;
+          cl.value = getEvaluatedText(e.target.textContent);
           cl.clicks = 0;
         }
       });
@@ -152,7 +156,7 @@ const CustomTable: React.FC = () => {
                   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
                   onClick={(e) => handleCellClick(x, y, e)}
                 >
-                  {data.clicks === 2 ? data.text : getEvaluatedText(data.text)}
+                  {data.clicks === 2 ? data.text : data.value}
                 </td>
               ))}
             </tr>
