@@ -50,20 +50,20 @@ const CustomTable: React.FC = () => {
           .trim()
           .split(regex)
           .filter((str) => str !== "");
-        chunks.forEach((chunk, i) => {
-          if (regex.test(chunk)) {
+
+        _text = chunks.reduce((prev, next): string => {
+          if (regex.test(next)) {
             // split string
-            const coords = chunk.split(/([A-Z])/).filter((str) => str !== "");
-            console.log("coords", coords);
-            // _text += table.cells[0][0].value;
-            _text +=
+            const coords = next.split(/([A-Z])/).filter((str) => str !== "");
+            return (prev +=
               table.cells[Number(coords[1]) - 1][
                 getColumnNumberFromColName(coords[0])
-              ].value;
+              ].value);
           } else {
-            _text += chunk;
+            return (prev += next);
           }
         });
+
         return evaluate(_text.substring(1));
       } else {
         return evaluate(text.substring(1));
