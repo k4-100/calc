@@ -51,7 +51,8 @@ const CustomTable: React.FC = () => {
           .split(regex)
           .filter((str) => str !== "");
         console.log("chunks", chunks);
-        chunks.forEach((chunk) => {
+        chunks.forEach((chunk, i) => {
+          console.log(`i: ${i}`);
           if (regex.test(chunk)) {
             console.log("chunk", chunk);
             // split string
