@@ -19,6 +19,8 @@ export class CellClass {
   clicks: number;
   /** unique id number */
   id: number;
+  /** indicate if the cell has been found */
+  wasFound: boolean;
 
   /**
    *
@@ -32,6 +34,7 @@ export class CellClass {
     this.text = text;
     this.value = "";
     this.clicks = 0;
+    this.wasFound = false;
     this.id = ++cellIDSrc;
   }
 }

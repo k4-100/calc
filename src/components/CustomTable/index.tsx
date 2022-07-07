@@ -148,6 +148,7 @@ const CustomTable: React.FC = () => {
               <td>{y + 1}</td>
               {table.cells[y].map((data: CellClass, x) => (
                 <td
+                  style={{ backgroundColor: data.wasFound ? "red" : "" }}
                   key={x}
                   id={`td-${x}-${y}`}
                   contentEditable
