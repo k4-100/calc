@@ -1,15 +1,15 @@
-import React from 'react'
+import React from "react";
+import SearchBar from "./SearchBar";
 /**
- * 
+ *
  * @returns Belt with Utilities
  */
-const UtilityBelt: React.FC = () =>{
+const UtilityBelt: React.FC = () => {
+  return (
+    <div className="UtilityBelt">
+      <SearchBar />
+    </div>
+  );
+};
 
-    return(
-        <div className="UtilityBelt">
-            UtilityBelt
-        </div>
-    )
-}
-
-export default UtilityBelt
+export default UtilityBelt;
