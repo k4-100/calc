@@ -6,17 +6,15 @@ import React from "react";
 const SearchBar: React.FC = () => {
   return (
     <div className="SearchBar">
-      <form className="form-inline my-2 my-lg-0">
+      <div className="d-flex m-2">
+        <button className="btn btn-outline-success my-2 my-sm-0">Search</button>
         <input
-          className="form-control"
+          className="form-control w-25"
           type="search"
           placeholder="Search"
           aria-label="Search"
         />
-        {/* <button className="btn btn-outline-success my-2 my-sm-0" type="submit">
-          Search
-        </button> */}
-      </form>
+      </div>
     </div>
   );
 };
