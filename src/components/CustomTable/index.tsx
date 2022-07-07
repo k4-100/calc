@@ -3,12 +3,13 @@ import { Table } from "react-bootstrap";
 import _ from "lodash";
 import { CellClass, TableClass } from "../../utility/TableClass";
 import { evaluate } from "mathjs";
+import { useGlobalContext } from "../../context";
 /**
  *
  * @returns Table with cells
  */
 const CustomTable: React.FC = () => {
-  const [table, setTable] = useState<TableClass>(new TableClass(4, 3));
+  const { table, setTable } = useGlobalContext();
   //#region utils
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
@@ -25,7 +26,7 @@ const CustomTable: React.FC = () => {
     const _cell = _table.cells[y][x];
     callback(_cell);
     _table.cells[y][x] = _cell;
-    setTable(_table);
+    setTable!(_table);
   };
 
   /**

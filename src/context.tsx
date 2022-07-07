@@ -1,10 +1,11 @@
 import React from "react";
-
+import { TableClass } from "./utility/TableClass";
 type GlobalContextType = {
-  txt: string;
+  table: TableClass;
+  setTable?: React.Dispatch<React.SetStateAction<TableClass>>;
 };
 const GlobalContext = React.createContext<GlobalContextType>({
-  txt: "",
+  table: new TableClass(1, 1),
 });
 
 type Props = {
@@ -12,8 +13,9 @@ type Props = {
 };
 
 const GlobalContextProvider: React.FC<Props> = ({ children }) => {
+  const [table, setTable] = React.useState<TableClass>(new TableClass(4, 3));
   return (
-    <GlobalContext.Provider value={{ txt: "runs" }}>
+    <GlobalContext.Provider value={{ table, setTable }}>
       {children}
     </GlobalContext.Provider>
   );
