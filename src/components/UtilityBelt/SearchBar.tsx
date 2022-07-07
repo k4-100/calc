@@ -1,9 +1,11 @@
 import React from "react";
+import { useGlobalContext } from "../../context";
 /**
  *
  * @returns Search Bar
  */
 const SearchBar: React.FC = () => {
+  console.log("useGlobalContext", useGlobalContext());
   return (
     <div className="SearchBar">
       <div className="d-flex m-2">
