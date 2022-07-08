@@ -24,6 +24,7 @@ const SearchBar: React.FC = () => {
       const _table: TableClass = _.cloneDeep(table);
       _table.cells.forEach((row) =>
         row.forEach((cell) => {
+          if (cell.wasFound) cell.wasFound = false;
           if (cell.value.includes(searchQuery)) {
             cell.wasFound = true;
             if (!tableChanged) tableChanged = true;
