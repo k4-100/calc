@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
-import { CellClass, TableClass } from "../../utility/Classes";
+import { CellClass, TableClass, SheetClass } from "../../utility/Classes";
 import { evaluate } from "mathjs";
 import { useGlobalContext } from "../../context";
 /**
@@ -9,7 +9,9 @@ import { useGlobalContext } from "../../context";
  * @returns Table with cells
  */
 const CustomTable: React.FC = () => {
-  const { table, setTable } = useGlobalContext();
+  const { sheet, setSheet } = useGlobalContext();
+  /** index of a table inside of the sheet */
+  const tableIndex = 0;
   //#region utils
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
@@ -22,11 +24,13 @@ const CustomTable: React.FC = () => {
     y: number,
     callback: (cl: CellClass) => void
   ) => {
-    const _table: TableClass = _.cloneDeep(table);
+    const _table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
     const _cell = _table.cells[y][x];
     callback(_cell);
     _table.cells[y][x] = _cell;
-    setTable!(_table);
+    const _sheet: SheetClass = _.cloneDeep(sheet);
+    _sheet.tables[tableIndex] = _table;
+    setSheet!(_sheet);
   };
 
   /**
@@ -42,6 +46,7 @@ const CustomTable: React.FC = () => {
    * @returns evaulated this.text used for display in a table
    */
   const getEvaluatedText = (text: string) => {
+    const table = _.cloneDeep(sheet.tables[tableIndex]);
     // if this.text is a mathematical expression:
     if (text[0] === "=") {
       const regex: RegExp = /([A-Z][1-9]+)/;
@@ -129,7 +134,7 @@ const CustomTable: React.FC = () => {
       if (cl.clicks < 2) cl.clicks = ++cl.clicks;
     });
   };
-
+  const table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
   return (
     <div className="CustomTable">
       <Table striped bordered hover>

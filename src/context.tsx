@@ -1,11 +1,11 @@
 import React from "react";
-import { TableClass } from "./utility/Classes";
+import { SheetClass } from "./utility/Classes";
 type GlobalContextType = {
-  table: TableClass;
-  setTable?: React.Dispatch<TableClass>;
+  sheet: SheetClass;
+  setSheet?: React.Dispatch<SheetClass>;
 };
 const GlobalContext = React.createContext<GlobalContextType>({
-  table: new TableClass(1, 1),
+  sheet: new SheetClass(),
 });
 
 type Props = {
@@ -13,9 +13,9 @@ type Props = {
 };
 
 const GlobalContextProvider: React.FC<Props> = ({ children }) => {
-  const [table, setTable] = React.useState<TableClass>(new TableClass(4, 3));
+  const [sheet, setSheet] = React.useState<SheetClass>(new SheetClass());
   return (
-    <GlobalContext.Provider value={{ table, setTable }}>
+    <GlobalContext.Provider value={{ sheet, setSheet }}>
       {children}
     </GlobalContext.Provider>
   );
