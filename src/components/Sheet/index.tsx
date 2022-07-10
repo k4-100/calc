@@ -1,4 +1,5 @@
 import React from "react";
+import SheetBar from "../SheetBar";
 import CustomTable from "./CustomTable";
 import UtilityBelt from "./UtilityBelt";
 
@@ -11,6 +12,7 @@ const Sheet: React.FC = () => {
     <main className="Sheet">
       <UtilityBelt />
       <CustomTable />
+      <SheetBar />
     </main>
   );
 };
