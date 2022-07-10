@@ -25,7 +25,7 @@ const SearchBar: React.FC = () => {
       _table.cells.forEach((row) =>
         row.forEach((cell) => {
           if (cell.wasFound) cell.wasFound = false;
-          if (cell.value.includes(searchQuery)) {
+          if (String(cell.value).includes(searchQuery)) {
             cell.wasFound = true;
             if (!tableChanged) tableChanged = true;
           }
