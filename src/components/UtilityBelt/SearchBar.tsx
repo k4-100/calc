@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import _ from "lodash";
 import { useGlobalContext } from "../../context";
-import { TableClass } from "../../utility/TableClass";
+import { TableClass } from "../../utility/Classes";
 /**
  *
  * @returns Search Bar

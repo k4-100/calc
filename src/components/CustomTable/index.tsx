@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "react-bootstrap";
 import _ from "lodash";
-import { CellClass, TableClass } from "../../utility/TableClass";
+import { CellClass, TableClass } from "../../utility/Classes";
 import { evaluate } from "mathjs";
 import { useGlobalContext } from "../../context";
 /**

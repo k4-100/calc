@@ -1,5 +1,5 @@
 import React from "react";
-import { TableClass } from "./utility/TableClass";
+import { TableClass } from "./utility/Classes";
 type GlobalContextType = {
   table: TableClass;
   setTable?: React.Dispatch<TableClass>;
