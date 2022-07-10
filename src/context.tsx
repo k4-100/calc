@@ -2,7 +2,7 @@ import React from "react";
 import { TableClass } from "./utility/TableClass";
 type GlobalContextType = {
   table: TableClass;
-  setTable?: React.Dispatch<React.SetStateAction<TableClass>>;
+  setTable?: React.Dispatch<TableClass>;
 };
 const GlobalContext = React.createContext<GlobalContextType>({
   table: new TableClass(1, 1),
