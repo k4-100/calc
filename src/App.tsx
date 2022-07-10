@@ -8,7 +8,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <h1>
-        {/* <UtilityBelt /> */}
+        <UtilityBelt />
         <CustomTable />
       </h1>
     </div>

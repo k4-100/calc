@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import _ from "lodash";
 import { useGlobalContext } from "../../context";
-import { TableClass } from "../../utility/Classes";
+import { TableClass, SheetClass } from "../../utility/Classes";
 /**
  *
  * @returns Search Bar
  */
 const SearchBar: React.FC = () => {
-  const { table, setTable } = useGlobalContext();
+  const { sheet, setSheet } = useGlobalContext();
   const [searchQuery, setSearchQuery] = useState<string>("");
+  const tableIndex = 0;
 
   /**
    *
@@ -21,7 +22,7 @@ const SearchBar: React.FC = () => {
   const handleSearchButtonClick = () => {
     if (searchQuery !== "") {
       let tableChanged = false;
-      const _table: TableClass = _.cloneDeep(table);
+      const _table: TableClass = _.cloneDeep(sheet.tables[0]);
       _table.cells.forEach((row) =>
         row.forEach((cell) => {
           if (cell.wasFound) cell.wasFound = false;
@@ -31,7 +32,9 @@ const SearchBar: React.FC = () => {
           }
         })
       );
-      setTable!(_table);
+      const _sheet: SheetClass = _.cloneDeep(sheet);
+      _sheet.tables[tableIndex] = _table;
+      setSheet!(_sheet);
     }
   };
   return (
