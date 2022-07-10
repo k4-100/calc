@@ -1,6 +1,6 @@
 import React from "react";
-import CustomTable from "./Sheet/CustomTable";
-import UtilityBelt from "./Sheet/UtilityBelt";
+import CustomTable from "./CustomTable";
+import UtilityBelt from "./UtilityBelt";
 
 /**
  *

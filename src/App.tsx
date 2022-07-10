@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./dist/css/compiled/main.css";
-import Sheet from "./components";
+import Sheet from "./components/Sheet";
 
 const App: React.FC = () => {
   return (
