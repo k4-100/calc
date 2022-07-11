@@ -6,9 +6,9 @@ import React from "react";
  */
 const SheetBarButton: React.FC = () => {
   return (
-    <div className="SheetBarButton">
-      <button className="btn btn-primary">1</button>
-      <button className="btn btn-danger">X</button>
+    <div className="SheetBarButton h-100 mx-2">
+      <button className="btn btn-primary px-5 rounded-0">1</button>
+      <button className="btn btn-danger  rounded-0">X</button>
     </div>
   );
 };

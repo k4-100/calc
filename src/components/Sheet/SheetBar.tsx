@@ -4,8 +4,8 @@ import SheetBarButton from "./SheetBarButton";
 const SheetBar = () => {
   return (
     <div className="SheetBar">
-      <div className="d-flex mx-1">
-        <div className="d-flex w-100 my-1">
+      <div className="d-flex">
+        <div className="">
           <SheetBarButton />
           {/* <button
             type="button"
@@ -15,11 +15,7 @@ const SheetBar = () => {
             1
           </button> */}
         </div>
-        <button
-          type="button"
-          style={{ borderRadius: "0", width: "50px" }}
-          className="btn btn-success"
-        >
+        <button type="button" className="btn btn-success ms-auto me-2">
           +
         </button>
       </div>
