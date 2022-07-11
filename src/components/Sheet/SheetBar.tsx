@@ -1,38 +1,19 @@
 import React from "react";
+import SheetBarButton from "./SheetBarButton";
 
 const SheetBar = () => {
   return (
     <div className="SheetBar">
       <div className="d-flex mx-1">
         <div className="d-flex w-100 my-1">
-          <button
+          <SheetBarButton />
+          {/* <button
             type="button"
             style={{ borderRadius: "0" }}
             className="btn btn-primary w-100 mx-1"
           >
             1
-          </button>
-          <button
-            type="button"
-            style={{ borderRadius: "0" }}
-            className="btn btn-primary w-100 mx-1"
-          >
-            1
-          </button>
-          <button
-            type="button"
-            style={{ borderRadius: "0" }}
-            className="btn btn-primary w-100 mx-1"
-          >
-            1
-          </button>
-          <button
-            type="button"
-            style={{ borderRadius: "0" }}
-            className="btn btn-primary w-100 mx-1"
-          >
-            1
-          </button>
+          </button> */}
         </div>
         <button
           type="button"
