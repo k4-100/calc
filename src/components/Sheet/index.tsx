@@ -1,5 +1,5 @@
 import React from "react";
-import SheetBar from "../SheetBar";
+import SheetBar from "./SheetBar";
 import CustomTable from "./CustomTable";
 import UtilityBelt from "./UtilityBelt";
 
