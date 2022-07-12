@@ -73,13 +73,16 @@ export class SheetClass {
   /** all tables in the sheet */
   tables: Array<TableClass>;
   /** sheet id */
-  id: number;
+  id: string;
+  /** id of main tab */
+  mainTabID: string;
 
   /**
    * constructs sheet with default table and an id
    */
   constructor() {
     this.tables = [new TableClass(4, 3, "first")];
-    this.id = 0;
+    this.id = "first";
+    this.mainTabID = "first";
   }
 }

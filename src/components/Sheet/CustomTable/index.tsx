@@ -11,7 +11,9 @@ import { useGlobalContext } from "../../../context";
 const CustomTable: React.FC = () => {
   const { sheet, setSheet } = useGlobalContext();
   /** index of a table inside of the sheet */
-  const tableIndex = 0;
+  const tableIndex = sheet.tables.findIndex(
+    (tab) => tab.id === sheet.mainTabID
+  );
   //#region utils
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
