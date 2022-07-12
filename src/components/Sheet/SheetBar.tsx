@@ -5,7 +5,9 @@ const SheetBar = () => {
   return (
     <div className="SheetBar">
       <div className="d-flex">
-        <div className="">
+        <div className="d-flex">
+          <SheetBarButton />
+          <SheetBarButton />
           <SheetBarButton />
           {/* <button
             type="button"
