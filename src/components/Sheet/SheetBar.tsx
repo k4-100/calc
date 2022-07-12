@@ -16,13 +16,14 @@ const SheetBar = () => {
     _sheet.tables.push(new TableClass(3, 4, uuidv4()));
     setSheet!(_sheet);
   };
+
   return (
     <div className="SheetBar">
       <div className="d-flex">
         <div className="d-flex">
           {sheet.tables.length &&
-            sheet.tables.map((_, i) => (
-              <SheetBarButton name={`${i + 1}`} key={i} />
+            sheet.tables.map((tab, i) => (
+              <SheetBarButton name={`${i + 1}`} id={tab.id} key={i} />
             ))}
         </div>
         <button
