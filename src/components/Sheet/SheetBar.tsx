@@ -1,21 +1,16 @@
 import React from "react";
+import { useGlobalContext } from "../../context";
 import SheetBarButton from "./SheetBarButton";
 
 const SheetBar = () => {
+  const { sheet } = useGlobalContext();
   return (
     <div className="SheetBar">
       <div className="d-flex">
         <div className="d-flex">
-          <SheetBarButton />
-          <SheetBarButton />
-          <SheetBarButton />
-          {/* <button
-            type="button"
-            style={{ borderRadius: "0" }}
-            className="btn btn-primary w-100 mx-1"
-          >
-            1
-          </button> */}
+          {sheet.tables.length &&
+            sheet.tables.map((_, i) => <SheetBarButton key={i} />)}
+          {/* <SheetBarButton /> */}
         </div>
         <button type="button" className="btn btn-success ms-auto me-2">
           +
