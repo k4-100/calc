@@ -45,13 +45,15 @@ export class CellClass {
 export class TableClass {
   /** 2d array storing cells representing table */
   cells: Array<Array<CellClass>>;
-
+  /** table id */
+  id: string;
   /**
    *
    * @param width horizontal width of an array
    * @param height vertical hight of an array
+   * @param id table id
    */
-  constructor(width: number, height: number) {
+  constructor(width: number, height: number, id: string) {
     /**
      *  dummy cells 2d array for generating stuff
      */
@@ -62,6 +64,8 @@ export class TableClass {
     this.cells = _cells.map((row, y) =>
       row.map((_, x) => new CellClass(x, y, ""))
     );
+
+    this.id = id;
   }
 }
 
@@ -75,7 +79,7 @@ export class SheetClass {
    * constructs sheet with default table and an id
    */
   constructor() {
-    this.tables = [new TableClass(4, 3)];
+    this.tables = [new TableClass(4, 3, "first")];
     this.id = 0;
   }
 }
