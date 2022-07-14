@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "./Header";
 
 /**
  *
@@ -7,6 +8,7 @@ import React from "react";
 const Home: React.FC = () => {
   return (
     <div className="Home">
+      <Header />
       <h1>Home</h1>
     </div>
   );
