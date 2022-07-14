@@ -45,6 +45,7 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
       <button
         className="btn btn-danger  rounded-0"
         onClick={() => handleDelClick(id)}
+        disabled={sheet.tables.length < 2}
       >
         X
       </button>
