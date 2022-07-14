@@ -142,17 +142,19 @@ const CustomTable: React.FC = () => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            <th>#</th>
+            <th className="h1">#</th>
             {table.cells[0] &&
               table.cells[0].map((_, i) => (
-                <th key={i}>{String.fromCharCode(65 + i)}</th>
+                <th className="h1" key={i}>
+                  {String.fromCharCode(65 + i)}
+                </th>
               ))}
           </tr>
         </thead>
         <tbody>
           {table.cells.map((_, y) => (
             <tr key={y + 1}>
-              <td>{y + 1}</td>
+              <td className="h1">{y + 1}</td>
               {table.cells[y].map((data: CellClass, x) => (
                 <td
                   style={{ backgroundColor: data.wasFound ? "red" : "" }}
