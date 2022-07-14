@@ -20,6 +20,8 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
     const _sheet = _.cloneDeep(sheet);
     const deleteIndex = _sheet.tables.findIndex((tab) => tab.id === id);
     _sheet.tables.splice(deleteIndex, 1);
+    // ensures there will be always a main tab
+    if (_sheet.mainTabID === id) _sheet.mainTabID = _sheet.tables[0].id;
     setSheet!(_sheet);
   };
   /**
