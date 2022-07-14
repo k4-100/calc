@@ -6,9 +6,7 @@ import Sheet from "./components/Sheet";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <h1>
-        <Sheet />
-      </h1>
+      <Sheet />
     </div>
   );
 };
