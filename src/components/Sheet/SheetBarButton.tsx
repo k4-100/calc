@@ -4,7 +4,7 @@ import { useGlobalContext } from "../../context";
 
 /**
  *
- * @returns SheetBarButton
+ * @returns SheetBarButton Button in a SheetBar
  */
 const SheetBarButton: React.FC<{ name: string; id: string }> = ({
   name,
