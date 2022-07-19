@@ -145,7 +145,7 @@ const CustomTable: React.FC = () => {
             <th className="h1">#</th>
             {table.cells[0] &&
               table.cells[0].map((_, i) => (
-                <th className="h1" key={i}>
+                <th className="h1" key={i} style={{ maxWidth: "250px" }}>
                   {String.fromCharCode(65 + i)}
                 </th>
               ))}
@@ -157,7 +157,13 @@ const CustomTable: React.FC = () => {
               <td className="h1">{y + 1}</td>
               {table.cells[y].map((data: CellClass, x) => (
                 <td
-                  style={{ backgroundColor: data.wasFound ? "red" : "" }}
+                  className="h1"
+                  style={{
+                    backgroundColor: data.wasFound ? "red" : "",
+                    maxWidth: "250px",
+                    width: "250px",
+                    overflowX: "auto",
+                  }}
                   key={x}
                   id={`td-${x}-${y}`}
                   contentEditable
