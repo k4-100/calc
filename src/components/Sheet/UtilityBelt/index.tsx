@@ -32,7 +32,7 @@ const UtilityBelt: React.FC = () => {
           <MdHelpCenter fontSize={"40px"} />
         </Button>
       </div>
-      {displayHelp && <Help />}
+      {displayHelp && <Help handleXClick={() => setDisplayHelp(false)} />}
     </>
   );
 };

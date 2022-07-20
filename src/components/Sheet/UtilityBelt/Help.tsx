@@ -1,7 +1,12 @@
 import React from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import { ImCross } from "react-icons/im";
-const Help: React.FC = () => {
+
+interface Props {
+  handleXClick: () => void;
+}
+
+const Help = ({ handleXClick }: Props) => {
   return (
     <div
       className="Help w-100 h-100 position-fixed top-0"
@@ -13,7 +18,7 @@ const Help: React.FC = () => {
       <div className="container  bg-dark h-75 my-5 d-block">
         <div className="d-flex justify-content-between p-2 py-3">
           <h1 className="text-light">How to Guide: </h1>
-          <Button>
+          <Button onClick={handleXClick}>
             <ImCross />
           </Button>
         </div>
