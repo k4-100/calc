@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { MdHelpCenter } from "react-icons/md";
 import { Button } from "react-bootstrap";
@@ -10,6 +10,7 @@ import SearchBar from "./SearchBar";
  * @returns Belt with Utilities
  */
 const UtilityBelt: React.FC = () => {
+  const [displayHelp, setDisplayHelp] = useState(false);
   let navigate = useNavigate();
   return (
     <div className="UtilityBelt d-flex">
@@ -20,7 +21,11 @@ const UtilityBelt: React.FC = () => {
         <AiOutlineArrowLeft fontSize={"2rem"} />
       </Button>
       <SearchBar />
-      <Button variant="outline-warning" className="my-1 ms-auto me-1 p-0">
+      <Button
+        variant="outline-warning"
+        className="my-1 ms-auto me-1 p-0"
+        onClick={() => setDisplayHelp(!displayHelp)}
+      >
         <MdHelpCenter fontSize={"40px"} />
       </Button>
     </div>
