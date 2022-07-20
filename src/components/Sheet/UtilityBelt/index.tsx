@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
+import { MdHelpCenter } from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
@@ -19,6 +20,9 @@ const UtilityBelt: React.FC = () => {
         <AiOutlineArrowLeft fontSize={"2rem"} />
       </Button>
       <SearchBar />
+      <Button variant="outline-warning" className="my-1 ms-auto me-1 p-0">
+        <MdHelpCenter fontSize={"40px"} />
+      </Button>
     </div>
   );
 };
