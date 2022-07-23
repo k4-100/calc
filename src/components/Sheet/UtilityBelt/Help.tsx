@@ -10,10 +10,10 @@ const Help = ({ handleXClick }: Props) => {
   return (
     <div
       className="Help w-100 h-100 position-fixed top-0"
-      style={{
-        zIndex: "1000",
-        backgroundColor: "hsla(0,0%,15%, 0.80)",
-      }}
+      // style={{
+      //   zIndex: "1000",
+      //   backgroundColor: "hsla(0,0%,15%, 0.80)",
+      // }}
     >
       <div className="container  bg-dark h-75 my-5 d-block">
         <div className="d-flex justify-content-between p-2 py-3">

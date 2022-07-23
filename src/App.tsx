@@ -1,5 +1,5 @@
 import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import "./dist/css/compiled/main.css";
 import Sheet from "./components/Sheet";
 import { BrowserRouter, Routes, Route } from "react-router-dom";

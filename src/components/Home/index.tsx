@@ -11,7 +11,7 @@ const Home: React.FC = () => {
       <Header />
       <h1
         className="text-center w-75 text-dark"
-        style={{ marginTop: "6rem", fontSize: "4rem" }}
+        // style={{ marginTop: "6rem", fontSize: "4rem" }}
       >
         Welcome to SHEET!
       </h1>
@@ -24,14 +24,14 @@ const Home: React.FC = () => {
         src="https://picsum.photos/id/20/500/500"
         alt="placeholder"
         className="d-block rounded  me-3 mt-5"
-        style={{
-          marginLeft: "auto",
-        }}
+        // style={{
+        //   marginLeft: "auto",
+        // }}
       />
       <hr
-        style={{
-          borderTop: "2px dashed black",
-        }}
+      // style={{
+      //   borderTop: "2px dashed black",
+      // }}
       />
     </div>
   );
