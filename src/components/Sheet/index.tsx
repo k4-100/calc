@@ -9,11 +9,11 @@ import UtilityBelt from "./UtilityBelt";
  */
 const Sheet: React.FC = () => {
   return (
-    <main className="Sheet">
+    <>
       <UtilityBelt />
       <CustomTable />
       <SheetBar />
-    </main>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import Header from "./Header";
  */
 const Home: React.FC = () => {
   return (
-    <div className="Home">
+    <>
       <Header />
       <h1
         className="text-center w-75 text-dark"
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       //   borderTop: "2px dashed black",
       // }}
       />
-    </div>
+    </>
   );
 };
 

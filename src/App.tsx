@@ -14,16 +14,14 @@ const App: React.FC = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <div className="App">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/">
-              <Route index element={<Home />} />
-              <Route path="calc" element={<Sheet />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Home />} />
+            <Route path="calc" element={<Sheet />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 };
