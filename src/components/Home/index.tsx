@@ -41,14 +41,19 @@ const Home: React.FC = () => {
         columns={{ xs: 12 }}
         sx={{
           mt: 3,
-          ml: 3,
+          px: 3,
         }}
       >
-        <Grid item xs={8}>
+        <Grid
+          item
+          xs={8}
+          sx={{
+            pr: 5,
+          }}
+        >
           <Divider
             sx={{
               mb: 2,
-              mr: 5,
             }}
           />
           <Typography variant="h4" gutterBottom>
@@ -61,30 +66,30 @@ const Home: React.FC = () => {
             aperiam. Quisquam architecto dolorum velit.
           </Typography>
           <Typography variant="h6" gutterBottom>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cumque
-            explicabo harum delectus animi minima accusantium, veniam alias,
-            impedit officiis aliquid similique quod, consectetur aspernatur
-            numquam.
+            Impedit atque tempora error non harum consectetur, asperiores quos.
+            Id, reprehenderit ad dicta molestias animi autem excepturi modi
+            veritatis. Reprehenderit ipsa excepturi perspiciatis itaque
+            doloribus repellat voluptas perferendis, accusantium iusto saepe?
           </Typography>
           <Typography variant="h6" gutterBottom>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque,
-            repudiandae mollitia? Quas sed reiciendis, eligendi laborum enim
-            vitae sint nulla voluptatum, magni eaque exercitationem ut!
+            Quibusdam est asperiores quod atque soluta suscipit, id amet
+            praesentium repellat sed hic autem tenetur doloribus in? Ipsam,
+            accusantium? Eveniet dolorum saepe at veniam dolor!
           </Typography>
           <Typography variant="h6" gutterBottom>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam
-            assumenda vel harum modi molestiae animi eligendi quam error,
-            aspernatur deserunt eum officia debitis. Itaque, a?
+            Quis id est veritatis! Praesentium ea voluptas nulla laboriosam
+            minus doloribus reiciendis amet animi hic aliquid, labore debitis
+            vero quaerat minima dolorum dolore dignissimos?
           </Typography>
         </Grid>
         <Grid item xs={4}>
           <Paper
+            elevation={10}
             sx={{
               flexGrow: 1,
+              minHeight: "200px",
             }}
-          >
-            text
-          </Paper>
+          ></Paper>
         </Grid>
       </Grid>
     </>
