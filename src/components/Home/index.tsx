@@ -1,7 +1,6 @@
 import { Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import React from "react";
 import Header from "./Header";
-import { grey } from "@mui/material/colors";
 /**
  *
  * @returns Home page
