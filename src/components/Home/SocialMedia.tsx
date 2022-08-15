@@ -1,7 +1,6 @@
 import { Paper, Button } from "@mui/material";
 import React from "react";
 import { Facebook, Twitter, Instagram, WhatsApp } from "@mui/icons-material";
-import { styled } from "@mui/system";
 
 type Props = {
   text: string;
