@@ -1,5 +1,32 @@
-import { Paper, Button, Typography } from "@mui/material";
+import { Paper, Button } from "@mui/material";
 import React from "react";
+import { Facebook, Twitter, Instagram, WhatsApp } from "@mui/icons-material";
+import { styled } from "@mui/system";
+
+type Props = {
+  text: string;
+  background: string;
+  startIcon: any;
+};
+
+const CustomButton: React.FC<Props> = ({ text, background, startIcon }) => {
+  return (
+    <Button
+      href="https://www.facebook.com/"
+      variant="contained"
+      startIcon={startIcon}
+      sx={{
+        background,
+        color: "white",
+        display: "flex",
+        justifyContent: "flex-start",
+        fontSize: "22px",
+      }}
+    >
+      {text}
+    </Button>
+  );
+};
 
 /**
  *
@@ -14,37 +41,36 @@ const SocialMedia = () => {
         mt: 3,
         display: "flex",
         flexDirection: "column",
-        "& > *": {
-          p: 1,
-          fontSize: "20px",
-          fontWeight: "bold",
-        },
-        "& > *:not(:first-child)": {
+        "& > *:not(:first-of-type)": {
           borderTopLeftRadius: 0,
           borderTopRightRadius: 0,
         },
-        "& > *:not(:last-child)": {
+        "& > *:not(:last-of-type)": {
           borderBottomLeftRadius: 0,
           borderBottomRightRadius: 0,
         },
       }}
     >
-      <Button
-        href="https://www.facebook.com/"
-        variant="contained"
-        disableElevation
-      >
-        Facebook
-      </Button>
-      <Button href="https://www.facebook.com/" variant="contained">
-        Twitter
-      </Button>
-      <Button href="https://www.facebook.com/" variant="contained">
-        Instagram
-      </Button>
-      <Button href="https://www.facebook.com/" variant="contained">
-        Snapchat
-      </Button>
+      <CustomButton
+        text="Facebook"
+        background="#1877f2"
+        startIcon={<Facebook />}
+      />
+      <CustomButton
+        text="Twitter"
+        background="#179cf0"
+        startIcon={<Twitter />}
+      />
+      <CustomButton
+        text="Instagram"
+        background="#d8264b"
+        startIcon={<Instagram />}
+      />
+      <CustomButton
+        text="WhatsApp"
+        background="#128c7e"
+        startIcon={<WhatsApp />}
+      />
     </Paper>
   );
 };
