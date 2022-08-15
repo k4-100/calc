@@ -10,6 +10,7 @@ import "swiper/css/autoplay";
 
 import Header from "./Header";
 import SliderCard from "./SliderCard";
+import SocialMedia from "./SocialMedia";
 
 /**
  *
@@ -93,36 +94,38 @@ const Home: React.FC = () => {
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Paper
-            elevation={20}
-            sx={{
-              flexGrow: 1,
-              height: "200px",
-              "& *": {
-                // background: "red",
+          <Box>
+            <Paper
+              elevation={20}
+              sx={{
+                flexGrow: 1,
                 height: "200px",
-              },
-            }}
-          >
-            <Swiper
-              modules={[Navigation, Pagination, Autoplay]}
-              spaceBetween={50}
-              loop
-              autoplay={{
-                delay: 5000,
+                "& *": {
+                  height: "200px",
+                },
               }}
             >
-              <SwiperSlide>
-                <SliderCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SliderCard />
-              </SwiperSlide>
-              <SwiperSlide>
-                <SliderCard />
-              </SwiperSlide>
-            </Swiper>
-          </Paper>
+              <Swiper
+                modules={[Navigation, Pagination, Autoplay]}
+                spaceBetween={50}
+                loop
+                autoplay={{
+                  delay: 5000,
+                }}
+              >
+                <SwiperSlide>
+                  <SliderCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <SliderCard />
+                </SwiperSlide>
+                <SwiperSlide>
+                  <SliderCard />
+                </SwiperSlide>
+              </Swiper>
+            </Paper>
+            <SocialMedia />
+          </Box>
         </Grid>
       </Grid>
     </>
