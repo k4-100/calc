@@ -24,28 +24,57 @@ const Home: React.FC = () => {
         sx={{
           backgroundImage: "url(https://picsum.photos/id/60/2000/1000)",
           backgroundRepeat: "no-repeat",
-          backgroundSize: "100%",
+          backgroundSize: "cover",
           backgroundPosition: "center",
-          pl: 5,
-          py: 5,
+          pl: {
+            sm: 5,
+            xs: 2,
+          },
+          py: {
+            sm: 5,
+            xs: 1,
+          },
           mt: 3,
-          mx: 3,
-          minHeight: "250px",
+          mx: {
+            sm: 3,
+            xs: 0,
+          },
+          // minHeight: "285px",
         }}
       >
-        <Typography variant="h3">Welcome to SHEET!</Typography>
         <Typography
-          variant="h5"
           sx={{
-            width: 1 / 2,
+            fontSize: "clamp(20px, 5vw, 48px)",
+          }}
+        >
+          Welcome to SHEET!
+        </Typography>
+        <Typography
+          sx={{
+            width: {
+              xs: "100%",
+              md: 1 / 2,
+            },
             my: 2,
+            fontSize: "clamp(12px, 3vw, 24px)",
           }}
         >
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus
           unde et dolorum asperiores recusandae vero aliquid nisi quo ipsam
           ullam?
         </Typography>
-        <Button>Read more</Button>
+        <Button
+          color="info"
+          variant="contained"
+          sx={{
+            fontSize: {
+              xs: "10px",
+              md: "14px",
+            },
+          }}
+        >
+          Read more
+        </Button>
       </Box>
       <Grid
         container
@@ -57,9 +86,12 @@ const Home: React.FC = () => {
         <Grid
           item
           xs={12}
-          lg={8}
+          md={8}
           sx={{
-            pr: 5,
+            pr: {
+              xs: 0,
+              sm: 5,
+            },
           }}
         >
           <Divider
@@ -72,9 +104,12 @@ const Home: React.FC = () => {
             Section Header
           </Typography>
           <Typography variant="h6" gutterBottom>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui
-            molestias voluptates dolorum commodi consequuntur, doloremque
-            aperiam. Quisquam architecto dolorum velit.
+            Maiores magnam libero harum, praesentium saepe consectetur veniam
+            suscipit! Aspernatur eligendi hic illo nostrum explicabo maxime nemo
+            laborum repellendus architecto facere quae maiores amet quos quasi
+            minus blanditiis, delectus ea vero dolores quam in, sequi placeat
+            optio! Possimus eaque cupiditate eos voluptates vel corrupti ab,
+            iste porro expedita quo nisi.
           </Typography>
           <Typography variant="h6" gutterBottom>
             Impedit atque tempora error non harum consectetur, asperiores quos.
@@ -96,7 +131,7 @@ const Home: React.FC = () => {
         <Grid
           item
           xs={12}
-          lg={4}
+          md={4}
           sx={{
             mt: {
               xs: 5,
