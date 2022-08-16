@@ -49,7 +49,6 @@ const Home: React.FC = () => {
       </Box>
       <Grid
         container
-        columns={{ xs: 12 }}
         sx={{
           mt: 3,
           px: 3,
@@ -57,7 +56,8 @@ const Home: React.FC = () => {
       >
         <Grid
           item
-          xs={8}
+          xs={12}
+          lg={8}
           sx={{
             pr: 5,
           }}
@@ -93,7 +93,17 @@ const Home: React.FC = () => {
             vero quaerat minima dolorum dolore dignissimos?
           </Typography>
         </Grid>
-        <Grid item xs={4}>
+        <Grid
+          item
+          xs={12}
+          lg={4}
+          sx={{
+            mt: {
+              xs: 5,
+              lg: 0,
+            },
+          }}
+        >
           <Box>
             <Paper
               elevation={20}
