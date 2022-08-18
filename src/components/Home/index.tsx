@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Paper,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -11,6 +19,7 @@ import "swiper/css/autoplay";
 import Header from "./Header";
 import SliderCard from "./SliderCard";
 import SocialMedia from "./SocialMedia";
+import { Calculate } from "@mui/icons-material";
 
 /**
  *
@@ -173,6 +182,72 @@ const Home: React.FC = () => {
           </Box>
         </Grid>
       </Grid>
+      <Box
+        sx={{
+          mt: 3,
+          mx: "24px",
+        }}
+      >
+        <Paper elevation={2}>
+          <Typography
+            variant="h2"
+            color="text.secondary"
+            align="center"
+            sx={{
+              my: 3,
+              py: 3,
+              letterSpacing: 3,
+              wordSpacing: 7,
+            }}
+          >
+            Our Apps
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+            }}
+          >
+            <Paper
+              elevation={20}
+              sx={{
+                p: 3,
+                height: "200px",
+                width: "200px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <IconButton
+                // disabled
+                sx={{
+                  width: "50%",
+                  height: "50%",
+                  color: "white",
+                  borderRadius: 0,
+                  backgroundColor: "primary.dark",
+                  "& > svg": {
+                    fontSize: "50px",
+                  },
+                }}
+              >
+                <Calculate />
+              </IconButton>
+              <Typography variant="h5">Calc (Sheet)</Typography>
+            </Paper>
+          </Box>
+        </Paper>
+      </Box>
+      <Typography
+        variant="subtitle1"
+        align="center"
+        sx={{
+          my: 5,
+        }}
+      >
+        Copyright © XYZ 2022
+      </Typography>
     </>
   );
 };
