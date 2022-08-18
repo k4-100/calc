@@ -8,6 +8,7 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import { Calculate } from "@mui/icons-material";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -19,7 +20,7 @@ import "swiper/css/autoplay";
 import Header from "./Header";
 import SliderCard from "./SliderCard";
 import SocialMedia from "./SocialMedia";
-import { Calculate } from "@mui/icons-material";
+import AppButton from "./AppButton";
 
 /**
  *
@@ -182,63 +183,49 @@ const Home: React.FC = () => {
           </Box>
         </Grid>
       </Grid>
-      <Box
+      <Paper
+        elevation={2}
         sx={{
           mt: 3,
           mx: "24px",
+          pt: 2,
         }}
       >
-        <Paper elevation={2}>
-          <Typography
-            variant="h2"
-            color="text.secondary"
-            align="center"
-            sx={{
-              my: 3,
-              py: 3,
-              letterSpacing: 3,
-              wordSpacing: 7,
-            }}
-          >
-            Our Apps
-          </Typography>
-          <Box
-            sx={{
-              display: "flex",
-            }}
-          >
-            <Paper
-              elevation={20}
-              sx={{
-                p: 3,
-                height: "200px",
-                width: "200px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <IconButton
-                // disabled
-                sx={{
-                  width: "50%",
-                  height: "50%",
-                  color: "white",
-                  borderRadius: 0,
-                  backgroundColor: "primary.dark",
-                  "& > svg": {
-                    fontSize: "50px",
-                  },
-                }}
-              >
-                <Calculate />
-              </IconButton>
-              <Typography variant="h5">Calc (Sheet)</Typography>
-            </Paper>
-          </Box>
-        </Paper>
-      </Box>
+        <Typography
+          variant="h2"
+          color="text.secondary"
+          align="center"
+          sx={{
+            mb: 5,
+            letterSpacing: 3,
+            wordSpacing: 7,
+          }}
+        >
+          Our Apps
+        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            height: {
+              sm: "initial",
+              xs: "630px",
+            },
+            flexDirection: {
+              sm: "row",
+              xs: "column",
+            },
+            justifyContent: "space-between",
+            alignItems: {
+              sm: "initial",
+              xs: "center",
+            },
+          }}
+        >
+          <AppButton />
+          <AppButton />
+          <AppButton />
+        </Box>
+      </Paper>
       <Typography
         variant="subtitle1"
         align="center"
