@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Divider,
-  Grid,
-  Paper,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import { Calculate } from "@mui/icons-material";
+import { Box, Button, Divider, Grid, Paper, Typography } from "@mui/material";
+import { Calculate, Note, Slideshow } from "@mui/icons-material";
 import { Navigation, Pagination, Autoplay } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -221,9 +213,13 @@ const Home: React.FC = () => {
             },
           }}
         >
-          <AppButton />
-          <AppButton />
-          <AppButton />
+          <AppButton icon={<Calculate />} link="/calc" text="Calc (Sheet)" />
+          <AppButton disabled icon={<Note />} text="Word (in progress)" />
+          <AppButton
+            disabled
+            icon={<Slideshow />}
+            text="Present (in progress)"
+          />
         </Box>
       </Paper>
       <Typography
