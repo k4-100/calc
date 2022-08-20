@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "react-bootstrap";
+import { Table, TableCell, TableHead, TableRow } from "@mui/material";
 import _ from "lodash";
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
 import { evaluate } from "mathjs";
@@ -139,22 +139,22 @@ const CustomTable: React.FC = () => {
   const table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
   return (
     <div className="CustomTable">
-      <Table striped bordered hover>
-        <thead>
-          <tr>
-            <th className="h1">#</th>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>#</TableCell>
             {table.cells[0] &&
               table.cells[0].map((_, i) => (
-                <th
+                <TableCell
                   className="h1"
                   key={i}
                   // style={{ maxWidth: "250px" }}
                 >
                   {String.fromCharCode(65 + i)}
-                </th>
+                </TableCell>
               ))}
-          </tr>
-        </thead>
+          </TableRow>
+        </TableHead>
         <tbody>
           {table.cells.map((_, y) => (
             <tr key={y + 1}>
