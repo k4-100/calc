@@ -1,5 +1,11 @@
 import React from "react";
-import { Table, TableCell, TableHead, TableRow } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import _ from "lodash";
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
 import { evaluate } from "mathjs";
@@ -155,19 +161,13 @@ const CustomTable: React.FC = () => {
               ))}
           </TableRow>
         </TableHead>
-        <tbody>
+        <TableBody>
           {table.cells.map((_, y) => (
-            <tr key={y + 1}>
+            <TableRow key={y + 1}>
               <td className="h1">{y + 1}</td>
               {table.cells[y].map((data: CellClass, x) => (
-                <td
+                <TableCell
                   className="h1"
-                  // style={{
-                  //   backgroundColor: data.wasFound ? "red" : "",
-                  //   maxWidth: "250px",
-                  //   width: "250px",
-                  //   overflowX: "auto",
-                  // }}
                   key={x}
                   id={`td-${x}-${y}`}
                   contentEditable
@@ -177,11 +177,11 @@ const CustomTable: React.FC = () => {
                   onClick={(e) => handleCellClick(x, y, e)}
                 >
                   {data.clicks === 2 ? data.text : data.value}
-                </td>
+                </TableCell>
               ))}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
+        </TableBody>
       </Table>
     </div>
   );
