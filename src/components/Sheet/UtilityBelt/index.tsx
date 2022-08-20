@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 import { MdHelpCenter } from "react-icons/md";
-import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { Button, IconButton, AppBar } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import Help from "./Help";
+import { ArrowBackIosNew, HelpCenter } from "@mui/icons-material";
 
 /**
  *
@@ -12,26 +13,48 @@ import Help from "./Help";
  */
 const UtilityBelt: React.FC = () => {
   const [displayHelp, setDisplayHelp] = useState(false);
-  let navigate = useNavigate();
 
   return (
     <>
-      <div className="UtilityBelt d-flex">
+      <AppBar
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          height: "56px",
+        }}
+      >
         <Button
-          className="px-3 my-1"
-          onClick={() => navigate("../", { replace: true })}
+          component={RouterLink}
+          to="/"
+          sx={{
+            // borderRight: "1px solid yellow",
+            // borderRightColor: "primary.main",
+            // borderTopRightRadius: 0,
+            // borderBottomRightRadius: 0,
+            mr: 1,
+          }}
         >
-          <AiOutlineArrowLeft fontSize={"2rem"} />
+          <ArrowBackIosNew
+            sx={{
+              fontSize: "40px",
+            }}
+          />
         </Button>
         <SearchBar />
         <Button
-          variant="outline-warning"
-          className="my-1 ms-auto me-1 p-0"
-          onClick={() => setDisplayHelp(!displayHelp)}
+          sx={{
+            width: "50px",
+            ml: "auto",
+          }}
+          // onClick={() => setDisplayHelp(!displayHelp)}
         >
-          <MdHelpCenter fontSize={"40px"} />
+          <HelpCenter
+            sx={{
+              fontSize: "40px",
+            }}
+          />
         </Button>
-      </div>
+      </AppBar>
       {displayHelp && <Help handleXClick={() => setDisplayHelp(false)} />}
     </>
   );
