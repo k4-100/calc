@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import _ from "lodash";
 import { useGlobalContext } from "../../../context";
 import { TableClass, SheetClass } from "../../../utility/Classes";
+import { Button, TextField, Box } from "@mui/material";
 /**
  *
  * @returns Search Bar
@@ -38,24 +39,43 @@ const SearchBar: React.FC = () => {
     }
   };
   return (
-    <div className="SearchBar">
-      <div className="d-flex m-2">
-        <button
-          className="btn btn-outline-success my-2 my-sm-0"
+    <>
+      <Box
+        sx={{
+          my: 1,
+          display: "flex",
+          boxSizing: "border-box",
+        }}
+      >
+        <Button
+          variant="contained"
+          sx={{
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 0,
+          }}
           onClick={() => handleSearchButtonClick()}
         >
           Search
-        </button>
-        <input
+        </Button>
+        {/* <input
           className="form-control w-25"
           type="search"
           placeholder="Search"
           aria-label="Search"
           value={searchQuery}
           onChange={(e) => handleTextChange(e)}
+        /> */}
+        <TextField
+          label="Search"
+          variant="outlined"
+          sx={{
+            "& > * > *": {
+              p: 1.5,
+            },
+          }}
         />
-      </div>
-    </div>
+      </Box>
+    </>
   );
 };
 

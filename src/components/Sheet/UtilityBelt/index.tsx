@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { AiOutlineArrowLeft } from "react-icons/ai";
-import { MdHelpCenter } from "react-icons/md";
-import { Button, IconButton, AppBar } from "@mui/material";
+import { Button, AppBar } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import Help from "./Help";
@@ -20,17 +18,13 @@ const UtilityBelt: React.FC = () => {
         sx={{
           display: "flex",
           flexDirection: "row",
-          height: "56px",
+          height: "64px",
         }}
       >
         <Button
           component={RouterLink}
           to="/"
           sx={{
-            // borderRight: "1px solid yellow",
-            // borderRightColor: "primary.main",
-            // borderTopRightRadius: 0,
-            // borderBottomRightRadius: 0,
             mr: 1,
           }}
         >
