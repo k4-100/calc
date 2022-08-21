@@ -6,9 +6,10 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import _ from "lodash";
-import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
 import { evaluate } from "mathjs";
+import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
 import { useGlobalContext } from "../../../context";
 /**
  *
@@ -145,16 +146,30 @@ const CustomTable: React.FC = () => {
   const table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
   return (
     <div className="CustomTable">
-      <Table>
+      <Table
+        sx={{
+          "& th, & td": {
+            border: "1px solid black",
+          },
+        }}
+      >
         <TableHead>
           <TableRow>
-            <TableCell>#</TableCell>
+            <TableCell
+              sx={{
+                backgroundColor: `${grey[900]} !important`,
+              }}
+            />
             {table.cells[0] &&
               table.cells[0].map((_, i) => (
                 <TableCell
                   className="h1"
                   key={i}
-                  // style={{ maxWidth: "250px" }}
+                  sx={{
+                    backgroundColor: `${grey[900]} !important`,
+                    fontSize: "20px",
+                    textAlign: "center",
+                  }}
                 >
                   {String.fromCharCode(65 + i)}
                 </TableCell>
@@ -164,10 +179,17 @@ const CustomTable: React.FC = () => {
         <TableBody>
           {table.cells.map((_, y) => (
             <TableRow key={y + 1}>
-              <td className="h1">{y + 1}</td>
+              <TableCell
+                sx={{
+                  backgroundColor: `${grey[900]} !important`,
+                  fontSize: "20px",
+                  textAlign: "center",
+                }}
+              >
+                {y + 1}
+              </TableCell>
               {table.cells[y].map((data: CellClass, x) => (
                 <TableCell
-                  className="h1"
                   key={x}
                   id={`td-${x}-${y}`}
                   contentEditable
@@ -175,6 +197,10 @@ const CustomTable: React.FC = () => {
                   onBlur={(e) => handleCellBlur(x, y, e)}
                   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
                   onClick={(e) => handleCellClick(x, y, e)}
+                  sx={{
+                    backgroundColor: `${grey[800]} !important`,
+                    fontSize: "18px ",
+                  }}
                 >
                   {data.clicks === 2 ? data.text : data.value}
                 </TableCell>

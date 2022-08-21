@@ -70,13 +70,13 @@ const SearchBar: React.FC = () => {
         /> */}
         <TextField
           label="Search"
-          variant="outlined"
+          // variant="outlined"
           sx={{
-            ml: 0.5,
+            // ml: 0.5,
             height: "40px",
             width: "150px",
             boxSizing: "border-box",
-            "& > * > *": {
+            "& > * > input": {
               pb: 0.1,
             },
             "& > * > fieldset": {
