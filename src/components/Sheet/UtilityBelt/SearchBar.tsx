@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import _ from "lodash";
+import { Button, TextField, Box } from "@mui/material";
+import { Search } from "@mui/icons-material";
 import { useGlobalContext } from "../../../context";
 import { TableClass, SheetClass } from "../../../utility/Classes";
-import { Button, TextField, Box } from "@mui/material";
 /**
  *
  * @returns Search Bar
@@ -42,7 +43,7 @@ const SearchBar: React.FC = () => {
     <>
       <Box
         sx={{
-          my: 1,
+          my: 1.5,
           display: "flex",
           boxSizing: "border-box",
         }}
@@ -52,10 +53,12 @@ const SearchBar: React.FC = () => {
           sx={{
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
+            minWidth: "48px",
+            height: "100%",
           }}
           onClick={() => handleSearchButtonClick()}
         >
-          Search
+          <Search />
         </Button>
         {/* <input
           className="form-control w-25"
@@ -69,8 +72,16 @@ const SearchBar: React.FC = () => {
           label="Search"
           variant="outlined"
           sx={{
+            ml: 0.5,
+            height: "40px",
+            width: "150px",
+            boxSizing: "border-box",
             "& > * > *": {
-              p: 1.5,
+              pb: 0.1,
+            },
+            "& > * > fieldset": {
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
             },
           }}
         />

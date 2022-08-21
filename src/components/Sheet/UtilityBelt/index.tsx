@@ -16,6 +16,7 @@ const UtilityBelt: React.FC = () => {
     <>
       <AppBar
         sx={{
+          position: "relative",
           display: "flex",
           flexDirection: "row",
           height: "64px",
