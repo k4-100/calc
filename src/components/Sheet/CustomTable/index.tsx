@@ -11,6 +11,12 @@ import _ from "lodash";
 import { evaluate } from "mathjs";
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
 import { useGlobalContext } from "../../../context";
+
+/**
+ * size of td cell with a number (the one used for indexing)
+ */
+const numberTdSize = 100;
+
 /**
  *
  * @returns Table with cells
@@ -85,6 +91,7 @@ const CustomTable: React.FC = () => {
     }
     return text;
   };
+
   //#endregion utils
 
   /**
@@ -184,6 +191,7 @@ const CustomTable: React.FC = () => {
                   backgroundColor: `${grey[900]} !important`,
                   fontSize: "20px",
                   textAlign: "center",
+                  width: `${numberTdSize}px`,
                 }}
               >
                 {y + 1}
@@ -198,8 +206,24 @@ const CustomTable: React.FC = () => {
                   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
                   onClick={(e) => handleCellClick(x, y, e)}
                   sx={{
+                    position: data.clicks === 0 ? "" : "absolute",
                     backgroundColor: `${grey[800]} !important`,
-                    fontSize: "18px ",
+                    fontSize: "18px",
+                    width: `calc(  (100vw - ${numberTdSize}px) / ${
+                      table.cells.length - 1
+                    } )`,
+                    minWidth:
+                      data.clicks === 0
+                        ? ""
+                        : `calc( (100vw - ${numberTdSize}px) / ${
+                            table.cells.length - 1
+                          } ) !important`,
+                    maxWidth: `calc( (100vw - ${numberTdSize}px) / ${
+                      table.cells.length - 1
+                    } )`,
+                    overflowX: data.clicks === 0 ? "hidden" : "auto",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {data.clicks === 2 ? data.text : data.value}
