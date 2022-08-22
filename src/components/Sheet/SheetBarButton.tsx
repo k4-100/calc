@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import { useGlobalContext } from "../../context";
+import { Box, Button } from "@mui/material";
 
 /**
  *
@@ -35,21 +36,27 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
   };
 
   return (
-    <div className="SheetBarButton h-100 mx-2">
-      <button
+    // <div className="SheetBarButton h-100 mx-2">
+    <Box
+      sx={{
+        display: "flex",
+      }}
+    >
+      <Button
         className="btn btn-primary px-5 rounded-0"
         onClick={() => handleSwitchToNextTable(id)}
       >
         {name}
-      </button>
-      <button
+      </Button>
+      <Button
         className="btn btn-danger  rounded-0"
         onClick={() => handleDelClick(id)}
         disabled={sheet.tables.length < 2}
       >
         X
-      </button>
-    </div>
+      </Button>
+    </Box>
+    // </div>
   );
 };
 
