@@ -6,7 +6,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { grey } from "@mui/material/colors";
+import { grey, red } from "@mui/material/colors";
 import _ from "lodash";
 import { evaluate } from "mathjs";
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
@@ -207,7 +207,9 @@ const CustomTable: React.FC = () => {
                   onClick={(e) => handleCellClick(x, y, e)}
                   sx={{
                     position: data.clicks === 0 ? "" : "absolute",
-                    backgroundColor: `${grey[800]} !important`,
+                    backgroundColor: data.wasFound
+                      ? red[500]
+                      : `${grey[800]} !important`,
                     fontSize: "18px",
                     width: `calc(  (100vw - ${numberTdSize}px) / ${
                       table.cells.length - 1
