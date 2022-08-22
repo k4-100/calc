@@ -40,17 +40,25 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
     <Box
       sx={{
         display: "flex",
+        mr: 4,
       }}
     >
       <Button
-        className="btn btn-primary px-5 rounded-0"
+        variant="contained"
         onClick={() => handleSwitchToNextTable(id)}
+        sx={{
+          borderRadius: 0,
+        }}
       >
         {name}
       </Button>
       <Button
-        className="btn btn-danger  rounded-0"
+        variant="contained"
+        color="error"
         onClick={() => handleDelClick(id)}
+        sx={{
+          borderRadius: 0,
+        }}
         disabled={sheet.tables.length < 2}
       >
         X
