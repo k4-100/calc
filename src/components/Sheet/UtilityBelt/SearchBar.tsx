@@ -70,7 +70,8 @@ const SearchBar: React.FC = () => {
         /> */}
         <TextField
           label="Search"
-          // variant="outlined"
+          value={searchQuery}
+          onChange={(e) => handleTextChange(e)}
           sx={{
             // ml: 0.5,
             height: "40px",

@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, Button, Paper, Typography } from "@mui/material";
+import { IconButton, Paper, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 type Props = {
   disabled?: boolean;

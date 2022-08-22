@@ -1,16 +1,7 @@
 import React from "react";
-// import { Button, ListGroup } from "react-bootstrap";
-import {
-  Box,
-  Button,
-  IconButton,
-  List,
-  ListItem,
-  Typography,
-} from "@mui/material";
-// import { ImCross } from "react-icons/im";
+import { Box, IconButton, List, ListItem, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { Cancel, Close } from "@mui/icons-material";
+import { Cancel } from "@mui/icons-material";
 
 interface Props {
   handleXClick: () => void;
