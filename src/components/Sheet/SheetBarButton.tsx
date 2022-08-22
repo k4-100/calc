@@ -36,7 +36,6 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
   };
 
   return (
-    // <div className="SheetBarButton h-100 mx-2">
     <Box
       sx={{
         display: "flex",
@@ -64,7 +63,6 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
         X
       </Button>
     </Box>
-    // </div>
   );
 };
 

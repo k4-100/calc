@@ -20,6 +20,7 @@ const UtilityBelt: React.FC = () => {
           display: "flex",
           flexDirection: "row",
           height: "64px",
+          zIndex: 100,
         }}
       >
         <Button
@@ -41,7 +42,7 @@ const UtilityBelt: React.FC = () => {
             width: "50px",
             ml: "auto",
           }}
-          // onClick={() => setDisplayHelp(!displayHelp)}
+          onClick={() => setDisplayHelp(!displayHelp)}
         >
           <HelpCenter
             sx={{
