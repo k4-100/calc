@@ -11,21 +11,9 @@ const Apps: React.FC = () => {
       sx={{
         mt: 3,
         mx: "24px",
-        pt: 2,
+        // pt: 2,
       }}
     >
-      <Typography
-        variant="h2"
-        color="text.secondary"
-        align="center"
-        sx={{
-          mb: 5,
-          letterSpacing: 3,
-          wordSpacing: 7,
-        }}
-      >
-        Our Apps
-      </Typography>
       <Box
         sx={{
           display: "flex",

@@ -16,6 +16,7 @@ const Home: React.FC = () => {
     <>
       <Header />
       <Introduction />
+      <Apps />
       <Grid
         container
         sx={{
@@ -53,7 +54,6 @@ const Home: React.FC = () => {
           </Box>
         </Grid>
       </Grid>
-      <Apps />
       <Typography
         variant="subtitle1"
         align="center"

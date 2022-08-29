@@ -9,6 +9,11 @@ type Props = {
 };
 
 /**
+ * size of the AppsButton
+ */
+const SIZE = 180;
+
+/**
  *
  * @param disabled is button inside disabled?
  * @param icon icon inside button
@@ -23,9 +28,9 @@ const AppButton: React.FC<Props> = ({ disabled, icon, text, link }) => {
       sx={{
         p: 3,
         pb: 1,
-        height: "190px",
+        height: `${SIZE}px`,
         width: {
-          sm: "190px",
+          sm: `${SIZE}px`,
           xs: "100%",
         },
         display: "flex",
