@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper, Typography, Box } from "@mui/material";
+import { Paper, Box } from "@mui/material";
 import { Calculate, Note, Slideshow } from "@mui/icons-material";
 
 import AppsButton from "./AppsButton";
@@ -11,7 +11,6 @@ const Apps: React.FC = () => {
       sx={{
         mt: 3,
         mx: "24px",
-        // pt: 2,
       }}
     >
       <Box
