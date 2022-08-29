@@ -13,15 +13,12 @@ const Introduction: React.FC = () => {
           sm: 5,
           xs: 2,
         },
+        pr: 2,
         py: {
           sm: 5,
           xs: 1,
         },
-        mt: 3,
-        mx: {
-          sm: 3,
-          xs: 0,
-        },
+        m: 3,
       }}
     >
       <Typography
