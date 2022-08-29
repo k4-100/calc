@@ -2,7 +2,7 @@ import React from "react";
 import { Paper, Typography, Box } from "@mui/material";
 import { Calculate, Note, Slideshow } from "@mui/icons-material";
 
-import AppButton from "./AppButton";
+import AppsButton from "./AppsButton";
 
 const Apps: React.FC = () => {
   return (
@@ -32,9 +32,13 @@ const Apps: React.FC = () => {
           },
         }}
       >
-        <AppButton icon={<Calculate />} link="/calc" text="Calc (Sheet)" />
-        <AppButton disabled icon={<Note />} text="Word (in progress)" />
-        <AppButton disabled icon={<Slideshow />} text="Present (in progress)" />
+        <AppsButton icon={<Calculate />} link="/calc" text="Calc (Sheet)" />
+        <AppsButton disabled icon={<Note />} text="Word (in progress)" />
+        <AppsButton
+          disabled
+          icon={<Slideshow />}
+          text="Present (in progress)"
+        />
       </Box>
     </Paper>
   );

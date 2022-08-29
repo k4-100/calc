@@ -21,7 +21,7 @@ const SIZE = 180;
  * @param link link to an app
  * @returns
  */
-const AppButton: React.FC<Props> = ({ disabled, icon, text, link }) => {
+const AppsButton: React.FC<Props> = ({ disabled, icon, text, link }) => {
   return (
     <Paper
       elevation={20}
@@ -64,4 +64,4 @@ const AppButton: React.FC<Props> = ({ disabled, icon, text, link }) => {
   );
 };
 
-export default AppButton;
+export default AppsButton;
