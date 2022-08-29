@@ -33,7 +33,11 @@ const SliderCard: React.FC = () => {
               justifyContent: "space-between",
             }}
           >
-            <AccountCircle />
+            <AccountCircle
+              sx={{
+                height: "fit-content",
+              }}
+            />
             <Typography>John White</Typography>
           </Box>
           <Typography
