@@ -11,6 +11,7 @@ const Apps: React.FC = () => {
       sx={{
         mt: 3,
         mx: "24px",
+        p: 1,
       }}
     >
       <Box
