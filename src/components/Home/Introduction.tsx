@@ -9,6 +9,7 @@ const Introduction: React.FC = () => {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        borderRadius: 1,
         pl: {
           sm: 5,
           xs: 2,
