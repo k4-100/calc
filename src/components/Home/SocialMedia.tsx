@@ -5,10 +5,24 @@ import { Facebook, Twitter, Instagram, WhatsApp } from "@mui/icons-material";
 type Props = {
   text: string;
   background: string;
+  hoverBackground: string;
   startIcon: any;
 };
 
-const CustomButton: React.FC<Props> = ({ text, background, startIcon }) => {
+/**
+ *
+ * @param text text inside button
+ * @param background color of the background
+ * @param hoverBackground color of the background on hover/activation
+ * @param startIcon icon at the start of the button from the left
+ * @returns Custom button with social media link
+ */
+const CustomButton: React.FC<Props> = ({
+  text,
+  background,
+  hoverBackground,
+  startIcon,
+}) => {
   return (
     <Button
       href="https://www.facebook.com/"
@@ -20,6 +34,9 @@ const CustomButton: React.FC<Props> = ({ text, background, startIcon }) => {
         display: "flex",
         justifyContent: "flex-start",
         fontSize: "22px",
+        "&:hover, &:active": {
+          backgroundColor: hoverBackground,
+        },
       }}
     >
       {text}
@@ -52,22 +69,26 @@ const SocialMedia = () => {
     >
       <CustomButton
         text="Facebook"
-        background="#1877f2"
+        background="hsl(214, 89%, 52%)"
+        hoverBackground="hsl(214, 89%, 47%)"
         startIcon={<Facebook />}
       />
       <CustomButton
         text="Twitter"
-        background="#179cf0"
+        background="hsl(203, 88%, 52%)"
+        hoverBackground="hsl(203, 88%, 47%)"
         startIcon={<Twitter />}
       />
       <CustomButton
         text="Instagram"
-        background="#d8264b"
+        background="hsl(348, 70%, 50%)"
+        hoverBackground="hsl(348, 70%, 45%)"
         startIcon={<Instagram />}
       />
       <CustomButton
         text="WhatsApp"
-        background="#128c7e"
+        background="hsl(173, 77%, 31%)"
+        hoverBackground="hsl(173, 77%, 26%)"
         startIcon={<WhatsApp />}
       />
     </Paper>
