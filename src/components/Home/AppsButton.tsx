@@ -11,7 +11,7 @@ type Props = {
 /**
  * size of the AppsButton
  */
-const SIZE = 180;
+const SIZE = 170;
 
 /**
  *
@@ -26,7 +26,7 @@ const AppsButton: React.FC<Props> = ({ disabled, icon, text, link }) => {
     <Paper
       elevation={20}
       sx={{
-        p: 3,
+        p: 2.5,
         pb: 1,
         height: `${SIZE}px`,
         width: {

@@ -11,7 +11,7 @@ const Apps: React.FC = () => {
       sx={{
         mt: 3,
         mx: "24px",
-        p: 1,
+        p: 2,
       }}
     >
       <Box
@@ -19,16 +19,26 @@ const Apps: React.FC = () => {
           display: "flex",
           height: {
             sm: "initial",
-            xs: "630px",
+            xs: "550px",
           },
           flexDirection: {
             sm: "row",
             xs: "column",
           },
-          justifyContent: "space-between",
+          justifyContent: {
+            md: "flex-start",
+            sm: "center",
+            xs: "space-between",
+          },
           alignItems: {
             sm: "initial",
             xs: "center",
+          },
+          "& > *": {
+            mr: {
+              sm: 2,
+              xs: "inherit",
+            },
           },
         }}
       >
