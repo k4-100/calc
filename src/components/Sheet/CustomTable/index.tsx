@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   Table,
   TableBody,
@@ -23,6 +23,8 @@ const numberTdSize = 100;
  */
 const CustomTable: React.FC = () => {
   const { sheet, setSheet } = useGlobalContext();
+
+  console.log("re-rendered CustomTable");
   /** index of a table inside of the sheet */
   const tableIndex = sheet.tables.findIndex(
     (tab) => tab.id === sheet.mainTabID
@@ -34,63 +36,65 @@ const CustomTable: React.FC = () => {
    * @param y vertical (row) cell coords
    * @param callback function to be used between cloning and setting
    */
-  const cloneAndSetTableCell = (
-    x: number,
-    y: number,
-    callback: (cl: CellClass) => void
-  ) => {
-    const _table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
-    const _cell = _table.cells[y][x];
-    callback(_cell);
-    _table.cells[y][x] = _cell;
-    const _sheet: SheetClass = _.cloneDeep(sheet);
-    _sheet.tables[tableIndex] = _table;
-    setSheet!(_sheet);
-  };
+  const cloneAndSetTableCell = useCallback(
+    (x: number, y: number, callback: (cl: CellClass) => void) => {
+      const _table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
+      const _cell = _table.cells[y][x];
+      callback(_cell);
+      _table.cells[y][x] = _cell;
+      const _sheet: SheetClass = _.cloneDeep(sheet);
+      _sheet.tables[tableIndex] = _table;
+      setSheet!(_sheet);
+    },
+    [setSheet, sheet, tableIndex]
+  );
 
   /**
    * @param colName name (string) at the top of the column
    * @returns column number
    */
-  const getColumnNumberFromColName = (colName: string): number => {
+  const getColumnNumberFromColName = useCallback((colName: string): number => {
     return colName.charCodeAt(0) - 65;
-  };
+  }, []);
 
   /**
    * @param text to evaluate
    * @returns evaulated this.text used for display in a table
    */
-  const getEvaluatedText = (text: string) => {
-    const table = _.cloneDeep(sheet.tables[tableIndex]);
-    // if this.text is a mathematical expression:
-    if (text[0] === "=") {
-      const regex: RegExp = /([A-Z][1-9]+)/;
-      if (regex.test(text)) {
-        let _text: string = "";
-        const chunks: string[] = text
-          .trim()
-          .split(regex)
-          .filter((str) => str !== "");
+  const getEvaluatedText = useCallback(
+    (text: string) => {
+      const table = _.cloneDeep(sheet.tables[tableIndex]);
+      // if this.text is a mathematical expression:
+      if (text[0] === "=") {
+        const regex: RegExp = /([A-Z][1-9]+)/;
+        if (regex.test(text)) {
+          let _text: string = "";
+          const chunks: string[] = text
+            .trim()
+            .split(regex)
+            .filter((str) => str !== "");
 
-        _text = chunks.reduce((prev, next): string => {
-          if (regex.test(next)) {
-            // split string
-            const coords = next.split(/([A-Z])/).filter((str) => str !== "");
-            return (prev +=
-              table.cells[Number(coords[1]) - 1][
-                getColumnNumberFromColName(coords[0])
-              ].value || "0");
-          } else {
-            return (prev += next);
-          }
-        });
-        return evaluate(_text.substring(1));
-      } else {
-        return evaluate(text.substring(1));
+          _text = chunks.reduce((prev, next): string => {
+            if (regex.test(next)) {
+              // split string
+              const coords = next.split(/([A-Z])/).filter((str) => str !== "");
+              return (prev +=
+                table.cells[Number(coords[1]) - 1][
+                  getColumnNumberFromColName(coords[0])
+                ].value || "0");
+            } else {
+              return (prev += next);
+            }
+          });
+          return evaluate(_text.substring(1));
+        } else {
+          return evaluate(text.substring(1));
+        }
       }
-    }
-    return text;
-  };
+      return text;
+    },
+    [getColumnNumberFromColName, sheet.tables, tableIndex]
+  );
 
   //#endregion utils
 
@@ -117,27 +121,30 @@ const CustomTable: React.FC = () => {
    * @param y vertical (row) cell coords
    * @param e event object
    */
-  const handleCellKeyDown = (x: number, y: number, e: any) => {
-    const { keyCode } = e;
-    // if keyCode is Enter save content
-    if (keyCode === 13) {
-      e.preventDefault();
+  const handleCellKeyDown = useCallback(
+    (x: number, y: number, e: any) => {
+      const { keyCode } = e;
+      // if keyCode is Enter save content
+      if (keyCode === 13) {
+        e.preventDefault();
 
-      cloneAndSetTableCell(x, y, (cl) => {
-        if (cl.clicks === 2) {
-          cl.text = e.target.textContent;
-          cl.value = getEvaluatedText(e.target.textContent);
-          cl.clicks = 0;
-        }
-      });
-    }
-    // on non-ENTER key press if cell was clicked on once
-    else {
-      cloneAndSetTableCell(x, y, (cl) => {
-        if (cl.clicks < 2) cl.clicks = 2;
-      });
-    }
-  };
+        cloneAndSetTableCell(x, y, (cl) => {
+          if (cl.clicks === 2) {
+            cl.text = e.target.textContent;
+            cl.value = getEvaluatedText(e.target.textContent);
+            cl.clicks = 0;
+          }
+        });
+      }
+      // on non-ENTER key press if cell was clicked on once
+      else {
+        cloneAndSetTableCell(x, y, (cl) => {
+          if (cl.clicks < 2) cl.clicks = 2;
+        });
+      }
+    },
+    [cloneAndSetTableCell, getEvaluatedText]
+  );
 
   /**
    *
@@ -150,6 +157,7 @@ const CustomTable: React.FC = () => {
       if (cl.clicks < 2) cl.clicks = ++cl.clicks;
     });
   };
+
   const table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
   return (
     <div className="CustomTable">
