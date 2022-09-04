@@ -99,73 +99,79 @@ const CustomTable: React.FC = () => {
 
   //#endregion utils
 
-  /**
-   *
-   * @param x horizontal (column/cell) cell coords
-   * @param y vertical (row) cell coords
-   * @param e event object
-   */
-  const handleCellBlur = (x: number, y: number, e: any) => {
-    console.log("lost focus");
-    cloneAndSetTableCell(x, y, (cl) => {
-      if (cl.clicks === 2) {
-        cl.text = e.target.textContent;
-        cl.value = getEvaluatedText(e.target.textContent);
-      }
-      cl.clicks = 0;
-    });
-  };
+  // /**
+  //  *
+  //  * @param x horizontal (column/cell) cell coords
+  //  * @param y vertical (row) cell coords
+  //  * @param e event object
+  //  */
+  // const handleCellBlur = (x: number, y: number, e: any) => {
+  //   console.log("lost focus");
+  //   cloneAndSetTableCell(x, y, (cl) => {
+  //     if (cl.clicks === 2) {
+  //       cl.text = e.target.textContent;
+  //       cl.value = getEvaluatedText(e.target.textContent);
+  //     }
+  //     cl.clicks = 0;
+  //   });
+  // };
 
-  /**
-   *
-   * @param x horizontal (column/cell) cell coords
-   * @param y vertical (row) cell coords
-   * @param e event object
-   */
-  const handleCellKeyDown = useCallback(
-    (x: number, y: number, e: any) => {
-      const { keyCode } = e;
-      // if keyCode is Enter save content
-      if (keyCode === 13) {
-        e.preventDefault();
+  // /**
+  //  *
+  //  * @param x horizontal (column/cell) cell coords
+  //  * @param y vertical (row) cell coords
+  //  * @param e event object
+  //  */
+  // const handleCellKeyDown = useCallback(
+  //   (x: number, y: number, e: any) => {
+  //     const { keyCode } = e;
+  //     // if keyCode is Enter save content
+  //     if (keyCode === 13) {
+  //       e.preventDefault();
 
-        cloneAndSetTableCell(x, y, (cl) => {
-          if (cl.clicks === 2) {
-            cl.text = e.target.textContent;
-            cl.value = getEvaluatedText(e.target.textContent);
-            cl.clicks = 0;
-          }
-        });
-      }
-      // on non-ENTER key press if cell was clicked on once
-      else {
-        cloneAndSetTableCell(x, y, (cl) => {
-          if (cl.clicks < 2) cl.clicks = 2;
-        });
-      }
-    },
-    [cloneAndSetTableCell, getEvaluatedText]
-  );
+  //       cloneAndSetTableCell(x, y, (cl) => {
+  //         if (cl.clicks === 2) {
+  //           cl.text = e.target.textContent;
+  //           cl.value = getEvaluatedText(e.target.textContent);
+  //           cl.clicks = 0;
+  //         }
+  //       });
+  //     }
+  //     // on non-ENTER key press if cell was clicked on once
+  //     else {
+  //       cloneAndSetTableCell(x, y, (cl) => {
+  //         if (cl.clicks < 2) cl.clicks = 2;
+  //       });
+  //     }
+  //   },
+  //   [cloneAndSetTableCell, getEvaluatedText]
+  // );
 
-  /**
-   *
-   * @param x horizontal (column/cell) cell coords
-   * @param y vertical (row) cell coords
-   * @param e event object
-   */
-  const handleCellClick = (x: number, y: number, e: any) => {
-    cloneAndSetTableCell(x, y, (cl) => {
-      if (cl.clicks < 2) cl.clicks = ++cl.clicks;
-    });
-  };
+  // /**
+  //  *
+  //  * @param x horizontal (column/cell) cell coords
+  //  * @param y vertical (row) cell coords
+  //  * @param e event object
+  //  */
+  // const handleCellClick = (x: number, y: number, e: any) => {
+  //   cloneAndSetTableCell(x, y, (cl) => {
+  //     if (cl.clicks < 2) cl.clicks = ++cl.clicks;
+  //   });
+  // };
 
   const table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
   return (
     <div className="CustomTable">
       <Table
         sx={{
+          "& *": {
+            display: "block !important",
+          },
           "& th, & td": {
             border: "1px solid black",
+          },
+          "& tr": {
+            display: "flex !important",
           },
         }}
       >
@@ -174,6 +180,7 @@ const CustomTable: React.FC = () => {
             <TableCell
               sx={{
                 backgroundColor: `${grey[900]} !important`,
+                width: "70px",
               }}
             />
             {table.cells[0] &&
@@ -185,6 +192,8 @@ const CustomTable: React.FC = () => {
                     backgroundColor: `${grey[900]} !important`,
                     fontSize: "20px",
                     textAlign: "center",
+
+                    width: "170px",
                   }}
                 >
                   {String.fromCharCode(65 + i)}
@@ -200,19 +209,21 @@ const CustomTable: React.FC = () => {
                   backgroundColor: `${grey[900]} !important`,
                   fontSize: "20px",
                   textAlign: "center",
-                  width: `${numberTdSize}px`,
+                  width: "70px",
                 }}
               >
                 {y + 1}
               </TableCell>
-              {table.cells[y].map((data: CellClass, x) => (
+              {table.cells[y].map((cell: CellClass, x) => (
                 <CustomTableCell
                   x={x}
                   y={y}
-                  data={data}
-                  handleCellBlur={handleCellBlur}
-                  handleCellKeyDown={handleCellKeyDown}
-                  handleCellClick={handleCellClick}
+                  cell={cell}
+                  cloneAndSetTableCell={cloneAndSetTableCell}
+                  getEvaluatedText={getEvaluatedText}
+                  // handleCellBlur={handleCellBlur}
+                  // handleCellKeyDown={handleCellKeyDown}
+                  // handleCellClick={handleCellClick}
                 />
                 // <TableCell
                 //   key={x}
