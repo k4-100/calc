@@ -11,6 +11,7 @@ import _ from "lodash";
 import { evaluate } from "mathjs";
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
 import { useGlobalContext } from "../../../context";
+import CustomTableCell from "./CustomTableCell";
 
 /**
  * size of td cell with a number (the one used for indexing)
@@ -205,39 +206,47 @@ const CustomTable: React.FC = () => {
                 {y + 1}
               </TableCell>
               {table.cells[y].map((data: CellClass, x) => (
-                <TableCell
-                  key={x}
-                  id={`td-${x}-${y}`}
-                  contentEditable
-                  suppressContentEditableWarning
-                  onBlur={(e) => handleCellBlur(x, y, e)}
-                  onKeyDown={(e) => handleCellKeyDown(x, y, e)}
-                  onClick={(e) => handleCellClick(x, y, e)}
-                  sx={{
-                    position: data.clicks === 0 ? "" : "absolute",
-                    backgroundColor: data.wasFound
-                      ? red[500]
-                      : `${grey[800]} !important`,
-                    fontSize: "18px",
-                    width: `calc(  (100vw - ${numberTdSize}px) / ${
-                      table.cells.length - 1
-                    } )`,
-                    minWidth:
-                      data.clicks === 0
-                        ? ""
-                        : `calc( (100vw - ${numberTdSize}px) / ${
-                            table.cells.length - 1
-                          } ) !important`,
-                    maxWidth: `calc( (100vw - ${numberTdSize}px) / ${
-                      table.cells.length - 1
-                    } )`,
-                    overflowX: data.clicks === 0 ? "hidden" : "auto",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}
-                >
-                  {data.clicks === 2 ? data.text : data.value}
-                </TableCell>
+                <CustomTableCell
+                  x={x}
+                  y={y}
+                  data={data}
+                  handleCellBlur={handleCellBlur}
+                  handleCellKeyDown={handleCellKeyDown}
+                  handleCellClick={handleCellClick}
+                />
+                // <TableCell
+                //   key={x}
+                //   id={`td-${x}-${y}`}
+                //   contentEditable
+                //   suppressContentEditableWarning
+                //   onBlur={(e) => handleCellBlur(x, y, e)}
+                //   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
+                //   onClick={(e) => handleCellClick(x, y, e)}
+                //   sx={{
+                //     position: data.clicks === 0 ? "" : "absolute",
+                //     backgroundColor: data.wasFound
+                //       ? red[500]
+                //       : `${grey[800]} !important`,
+                //     fontSize: "18px",
+                //     width: `calc(  (100vw - ${numberTdSize}px) / ${
+                //       table.cells.length - 1
+                //     } )`,
+                //     minWidth:
+                //       data.clicks === 0
+                //         ? ""
+                //         : `calc( (100vw - ${numberTdSize}px) / ${
+                //             table.cells.length - 1
+                //           } ) !important`,
+                //     maxWidth: `calc( (100vw - ${numberTdSize}px) / ${
+                //       table.cells.length - 1
+                //     } )`,
+                //     overflowX: data.clicks === 0 ? "hidden" : "auto",
+                //     textOverflow: "ellipsis",
+                //     whiteSpace: "nowrap",
+                //   }}
+                // >
+                //   {data.clicks === 2 ? data.text : data.value}
+                // </TableCell>
               ))}
             </TableRow>
           ))}
