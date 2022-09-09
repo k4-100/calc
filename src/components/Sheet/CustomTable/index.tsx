@@ -159,7 +159,7 @@ const CustomTable: React.FC = () => {
   //   });
   // };
 
-  const table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
+  const table: TableClass = sheet.tables[tableIndex];
   return (
     <div className="CustomTable">
       <Table
@@ -221,6 +221,7 @@ const CustomTable: React.FC = () => {
                   cell={cell}
                   cloneAndSetTableCell={cloneAndSetTableCell}
                   getEvaluatedText={getEvaluatedText}
+                  key={`td-${x}-${y}`}
                   // handleCellBlur={handleCellBlur}
                   // handleCellKeyDown={handleCellKeyDown}
                   // handleCellClick={handleCellClick}
