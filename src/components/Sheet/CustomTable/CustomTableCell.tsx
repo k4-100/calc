@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect, useRef } from "react";
 import _ from "lodash";
 import { TableCell } from "@mui/material";
 import { CellClass } from "../../../utility/Classes";
-import { ElevatorSharp } from "@mui/icons-material";
 type Props = {
   x: number;
   y: number;
@@ -20,6 +19,7 @@ const CustomTableCell: React.FC<Props> = ({
 }) => {
   // const [text, setText] = useState<string>("");
   const [clicks, setClicks] = useState<number>(0);
+  const [wasCaretSet, setWasCaretSet] = useState<boolean>(false);
   const tdRef = useRef<any>(null);
 
   /**
@@ -34,6 +34,13 @@ const CustomTableCell: React.FC<Props> = ({
     sel.removeAllRanges();
     sel.addRange(range);
   };
+
+  useEffect(() => {
+    if (clicks === 2 && !wasCaretSet) {
+      placeCaretAtEnd(tdRef.current);
+      setWasCaretSet(true);
+    }
+  }, [clicks, wasCaretSet, setWasCaretSet, placeCaretAtEnd]);
 
   /**
    *
@@ -62,16 +69,19 @@ const CustomTableCell: React.FC<Props> = ({
             const { textContent } = tdRef.current;
             cl.text = textContent;
             cl.value = getEvaluatedText(textContent);
+            setClicks(0);
           } else if (clicks === 1) setClicks(2);
         });
-        setClicks(0);
-      }
+      } else if (clicks !== 2) setClicks(2);
+      // if (clicks === 2 && !wasCaretSet) {
+      //   placeCaretAtEnd(tdRef.current);
+      //   setWasCaretSet(true);
+      // }
 
       // setClicks(2);
       // else {
       //   if (clicks === 1) {
       //     setClicks(2);
-      //     //   placeCaretAtEnd(tdRef.current);
       //   }
       // }
     },
@@ -94,6 +104,7 @@ const CustomTableCell: React.FC<Props> = ({
         cl.value = getEvaluatedText(textContent);
       }
       setClicks(0);
+      setWasCaretSet(false);
     });
   };
 
@@ -122,7 +133,7 @@ const CustomTableCell: React.FC<Props> = ({
         // maxWidth: `calc( (100vw - ${numberTdSize}px) / ${
         //   table.cells.length - 1
         // } )`,
-        overflowX: cell.clicks === 0 ? "hidden" : "scrollbar",
+        overflowX: clicks === 0 ? "hidden" : "scrollbar",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
       }}
