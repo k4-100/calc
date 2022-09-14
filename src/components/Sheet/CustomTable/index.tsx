@@ -99,66 +99,6 @@ const CustomTable: React.FC = () => {
 
   //#endregion utils
 
-  // /**
-  //  *
-  //  * @param x horizontal (column/cell) cell coords
-  //  * @param y vertical (row) cell coords
-  //  * @param e event object
-  //  */
-  // const handleCellBlur = (x: number, y: number, e: any) => {
-  //   console.log("lost focus");
-  //   cloneAndSetTableCell(x, y, (cl) => {
-  //     if (cl.clicks === 2) {
-  //       cl.text = e.target.textContent;
-  //       cl.value = getEvaluatedText(e.target.textContent);
-  //     }
-  //     cl.clicks = 0;
-  //   });
-  // };
-
-  // /**
-  //  *
-  //  * @param x horizontal (column/cell) cell coords
-  //  * @param y vertical (row) cell coords
-  //  * @param e event object
-  //  */
-  // const handleCellKeyDown = useCallback(
-  //   (x: number, y: number, e: any) => {
-  //     const { keyCode } = e;
-  //     // if keyCode is Enter save content
-  //     if (keyCode === 13) {
-  //       e.preventDefault();
-
-  //       cloneAndSetTableCell(x, y, (cl) => {
-  //         if (cl.clicks === 2) {
-  //           cl.text = e.target.textContent;
-  //           cl.value = getEvaluatedText(e.target.textContent);
-  //           cl.clicks = 0;
-  //         }
-  //       });
-  //     }
-  //     // on non-ENTER key press if cell was clicked on once
-  //     else {
-  //       cloneAndSetTableCell(x, y, (cl) => {
-  //         if (cl.clicks < 2) cl.clicks = 2;
-  //       });
-  //     }
-  //   },
-  //   [cloneAndSetTableCell, getEvaluatedText]
-  // );
-
-  // /**
-  //  *
-  //  * @param x horizontal (column/cell) cell coords
-  //  * @param y vertical (row) cell coords
-  //  * @param e event object
-  //  */
-  // const handleCellClick = (x: number, y: number, e: any) => {
-  //   cloneAndSetTableCell(x, y, (cl) => {
-  //     if (cl.clicks < 2) cl.clicks = ++cl.clicks;
-  //   });
-  // };
-
   const table: TableClass = useMemo(
     () => sheet.tables[tableIndex],
     [sheet.tables, tableIndex]
@@ -182,6 +122,35 @@ const CustomTable: React.FC = () => {
         </TableCell>
       )),
     [table.cells]
+  );
+
+  const cells = useMemo(
+    () =>
+      table.cells.map((_, y) => (
+        <TableRow key={y + 1}>
+          <TableCell
+            sx={{
+              backgroundColor: `${grey[900]} !important`,
+              fontSize: "20px",
+              textAlign: "center",
+              width: "70px",
+            }}
+          >
+            {y + 1}
+          </TableCell>
+          {table.cells[y].map((cell: CellClass, x) => (
+            <CustomTableCell
+              x={x}
+              y={y}
+              cell={cell}
+              cloneAndSetTableCell={cloneAndSetTableCell}
+              getEvaluatedText={getEvaluatedText}
+              key={`td-${x}-${y}`}
+            />
+          ))}
+        </TableRow>
+      )),
+    [cloneAndSetTableCell, getEvaluatedText, table.cells]
   );
 
   return (
@@ -209,86 +178,10 @@ const CustomTable: React.FC = () => {
               width: "70px",
             }}
           />
-          {/* {table.cells[0] &&
-            table.cells[0].map((_, i) => (
-              <TableCell
-                className="h1"
-                key={i}
-                sx={{
-                  backgroundColor: `${grey[900]} !important`,
-                  fontSize: "20px",
-                  textAlign: "center",
-
-                  width: "170px",
-                }}
-              >
-                {String.fromCharCode(65 + i)}
-              </TableCell>
-            ))} */}
+          {table.cells[0] && listTable}
         </TableRow>
       </TableHead>
-      <TableBody>
-        {table.cells.map((_, y) => (
-          <TableRow key={y + 1}>
-            <TableCell
-              sx={{
-                backgroundColor: `${grey[900]} !important`,
-                fontSize: "20px",
-                textAlign: "center",
-                width: "70px",
-              }}
-            >
-              {y + 1}
-            </TableCell>
-            {table.cells[y].map((cell: CellClass, x) => (
-              <CustomTableCell
-                x={x}
-                y={y}
-                cell={cell}
-                cloneAndSetTableCell={cloneAndSetTableCell}
-                getEvaluatedText={getEvaluatedText}
-                key={`td-${x}-${y}`}
-                // handleCellBlur={handleCellBlur}
-                // handleCellKeyDown={handleCellKeyDown}
-                // handleCellClick={handleCellClick}
-              />
-              // <TableCell
-              //   key={x}
-              //   id={`td-${x}-${y}`}
-              //   contentEditable
-              //   suppressContentEditableWarning
-              //   onBlur={(e) => handleCellBlur(x, y, e)}
-              //   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
-              //   onClick={(e) => handleCellClick(x, y, e)}
-              //   sx={{
-              //     position: data.clicks === 0 ? "" : "absolute",
-              //     backgroundColor: data.wasFound
-              //       ? red[500]
-              //       : `${grey[800]} !important`,
-              //     fontSize: "18px",
-              //     width: `calc(  (100vw - ${numberTdSize}px) / ${
-              //       table.cells.length - 1
-              //     } )`,
-              //     minWidth:
-              //       data.clicks === 0
-              //         ? ""
-              //         : `calc( (100vw - ${numberTdSize}px) / ${
-              //             table.cells.length - 1
-              //           } ) !important`,
-              //     maxWidth: `calc( (100vw - ${numberTdSize}px) / ${
-              //       table.cells.length - 1
-              //     } )`,
-              //     overflowX: data.clicks === 0 ? "hidden" : "auto",
-              //     textOverflow: "ellipsis",
-              //     whiteSpace: "nowrap",
-              //   }}
-              // >
-              //   {data.clicks === 2 ? data.text : data.value}
-              // </TableCell>
-            ))}
-          </TableRow>
-        ))}
-      </TableBody>
+      <TableBody>{cells}</TableBody>
     </Table>
   );
 };
