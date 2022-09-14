@@ -63,14 +63,19 @@ const CustomTableCell: React.FC<Props> = ({
       // if keyCode is Enter save content
       if (keyCode === 13) {
         e.preventDefault();
-        cloneAndSetTableCell(x, y, (cl: CellClass) => {
-          if (clicks === 2) {
-            const { textContent } = tdRef.current;
-            cl.text = textContent;
-            cl.value = getEvaluatedText(textContent);
-            setClicks(0);
-          } else if (clicks === 1) setClicks(2);
-        });
+
+        const { textContent } = tdRef.current;
+
+        if (clicks === 2) {
+          if (textContent !== cell.text)
+            cloneAndSetTableCell(x, y, (cl: CellClass) => {
+              if (textContent !== cell.text) {
+                cl.text = textContent;
+                cl.value = getEvaluatedText(textContent);
+              }
+            });
+          setClicks(0);
+        } else if (clicks === 1) setClicks(2);
       } else if (clicks !== 2) setClicks(2);
       // if (clicks === 2 && !wasCaretSet) {
       //   placeCaretAtEnd(tdRef.current);
@@ -84,7 +89,7 @@ const CustomTableCell: React.FC<Props> = ({
       //   }
       // }
     },
-    [cloneAndSetTableCell, getEvaluatedText, clicks]
+    [cloneAndSetTableCell, getEvaluatedText, clicks, cell.text]
   );
 
   /**
@@ -95,16 +100,18 @@ const CustomTableCell: React.FC<Props> = ({
    */
   const handleCellBlur = (x: number, y: number, e: any) => {
     console.log("lost focus");
-    cloneAndSetTableCell(x, y, (cl: CellClass) => {
-      if (clicks === 2) {
-        const { textContent } = tdRef.current;
-        console.log("textContent", textContent);
-        cl.text = textContent;
-        cl.value = getEvaluatedText(textContent);
-      }
-      setClicks(0);
-      setWasCaretSet(false);
-    });
+
+    const { textContent } = tdRef.current;
+    if (textContent !== cell.text) {
+      cloneAndSetTableCell(x, y, (cl: CellClass) => {
+        if (clicks === 2) {
+          cl.text = textContent;
+          cl.value = getEvaluatedText(textContent);
+        }
+      });
+    }
+    setClicks(0);
+    setWasCaretSet(false);
   };
 
   return (

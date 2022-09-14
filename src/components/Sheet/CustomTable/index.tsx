@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
   Table,
   TableBody,
@@ -159,7 +159,31 @@ const CustomTable: React.FC = () => {
   //   });
   // };
 
-  const table: TableClass = sheet.tables[tableIndex];
+  const table: TableClass = useMemo(
+    () => sheet.tables[tableIndex],
+    [sheet.tables, tableIndex]
+  );
+
+  const listTable = useMemo(
+    () =>
+      table.cells[0].map((_, i) => (
+        <TableCell
+          className="h1"
+          key={i}
+          sx={{
+            backgroundColor: `${grey[900]} !important`,
+            fontSize: "20px",
+            textAlign: "center",
+
+            width: "170px",
+          }}
+        >
+          {String.fromCharCode(65 + i)}
+        </TableCell>
+      )),
+    [table.cells]
+  );
+
   return (
     <Table
       sx={{
@@ -185,7 +209,7 @@ const CustomTable: React.FC = () => {
               width: "70px",
             }}
           />
-          {table.cells[0] &&
+          {/* {table.cells[0] &&
             table.cells[0].map((_, i) => (
               <TableCell
                 className="h1"
@@ -200,7 +224,7 @@ const CustomTable: React.FC = () => {
               >
                 {String.fromCharCode(65 + i)}
               </TableCell>
-            ))}
+            ))} */}
         </TableRow>
       </TableHead>
       <TableBody>
