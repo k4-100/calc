@@ -6,7 +6,7 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material";
-import { grey, red } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import _ from "lodash";
 import { evaluate } from "mathjs";
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
@@ -16,7 +16,7 @@ import CustomTableCell from "./CustomTableCell";
 /**
  * size of td cell with a number (the one used for indexing)
  */
-const numberTdSize = 100;
+// const numberTdSize = 100;
 
 /**
  *
