@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 
 const Introduction: React.FC = () => {
+  const [isTextToggled, setIsTextToggled] = useState(false);
+
   return (
     <Box
       sx={{
@@ -42,9 +44,28 @@ const Introduction: React.FC = () => {
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellendus
         unde et dolorum asperiores recusandae vero aliquid nisi quo ipsam ullam?
       </Typography>
+      {isTextToggled && (
+        <Typography
+          sx={{
+            width: {
+              xs: "100%",
+              md: 1 / 2,
+            },
+            my: 2,
+            mb: 5,
+            fontSize: "clamp(12px, 3vw, 24px)",
+          }}
+        >
+          Voluptatum minima modi nihil itaque quas eum dicta. Quae saepe vero
+          facilis aliquid quidem maiores laborum. Perferendis, sunt neque
+          impedit id maxime non illo praesentium quisquam pariatur repellendus
+          delectus unde accusamus facere.
+        </Typography>
+      )}
       <Button
         color="info"
         variant="contained"
+        onClick={() => setIsTextToggled(!isTextToggled)}
         sx={{
           fontSize: {
             xs: "10px",
@@ -52,7 +73,7 @@ const Introduction: React.FC = () => {
           },
         }}
       >
-        Read more
+        {isTextToggled ? "Show Less" : "Read more"}
       </Button>
     </Box>
   );
