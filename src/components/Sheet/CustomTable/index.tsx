@@ -161,110 +161,111 @@ const CustomTable: React.FC = () => {
 
   const table: TableClass = sheet.tables[tableIndex];
   return (
-    <div className="CustomTable">
-      <Table
-        sx={{
-          "& *": {
-            display: "block !important",
-          },
-          "& th, & td": {
-            border: "1px solid black",
-          },
-          "& tr": {
-            display: "flex !important",
-          },
-        }}
-      >
-        <TableHead>
-          <TableRow>
-            <TableCell
-              sx={{
-                backgroundColor: `${grey[900]} !important`,
-                width: "70px",
-              }}
-            />
-            {table.cells[0] &&
-              table.cells[0].map((_, i) => (
-                <TableCell
-                  className="h1"
-                  key={i}
-                  sx={{
-                    backgroundColor: `${grey[900]} !important`,
-                    fontSize: "20px",
-                    textAlign: "center",
-
-                    width: "170px",
-                  }}
-                >
-                  {String.fromCharCode(65 + i)}
-                </TableCell>
-              ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {table.cells.map((_, y) => (
-            <TableRow key={y + 1}>
+    <Table
+      sx={{
+        width: "100vw",
+        maxWidth: "100vw",
+        // overflow
+        "& *": {
+          display: "block !important",
+        },
+        "& th, & td": {
+          border: "1px solid black",
+        },
+        "& tr": {
+          display: "flex !important",
+        },
+      }}
+    >
+      <TableHead>
+        <TableRow>
+          <TableCell
+            sx={{
+              backgroundColor: `${grey[900]} !important`,
+              width: "70px",
+            }}
+          />
+          {table.cells[0] &&
+            table.cells[0].map((_, i) => (
               <TableCell
+                className="h1"
+                key={i}
                 sx={{
                   backgroundColor: `${grey[900]} !important`,
                   fontSize: "20px",
                   textAlign: "center",
-                  width: "70px",
+
+                  width: "170px",
                 }}
               >
-                {y + 1}
+                {String.fromCharCode(65 + i)}
               </TableCell>
-              {table.cells[y].map((cell: CellClass, x) => (
-                <CustomTableCell
-                  x={x}
-                  y={y}
-                  cell={cell}
-                  cloneAndSetTableCell={cloneAndSetTableCell}
-                  getEvaluatedText={getEvaluatedText}
-                  key={`td-${x}-${y}`}
-                  // handleCellBlur={handleCellBlur}
-                  // handleCellKeyDown={handleCellKeyDown}
-                  // handleCellClick={handleCellClick}
-                />
-                // <TableCell
-                //   key={x}
-                //   id={`td-${x}-${y}`}
-                //   contentEditable
-                //   suppressContentEditableWarning
-                //   onBlur={(e) => handleCellBlur(x, y, e)}
-                //   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
-                //   onClick={(e) => handleCellClick(x, y, e)}
-                //   sx={{
-                //     position: data.clicks === 0 ? "" : "absolute",
-                //     backgroundColor: data.wasFound
-                //       ? red[500]
-                //       : `${grey[800]} !important`,
-                //     fontSize: "18px",
-                //     width: `calc(  (100vw - ${numberTdSize}px) / ${
-                //       table.cells.length - 1
-                //     } )`,
-                //     minWidth:
-                //       data.clicks === 0
-                //         ? ""
-                //         : `calc( (100vw - ${numberTdSize}px) / ${
-                //             table.cells.length - 1
-                //           } ) !important`,
-                //     maxWidth: `calc( (100vw - ${numberTdSize}px) / ${
-                //       table.cells.length - 1
-                //     } )`,
-                //     overflowX: data.clicks === 0 ? "hidden" : "auto",
-                //     textOverflow: "ellipsis",
-                //     whiteSpace: "nowrap",
-                //   }}
-                // >
-                //   {data.clicks === 2 ? data.text : data.value}
-                // </TableCell>
-              ))}
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+            ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {table.cells.map((_, y) => (
+          <TableRow key={y + 1}>
+            <TableCell
+              sx={{
+                backgroundColor: `${grey[900]} !important`,
+                fontSize: "20px",
+                textAlign: "center",
+                width: "70px",
+              }}
+            >
+              {y + 1}
+            </TableCell>
+            {table.cells[y].map((cell: CellClass, x) => (
+              <CustomTableCell
+                x={x}
+                y={y}
+                cell={cell}
+                cloneAndSetTableCell={cloneAndSetTableCell}
+                getEvaluatedText={getEvaluatedText}
+                key={`td-${x}-${y}`}
+                // handleCellBlur={handleCellBlur}
+                // handleCellKeyDown={handleCellKeyDown}
+                // handleCellClick={handleCellClick}
+              />
+              // <TableCell
+              //   key={x}
+              //   id={`td-${x}-${y}`}
+              //   contentEditable
+              //   suppressContentEditableWarning
+              //   onBlur={(e) => handleCellBlur(x, y, e)}
+              //   onKeyDown={(e) => handleCellKeyDown(x, y, e)}
+              //   onClick={(e) => handleCellClick(x, y, e)}
+              //   sx={{
+              //     position: data.clicks === 0 ? "" : "absolute",
+              //     backgroundColor: data.wasFound
+              //       ? red[500]
+              //       : `${grey[800]} !important`,
+              //     fontSize: "18px",
+              //     width: `calc(  (100vw - ${numberTdSize}px) / ${
+              //       table.cells.length - 1
+              //     } )`,
+              //     minWidth:
+              //       data.clicks === 0
+              //         ? ""
+              //         : `calc( (100vw - ${numberTdSize}px) / ${
+              //             table.cells.length - 1
+              //           } ) !important`,
+              //     maxWidth: `calc( (100vw - ${numberTdSize}px) / ${
+              //       table.cells.length - 1
+              //     } )`,
+              //     overflowX: data.clicks === 0 ? "hidden" : "auto",
+              //     textOverflow: "ellipsis",
+              //     whiteSpace: "nowrap",
+              //   }}
+              // >
+              //   {data.clicks === 2 ? data.text : data.value}
+              // </TableCell>
+            ))}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 };
 
