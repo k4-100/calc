@@ -7,6 +7,7 @@ import Introduction from "./Introduction";
 import AboutUs from "./AboutUs";
 import Opinions from "./Opinions";
 import Apps from "./Apps";
+import Saves from "./Saves";
 /**
  *
  * @returns Home page
@@ -54,6 +55,7 @@ const Home: React.FC = () => {
           </Box>
         </Grid>
       </Grid>
+      <Saves />
       <Typography
         variant="subtitle1"
         align="center"
