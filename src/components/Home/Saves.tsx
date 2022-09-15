@@ -1,5 +1,5 @@
 import React from "react";
-import { Paper } from "@mui/material";
+import { Paper, Box, Typography } from "@mui/material";
 
 import Save from "./Save";
 /**
@@ -11,17 +11,30 @@ const Saves: React.FC = () => {
     <Paper
       elevation={10}
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        mt: 3,
-        p: 2,
         mx: 3,
       }}
     >
-      <Save />
-      <Save />
-      <Save />
+      <Typography
+        variant="h3"
+        sx={{
+          p: 3,
+          pb: 0,
+        }}
+      >
+        Saved Files:
+      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          p: 2,
+        }}
+      >
+        <Save />
+        <Save />
+        <Save />
+      </Box>
     </Paper>
   );
 };
