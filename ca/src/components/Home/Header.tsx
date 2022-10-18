@@ -3,10 +3,10 @@ import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import BorderStyleIcon from "@mui/icons-material/BorderStyle";
 import { Link as RouterLink } from "react-router-dom";
 import { AccountCircle } from "@mui/icons-material";
-import { boolean } from "mathjs";
+import Profile from "./Profile";
 
 const Header = () => {
-  const [profileClicked, setProfileClicked] = React.useState<boolean>(false);
+  const [profileClicked, setProfileClicked] = useState<boolean>(false);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ position: "static" }}>
@@ -54,10 +54,12 @@ const Header = () => {
               Calc
             </Button>
           </Box>
-          <Button onClick={() => setProfileClicked(!profileClicked)}>
-            <AccountCircle />
-          </Button>
-          {profileClicked && "text"}
+          <Box>
+            <Button onClick={() => setProfileClicked(!profileClicked)}>
+              <AccountCircle />
+            </Button>
+            {profileClicked && <Profile />}
+          </Box>
         </Toolbar>
       </AppBar>
     </Box>
