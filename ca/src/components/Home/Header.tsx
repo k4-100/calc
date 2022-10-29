@@ -58,7 +58,10 @@ const Header = () => {
             <Button onClick={() => setProfileClicked(!profileClicked)}>
               <AccountCircle />
             </Button>
-            {profileClicked && <Profile />}
+            {
+              // profileClicked &&
+              <Profile />
+            }
           </Box>
         </Toolbar>
       </AppBar>
