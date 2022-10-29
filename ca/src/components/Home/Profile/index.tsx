@@ -15,6 +15,8 @@ const Profile = () => {
       elevation={5}
       sx={{
         position: "absolute",
+        width: "261px",
+        height: "201px",
         display: "flex",
         flexDirection: "column",
         padding: 1,
@@ -30,7 +32,9 @@ const Profile = () => {
     >
       <FormControl>
         <ProfileAccessed />
-        {/* <TextField id="profile-login"
+
+        {/* <TextField
+          id="profile-login"
           label="Login"
           variant="outlined"
           size="small"
