@@ -38,11 +38,43 @@ const ProfileAccessed = () => {
             color: grey[900],
           }}
         >
-          info:
+          info
         </Paper>
       </Box>
-      <Typography variant="h6">user: xyz1235</Typography>
-      <Typography variant="h6">created: 27.09.2021</Typography>
+      <Box
+        sx={{
+          display: "flex",
+        }}
+      >
+        <Paper
+          elevation={100}
+          sx={{
+            marginRight: 1,
+            paddingLeft: 1,
+            paddingRight: 2,
+          }}
+        >
+          user:
+        </Paper>
+        <Typography> xyz12345</Typography>
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+        }}
+      >
+        <Paper
+          elevation={100}
+          sx={{
+            marginRight: 1,
+            paddingLeft: 1,
+            paddingRight: 2,
+          }}
+        >
+          created:
+        </Paper>
+        <Typography> 20.01.2021</Typography>
+      </Box>
       <Button
         color="error"
         variant="outlined"
