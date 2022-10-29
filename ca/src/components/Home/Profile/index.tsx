@@ -31,28 +31,32 @@ const Profile = () => {
       }}
     >
       <FormControl>
-        <ProfileAccessed />
-
-        {/* <TextField
-          id="profile-login"
-          label="Login"
-          variant="outlined"
-          size="small"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
-        />
-        <TextField
-          id="profile-login"
-          label="Password"
-          variant="outlined"
-          size="small"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-        />
-        <Button variant="contained" color="success">
-          Log in
-        </Button>
-        <Button>Register</Button> */}
+        {profileAccessed ? (
+          <ProfileAccessed />
+        ) : (
+          <>
+            <TextField
+              id="profile-login"
+              label="Login"
+              variant="outlined"
+              size="small"
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
+            />
+            <TextField
+              id="profile-login"
+              label="Password"
+              variant="outlined"
+              size="small"
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+            />
+            <Button variant="contained" color="success">
+              Log in
+            </Button>
+            <Button>Register</Button>
+          </>
+        )}
       </FormControl>
     </Paper>
   );
