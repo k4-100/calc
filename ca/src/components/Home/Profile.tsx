@@ -5,6 +5,9 @@ const Profile = () => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
 
+  const handleLogIn = () => {};
+  const handleRegister = () => {};
+
   return (
     <Paper
       elevation={5}
