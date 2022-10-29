@@ -1,13 +1,15 @@
 import { Button, FormControl, Paper, TextField } from "@mui/material";
 import React, { useState } from "react";
+import ProfileAccessed from "./ProfileAccessed";
 
 const Profile = () => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
+  const [profileAccessed, setProfileAccessed] = useState(false);
 
   const handleLogIn = () => {};
-  const handleRegister = () => {};
 
+  const handleRegister = () => {};
   return (
     <Paper
       elevation={5}
@@ -27,8 +29,8 @@ const Profile = () => {
       }}
     >
       <FormControl>
-        <TextField
-          id="profile-login"
+        <ProfileAccessed />
+        {/* <TextField id="profile-login"
           label="Login"
           variant="outlined"
           size="small"
@@ -46,7 +48,7 @@ const Profile = () => {
         <Button variant="contained" color="success">
           Log in
         </Button>
-        <Button>Register</Button>
+        <Button>Register</Button> */}
       </FormControl>
     </Paper>
   );
