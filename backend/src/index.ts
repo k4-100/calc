@@ -26,17 +26,16 @@ app.get("/login", async (req, res) => {
     return res.status(400).json({ data: {}, status: false });
 
   const p = new Promise((res, rej) => {
-    mysqlConnection.query("SELECT * FRO Users", (err, result) => {
-      if (err) return rej(err);
-
-      res({ result });
-      res({
-        result: result.map(({ userID, username }: any) => ({
-          userID,
-          username,
-        })),
-      });
-    });
+    mysqlConnection.query(
+      `SELECT * FROM Users WHERE userID=${id} AND username='${username}' AND pass='${pass}'`,
+      (err, result) => {
+        if (err) return rej(err);
+        delete result.pass;
+        res({
+          result: result[0],
+        });
+      }
+    );
   }).catch((err) => {
     console.log("promise error: ", err);
     error = true;
