@@ -30,7 +30,7 @@ app.get("/", async (req, res) => {
 
   const ret: any = await p;
   console.log(ret);
-  return res.json({ data: ret.result, msg: "stuff", status: true });
+  return res.json({ data: ret.result, status: true });
 });
 
 app.all("*", (req, res) => {
