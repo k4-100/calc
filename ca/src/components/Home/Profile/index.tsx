@@ -44,7 +44,10 @@ const Profile = () => {
     >
       <FormControl>
         {profileAccessed ? (
-          <ProfileAccessed profileData={profileData} />
+          <ProfileAccessed
+            profileData={profileData}
+            handleLogOutClick={() => setProfileAccessed(false)}
+          />
         ) : (
           <>
             <TextField

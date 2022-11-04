@@ -3,7 +3,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
 import React from "react";
 
-const ProfileAccessed = ({ profileData }: any) => {
+const ProfileAccessed = ({ profileData, handleLogOutClick }: any) => {
   return (
     <Box
       sx={{
@@ -81,6 +81,7 @@ const ProfileAccessed = ({ profileData }: any) => {
         sx={{
           width: 1,
         }}
+        onClick={handleLogOutClick}
       >
         Log out
       </Button>
