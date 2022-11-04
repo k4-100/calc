@@ -11,7 +11,7 @@ const mysqlConnection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "1234",
-  database: "Products",
+  database: "Sheet",
 });
 
 mysqlConnection.connect((err) => {
@@ -19,18 +19,29 @@ mysqlConnection.connect((err) => {
   console.log("Connected");
 });
 
-app.get("/", async (req, res) => {
+app.get("/api/v1/users", async (_, res) => {
+  let error = false;
   const p = new Promise((res, rej) => {
-    mysqlConnection.query("SELECT * FROM Products.Food", (err, result) => {
-      if (err) throw err;
+    mysqlConnection.query("SELECT * FROM Users", (err, result) => {
+      if (err) rej(err);
 
-      res({ result });
+      res({
+        result: result.map(({ userID, username }: any) => ({
+          userID,
+          username,
+        })),
+      });
     });
-  }).catch((err) => console.log("promise error: ", err));
+  }).catch((err) => {
+    console.log("promise error: ", err);
+    error = true;
+  });
 
   const ret: any = await p;
   console.log(ret);
-  return res.json({ data: ret.result, status: true });
+  if (!error) return res.status(201).json({ data: ret.result, status: true });
+
+  return res.status(404).json({ data: [], status: false });
 });
 
 app.all("*", (req, res) => {
