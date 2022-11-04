@@ -3,7 +3,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
 import React from "react";
 
-const ProfileAccessed = () => {
+const ProfileAccessed = ({ profileData }: any) => {
   return (
     <Box
       sx={{
@@ -47,7 +47,7 @@ const ProfileAccessed = () => {
         }}
       >
         <Paper
-          elevation={100}
+          elevation={20}
           sx={{
             marginRight: 1,
             paddingLeft: 1,
@@ -56,7 +56,7 @@ const ProfileAccessed = () => {
         >
           user:
         </Paper>
-        <Typography> xyz12345</Typography>
+        <Typography> {profileData.username} </Typography>
       </Box>
       <Box
         sx={{
@@ -64,7 +64,7 @@ const ProfileAccessed = () => {
         }}
       >
         <Paper
-          elevation={100}
+          elevation={20}
           sx={{
             marginRight: 1,
             paddingLeft: 1,

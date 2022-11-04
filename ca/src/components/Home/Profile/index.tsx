@@ -1,13 +1,25 @@
-import { Button, FormControl, Paper, TextField } from "@mui/material";
 import React, { useState } from "react";
+import { Button, FormControl, Paper, TextField } from "@mui/material";
+import _ from "lodash";
 import ProfileAccessed from "./ProfileAccessed";
 
 const Profile = () => {
   const [login, setLogin] = useState("");
   const [pass, setPass] = useState("");
   const [profileAccessed, setProfileAccessed] = useState(false);
-
-  const handleLogIn = () => {};
+  const [profileData, setProfileData] = useState<null | Object>(null);
+  const handleLogIn = async () => {
+    const userData = await fetch(
+      `http://127.0.0.1:5000/login?username=${login}&pass=${pass}`
+    )
+      .then((response) => response.json())
+      .catch((err) => console.log("error on handleLogIn: ", err));
+    const { data, status } = userData;
+    if (status && !_.isEmpty(data)) {
+      setProfileAccessed(true);
+      setProfileData(data);
+    }
+  };
 
   const handleRegister = () => {};
   return (
@@ -31,8 +43,8 @@ const Profile = () => {
       }}
     >
       <FormControl>
-        {!profileAccessed ? (
-          <ProfileAccessed />
+        {profileAccessed ? (
+          <ProfileAccessed profileData={profileData} />
         ) : (
           <>
             <TextField
@@ -51,7 +63,7 @@ const Profile = () => {
               value={pass}
               onChange={(e) => setPass(e.target.value)}
             />
-            <Button variant="contained" color="success">
+            <Button variant="contained" color="success" onClick={handleLogIn}>
               Log in
             </Button>
             <Button>Register</Button>

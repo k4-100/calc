@@ -1,5 +1,6 @@
-import express, { application } from "express";
+import express from "express";
 import mysql from "mysql";
+import cors from "cors";
 import _ from "lodash";
 
 const app = express();
@@ -19,15 +20,17 @@ mysqlConnection.connect((err) => {
   console.log("Connected");
 });
 
+app.use(cors());
+
 app.get("/login", async (req, res) => {
   let error = false;
-  const { id, username, pass } = req.query;
-  if (!id || !username || !pass)
+  const { username, pass } = req.query;
+  if (!username || !pass)
     return res.status(400).json({ data: {}, status: false });
 
   const p = new Promise((res, rej) => {
     mysqlConnection.query(
-      `SELECT * FROM Users WHERE userID=${id} AND username='${username}' AND pass='${pass}'`,
+      `SELECT * FROM Users WHERE username='${username}' AND pass='${pass}'`,
       (err, result) => {
         if (err) return rej(err);
         delete result.pass;
