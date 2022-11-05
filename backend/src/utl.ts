@@ -6,13 +6,13 @@ import _ from "lodash";
  * @param username username query string
  * @param pass password query string
  * @param sqlConnection sql connection instance
- * @returns sql query awaiting completion
+ * @returns sql query get promise awaiting completion
  */
 export function getLoginPromise(
   username: string,
   pass: string,
   sqlConnection: mysql.Connection
-) {
+): Promise<unknown> {
   return new Promise((res, rej) => {
     sqlConnection.query(
       `SELECT * FROM Users WHERE username='${username}' AND pass='${pass}'`,
@@ -27,6 +27,31 @@ export function getLoginPromise(
         delete result[0].pass;
         res({
           result: result[0],
+        });
+      }
+    );
+  });
+}
+
+/**
+ *
+ * @param username username query string
+ * @param pass password query string
+ * @param sqlConnection sql connection instance
+ * @returns sql query post promise awaiting completion
+ */
+export function postLoginPromise(
+  username: string,
+  pass: string,
+  sqlConnection: mysql.Connection
+): Promise<unknown> {
+  return new Promise((res, rej) => {
+    sqlConnection.query(
+      `INSERT INTO Users(username,pass) VALUES('${username}','${pass}')`,
+      (err, result) => {
+        if (err) return rej(err);
+        res({
+          result,
         });
       }
     );

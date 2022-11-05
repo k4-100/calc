@@ -37,7 +37,7 @@ app.get("/login", async (req, res) => {
     console.log("promise error: ", err);
     error = true;
   });
-  console.log(ret);
+
   if (error) return res.status(404).json({ data: [], status: false });
   return res.status(201).json({ data: ret.result, status: true });
 });
@@ -48,47 +48,19 @@ app.post("/login", async (req, res) => {
   if (!username || !pass)
     return res.status(400).json({ data: {}, status: false });
 
-  const p = new Promise((res, rej) => {
-    mysqlConnection.query(
-      `INSERT INTO Users(username,pass) VALUES('${username}','${pass}')`,
-      (err, result) => {
-        if (err) return rej(err);
-        res({
-          result,
-        });
-      }
-    );
-  })
-    .then(async () => {
-      const p2 = new Promise((res2, rej2) => {
-        const { username, pass } = req.query;
-        mysqlConnection.query(
-          `SELECT * FROM Users WHERE username='${username}' AND pass='${pass}'`,
-          (err, result) => {
-            if (err) return rej2(err);
-
-            if (_.isEmpty(result))
-              return res2({
-                result: [],
-              });
-
-            delete result[0].pass;
-            res2({
-              result: result[0],
-            });
-          }
-        );
-      });
-
-      return await p2;
-    })
+  const ret: any = await UTL.postLoginPromise(
+    username as string,
+    pass as string,
+    mysqlConnection
+  )
+    .then(() =>
+      UTL.getLoginPromise(username as string, pass as string, mysqlConnection)
+    )
     .catch((err) => {
       console.log("promise error: ", err);
       error = true;
     });
 
-  const ret: any = await p;
-  console.log(ret);
   if (error) return res.status(404).json({ data: [], status: false });
   return res.status(201).json({ data: ret.result, status: true });
 });
