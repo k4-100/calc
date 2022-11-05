@@ -8,20 +8,40 @@ const Profile = () => {
   const [pass, setPass] = useState("");
   const [profileAccessed, setProfileAccessed] = useState(false);
   const [profileData, setProfileData] = useState<null | Object>(null);
+
   const handleLogIn = async () => {
-    const userData = await fetch(
+    const fetchedData = await fetch(
       `http://127.0.0.1:5000/login?username=${login}&pass=${pass}`
     )
       .then((response) => response.json())
       .catch((err) => console.log("error on handleLogIn: ", err));
-    const { data, status } = userData;
+    const { data, status } = fetchedData;
     if (status && !_.isEmpty(data)) {
       setProfileAccessed(true);
       setProfileData(data);
     }
   };
 
-  const handleRegister = () => {};
+  const handleRegister = async () => {
+    const fetchedData = await fetch(
+      `http://127.0.0.1:5000/login?username=${login}&pass=${pass}`,
+      {
+        method: "POST",
+      }
+    )
+      .then((response) => {
+        console.log(response);
+        return response.json();
+      })
+      .catch((err) => console.log("error on handleLogIn: ", err));
+
+    const { data, status } = fetchedData;
+    if (status && !_.isEmpty(data)) {
+      setProfileAccessed(true);
+      setProfileData(data);
+    }
+  };
+
   return (
     <Paper
       elevation={5}
@@ -69,7 +89,7 @@ const Profile = () => {
             <Button variant="contained" color="success" onClick={handleLogIn}>
               Log in
             </Button>
-            <Button>Register</Button>
+            <Button onClick={handleRegister}>Register</Button>
           </>
         )}
       </FormControl>
