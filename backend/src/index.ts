@@ -33,7 +33,13 @@ app.get("/login", async (req, res) => {
       `SELECT * FROM Users WHERE username='${username}' AND pass='${pass}'`,
       (err, result) => {
         if (err) return rej(err);
-        delete result.pass;
+
+        if (_.isEmpty(result))
+          return res({
+            result: [],
+          });
+
+        delete result[0].pass;
         res({
           result: result[0],
         });
@@ -74,6 +80,13 @@ app.post("/login", async (req, res) => {
           `SELECT * FROM Users WHERE username='${username}' AND pass='${pass}'`,
           (err, result) => {
             if (err) return rej2(err);
+
+            if (_.isEmpty(result))
+              return res2({
+                result: [],
+              });
+
+            delete result[0].pass;
             res2({
               result: result[0],
             });
