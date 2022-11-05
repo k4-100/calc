@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button, FormControl, Paper, TextField } from "@mui/material";
 import _ from "lodash";
 import ProfileAccessed from "./ProfileAccessed";
+import * as UT from "../../../types/types";
 
 const Profile = () => {
   const [login, setLogin] = useState<string>("");
@@ -11,7 +12,7 @@ const Profile = () => {
   const [errorMessage, setErrorMessage] = useState<string>(".");
 
   const handleLogIn = async () => {
-    const fetchedData = await fetch(
+    const fetchedData: UT.FetchedData<UT.UserData> = await fetch(
       `http://127.0.0.1:5000/login?username=${login}&pass=${pass}`
     )
       .then((response) => response.json())
@@ -22,6 +23,7 @@ const Profile = () => {
     if (status && !_.isEmpty(data)) {
       setProfileAccessed(true);
       setProfileData(data);
+      console.log(fetchedData);
       return;
     }
 
