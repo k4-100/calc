@@ -2,8 +2,7 @@ import express from "express";
 import mysql from "mysql";
 import cors from "cors";
 import _ from "lodash";
-
-import * as UT from "./types/types";
+import * as UTL from "./utl";
 
 const app = express();
 
@@ -30,29 +29,14 @@ app.get("/login", async (req, res) => {
   if (!username || !pass)
     return res.status(400).json({ data: {}, status: false });
 
-  const p = new Promise((res, rej) => {
-    mysqlConnection.query(
-      `SELECT * FROM Users WHERE username='${username}' AND pass='${pass}'`,
-      (err, result) => {
-        if (err) return rej(err);
-
-        if (_.isEmpty(result))
-          return res({
-            result: [],
-          });
-
-        delete result[0].pass;
-        res({
-          result: result[0],
-        });
-      }
-    );
-  }).catch((err) => {
+  const ret: any = await UTL.getLoginPromise(
+    username as string,
+    pass as string,
+    mysqlConnection
+  ).catch((err) => {
     console.log("promise error: ", err);
     error = true;
   });
-
-  const ret: any = await p;
   console.log(ret);
   if (error) return res.status(404).json({ data: [], status: false });
   return res.status(201).json({ data: ret.result, status: true });
@@ -108,30 +92,6 @@ app.post("/login", async (req, res) => {
   if (error) return res.status(404).json({ data: [], status: false });
   return res.status(201).json({ data: ret.result, status: true });
 });
-
-// app.get("/api/v1/users", async (_, res) => {
-//   let error = false;
-//   const p = new Promise((res, rej) => {
-//     mysqlConnection.query("SELECT * FROM Users", (err, result) => {
-//       if (err) rej(err);
-
-//       res({
-//         result: result.map(({ userID, username }: any) => ({
-//           userID,
-//           username,
-//         })),
-//       });
-//     });
-//   }).catch((err) => {
-//     console.log("promise error: ", err);
-//     error = true;
-//   });
-
-//   if (!error) return res.status(404).json({ data: [], status: false });
-
-//   const ret: any = await p;
-//   return res.status(201).json({ data: ret.result, status: true });
-// });
 
 app.all("*", (req, res) => {
   res.status(404).send("ERROR");
