@@ -3,6 +3,8 @@ import mysql from "mysql";
 import cors from "cors";
 import _ from "lodash";
 
+import * as UT from "./types/types";
+
 const app = express();
 
 const PORT: number = 5000;
