@@ -3,7 +3,15 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import { blue, grey } from "@mui/material/colors";
 import React from "react";
 
-const ProfileAccessed = ({ profileData, handleLogOutClick }: any) => {
+import * as UT from "../../../types/types";
+
+const ProfileAccessed = ({
+  profileData,
+  handleLogOutClick,
+}: {
+  profileData: UT.UserData;
+  handleLogOutClick: () => void;
+}) => {
   return (
     <Box
       sx={{

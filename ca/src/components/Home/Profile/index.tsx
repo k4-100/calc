@@ -8,7 +8,7 @@ const Profile = () => {
   const [login, setLogin] = useState<string>("");
   const [pass, setPass] = useState<string>("");
   const [profileAccessed, setProfileAccessed] = useState<boolean>(false);
-  const [profileData, setProfileData] = useState<null | Object>(null);
+  const [profileData, setProfileData] = useState<null | UT.UserData>(null);
   const [errorMessage, setErrorMessage] = useState<string>(".");
 
   const handleLogIn = async () => {
@@ -23,7 +23,6 @@ const Profile = () => {
     if (status && !_.isEmpty(data)) {
       setProfileAccessed(true);
       setProfileData(data);
-      console.log(fetchedData);
       return;
     }
 
@@ -31,7 +30,7 @@ const Profile = () => {
   };
 
   const handleRegister = async () => {
-    const fetchedData = await fetch(
+    const fetchedData: UT.FetchedData<UT.UserData> = await fetch(
       `http://127.0.0.1:5000/login?username=${login}&pass=${pass}`,
       {
         method: "POST",
@@ -78,7 +77,7 @@ const Profile = () => {
       <FormControl>
         {profileAccessed ? (
           <ProfileAccessed
-            profileData={profileData}
+            profileData={profileData as UT.UserData}
             handleLogOutClick={() => {
               setProfileAccessed(false);
               setProfileData(null);
