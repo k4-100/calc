@@ -4,22 +4,28 @@ import _ from "lodash";
 import ProfileAccessed from "./ProfileAccessed";
 
 const Profile = () => {
-  const [login, setLogin] = useState("");
-  const [pass, setPass] = useState("");
-  const [profileAccessed, setProfileAccessed] = useState(false);
+  const [login, setLogin] = useState<string>("");
+  const [pass, setPass] = useState<string>("");
+  const [profileAccessed, setProfileAccessed] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<null | Object>(null);
+  const [errorMessage, setErrorMessage] = useState<string>(".");
 
   const handleLogIn = async () => {
     const fetchedData = await fetch(
       `http://127.0.0.1:5000/login?username=${login}&pass=${pass}`
     )
       .then((response) => response.json())
-      .catch((err) => console.log("error on handleLogIn: ", err));
+      .catch((err) => {
+        console.log("error on handleLogIn: ", err);
+      });
     const { data, status } = fetchedData;
     if (status && !_.isEmpty(data)) {
       setProfileAccessed(true);
       setProfileData(data);
+      return;
     }
+
+    setErrorMessage("Failed to log in");
   };
 
   const handleRegister = async () => {
@@ -33,13 +39,18 @@ const Profile = () => {
         console.log(response);
         return response.json();
       })
-      .catch((err) => console.log("error on handleLogIn: ", err));
+      .catch((err) => {
+        console.log("error on handleLogIn: ", err);
+      });
 
     const { data, status } = fetchedData;
     if (status && !_.isEmpty(data)) {
       setProfileAccessed(true);
       setProfileData(data);
+      return;
     }
+
+    setErrorMessage("Failed to register");
   };
 
   return (
@@ -48,16 +59,16 @@ const Profile = () => {
       sx={{
         position: "absolute",
         width: "261px",
-        height: "201px",
+        // height: "236px",
         display: "flex",
         flexDirection: "column",
         padding: 1,
         top: "75px",
         right: "20px",
-        "& > * > *:nth-of-type(1)": {
-          mt: 0,
-        },
         "& > * > *:nth-of-type(2)": {
+          mt: 1,
+        },
+        "& > * > *:nth-of-type(3)": {
           my: 1,
         },
       }}
@@ -66,10 +77,25 @@ const Profile = () => {
         {profileAccessed ? (
           <ProfileAccessed
             profileData={profileData}
-            handleLogOutClick={() => setProfileAccessed(false)}
+            handleLogOutClick={() => {
+              setProfileAccessed(false);
+              setProfileData(null);
+              setErrorMessage(".");
+            }}
           />
         ) : (
           <>
+            <Paper
+              elevation={20}
+              sx={{
+                p: 0.5,
+                textAlign: "center",
+                color: "red",
+                textTransform: "uppercase",
+              }}
+            >
+              {errorMessage}
+            </Paper>
             <TextField
               id="profile-login"
               label="Login"
