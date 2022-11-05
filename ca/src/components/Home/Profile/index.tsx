@@ -112,10 +112,20 @@ const Profile = () => {
               value={pass}
               onChange={(e) => setPass(e.target.value)}
             />
-            <Button variant="contained" color="success" onClick={handleLogIn}>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={handleLogIn}
+              disabled={!login || !pass ? true : false}
+            >
               Log in
             </Button>
-            <Button onClick={handleRegister}>Register</Button>
+            <Button
+              onClick={handleRegister}
+              disabled={!login || !pass ? true : false}
+            >
+              Register
+            </Button>
           </>
         )}
       </FormControl>
