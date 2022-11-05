@@ -8,7 +8,8 @@ CREATE TABLE Sheet.Users(
   userID INT NOT NULL AUTO_INCREMENT,
   username VARCHAR(17) NOT NULL,
   pass VARCHAR(30) NOT NULL,
-  PRIMARY KEY(userID)
+  PRIMARY KEY(userID),
+  UNIQUE(username)
 );
 
 -- CREATE TABLE Sheet.Sheets(
