@@ -58,7 +58,7 @@ const SearchBar: React.FC = () => {
           }}
           onClick={() => {
             handleSearchButtonClick();
-            sheet.tables[0].convertToJSON();
+            console.log("stuff\n", sheet.tables[0].convertToJSON());
           }}
         >
           <Search />

@@ -81,12 +81,10 @@ export class TableClass {
   }
 
   convertToJSON() {
-    // const dsa: Array<Array<Object>> = [[]];
-    const dsa = this.cells.map((row) =>
-      row.map((item) => item.getAsPureObject())
-    );
-
-    console.log(dsa);
+    return JSON.stringify({
+      id: this.id,
+      data: this.cells.map((row) => row.map((item) => item.getAsPureObject())),
+    });
   }
 }
 
