@@ -56,7 +56,10 @@ const SearchBar: React.FC = () => {
             minWidth: "48px",
             height: "100%",
           }}
-          onClick={() => handleSearchButtonClick()}
+          onClick={() => {
+            handleSearchButtonClick();
+            sheet.tables[0].convertToJSON();
+          }}
         >
           <Search />
         </Button>

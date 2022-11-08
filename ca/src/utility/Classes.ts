@@ -37,6 +37,18 @@ export class CellClass {
     this.wasFound = false;
     this.id = ++cellIDSrc;
   }
+
+  getAsPureObject() {
+    return {
+      x: this.x,
+      y: this.y,
+      text: this.text,
+      value: this.value,
+      clicks: this.clicks,
+      wasFound: this.wasFound,
+      id: this.id,
+    };
+  }
 }
 
 /**
@@ -66,6 +78,15 @@ export class TableClass {
     );
 
     this.id = id;
+  }
+
+  convertToJSON() {
+    // const dsa: Array<Array<Object>> = [[]];
+    const dsa = this.cells.map((row) =>
+      row.map((item) => item.getAsPureObject())
+    );
+
+    console.log(dsa);
   }
 }
 
