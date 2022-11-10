@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Button, AppBar } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
+import { ArrowBackIosNew, HelpCenter, Save } from "@mui/icons-material";
+import _ from "lodash";
+
 import SearchBar from "./SearchBar";
 import Help from "./Help";
-import { ArrowBackIosNew, HelpCenter, Save } from "@mui/icons-material";
+import { useGlobalContext } from "../../../context";
 
 /**
  *
@@ -11,7 +14,26 @@ import { ArrowBackIosNew, HelpCenter, Save } from "@mui/icons-material";
  */
 const UtilityBelt: React.FC = () => {
   const [displayHelp, setDisplayHelp] = useState(false);
+  const { sheet } = useGlobalContext();
 
+  function handleSave() {
+    fetch("http://127.0.0.1:5000/table", {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      //make sure to serialize your JSON body
+      body: JSON.stringify({
+        content: sheet.tables[0].convertToJSON(),
+      }),
+    })
+      .then((response) => {
+        //do something awesome that makes the world a better place
+      })
+      .catch((err) => console.log(err))
+      .finally(() => console.log("perfomed save attempt"));
+  }
   return (
     <>
       <AppBar
@@ -43,7 +65,7 @@ const UtilityBelt: React.FC = () => {
             width: "50px",
             ml: "auto",
           }}
-          // onClick={() => setDisplayHelp(!displayHelp)}
+          onClick={handleSave}
         >
           <Save
             sx={{

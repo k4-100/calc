@@ -86,25 +86,25 @@ export function getTablePromise(
   });
 }
 
-// /**
-//  *
-//  * @param id id url param number
-//  * @param sqlConnection sql connection instance
-//  * @returns sql query post promise awaiting completion
-//  */
-// export function postTablePromise(
-//   id: number,
-//   sqlConnection: mysql.Connection
-// ): Promise<unknown> {
-//   return new Promise((res, rej) => {
-//     sqlConnection.query(
-//       `INSERT INTO Users(username,pass) VALUES('${username}','${pass}')`,
-//       (err, result) => {
-//         if (err) return rej(err);
-//         res({
-//           result,
-//         });
-//       }
-//     );
-//   });
-// }
+/**
+ * @param content json content in a form of a string
+ * @param sqlConnection sql connection instance
+ * @returns sql query post promise awaiting completion
+ */
+export function postTablePromise(
+  content: string,
+  sqlConnection: mysql.Connection
+): Promise<unknown> {
+  return new Promise((res, rej) => {
+    sqlConnection.query(
+      `INSERT INTO Tables(content) VALUES('${content}')`,
+      (err, result) => {
+        if (err) return rej(err);
+
+        res({
+          result,
+        });
+      }
+    );
+  });
+}
