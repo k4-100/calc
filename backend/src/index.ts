@@ -87,6 +87,12 @@ app.get("/table/:id", async (req, res) => {
   return res.status(201).json({ data: ret.result, status: true });
 });
 
+// app.post("/table/:id", async (req, res) => {
+
+// });
+// app.put("/table/:id", async (req, res) => {});
+// app.delete("/table/:id", async (req, res) => {});
+
 //#endregion /table
 
 app.all("*", (req, res) => {

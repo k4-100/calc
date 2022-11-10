@@ -85,3 +85,26 @@ export function getTablePromise(
     );
   });
 }
+
+// /**
+//  *
+//  * @param id id url param number
+//  * @param sqlConnection sql connection instance
+//  * @returns sql query post promise awaiting completion
+//  */
+// export function postTablePromise(
+//   id: number,
+//   sqlConnection: mysql.Connection
+// ): Promise<unknown> {
+//   return new Promise((res, rej) => {
+//     sqlConnection.query(
+//       `INSERT INTO Users(username,pass) VALUES('${username}','${pass}')`,
+//       (err, result) => {
+//         if (err) return rej(err);
+//         res({
+//           result,
+//         });
+//       }
+//     );
+//   });
+// }
