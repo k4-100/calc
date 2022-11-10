@@ -57,3 +57,31 @@ export function postLoginPromise(
     );
   });
 }
+
+/**
+ *
+ * @param id id url param number
+ * @param sqlConnection sql connection instance
+ * @returns sql query get promise awaiting completion
+ */
+export function getTablePromise(
+  id: number,
+  sqlConnection: mysql.Connection
+): Promise<unknown> {
+  return new Promise((res, rej) => {
+    sqlConnection.query(
+      `SELECT * FROM Tables WHERE tableID=${id}`,
+      (err, result) => {
+        if (err) return rej(err);
+        if (_.isEmpty(result))
+          return res({
+            result: [],
+          });
+
+        res({
+          result: result[0],
+        });
+      }
+    );
+  });
+}

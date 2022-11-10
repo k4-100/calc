@@ -23,6 +23,8 @@ mysqlConnection.connect((err) => {
 
 app.use(cors());
 
+//#region /login
+
 app.get("/login", async (req, res) => {
   let error = false;
   const { username, pass } = req.query;
@@ -64,6 +66,28 @@ app.post("/login", async (req, res) => {
   if (error) return res.status(404).json({ data: [], status: false });
   return res.status(201).json({ data: ret.result, status: true });
 });
+
+//#endregion /login
+
+//#region /table
+
+app.get("/table/:id", async (req, res) => {
+  let error = false;
+  const id = Number(req.params.id);
+  if (!id) return res.status(400).json({ data: {}, status: false });
+
+  const ret: any = await UTL.getTablePromise(id, mysqlConnection).catch(
+    (err) => {
+      console.log("promise error: ", err);
+      error = true;
+    }
+  );
+
+  if (error) return res.status(404).json({ data: [], status: false });
+  return res.status(201).json({ data: ret.result, status: true });
+});
+
+//#endregion /table
 
 app.all("*", (req, res) => {
   res.status(404).send("ERROR");
