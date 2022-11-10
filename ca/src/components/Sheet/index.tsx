@@ -1,7 +1,8 @@
+import React, { Suspense, useEffect } from "react";
 import { Box } from "@mui/material";
-import React, { Suspense } from "react";
+import _ from "lodash";
+import { useGlobalContext } from "../../context";
 import SheetBar from "./SheetBar";
-// import CustomTable from "./CustomTable";
 import UtilityBelt from "./UtilityBelt";
 
 const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
@@ -10,6 +11,21 @@ const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
  * @returns Sheet component
  */
 const Sheet: React.FC = () => {
+  const { sheet, setSheet } = useGlobalContext();
+
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000/table/${1}`)
+      .then(async (fetched) => await fetched.json())
+      .then((json) => {
+        const { tableID, content } = json.data;
+        const newSheet = _.cloneDeep(sheet);
+        console.log(tableID, content);
+        newSheet.loadTableFromJSON(tableID, content);
+        setSheet!(newSheet);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <UtilityBelt />
