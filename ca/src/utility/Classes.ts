@@ -1,3 +1,5 @@
+import _ from "lodash";
+
 /**
  * id for the cell
  */
@@ -49,6 +51,16 @@ export class CellClass {
       id: this.id,
     };
   }
+
+  loadFromPureObject(cell: CellClass) {
+    this.x = cell.x;
+    this.y = cell.y;
+    this.text = cell.text;
+    this.value = cell.value;
+    this.clicks = cell.clicks;
+    this.wasFound = cell.wasFound;
+    this.id = cell.id;
+  }
 }
 
 /**
@@ -79,10 +91,19 @@ export class TableClass {
 
     this.id = id;
   }
+  loadFromJSON(json: string) {
+    const { data } = JSON.parse(json);
+    for (let x = 0; x < this.cells.length; x++) {
+      for (let y = 0; y < this.cells[0].length; y++) {
+        this.cells[x][y].loadFromPureObject(data[x][y]);
+      }
+    }
+
+    // console.log("parsed: ", parsed);
+  }
 
   convertToJSON() {
     return JSON.stringify({
-      id: this.id,
       data: this.cells.map((row) => row.map((item) => item.getAsPureObject())),
     });
   }
