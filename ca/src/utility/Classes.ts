@@ -91,16 +91,6 @@ export class TableClass {
 
     this.id = id;
   }
-  loadFromJSON(json: string) {
-    const { data } = JSON.parse(json);
-    for (let x = 0; x < this.cells.length; x++) {
-      for (let y = 0; y < this.cells[0].length; y++) {
-        this.cells[x][y].loadFromPureObject(data[x][y]);
-      }
-    }
-
-    // console.log("parsed: ", parsed);
-  }
 
   convertToJSON() {
     return JSON.stringify({
@@ -124,5 +114,18 @@ export class SheetClass {
     this.tables = [new TableClass(26, 26, "first")];
     this.id = "first";
     this.mainTabID = "first";
+  }
+
+  loadTableFromJSON(tableID: string, json: string) {
+    const { data } = JSON.parse(json);
+    const tableIndex = this.tables.findIndex((table) => table.id === tableID);
+    if (tableIndex === -1) {
+      console.error("ERROR: loadTableFromJSON tableIndex not found");
+    }
+
+    for (let x = 0; x < this.tables[tableIndex].cells.length; x++) {
+      for (let y = 0; y < this.tables[tableIndex].cells[0].length; y++)
+        this.tables[tableIndex].cells[x][y].loadFromPureObject(data[x][y]);
+    }
   }
 }
