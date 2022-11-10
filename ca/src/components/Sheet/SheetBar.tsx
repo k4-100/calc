@@ -1,6 +1,5 @@
 import React from "react";
 import _ from "lodash";
-import { v4 as uuidv4 } from "uuid";
 import { Box, Button, Paper } from "@mui/material";
 import { useGlobalContext } from "../../context";
 import { TableClass } from "../../utility/Classes";
@@ -14,7 +13,9 @@ const SheetBar = () => {
    */
   const handleTableAdd = () => {
     const _sheet = _.cloneDeep(sheet);
-    _sheet.tables.push(new TableClass(3, 4, uuidv4()));
+    _sheet.tables.push(
+      new TableClass(3, 4, Math.trunc(Math.random() * 100_000_000))
+    );
     setSheet!(_sheet);
   };
 

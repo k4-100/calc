@@ -7,7 +7,7 @@ import { Box, Button } from "@mui/material";
  *
  * @returns SheetBarButton Button in a SheetBar
  */
-const SheetBarButton: React.FC<{ name: string; id: string }> = ({
+const SheetBarButton: React.FC<{ name: string; id: number }> = ({
   name,
   id,
 }) => {
@@ -17,7 +17,7 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
    * deletes table from sheet
    * @param id id of table to be deleted
    */
-  const handleDelClick = (id: string) => {
+  const handleDelClick = (id: number) => {
     const _sheet = _.cloneDeep(sheet);
     const deleteIndex = _sheet.tables.findIndex((tab) => tab.id === id);
     _sheet.tables.splice(deleteIndex, 1);
@@ -29,7 +29,7 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
    * switches to another main table
    * @param id id of a new main table
    */
-  const handleSwitchToNextTable = (id: string) => {
+  const handleSwitchToNextTable = (id: number) => {
     const _sheet = _.cloneDeep(sheet);
     _sheet.mainTabID = id;
     setSheet!(_sheet);
