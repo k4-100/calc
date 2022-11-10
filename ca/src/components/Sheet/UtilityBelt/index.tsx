@@ -3,7 +3,7 @@ import { Button, AppBar } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import Help from "./Help";
-import { ArrowBackIosNew, HelpCenter } from "@mui/icons-material";
+import { ArrowBackIosNew, HelpCenter, Save } from "@mui/icons-material";
 
 /**
  *
@@ -38,9 +38,23 @@ const UtilityBelt: React.FC = () => {
         </Button>
         <SearchBar />
         <Button
+          color="success"
           sx={{
             width: "50px",
             ml: "auto",
+          }}
+          // onClick={() => setDisplayHelp(!displayHelp)}
+        >
+          <Save
+            sx={{
+              fontSize: "40px",
+            }}
+          />
+        </Button>
+        <Button
+          sx={{
+            width: "50px",
+            ml: 0,
           }}
           onClick={() => setDisplayHelp(!displayHelp)}
         >
