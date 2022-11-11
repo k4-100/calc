@@ -12,6 +12,14 @@ CREATE TABLE Sheet.Users(
   UNIQUE(username)
 );
 
+CREATE TABLE Sheet.Sheets(  
+    sheetID INT NOT NULL AUTO_INCREMENT,
+    userID INT NOT NULL,
+    PRIMARY KEY(sheetID),
+    FOREIGN KEY (userID) REFERENCES Users(userID)
+    createTime TIMESTAMP NOT NULL DEFAULT NOW(),
+);
+
 -- CREATE TABLE Sheet.Sheets(
 --   sheetID INT NOT NULL AUTO_INCREMENT,
 --   userID INT NOT NULL,
@@ -20,15 +28,16 @@ CREATE TABLE Sheet.Users(
 --   FOREIGN KEY(userID) REFERENCES Sheet.Users(userID)
 -- );
 
--- CREATE TABLE Sheet.Tables(
---   tableID INT NOT NULL AUTO_INCREMENT,
---   sheetID INT NOT NULL,
---   userID  INT NOT NULL,
---   data json_files,
---   PRIMARY KEY(tableID),
---   FOREIGN KEY(sheetID) REFERENCES Sheet.Sheets(sheetID),
---   FOREIGN KEY(userID) REFERENCES Sheet.Users(userID),
--- );
+CREATE TABLE Sheet.Tables(
+  tableID INT NOT NULL AUTO_INCREMENT,
+  sheetID INT NOT NULL,
+  userID  INT NOT NULL,
+  data json,
+  PRIMARY KEY(tableID),
+  FOREIGN KEY(sheetID) REFERENCES Sheet.Sheets(sheetID),
+  FOREIGN KEY(userID) REFERENCES Sheet.Users(userID),
+    createTime TIMESTAMP NOT NULL DEFAULT NOW(),
+);
 
 -- INSERT DUMMY DATA INTO TABLES
 
