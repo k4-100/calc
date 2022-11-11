@@ -16,8 +16,8 @@ CREATE TABLE Sheet.Sheets(
     sheetID INT NOT NULL AUTO_INCREMENT,
     userID INT NOT NULL,
     PRIMARY KEY(sheetID),
-    FOREIGN KEY (userID) REFERENCES Users(userID)
-    createTime TIMESTAMP NOT NULL DEFAULT NOW(),
+    FOREIGN KEY (userID) REFERENCES Users(userID),
+    createTime TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 -- CREATE TABLE Sheet.Sheets(
@@ -36,7 +36,7 @@ CREATE TABLE Sheet.Tables(
   PRIMARY KEY(tableID),
   FOREIGN KEY(sheetID) REFERENCES Sheet.Sheets(sheetID),
   FOREIGN KEY(userID) REFERENCES Sheet.Users(userID),
-    createTime TIMESTAMP NOT NULL DEFAULT NOW(),
+    createTime TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 -- INSERT DUMMY DATA INTO TABLES
