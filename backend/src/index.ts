@@ -96,15 +96,24 @@ app.post("/table", jsonParser, async (req, res) => {
   let error = false;
   const { content } = req.body;
   if (!content) return res.status(400).json({ data: {}, status: false });
-  const ret: any = await UTL.postTablePromise(content, mysqlConnection).catch(
-    (err) => {
+  const ret: any = await UTL.queryPromise(
+    mysqlConnection,
+    `SELECT * FROM Sheets WHERE userID=${1}`
+  )
+    .then((dsa) => console.log((dsa as any).result.userID))
+    .catch((err) => {
       console.log("promise error: ", err);
       error = true;
-    }
-  );
-
+    });
+  // UTL.postTablePromise(
+  //   1,
+  //   content,
+  //   mysqlConnection
+  // )
   if (error) return res.status(404).json({ data: [], status: false });
-  return res.status(201).json({ data: ret.result, status: true });
+  return res
+    .status(201)
+    .json({ data: !_.isEmpty(ret) ? ret.result : [], status: true });
 });
 // app.put("/table", async (req, res) => {});
 // app.delete("/table", async (req, res) => {});

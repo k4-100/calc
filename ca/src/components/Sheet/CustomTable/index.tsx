@@ -28,7 +28,7 @@ const CustomTable: React.FC = () => {
   console.log("re-rendered CustomTable");
   /** index of a table inside of the sheet */
   const tableIndex = sheet.tables.findIndex(
-    (tab) => tab.id === sheet.mainTabID
+    (tab) => tab.id === sheet.mainTabIndex
   );
   //#region utils
   /**

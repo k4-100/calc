@@ -104,16 +104,16 @@ export class SheetClass {
   tables: Array<TableClass>;
   /** sheet id */
   id: number;
-  /** id of main tab */
-  mainTabID: number;
+  /** index of main tab */
+  mainTabIndex: number;
 
   /**
    * constructs sheet with default table and an id
    */
   constructor() {
     this.tables = [new TableClass(26, 26, 1)];
-    this.id = 1;
-    this.mainTabID = 1;
+    this.id = 0;
+    this.mainTabIndex = 1;
   }
 
   loadTableFromJSON(tableID: number, json: string) {
