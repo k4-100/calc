@@ -14,25 +14,29 @@ import { useGlobalContext } from "../../../context";
  */
 const UtilityBelt: React.FC = () => {
   const [displayHelp, setDisplayHelp] = useState(false);
-  const { sheet } = useGlobalContext();
+  const { sheet, userID } = useGlobalContext();
 
   function handleSave() {
-    fetch("http://127.0.0.1:5000/table", {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      //make sure to serialize your JSON body
-      body: JSON.stringify({
-        content: sheet.tables[0].convertToJSON(),
-      }),
-    })
-      .then((response) => {
-        //do something awesome that makes the world a better place
-      })
-      .catch((err) => console.log(err))
-      .finally(() => console.log("perfomed save attempt"));
+    if (userID) {
+      if (sheet.id === 0)
+        fetch("http://127.0.0.1:5000/table", {
+          method: "post",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          //make sure to serialize your JSON body
+          body: JSON.stringify({
+            content: [sheet.tables.map((table) => table.convertToJSON())],
+            sheetID: sheet.id,
+          }),
+        })
+          .then((response) => {
+            //do something awesome that makes the world a better place
+          })
+          .catch((err) => console.log(err))
+          .finally(() => console.log("perfomed save attempt"));
+    }
   }
   return (
     <>
