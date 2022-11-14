@@ -3,6 +3,7 @@ import { Button, FormControl, Paper, TextField } from "@mui/material";
 import _ from "lodash";
 import ProfileAccessed from "./ProfileAccessed";
 import * as UT from "../../../types/types";
+import { useGlobalContext } from "../../../context";
 
 const Profile = () => {
   const [login, setLogin] = useState<string>("");
@@ -10,6 +11,8 @@ const Profile = () => {
   const [profileAccessed, setProfileAccessed] = useState<boolean>(false);
   const [profileData, setProfileData] = useState<null | UT.UserData>(null);
   const [errorMessage, setErrorMessage] = useState<string>(".");
+
+  const { setUserID } = useGlobalContext();
 
   const handleLogIn = async () => {
     const fetchedData: UT.FetchedData<UT.UserData> = await fetch(
@@ -23,6 +26,7 @@ const Profile = () => {
     if (status && !_.isEmpty(data)) {
       setProfileAccessed(true);
       setProfileData(data);
+      setUserID!(data.userID);
       return;
     }
 

@@ -18,7 +18,7 @@ const UtilityBelt: React.FC = () => {
 
   function handleSave() {
     if (userID) {
-      if (sheet.id === 0)
+      if (sheet.id === 0) {
         fetch("http://127.0.0.1:5000/table", {
           method: "post",
           headers: {
@@ -28,7 +28,7 @@ const UtilityBelt: React.FC = () => {
           //make sure to serialize your JSON body
           body: JSON.stringify({
             content: [sheet.tables.map((table) => table.convertToJSON())],
-            sheetID: sheet.id,
+            userID: userID,
           }),
         })
           .then((response) => {
@@ -36,7 +36,8 @@ const UtilityBelt: React.FC = () => {
           })
           .catch((err) => console.log(err))
           .finally(() => console.log("perfomed save attempt"));
-    }
+      } else console.log("sheet.id is trutty: ", sheet.id);
+    } else console.log("userID is falsy: ", userID);
   }
   return (
     <>

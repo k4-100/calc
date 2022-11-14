@@ -94,13 +94,25 @@ app.get("/table/:id", async (req, res) => {
 
 app.post("/table", jsonParser, async (req, res) => {
   let error = false;
-  const { content } = req.body;
+  const { content, userID } = req.body;
   if (!content) return res.status(400).json({ data: {}, status: false });
   const ret: any = await UTL.queryPromise(
     mysqlConnection,
-    `SELECT * FROM Sheets WHERE userID=${1}`
+    `INSERT INTO Sheets(userID) VALUES(${userID})`
   )
-    .then((dsa) => console.log((dsa as any).result.userID))
+    .then(() =>
+      UTL.queryPromise(
+        mysqlConnection,
+        `SELECT * FROM Sheets WHERE userID=${userID}`
+      )
+    )
+    .then(({ result }: any) =>
+      UTL.queryPromise(
+        mysqlConnection,
+        `INSERT INTO Tables(sheetID,content) VALUES(${result.sheetID}, '${content}')`
+      )
+    )
+    .then((dt) => console.log("dt: ", dt))
     .catch((err) => {
       console.log("promise error: ", err);
       error = true;
