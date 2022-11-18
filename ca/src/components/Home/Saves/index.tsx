@@ -1,7 +1,7 @@
 import React from "react";
 import { Paper, Box, Typography } from "@mui/material";
-
 import Save from "./Save";
+
 /**
  *
  * @returns component with multiple save "files"
@@ -31,8 +31,6 @@ const Saves: React.FC = () => {
           p: 2,
         }}
       >
-        <Save />
-        <Save />
         <Save />
       </Box>
     </Paper>

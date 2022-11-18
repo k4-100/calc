@@ -17,13 +17,13 @@ const jsonParser = bodyParser.json();
 const mysqlConnection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "1234",
+  password: "4321",
   database: "Sheet",
 });
 
 mysqlConnection.connect((err) => {
   if (err) throw err;
-  console.log("Connected");
+  console.log("Connected to mysql");
 });
 
 app.use(cors());
@@ -94,7 +94,7 @@ app.get("/table/:id", async (req, res) => {
 
 app.post("/table", jsonParser, async (req, res) => {
   let error = false;
-  const { content, userID } = req.body;
+  const { content, userID, sheetID } = req.body;
   if (!content) return res.status(400).json({ data: {}, status: false });
   const ret: any = await UTL.queryPromise(
     mysqlConnection,

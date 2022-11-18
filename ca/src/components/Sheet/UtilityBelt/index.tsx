@@ -31,9 +31,6 @@ const UtilityBelt: React.FC = () => {
             userID: userID,
           }),
         })
-          .then((response) => {
-            //do something awesome that makes the world a better place
-          })
           .catch((err) => console.log(err))
           .finally(() => console.log("perfomed save attempt"));
       } else console.log("sheet.id is trutty: ", sheet.id);
