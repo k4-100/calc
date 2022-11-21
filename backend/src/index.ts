@@ -132,6 +132,44 @@ app.post("/table", jsonParser, async (req, res) => {
 
 //#endregion /table
 
+//#region  /sheet
+
+app.get("/sheet/:id", async (req, res) => {
+  let error = false;
+  const id = Number(req.params.id);
+  if (!id) return res.status(400).json({ data: {}, status: false });
+
+  const ret: any = await UTL.queryPromise(
+    mysqlConnection,
+    `SELECT * FROM Sheets WHERE sheetID=${id}`
+  ).catch((err) => {
+    console.log("promise error: ", err);
+    error = true;
+  });
+
+  if (error) return res.status(404).json({ data: [], status: false });
+  return res.status(201).json({ data: ret.result, status: true });
+});
+
+app.get("/sheet", async (req, res) => {
+  let error = false;
+  const id = Number(req.query.userid);
+  if (!id) return res.status(400).json({ data: {}, status: false });
+
+  const ret: any = await UTL.queryPromise(
+    mysqlConnection,
+    `SELECT * FROM Sheets WHERE userID=${id}`
+  ).catch((err) => {
+    console.log("promise error: ", err);
+    error = true;
+  });
+
+  if (error) return res.status(404).json({ data: [], status: false });
+  return res.status(201).json({ data: ret.result, status: true });
+});
+
+//#endregion  /sheet
+
 app.all("*", (req, res) => {
   res.status(404).send("ERROR");
 });

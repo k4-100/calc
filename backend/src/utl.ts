@@ -20,7 +20,7 @@ export function queryPromise(
         });
 
       res({
-        result: result[0],
+        result,
       });
     });
   });

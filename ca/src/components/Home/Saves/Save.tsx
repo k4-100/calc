@@ -6,7 +6,11 @@ import { PlayArrow } from "@mui/icons-material";
  *
  * @returns a single "save file" with info
  */
-const Save: React.FC = () => {
+const Save: React.FC<{ userID: number; sheetID: number; date: string }> = ({
+  userID,
+  sheetID,
+  date,
+}) => {
   return (
     <Paper
       sx={{
@@ -27,9 +31,9 @@ const Save: React.FC = () => {
           },
         }}
       >
-        <Typography>App: Calc</Typography>
-        <Typography>Name: text_here</Typography>
-        <Typography>Date: 2002_01_01-10:30</Typography>
+        <Typography>sheetID: {sheetID}</Typography>
+        <Typography>userID {userID}</Typography>
+        <Typography>{date}</Typography>
       </Box>
       <Button
         sx={{
