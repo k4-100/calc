@@ -6,10 +6,10 @@ import React from "react";
 import * as UT from "../../../types/types";
 
 const ProfileAccessed = ({
-  profileData,
+  userData,
   handleLogOutClick,
 }: {
-  profileData: UT.UserData;
+  userData: UT.UserData;
   handleLogOutClick: () => void;
 }) => {
   return (
@@ -64,7 +64,7 @@ const ProfileAccessed = ({
         >
           user:
         </Paper>
-        <Typography> {profileData.username} </Typography>
+        <Typography> {userData.username} </Typography>
       </Box>
       <Box
         sx={{

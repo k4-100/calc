@@ -8,11 +8,8 @@ import { useGlobalContext } from "../../../context";
 const Profile = () => {
   const [login, setLogin] = useState<string>("");
   const [pass, setPass] = useState<string>("");
-  const [profileAccessed, setProfileAccessed] = useState<boolean>(false);
-  const [profileData, setProfileData] = useState<null | UT.UserData>(null);
   const [errorMessage, setErrorMessage] = useState<string>(".");
-
-  const { setUserID } = useGlobalContext();
+  const { userData, setUserData } = useGlobalContext();
 
   const handleLogIn = async () => {
     const fetchedData: UT.FetchedData<UT.UserData> = await fetch(
@@ -24,9 +21,8 @@ const Profile = () => {
       });
     const { data, status } = fetchedData;
     if (status && !_.isEmpty(data)) {
-      setProfileAccessed(true);
-      setProfileData(data);
-      setUserID!(data.userID);
+      const { userID, username } = data;
+      setUserData!({ userID, username });
       return;
     }
 
@@ -50,8 +46,7 @@ const Profile = () => {
 
     const { data, status } = fetchedData;
     if (status && !_.isEmpty(data)) {
-      setProfileAccessed(true);
-      setProfileData(data);
+      setUserData!(data);
       return;
     }
 
@@ -79,12 +74,11 @@ const Profile = () => {
       }}
     >
       <FormControl>
-        {profileAccessed ? (
+        {userData.userID ? (
           <ProfileAccessed
-            profileData={profileData as UT.UserData}
+            userData={userData}
             handleLogOutClick={() => {
-              setProfileAccessed(false);
-              setProfileData(null);
+              setUserData!({ userID: 0, username: "" });
               setErrorMessage(".");
             }}
           />

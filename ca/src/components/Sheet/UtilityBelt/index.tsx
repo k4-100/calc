@@ -14,9 +14,10 @@ import { useGlobalContext } from "../../../context";
  */
 const UtilityBelt: React.FC = () => {
   const [displayHelp, setDisplayHelp] = useState(false);
-  const { sheet, userID } = useGlobalContext();
+  const { sheet, userData } = useGlobalContext();
 
   function handleSave() {
+    const { userID } = userData;
     if (userID) {
       if (sheet.id === 0) {
         fetch("http://127.0.0.1:5000/table", {

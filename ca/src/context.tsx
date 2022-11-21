@@ -1,14 +1,18 @@
 import React from "react";
+import * as UTL from "./types/types";
 import { SheetClass } from "./utility/Classes";
 type GlobalContextType = {
   sheet: SheetClass;
   setSheet?: React.Dispatch<SheetClass>;
-  userID: number;
-  setUserID?: React.Dispatch<number>;
+  userData: UTL.UserData;
+  setUserData?: React.Dispatch<UTL.UserData>;
 };
 const GlobalContext = React.createContext<GlobalContextType>({
   sheet: new SheetClass(),
-  userID: 0,
+  userData: {
+    userID: 0,
+    username: "",
+  },
 });
 
 type Props = {
@@ -17,9 +21,12 @@ type Props = {
 
 const GlobalContextProvider: React.FC<Props> = ({ children }) => {
   const [sheet, setSheet] = React.useState<SheetClass>(new SheetClass());
-  const [userID, setUserID] = React.useState<number>(0);
+  const [userData, setUserData] = React.useState<UTL.UserData>({
+    userID: 0,
+    username: "",
+  });
   return (
-    <GlobalContext.Provider value={{ sheet, setSheet, userID, setUserID }}>
+    <GlobalContext.Provider value={{ sheet, setSheet, userData, setUserData }}>
       {children}
     </GlobalContext.Provider>
   );
