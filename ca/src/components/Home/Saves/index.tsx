@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Paper, Box, Typography } from "@mui/material";
 import Save from "./Save";
+import { useGlobalContext } from "../../../context";
 
 /**
  *
@@ -8,16 +9,18 @@ import Save from "./Save";
  */
 const Saves: React.FC = () => {
   const [fetched, setFetched] = useState<any>();
+  const { userData } = useGlobalContext();
 
-  const fetchSheetList = async () => {
-    fetch(`http://127.0.0.1:5000/sheet/?userid=51`)
+  const fetchSheetList = useCallback(async () => {
+    const { userID } = userData;
+    fetch(`http://127.0.0.1:5000/sheet/?userid=${userID}`)
       .then(async (data) => setFetched(await data.json()))
       .catch((err) => console.log("failed to fetch sheet list:     ", err));
-  };
+  }, [userData]);
 
   useEffect(() => {
     fetchSheetList();
-  }, []);
+  }, [fetchSheetList]);
   return (
     <Paper
       elevation={10}
@@ -42,7 +45,7 @@ const Saves: React.FC = () => {
           p: 2,
         }}
       >
-        {fetched && fetched.data
+        {fetched && fetched.data && fetched.data[0]
           ? fetched.data.map(
               (
                 {
