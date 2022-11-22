@@ -74,7 +74,7 @@ app.post("/login", async (req, res) => {
 
 //#endregion /login
 
-//#region /table
+//#region /table | /tables
 
 app.get("/table/:id", async (req, res) => {
   let error = false;
@@ -127,6 +127,24 @@ app.post("/table", jsonParser, async (req, res) => {
     .status(201)
     .json({ data: !_.isEmpty(ret) ? ret.result : [], status: true });
 });
+
+app.get("/tables", async (req, res) => {
+  let error = false;
+  const id = Number(req.query.sheetid);
+  if (!id) return res.status(400).json({ data: {}, status: false });
+
+  const ret: any = await UTL.queryPromise(
+    mysqlConnection,
+    `SELECT * FROM Tables WHERE sheetID=${id}`
+  ).catch((err) => {
+    console.log("promise error: ", err);
+    error = true;
+  });
+
+  if (error) return res.status(404).json({ data: [], status: false });
+  return res.status(201).json({ data: ret.result, status: true });
+});
+
 // app.put("/table", async (req, res) => {});
 // app.delete("/table", async (req, res) => {});
 

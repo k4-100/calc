@@ -1,6 +1,7 @@
 import React from "react";
 import { Paper, Box, Typography, Button } from "@mui/material";
 import { PlayArrow } from "@mui/icons-material";
+import { useGlobalContext } from "../../../context";
 
 /**
  *
@@ -11,6 +12,14 @@ const Save: React.FC<{ userID: number; sheetID: number; date: string }> = ({
   sheetID,
   date,
 }) => {
+  const { sheet, setSheet } = useGlobalContext();
+
+  const handleSheetLoad = () => {
+    fetch(`http://127.0.0.1:5000/tables?sheetid=28`)
+      .then(async (data) => console.log(await data.json()))
+      .catch((err) => console.log("failed to fetch sheet list:     ", err));
+  };
+
   return (
     <Paper
       sx={{
@@ -40,6 +49,7 @@ const Save: React.FC<{ userID: number; sheetID: number; date: string }> = ({
           ml: 1,
           // py: 2,
         }}
+        onClick={handleSheetLoad}
       >
         <PlayArrow fontSize="large" />
       </Button>
