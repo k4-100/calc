@@ -128,9 +128,9 @@ app.post("/table", jsonParser, async (req, res) => {
     .json({ data: !_.isEmpty(ret) ? ret.result : [], status: true });
 });
 
-app.get("/tables", async (req, res) => {
+app.get("/tables/:sheetid", async (req, res) => {
   let error = false;
-  const id = Number(req.query.sheetid);
+  const id = Number(req.params.sheetid);
   if (!id) return res.status(400).json({ data: {}, status: false });
 
   const ret: any = await UTL.queryPromise(
