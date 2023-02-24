@@ -3,6 +3,7 @@ import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sheet from "./components/Sheet";
 import Home from "./components/Home";
+import { writeStorage, useLocalStorage } from '@rehooks/local-storage';
 
 const darkTheme = createTheme({
   palette: {
@@ -10,7 +11,11 @@ const darkTheme = createTheme({
   },
 });
 
+let count = 10;
 const App: React.FC = () => {
+    // writeStorage("test", ++count)
+    const localStorageTest = useLocalStorage('test');
+  console.log( localStorageTest );
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
