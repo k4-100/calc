@@ -10,9 +10,14 @@ import {
 import { grey } from "@mui/material/colors";
 import _ from "lodash";
 import { evaluate } from "mathjs";
+import { useSelector, useDispatch } from "react-redux"
+import { actions } from "../../../store"
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
 import { useGlobalContext } from "../../../context";
 import CustomTableCell from "./CustomTableCell";
+
+
+
 
 /**
  * size of td cell with a number (the one used for indexing)
@@ -26,6 +31,14 @@ import CustomTableCell from "./CustomTableCell";
 const CustomTable: React.FC = () => {
   const { sheet, setSheet } = useGlobalContext();
 
+
+  const sheets = useSelector( (state: any)=> state.sheets )
+  console.log()
+  // const sheet = sheets
+  const dispatch = useDispatch();
+  // const setSheet = 
+  // dispatch( actions.setSheet() )
+
   console.log("re-rendered CustomTable");
   /** index of a table inside of the sheet */
   const tableIndex = sheet.tables.findIndex(
@@ -38,18 +51,15 @@ const CustomTable: React.FC = () => {
    * @param y vertical (row) cell coords
    * @param callback function to be used between cloning and setting
    */
-  const cloneAndSetTableCell = useCallback(
-    (x: number, y: number, callback: (cl: CellClass) => void) => {
+  const cloneAndSetTableCell =  (x: number, y: number, callback: (cl: CellClass) => void ) => {
       const _table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
       const _cell = _table.cells[y][x];
       callback(_cell);
       _table.cells[y][x] = _cell;
       const _sheet: SheetClass = _.cloneDeep(sheet);
       _sheet.tables[tableIndex] = _table;
-      setSheet!(_sheet);
-    },
-    [setSheet, sheet, tableIndex]
-  );
+      dispatch( actions.setSheet(_sheet.getObject()) )
+  }
 
   /**
    * @param colName name (string) at the top of the column

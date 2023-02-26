@@ -37,6 +37,19 @@ export class CellClass {
     this.wasFound = false;
     this.id = ++cellIDSrc;
   }
+  
+  getObject(){
+    return({
+      x: this.x,
+      y: this.y,
+      text: this.text,
+      clicks: this.clicks,
+      value: this.value,
+      id: this.id,
+      wasFound: this.wasFound
+    })
+  }
+
 }
 
 /**
@@ -67,6 +80,17 @@ export class TableClass {
 
     this.id = id;
   }
+
+  getObject(){
+    return({
+      cells: 
+        this.cells.map( 
+          row => row.map(  cell => cell.getObject()  ) 
+        )
+      ,
+      id: this.id
+    })
+  }
 }
 
 export class SheetClass {
@@ -85,4 +109,14 @@ export class SheetClass {
     this.id = "first";
     this.mainTabID = "first";
   }
+
+
+  getObject(){
+    return({
+      tables: this.tables.map( table => table.getObject() ),
+      id: this.id,
+      mainTabID: this.id
+    })
+  }
+
 }

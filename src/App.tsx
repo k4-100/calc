@@ -5,8 +5,8 @@ import Sheet from "./components/Sheet";
 import Home from "./components/Home";
 import { writeStorage, useLocalStorage } from '@rehooks/local-storage';
 
-import { useSelector, useDispatch } from "react-redux"
-import { actions } from "./store"
+// import { useSelector, useDispatch } from "react-redux"
+// import { actions } from "./store"
 
 
 
@@ -18,15 +18,12 @@ const darkTheme = createTheme({
 
 let count = 10;
 const App: React.FC = () => {
-  const localStorageTest = useLocalStorage('test')
-  const counter = useSelector( (state: any)=> state.counter )
-  const dispatch = useDispatch();
-  console.log( localStorageTest );
+  // const localStorageTest = useLocalStorage('test')
+  // const counter = useSelector( (state: any)=> state.counter )
+  // const dispatch = useDispatch();
+
   return (
     <ThemeProvider theme={darkTheme}>
-      <h1>
-        { counter }
-      </h1>
       <CssBaseline />
       <BrowserRouter>
         <Routes>

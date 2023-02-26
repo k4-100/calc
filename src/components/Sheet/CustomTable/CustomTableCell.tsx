@@ -58,8 +58,7 @@ const CustomTableCell: React.FC<Props> = ({
    * @param y vertical (row) cell coords
    * @param e event object
    */
-  const handleCellKeyDown = useCallback(
-    (x: number, y: number, e: any) => {
+  const handleCellKeyDown = (x: number, y: number, e: any) => {
       const { keyCode } = e;
       // if keyCode is Enter save content
       if (keyCode === 13) {
@@ -82,16 +81,13 @@ const CustomTableCell: React.FC<Props> = ({
       //   placeCaretAtEnd(tdRef.current);
       //   setWasCaretSet(true);
       // }
-
       // setClicks(2);
       // else {
       //   if (clicks === 1) {
       //     setClicks(2);
       //   }
       // }
-    },
-    [cloneAndSetTableCell, getEvaluatedText, clicks, cell.text]
-  );
+    }
 
   /**
    *
