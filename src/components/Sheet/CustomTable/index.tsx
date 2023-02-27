@@ -13,7 +13,6 @@ import { evaluate } from "mathjs";
 import { useSelector, useDispatch } from "react-redux"
 import { actions } from "../../../store"
 import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
-import { useGlobalContext } from "../../../context";
 import CustomTableCell from "./CustomTableCell";
 
 
@@ -29,12 +28,11 @@ import CustomTableCell from "./CustomTableCell";
  * @returns Table with cells
  */
 const CustomTable: React.FC = () => {
-  const { sheet, setSheet } = useGlobalContext();
 
 
-  const sheets = useSelector( (state: any)=> state.sheets )
+  const sheets = useSelector( (state: any)=> state )
   console.log()
-  // const sheet = sheets
+  const sheet = sheets
   const dispatch = useDispatch();
   // const setSheet = 
   // dispatch( actions.setSheet() )
@@ -42,8 +40,9 @@ const CustomTable: React.FC = () => {
   console.log("re-rendered CustomTable");
   /** index of a table inside of the sheet */
   const tableIndex = sheet.tables.findIndex(
-    (tab) => tab.id === sheet.mainTabID
+    (tab: any) => tab.id === sheet.mainTabID
   );
+
   //#region utils
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
@@ -58,7 +57,7 @@ const CustomTable: React.FC = () => {
       _table.cells[y][x] = _cell;
       const _sheet: SheetClass = _.cloneDeep(sheet);
       _sheet.tables[tableIndex] = _table;
-      dispatch( actions.setSheet(_sheet.getObject()) )
+      dispatch( actions.setSheet(_sheet) )
   }
 
   /**
