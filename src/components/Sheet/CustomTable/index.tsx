@@ -12,7 +12,7 @@ import _ from "lodash";
 import { evaluate } from "mathjs";
 import { useSelector, useDispatch } from "react-redux"
 import { actions } from "../../../store"
-import { CellClass, TableClass, SheetClass } from "../../../utility/Classes";
+import { CellClass, TableClass, SheetClass, SheetClassObject, TableClassObject } from "../../../utility/Classes";
 import CustomTableCell from "./CustomTableCell";
 
 
@@ -51,13 +51,13 @@ const CustomTable: React.FC = () => {
    * @param callback function to be used between cloning and setting
    */
   const cloneAndSetTableCell =  (x: number, y: number, callback: (cl: CellClass) => void ) => {
-      const _table: TableClass = _.cloneDeep(sheet.tables[tableIndex]);
+      const _table: TableClassObject = _.cloneDeep(sheet.tables[tableIndex]);
       const _cell = _table.cells[y][x];
       callback(_cell);
       _table.cells[y][x] = _cell;
-      const _sheet: SheetClass = _.cloneDeep(sheet);
+      const _sheet: SheetClassObject = _.cloneDeep(sheet);
       _sheet.tables[tableIndex] = _table;
-      dispatch( actions.setSheet(_sheet) )
+      dispatch( actions.setSheet( _sheet ) )
   }
 
   /**

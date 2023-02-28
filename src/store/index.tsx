@@ -20,8 +20,8 @@ const calcSlice = createSlice({
   initialState: new SheetClass().getObject(),
   reducers: {
     setSheet(state, action){
-      console.log( "state: ", current( state ))
-      console.log( "action.payload: ", action.payload )
+      // console.log( "state: ", current( state ))
+      // console.log( "action.payload: ", action.payload )
       // const newSheets = _.cloneDeep( state )
       // newSheets.id = '3214124'
       return action.payload

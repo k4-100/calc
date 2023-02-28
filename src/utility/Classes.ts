@@ -3,6 +3,28 @@
  */
 let cellIDSrc: number = 0;
 
+
+/**
+ * represents Cell inside a table in form of a pure object
+ */
+export type CellClassObject = {
+  /** x position of the cell in a table */
+  x: number;
+  /** y position of the cell in a table */
+  y: number;
+  /** text content of the cell */
+  text: string;
+  /** evaluated value of the cell text */
+  value: string;
+  /**  number of times cell has been clicked*/
+  clicks: number;
+  /** unique id number */
+  id: number;
+  /** indicate if the cell has been found */
+  wasFound: boolean;
+}
+
+
 /**
  * represents Cell inside a table
  */
@@ -38,7 +60,7 @@ export class CellClass {
     this.id = ++cellIDSrc;
   }
   
-  getObject(){
+  getObject(): CellClassObject{
     return({
       x: this.x,
       y: this.y,
@@ -51,6 +73,21 @@ export class CellClass {
   }
 
 }
+
+
+
+/**
+ * class representing a table filled with cells in a forn of a pure object
+ */
+export type TableClassObject = {
+  /** 2d array storing cells representing table */
+  cells: Array<Array<CellClassObject>>;
+  /** table id */
+  id: string;
+}
+
+
+
 
 /**
  * class representing a table filled with cells
@@ -81,7 +118,7 @@ export class TableClass {
     this.id = id;
   }
 
-  getObject(){
+  getObject(): TableClassObject{
     return({
       cells: 
         this.cells.map( 
@@ -92,6 +129,17 @@ export class TableClass {
     })
   }
 }
+
+
+export type SheetClassObject = {
+  /** all tables in the sheet */
+  tables: Array<TableClassObject>;
+  /** sheet id */
+  id: string;
+  /** id of main tab */
+  mainTabID: string;
+}
+
 
 export class SheetClass {
   /** all tables in the sheet */
