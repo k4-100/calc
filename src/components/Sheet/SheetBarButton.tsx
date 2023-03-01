@@ -1,7 +1,9 @@
 import React from "react";
 import _ from "lodash";
-import { useGlobalContext } from "../../context";
 import { Box, Button } from "@mui/material";
+import { useSelector, useDispatch } from "react-redux"
+
+import { actions } from "../../store"
 
 /**
  *
@@ -11,11 +13,9 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
   name,
   id,
 }) => {
-  const { sheet, setSheet } = useGlobalContext();
-  // const sheets = useSelector( (state: any)=> state )
-  // console.log()
-  // const sheet = sheets
-  // const dispatch = useDispatch();
+  const sheets = useSelector( (state: any)=> state );
+  const sheet = sheets;
+  const dispatch = useDispatch();
 
   /**
    * deletes table from sheet
@@ -23,11 +23,12 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
    */
   const handleDelClick = (id: string) => {
     const _sheet = _.cloneDeep(sheet);
-    const deleteIndex = _sheet.tables.findIndex((tab) => tab.id === id);
+    const deleteIndex = _sheet.tables.findIndex((tab:any) => tab.id === id);
     _sheet.tables.splice(deleteIndex, 1);
     // ensures there will be always a main tab
     if (_sheet.mainTabID === id) _sheet.mainTabID = _sheet.tables[0].id;
-    setSheet!(_sheet);
+    // setSheet!(_sheet);
+    dispatch(actions.setSheet(_sheet));
   };
   /**
    * switches to another main table
@@ -36,7 +37,7 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
   const handleSwitchToNextTable = (id: string) => {
     const _sheet = _.cloneDeep(sheet);
     _sheet.mainTabID = id;
-    setSheet!(_sheet);
+    dispatch(actions.setSheet(_sheet));
   };
 
   return (

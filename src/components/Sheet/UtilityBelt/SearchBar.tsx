@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import _ from "lodash";
 import { Button, TextField, Box } from "@mui/material";
 import { Search } from "@mui/icons-material";
-import { useGlobalContext } from "../../../context";
+import { useSelector, useDispatch } from "react-redux";
+
+import { actions } from "../../../store";
 import { TableClass, SheetClass } from "../../../utility/Classes";
 /**
  *
  * @returns Search Bar
  */
 const SearchBar: React.FC = () => {
-  const { sheet, setSheet } = useGlobalContext();
+  const sheets = useSelector( (state: any)=> state );
+  const sheet = sheets;
+  const dispatch = useDispatch();
+
   const [searchQuery, setSearchQuery] = useState<string>("");
   const tableIndex = 0;
 
@@ -36,7 +41,7 @@ const SearchBar: React.FC = () => {
       );
       const _sheet: SheetClass = _.cloneDeep(sheet);
       _sheet.tables[tableIndex] = _table;
-      setSheet!(_sheet);
+      dispatch( actions.setSheet(_sheet));
     }
   };
   return (
