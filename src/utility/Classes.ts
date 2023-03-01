@@ -7,7 +7,7 @@ let cellIDSrc: number = 0;
 /**
  * represents Cell inside a table in form of a pure object
  */
-export type CellClassObject = {
+export type CellClassObjectType = {
   /** x position of the cell in a table */
   x: number;
   /** y position of the cell in a table */
@@ -60,7 +60,7 @@ export class CellClass {
     this.id = ++cellIDSrc;
   }
   
-  getObject(): CellClassObject{
+  getObject(): CellClassObjectType {
     return({
       x: this.x,
       y: this.y,
@@ -79,9 +79,9 @@ export class CellClass {
 /**
  * class representing a table filled with cells in a forn of a pure object
  */
-export type TableClassObject = {
+export type TableClassObjectType = {
   /** 2d array storing cells representing table */
-  cells: Array<Array<CellClassObject>>;
+  cells: Array<Array<CellClassObjectType>>;
   /** table id */
   id: string;
 }
@@ -118,7 +118,7 @@ export class TableClass {
     this.id = id;
   }
 
-  getObject(): TableClassObject{
+  getObject(): TableClassObjectType{
     return({
       cells: 
         this.cells.map( 
@@ -131,9 +131,9 @@ export class TableClass {
 }
 
 
-export type SheetClassObject = {
+export type SheetClassObjectType = {
   /** all tables in the sheet */
-  tables: Array<TableClassObject>;
+  tables: Array<TableClassObjectType>;
   /** sheet id */
   id: string;
   /** id of main tab */
@@ -159,7 +159,7 @@ export class SheetClass {
   }
 
 
-  getObject(){
+  getObject(): SheetClassObjectType{
     return({
       tables: this.tables.map( table => table.getObject() ),
       id: this.id,

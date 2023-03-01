@@ -12,7 +12,7 @@ import _ from "lodash";
 import { evaluate } from "mathjs";
 import { useSelector, useDispatch } from "react-redux"
 import { actions } from "../../../store"
-import { CellClass, TableClass, SheetClass, SheetClassObject, TableClassObject } from "../../../utility/Classes";
+import { TableClass,  SheetClassObjectType, TableClassObjectType, CellClassObjectType } from "../../../utility/Classes";
 import CustomTableCell from "./CustomTableCell";
 
 
@@ -31,7 +31,6 @@ const CustomTable: React.FC = () => {
 
 
   const sheets = useSelector( (state: any)=> state )
-  console.log()
   const sheet = sheets
   const dispatch = useDispatch();
   // const setSheet = 
@@ -50,12 +49,12 @@ const CustomTable: React.FC = () => {
    * @param y vertical (row) cell coords
    * @param callback function to be used between cloning and setting
    */
-  const cloneAndSetTableCell =  (x: number, y: number, callback: (cl: CellClass) => void ) => {
-      const _table: TableClassObject = _.cloneDeep(sheet.tables[tableIndex]);
+  const cloneAndSetTableCell =  (x: number, y: number, callback: (cl: CellClassObjectType) => void ) => {
+      const _table: TableClassObjectType = _.cloneDeep(sheet.tables[tableIndex]);
       const _cell = _table.cells[y][x];
       callback(_cell);
       _table.cells[y][x] = _cell;
-      const _sheet: SheetClassObject = _.cloneDeep(sheet);
+      const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
       _sheet.tables[tableIndex] = _table;
       dispatch( actions.setSheet( _sheet ) )
   }
@@ -148,7 +147,7 @@ const CustomTable: React.FC = () => {
           >
             {y + 1}
           </TableCell>
-          {table.cells[y].map((cell: CellClass, x) => (
+          {table.cells[y].map((cell: CellClassObjectType, x) => (
             <CustomTableCell
               x={x}
               y={y}

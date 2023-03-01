@@ -1,11 +1,11 @@
 // !
 import React, { useState, useCallback, useEffect, useRef } from "react";
 import { TableCell } from "@mui/material";
-import { CellClass } from "../../../utility/Classes";
+import { CellClassObjectType } from "../../../utility/Classes";
 type Props = {
   x: number;
   y: number;
-  cell: CellClass;
+  cell: CellClassObjectType;
   cloneAndSetTableCell: Function;
   getEvaluatedText: Function;
 };
@@ -68,7 +68,7 @@ const CustomTableCell: React.FC<Props> = ({
 
         if (clicks === 2) {
           if (textContent !== cell.text)
-            cloneAndSetTableCell(x, y, (cl: CellClass) => {
+            cloneAndSetTableCell(x, y, (cl: CellClassObjectType) => {
               if (textContent !== cell.text) {
                 cl.text = textContent;
                 cl.value = getEvaluatedText(textContent);
@@ -100,7 +100,7 @@ const CustomTableCell: React.FC<Props> = ({
 
     const { textContent } = tdRef.current;
     if (textContent !== cell.text) {
-      cloneAndSetTableCell(x, y, (cl: CellClass) => {
+      cloneAndSetTableCell(x, y, (cl: CellClassObjectType) => {
         if (clicks === 2) {
           cl.text = textContent;
           cl.value = getEvaluatedText(textContent);

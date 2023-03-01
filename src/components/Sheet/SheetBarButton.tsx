@@ -12,6 +12,10 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
   id,
 }) => {
   const { sheet, setSheet } = useGlobalContext();
+  // const sheets = useSelector( (state: any)=> state )
+  // console.log()
+  // const sheet = sheets
+  // const dispatch = useDispatch();
 
   /**
    * deletes table from sheet
