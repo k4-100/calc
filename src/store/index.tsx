@@ -1,11 +1,9 @@
-import { configureStore, createSlice, createReducer } from "@reduxjs/toolkit"
-import produce, { current } from 'immer'
+import { configureStore, createSlice } from "@reduxjs/toolkit"
 import _ from "lodash";
-import { SheetClass, CellClass, TableClass, SheetClassObjectType } from '../utility/Classes'
+import { SheetClass, SheetClassObjectType } from '../utility/Classes'
 
 
 const newSheet: SheetClassObjectType = new SheetClass().getObject();
-// localStorage.setItem('sheet', JSON.stringify(newSheet) );
 
 
 const determineInitialState = (): SheetClassObjectType => {

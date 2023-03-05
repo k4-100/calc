@@ -8,6 +8,7 @@ import AboutUs from "./AboutUs";
 import Opinions from "./Opinions";
 import Apps from "./Apps";
 import Saves from "./Saves";
+import AppsWithSaves from "./AppsWithSaves";
 /**
  *
  * @returns Home page
@@ -55,7 +56,8 @@ const Home: React.FC = () => {
           </Box>
         </Grid>
       </Grid>
-      <Saves />
+        <AppsWithSaves />
+        {/* <Saves /> */}
       <Typography
         variant="subtitle1"
         align="center"
