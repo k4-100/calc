@@ -56,8 +56,8 @@ const Home: React.FC = () => {
           </Box>
         </Grid>
       </Grid>
-        <AppsWithSaves />
-        {/* <Saves /> */}
+        {/* <AppsWithSaves /> */}
+        <Saves />
       <Typography
         variant="subtitle1"
         align="center"

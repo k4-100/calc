@@ -6,7 +6,6 @@ import Saves from './Saves';
 const AppsWithSaves: React.FC = () =>{
   return(
   <Box sx={{
-      mt: "70px"
     }}>
       <Saves />
       {/* <Saves /> */}

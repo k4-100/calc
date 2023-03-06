@@ -1,6 +1,6 @@
 import React from "react";
-import { Paper, Box, Typography } from "@mui/material";
-import { blue } from "@mui/material/colors";
+import { Paper, Box, Typography, Button } from "@mui/material";
+import { blue, green, orange } from "@mui/material/colors";
 
 import Save from "./Save";
 import { Calculate } from "@mui/icons-material";
@@ -12,6 +12,7 @@ const Saves: React.FC = () => {
   return (
     <Box
       sx={{
+        mt: "50px",
         mx: 3,
         backgroundColor: `${blue[900]}`,
         position: "relative" 
@@ -38,26 +39,61 @@ const Saves: React.FC = () => {
             Calc
           </Typography>   
         </Box>
+        {/* crevice containg buttons for each app */}
         <Box sx={{
           position: "absolute",
           top: 0,
           right: 0,
-          width: "40vw",
+          width: "70vw",
           height: "45px",
-          backgroundColor: `${blue[700]}`,
+          backgroundColor: `${blue[900]}`,
           borderRadius: "0 4px 0 0",
           display: "flex",
           alignItems: "center",
           justifyContent:" space-between"
         }}>
-          <Box sx={{
-            width: 0,
-            height: 0,
-            borderRight: '35px solid transparent',
-            borderBottom: `45px solid ${blue[900]}`,
-            backgroundClip:  'padding-box'
+          <Button 
+            // color="primary"
+            sx={{
+            position: "relative",
+            left: "24%",
+            width: "100%",
+            height: "100%",
+            background: `${blue[700]}`,
+            clipPath: 'polygon(0 0, 65% 0, 100% 100%, 35% 100%)',
+            "&:hover": {
+            backgroundColor: `${blue[400]}`,
+            }
           }}>
-          </Box>
+          </Button> 
+
+          <Button 
+            color="success"
+            sx={{
+            position: "relative",
+            left: "12%",
+            width: "100%",
+            height: "100%",
+            background: `${green[600]}`,
+            clipPath: 'polygon(0 0, 65% 0, 100% 100%, 35% 100%)',
+            "&:hover": {
+              backgroundColor: `${green[400]}`,
+            }
+          }}>
+          </Button> 
+
+          <Button 
+            color="warning"
+            sx={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: `${orange[800]}`,
+            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 35% 100%)',
+            "&:hover": {
+              backgroundColor: `${orange[600]}`,
+            }
+          }}>
+          </Button> 
         </Box>
       </Box>
       <Box
@@ -77,3 +113,16 @@ const Saves: React.FC = () => {
 };
 
 export default Saves;
+
+
+
+
+
+{/* <Box sx={{ */}
+{/*   backgroundColor: "red", */}
+{/*   borderRight: '35px solid transparent', */}
+{/*   borderBottom: `45px solid ${blue[900]}`, */}
+{/*   backgroundClip:  'padding-box' */}
+{/* }}> */}
+{/* </Box> */}
+
