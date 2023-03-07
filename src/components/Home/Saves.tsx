@@ -3,7 +3,7 @@ import { Paper, Box, Typography, Button } from "@mui/material";
 import { blue, green, orange } from "@mui/material/colors";
 
 import Save from "./Save";
-import { Calculate } from "@mui/icons-material";
+import { Calculate, Note, Slideshow } from "@mui/icons-material";
 /**
  *
  * @returns component with multiple save "files" for a given app
@@ -62,11 +62,12 @@ const Saves: React.FC = () => {
             background: `${blue[700]}`,
             clipPath: 'polygon(0 0, 65% 0, 100% 100%, 35% 100%)',
             "&:hover": {
-            backgroundColor: `${blue[400]}`,
+            backgroundColor: `${blue[300]}`,
             }
           }}>
+            <Calculate />
           </Button> 
-
+ 
           <Button 
             color="success"
             sx={{
@@ -74,12 +75,13 @@ const Saves: React.FC = () => {
             left: "12%",
             width: "100%",
             height: "100%",
-            background: `${green[600]}`,
+            background: `${green[700]}`,
             clipPath: 'polygon(0 0, 65% 0, 100% 100%, 35% 100%)',
             "&:hover": {
-              backgroundColor: `${green[400]}`,
+              backgroundColor: `${green[300]}`,
             }
           }}>
+            <Note />
           </Button> 
 
           <Button 
@@ -93,6 +95,9 @@ const Saves: React.FC = () => {
               backgroundColor: `${orange[600]}`,
             }
           }}>
+            <Slideshow sx={{
+              mx: "auto"
+            }}/>
           </Button> 
         </Box>
       </Box>
