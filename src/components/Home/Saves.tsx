@@ -62,7 +62,7 @@ const Saves: React.FC = () => {
             background: `${blue[700]}`,
             clipPath: 'polygon(0 0, 65% 0, 100% 100%, 35% 100%)',
             "&:hover": {
-            backgroundColor: `${blue[300]}`,
+            backgroundColor: `${blue[100]}`,
             }
           }}>
             <Calculate />
@@ -78,7 +78,7 @@ const Saves: React.FC = () => {
             background: `${green[700]}`,
             clipPath: 'polygon(0 0, 65% 0, 100% 100%, 35% 100%)',
             "&:hover": {
-              backgroundColor: `${green[300]}`,
+              backgroundColor: `${green[100]}`,
             }
           }}>
             <Note />
@@ -89,10 +89,10 @@ const Saves: React.FC = () => {
             sx={{
             width: "100%",
             height: "100%",
-            backgroundColor: `${orange[800]}`,
+            backgroundColor: `${orange[700]}`,
             clipPath: 'polygon(0 0, 100% 0, 100% 100%, 35% 100%)',
             "&:hover": {
-              backgroundColor: `${orange[600]}`,
+              backgroundColor: `${orange[100]}`,
             }
           }}>
             <Slideshow sx={{
