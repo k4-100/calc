@@ -1,14 +1,29 @@
-import React from "react";
-import { Paper, Box, Typography, Button } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Typography, Button } from "@mui/material";
 import { blue, green, orange } from "@mui/material/colors";
 
 import Save from "./Save";
 import { Calculate, Note, Slideshow } from "@mui/icons-material";
+
+enum AppKind {
+  Calc = "calc",
+  Text = 'text',
+  Present = 'present'
+}
+
+
 /**
  *
  * @returns component with multiple save "files" for a given app
  */
 const Saves: React.FC = () => {
+  const [ currentApp, setCurrentApp ] = useState<AppKind>(AppKind.Calc);
+  
+  const handleAppChange = ( newApp: AppKind ) => {
+    setCurrentApp( newApp )
+  }
+
+
   return (
     <Box
       sx={{
@@ -36,7 +51,7 @@ const Saves: React.FC = () => {
             fontSize: "40px",
             alignSelf: "flex-start"
           }}>
-            Calc
+            { currentApp }
           </Typography>   
         </Box>
         {/* crevice containg buttons for each app */}
@@ -53,7 +68,8 @@ const Saves: React.FC = () => {
           justifyContent:" space-between"
         }}>
           <Button 
-            // color="primary"
+            onClick={ ()=> handleAppChange( AppKind.Calc ) }
+            color="primary"
             sx={{
             position: "relative",
             left: "24%",
@@ -62,13 +78,14 @@ const Saves: React.FC = () => {
             background: `${blue[700]}`,
             clipPath: 'polygon(0 0, 65% 0, 100% 100%, 35% 100%)',
             "&:hover": {
-            backgroundColor: `${blue[100]}`,
+              backgroundColor: `${blue[100]}`,
             }
           }}>
             <Calculate />
           </Button> 
  
           <Button 
+            onClick={ ()=> handleAppChange( AppKind.Text ) }
             color="success"
             sx={{
             position: "relative",
@@ -84,7 +101,8 @@ const Saves: React.FC = () => {
             <Note />
           </Button> 
 
-          <Button 
+          <Button
+            onClick={ ()=> handleAppChange( AppKind.Present ) }
             color="warning"
             sx={{
             width: "100%",
@@ -118,16 +136,3 @@ const Saves: React.FC = () => {
 };
 
 export default Saves;
-
-
-
-
-
-{/* <Box sx={{ */}
-{/*   backgroundColor: "red", */}
-{/*   borderRight: '35px solid transparent', */}
-{/*   borderBottom: `45px solid ${blue[900]}`, */}
-{/*   backgroundClip:  'padding-box' */}
-{/* }}> */}
-{/* </Box> */}
-
