@@ -25,13 +25,30 @@ const Saves: React.FC = () => {
   
   const currentBgColor = () => {
     if( currentApp == AppKind.Text)
-      return `${green[900]}`;
+      return `${green[800]}`;
     
     if( currentApp == AppKind.Present)
       return `${orange[900]}`
 
     return `${blue[900]}`;
   }
+
+  const currentIcon = () => {
+    if(currentApp == AppKind.Text)
+      return <> 
+        <Note />
+      </>;
+    
+    if(currentApp == AppKind.Present)
+      return <> 
+        <Slideshow />
+      </>;
+
+      return <> 
+        <Calculate />
+      </>;
+  }
+
 
   return (
     <Box
@@ -51,12 +68,17 @@ const Saves: React.FC = () => {
       >
         <Box sx={{
           display: "flex",
-          alignItems: "center"
-        }}>
-          <Calculate sx={{
+          alignItems: "center",
+          "& > svg":{
             fontSize: "40px",
-            mr: 1.5,
-          }}/>
+            mr: 1.5
+          }
+        }}>
+          {/* <Calculate sx={{ */}
+          {/*   fontSize: "40px", */}
+          {/*   mr: 1.5, */}
+          {/* }}/> */}
+          { currentIcon() }
           <Typography variant="h3" sx={{ 
             fontSize: "40px",
             alignSelf: "flex-start"
