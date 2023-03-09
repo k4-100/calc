@@ -22,14 +22,24 @@ const Saves: React.FC = () => {
   const handleAppChange = ( newApp: AppKind ) => {
     setCurrentApp( newApp )
   }
+  
+  const currentBgColor = () => {
+    if( currentApp == AppKind.Text)
+      return `${green[900]}`;
+    
+    if( currentApp == AppKind.Present)
+      return `${orange[900]}`
 
+    return `${blue[900]}`;
+  }
 
   return (
     <Box
       sx={{
         mt: "50px",
         mx: 3,
-        backgroundColor: `${blue[900]}`,
+        // backgroundColor: `${blue[900]}`,
+        backgroundColor: currentBgColor(),
         position: "relative" 
       }}
     >
@@ -61,7 +71,8 @@ const Saves: React.FC = () => {
           right: 0,
           width: "70vw",
           height: "45px",
-          backgroundColor: `${blue[900]}`,
+          // backgroundColor: `${blue[900]}`,
+          backgroundColor: currentBgColor(),
           borderRadius: "0 4px 0 0",
           display: "flex",
           alignItems: "center",
