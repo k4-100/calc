@@ -24,22 +24,22 @@ const Saves: React.FC = () => {
   }
   
   const currentBgColor = () => {
-    if( currentApp == AppKind.Text)
+    if( currentApp === AppKind.Text)
       return `${green[800]}`;
     
-    if( currentApp == AppKind.Present)
+    if( currentApp === AppKind.Present)
       return `${orange[900]}`
 
     return `${blue[900]}`;
   }
 
   const currentIcon = () => {
-    if(currentApp == AppKind.Text)
+    if(currentApp === AppKind.Text)
       return <> 
         <Note />
       </>;
     
-    if(currentApp == AppKind.Present)
+    if(currentApp === AppKind.Present)
       return <> 
         <Slideshow />
       </>;
@@ -157,12 +157,17 @@ const Saves: React.FC = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          p: 2
+          p: 2,
+          minHeight:"418px"
         }}
       >
-        <Save />
-        <Save />
-        <Save />
+        {
+         currentApp === AppKind.Calc && <>
+          <Save />
+          <Save />
+          <Save />
+        </>
+        }
       </Box>
     </Box>
   );
