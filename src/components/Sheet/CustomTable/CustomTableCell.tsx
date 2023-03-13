@@ -1,7 +1,9 @@
 // !
 import React, { useState, useCallback, useEffect, useRef, memo } from "react";
 import { TableCell } from "@mui/material";
+import _ from 'lodash';
 import { CellClassObjectType } from "../../../utility/Classes";
+
 type Props = {
   x: number;
   y: number;
@@ -9,6 +11,24 @@ type Props = {
   cloneAndSetTableCell: Function;
   getEvaluatedText: Function;
 };
+
+
+function arePropsEqual(oldProps: Props, newProps: Props){
+  const  sample = {
+    x: _.isEqual(oldProps.x, newProps.x),
+    y: _.isEqual(oldProps.y, newProps.y),
+    cell: _.isEqual(oldProps.cell, newProps.cell),
+    cloneAndSetTableCell: _.isEqual(oldProps.cloneAndSetTableCell, newProps.cloneAndSetTableCell),
+    getEvaluatedText: _.isEqual(oldProps.getEvaluatedText, newProps.getEvaluatedText),
+  };
+  console.table( sample )
+
+  const areEqual = _.isEqual(oldProps, newProps);
+  console.log("areEqual: ", areEqual);
+  return areEqual;
+}
+
+
 
 const CustomTableCell: React.FC<Props> = memo(({
   x,
@@ -22,25 +42,25 @@ const CustomTableCell: React.FC<Props> = memo(({
   const [wasCaretSet, setWasCaretSet] = useState<boolean>(false);
   const tdRef = useRef<any>(null);
 
-  // useEffect(() => {
-  //   /**
-  //    *
-  //    * @param el element to put caret at the end of
-  //    */
-  //   const placeCaretAtEnd = (el: any) => {
-  //     const range = document.createRange();
-  //     range.selectNodeContents(el);
-  //     range.collapse(false);
-  //     const sel: any = window.getSelection();
-  //     sel.removeAllRanges();
-  //     sel.addRange(range);
-  //   };
+  useEffect(() => {
+    /**
+     *
+     * @param el element to put caret at the end of
+     */
+    const placeCaretAtEnd = (el: any) => {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      range.collapse(false);
+      const sel: any = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+    };
 
-  //   if (clicks === 2 && !wasCaretSet) {
-  //     placeCaretAtEnd(tdRef.current);
-  //     setWasCaretSet(true);
-  //   }
-  // }, [clicks, wasCaretSet, setWasCaretSet]);
+    if (clicks === 2 && !wasCaretSet) {
+      placeCaretAtEnd(tdRef.current);
+      setWasCaretSet(true);
+    }
+  }, [clicks, wasCaretSet, setWasCaretSet]);
 
   /**
    *
@@ -144,6 +164,6 @@ const CustomTableCell: React.FC<Props> = memo(({
       {clicks === 2 ? cell.text : cell.value}
     </TableCell>
   );
-});
+}, arePropsEqual);
 
 export default CustomTableCell;

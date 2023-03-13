@@ -30,9 +30,8 @@ import CustomTableCell from "./CustomTableCell";
 const CustomTable: React.FC = () => {
 
 
-  const sheets = useSelector( (state: any)=> state )
-  const sheet = sheets
-  const dispatch = useDispatch();
+  const sheet =  useSelector( (state: any)=> state )
+  const dispatch =  useDispatch();
   // const setSheet = 
   // dispatch( actions.setSheet() )
 
@@ -41,7 +40,7 @@ const CustomTable: React.FC = () => {
   const tableIndex = sheet.tables.findIndex(
     (tab: any) => tab.id === sheet.mainTabID
   );
-
+  
   //#region utils
   /**
    * deep clones table and cell, performs callback and sets new table with changed cell
@@ -56,8 +55,8 @@ const CustomTable: React.FC = () => {
       _table.cells[y][x] = _cell;
       const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
       _sheet.tables[tableIndex] = _table;
-      dispatch( actions.setSheet( _sheet ) )
-  },[]);
+      dispatch( actions.setSheet( _sheet ) );
+  },[dispatch, sheet, tableIndex]);
 
   /**
    * @param colName name (string) at the top of the column
@@ -103,7 +102,7 @@ const CustomTable: React.FC = () => {
       }
       return text;
     },
-    [getColumnNumberFromColName, sheet.tables]
+    [getColumnNumberFromColName, sheet,  tableIndex]
   );
 
     // [getColumnNumberFromColName, sheet.tables, tableIndex]
