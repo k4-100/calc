@@ -79,7 +79,7 @@ export class CellClass {
 /**
  * class representing a table filled with cells in a forn of a pure object
  */
-export type TableClassObject = {
+export type TableClassObjectType = {
   /** 2d array storing cells representing table */
   cells: Array<Array<CellClassObjectType>>;
   /** table id */
@@ -118,7 +118,7 @@ export class TableClass {
     this.id = id;
   }
 
-  getObject(): TableClassObject{
+  getObject(): TableClassObjectType{
     return({
       cells: 
         this.cells.map( 
@@ -133,7 +133,7 @@ export class TableClass {
 
 export type SheetClassObjectType = {
   /** all tables in the sheet */
-  tables: Array<TableClassObject>;
+  tables: Array<TableClassObjectType>;
   /** sheet id */
   id: string;
   /** id of main tab */

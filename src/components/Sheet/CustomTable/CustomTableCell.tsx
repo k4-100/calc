@@ -1,5 +1,5 @@
 // !
-import React, { useState, useCallback, useEffect, useRef } from "react";
+import React, { useState, useCallback, useEffect, useRef, memo } from "react";
 import { TableCell } from "@mui/material";
 import { CellClassObjectType } from "../../../utility/Classes";
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   getEvaluatedText: Function;
 };
 
-const CustomTableCell: React.FC<Props> = ({
+const CustomTableCell: React.FC<Props> = memo(({
   x,
   y,
   cell,
@@ -22,25 +22,25 @@ const CustomTableCell: React.FC<Props> = ({
   const [wasCaretSet, setWasCaretSet] = useState<boolean>(false);
   const tdRef = useRef<any>(null);
 
-  useEffect(() => {
-    /**
-     *
-     * @param el element to put caret at the end of
-     */
-    const placeCaretAtEnd = (el: any) => {
-      const range = document.createRange();
-      range.selectNodeContents(el);
-      range.collapse(false);
-      const sel: any = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-    };
+  // useEffect(() => {
+  //   /**
+  //    *
+  //    * @param el element to put caret at the end of
+  //    */
+  //   const placeCaretAtEnd = (el: any) => {
+  //     const range = document.createRange();
+  //     range.selectNodeContents(el);
+  //     range.collapse(false);
+  //     const sel: any = window.getSelection();
+  //     sel.removeAllRanges();
+  //     sel.addRange(range);
+  //   };
 
-    if (clicks === 2 && !wasCaretSet) {
-      placeCaretAtEnd(tdRef.current);
-      setWasCaretSet(true);
-    }
-  }, [clicks, wasCaretSet, setWasCaretSet]);
+  //   if (clicks === 2 && !wasCaretSet) {
+  //     placeCaretAtEnd(tdRef.current);
+  //     setWasCaretSet(true);
+  //   }
+  // }, [clicks, wasCaretSet, setWasCaretSet]);
 
   /**
    *
@@ -144,6 +144,6 @@ const CustomTableCell: React.FC<Props> = ({
       {clicks === 2 ? cell.text : cell.value}
     </TableCell>
   );
-};
+});
 
 export default CustomTableCell;

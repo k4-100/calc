@@ -49,7 +49,7 @@ const CustomTable: React.FC = () => {
    * @param y vertical (row) cell coords
    * @param callback function to be used between cloning and setting
    */
-  const cloneAndSetTableCell =  (x: number, y: number, callback: (cl: CellClassObjectType) => void ) => {
+  const cloneAndSetTableCell = useCallback((x: number, y: number, callback: (cl: CellClassObjectType) => void ) => {
       const _table: TableClassObjectType = _.cloneDeep(sheet.tables[tableIndex]);
       const _cell = _table.cells[y][x];
       callback(_cell);
@@ -57,7 +57,7 @@ const CustomTable: React.FC = () => {
       const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
       _sheet.tables[tableIndex] = _table;
       dispatch( actions.setSheet( _sheet ) )
-  }
+  },[]);
 
   /**
    * @param colName name (string) at the top of the column
@@ -103,9 +103,10 @@ const CustomTable: React.FC = () => {
       }
       return text;
     },
-    [getColumnNumberFromColName, sheet.tables, tableIndex]
+    [getColumnNumberFromColName, sheet.tables]
   );
 
+    // [getColumnNumberFromColName, sheet.tables, tableIndex]
   //#endregion utils
 
   const table: TableClass = useMemo(
