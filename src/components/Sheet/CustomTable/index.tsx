@@ -1,5 +1,5 @@
 // !
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableBody,
@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { actions } from "../../../store"
 import { TableClass,  SheetClassObjectType, TableClassObjectType, CellClassObjectType, CellClass } from "../../../utility/Classes";
 import CustomTableCell from "./CustomTableCell";
+import CustomInfoCell from "./CustomInfoCell";
 
 
 
@@ -94,21 +95,26 @@ const CustomTable: React.FC = () => {
       )),
     [table.cells]
   );
+  
 
-  const cells = useMemo(
-    () =>
-      table.cells.map((_, y) => (
+
+
+  const cells = table.cells.map((_, y) => (
         <TableRow key={y + 1}>
-          <TableCell
-            sx={{
-              backgroundColor: `${grey[900]} !important`,
-              fontSize: "20px",
-              textAlign: "center",
-              width: "70px",
-            }}
-          >
-            {y + 1}
-          </TableCell>
+          {/* {  */}
+          {/*   <TableCell */}
+          {/*     sx={{ */}
+          {/*       backgroundColor: `${grey[900]} !important`, */}
+          {/*       fontSize: "20px", */}
+          {/*       textAlign: "center", */}
+          {/*       width: "70px", */}
+          {/*     }} */}
+          {/*   > */}
+          {/*     {y + 1} */}
+          {/*   </TableCell> */}
+          {/* } */}
+          <CustomInfoCell content={ (y+1).toString() } />
+
           {table.cells[y].map((cell: CellClassObjectType, x) => (
             <CustomTableCell
               x={x}
@@ -120,9 +126,7 @@ const CustomTable: React.FC = () => {
             />
           ))}
         </TableRow>
-      )),
-    [ table.cells, cloneAndSetTableCell]
-  );
+  ));
 
   return (
     <Table
