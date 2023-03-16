@@ -2,16 +2,16 @@
 import React, { useState, useCallback, useEffect, useRef, memo, useMemo } from "react";
 import { TableCell } from "@mui/material";
 import _ from 'lodash';
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
 import { CellClassObjectType } from "../../../utility/Classes";
-import { actions } from '../../../store';
-import { cloneAndSetTableCell, getEvaluatedText } from "../../../utility/functions";
+// import { actions } from '../../../store';
+// import { cloneAndSetTableCell, getEvaluatedText } from "../../../utility/functions";
 
 type Props = {
   x: number;
   y: number;
   cell: CellClassObjectType;
-  // cloneAndSetTableCell: Function;
+  cloneAndSetTableCell: Function;
   // getEvaluatedText: Function;
 };
 
@@ -21,11 +21,12 @@ function arePropsEqual(oldProps: Props, newProps: Props){
     x: _.isEqual(oldProps.x, newProps.x),
     y: _.isEqual(oldProps.y, newProps.y),
     cell: _.isEqual(oldProps.cell, newProps.cell),
-    // cloneAndSetTableCell: _.isEqual(oldProps.cloneAndSetTableCell, newProps.cloneAndSetTableCell),
+    cloneAndSetTableCell: _.isEqual(oldProps.cloneAndSetTableCell, newProps.cloneAndSetTableCell),
     // getEvaluatedText: _.isEqual(oldProps.getEvaluatedText, newProps.getEvaluatedText),
   };
 
   const areEqual = _.isEqual(oldProps, newProps);
+  console.table(sample);
   console.log("areEqual: ", areEqual);
   return areEqual;
 }
@@ -36,7 +37,7 @@ const CustomTableCell: React.FC<Props> = memo(({
   x,
   y,
   cell,
-  // cloneAndSetTableCell,
+  cloneAndSetTableCell,
   // getEvaluatedText,
 }) => {
   // const [text, setText] = useState<string>("");
@@ -45,13 +46,6 @@ const CustomTableCell: React.FC<Props> = memo(({
   const tdRef = useRef<any>(null);
 
 
-  const sheet = useSelector( (state: any)=> state );
-  const dispatch = useDispatch();
-
-  /** index of table inside of a sheet */
-  const tableIndex =  sheet.tables.findIndex(
-    (tab: any) => tab.id === sheet.mainTabID
-  );
 
   useEffect(() => {
     /**
@@ -99,12 +93,13 @@ const CustomTableCell: React.FC<Props> = memo(({
 
         if (clicks === 2) {
           if (textContent !== cell.text)
-            cloneAndSetTableCell(x, y,tableIndex, dispatch, sheet,(cl: CellClassObjectType) => {
+            cloneAndSetTableCell(x, y, (cl: CellClassObjectType) => {
               if (textContent !== cell.text) {
                 cl.text = textContent;
-                cl.value = getEvaluatedText(textContent, tableIndex, sheet);
+                cl.value = textContent;
+                // cl.value = getEvaluatedText(textContent);
               }
-            });
+            }, cell );
           setClicks(0);
         } else if (clicks === 1) setClicks(2);
       } else if (clicks !== 2) setClicks(2);
@@ -131,12 +126,13 @@ const CustomTableCell: React.FC<Props> = memo(({
 
     const { textContent } = tdRef.current;
     if (textContent !== cell.text) {
-      cloneAndSetTableCell(x, y, tableIndex, dispatch, sheet, (cl: CellClassObjectType) => {
+      cloneAndSetTableCell(x, y, (cl: CellClassObjectType) => {
         if (clicks === 2) {
           cl.text = textContent;
-          cl.value = getEvaluatedText(textContent, tableIndex, sheet);
+          cl.value = textContent;
+          // cl.value = getEvaluatedText(textContent);
         }
-      });
+      }, cell);
     }
     setClicks(0);
     setWasCaretSet(false);

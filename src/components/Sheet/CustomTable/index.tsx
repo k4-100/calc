@@ -1,5 +1,5 @@
 // !
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Table,
   TableBody,
@@ -9,10 +9,10 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import _ from "lodash";
-// import { evaluate } from "mathjs";
+import { evaluate } from "mathjs";
 import { useSelector, useDispatch } from "react-redux"
-// import { actions } from "../../../store"
-import { TableClass,  SheetClassObjectType, TableClassObjectType, CellClassObjectType } from "../../../utility/Classes";
+import { actions } from "../../../store"
+import { TableClass,  SheetClassObjectType, TableClassObjectType, CellClassObjectType, CellClass } from "../../../utility/Classes";
 import CustomTableCell from "./CustomTableCell";
 
 
@@ -29,18 +29,46 @@ import CustomTableCell from "./CustomTableCell";
  */
 const CustomTable: React.FC = () => {
 
-
-  const sheet =  useSelector( (state: any)=> state )
+  const sheet =  useSelector( (state: any)=> state );
   const dispatch =  useDispatch();
-  // const setSheet = 
-  // dispatch( actions.setSheet() )
 
-  console.log("re-rendered CustomTable");
   // /** index of a table inside of the sheet */
   const tableIndex = sheet.tables.findIndex(
     (tab: any) => tab.id === sheet.mainTabID
   );
+
+
+
   
+  //#region utils
+  /**
+   * deep clones table and cell, performs callback and sets new table with changed cell
+   * @param x horizontal (column/cell) cell coords
+   * @param y vertical (row) cell coords
+   * @param callback function to be used between cloning and setting
+   */
+  const cloneAndSetTableCell =  useCallback((_x: number, _y: number, callback: (cl: CellClassObjectType) => void, cll: CellClassObjectType ) => {
+      // const _table: TableClassObjectType = _.cloneDeep(sheet.tables[tableIndex]);
+      const _cell = _.cloneDeep(cll);
+      callback(_cell);
+      // _table.cells[y][x] = _cell;
+      // const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
+      // _sheet.tables[tableIndex] = _table;
+      dispatch( actions.setCell(_cell) );
+      
+  },[dispatch]);
+
+  //#endregion utils
+
+
+
+
+  // useEffect( ()=>{
+  //   const _cell = new CellClass(0,0, "textt").getObject();
+  //   dispatch( actions.setCell(_cell) );
+  // },[dispatch])
+
+
 
   const table: TableClass = useMemo(
     () => sheet.tables[tableIndex],
@@ -86,14 +114,14 @@ const CustomTable: React.FC = () => {
               x={x}
               y={y}
               cell={cell}
-              // cloneAndSetTableCell={cloneAndSetTableCell}
+              cloneAndSetTableCell={cloneAndSetTableCell}
               // getEvaluatedText={getEvaluatedText}
               key={`td-${x}-${y}`}
             />
           ))}
         </TableRow>
       )),
-    [ table.cells]
+    [ table.cells, cloneAndSetTableCell]
   );
 
   return (
