@@ -117,8 +117,8 @@ const CustomTable: React.FC = () => {
 
           {table.cells[y].map((cell: CellClassObjectType, x) => (
             <CustomTableCell
-              x={x}
-              y={y}
+              // x={x}
+              // y={y}
               cell={cell}
               cloneAndSetTableCell={cloneAndSetTableCell}
               // getEvaluatedText={getEvaluatedText}

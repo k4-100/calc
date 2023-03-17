@@ -8,21 +8,15 @@ import { CellClassObjectType } from "../../../utility/Classes";
 // import { cloneAndSetTableCell, getEvaluatedText } from "../../../utility/functions";
 
 type Props = {
-  x: number;
-  y: number;
   cell: CellClassObjectType;
   cloneAndSetTableCell: Function;
-  // getEvaluatedText: Function;
 };
 
 
 function arePropsEqual(oldProps: Props, newProps: Props){
   const  sample = {
-    x: _.isEqual(oldProps.x, newProps.x),
-    y: _.isEqual(oldProps.y, newProps.y),
     cell: _.isEqual(oldProps.cell, newProps.cell),
     cloneAndSetTableCell: _.isEqual(oldProps.cloneAndSetTableCell, newProps.cloneAndSetTableCell),
-    // getEvaluatedText: _.isEqual(oldProps.getEvaluatedText, newProps.getEvaluatedText),
   };
 
   const areEqual = _.isEqual(oldProps, newProps);
@@ -34,13 +28,10 @@ function arePropsEqual(oldProps: Props, newProps: Props){
 
 
 const CustomTableCell: React.FC<Props> = memo(({
-  x,
-  y,
   cell,
   cloneAndSetTableCell,
-  // getEvaluatedText,
 }) => {
-  // const [text, setText] = useState<string>("");
+  const { x,y } = cell;
   const [clicks, setClicks] = useState<number>(0);
   const [wasCaretSet, setWasCaretSet] = useState<boolean>(false);
   const tdRef = useRef<any>(null);
