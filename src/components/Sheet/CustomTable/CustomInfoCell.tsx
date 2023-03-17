@@ -1,9 +1,9 @@
-import React, { memo } from 'react'
+import React  from 'react'
 import { TableCell } from '@mui/material'
 import { grey } from '@mui/material/colors'
 
 
-const CustomInfoCell: React.FC<{content: string}> = memo( ({ content }) =>{
+const CustomInfoCell: React.FC<{content: string}> = ({ content }) =>{
   return(
     <TableCell
       sx={{
@@ -16,6 +16,6 @@ const CustomInfoCell: React.FC<{content: string}> = memo( ({ content }) =>{
       {content}
     </TableCell>
   )
-});
+}
 
 export default CustomInfoCell;

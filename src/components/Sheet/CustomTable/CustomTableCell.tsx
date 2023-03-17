@@ -1,11 +1,8 @@
 // !
-import React, { useState, useCallback, useEffect, useRef, memo, useMemo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { TableCell } from "@mui/material";
 import _ from 'lodash';
-// import { useSelector, useDispatch } from "react-redux";
 import { CellClassObjectType } from "../../../utility/Classes";
-// import { actions } from '../../../store';
-// import { cloneAndSetTableCell, getEvaluatedText } from "../../../utility/functions";
 
 type Props = {
   cell: CellClassObjectType;
@@ -27,7 +24,7 @@ function arePropsEqual(oldProps: Props, newProps: Props){
 
 
 
-const CustomTableCell: React.FC<Props> = memo(({
+const CustomTableCell: React.FC<Props> = ({
   cell,
   cloneAndSetTableCell,
 }) => {
@@ -162,6 +159,6 @@ const CustomTableCell: React.FC<Props> = memo(({
       {clicks === 2 ? cell.text : cell.value}
     </TableCell>
   );
-}, arePropsEqual);
+}
 
 export default CustomTableCell;
