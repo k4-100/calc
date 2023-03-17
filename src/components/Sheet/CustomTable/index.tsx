@@ -15,6 +15,7 @@ import { actions } from "../../../store"
 import { TableClass,  SheetClassObjectType, TableClassObjectType, CellClassObjectType, CellClass } from "../../../utility/Classes";
 import CustomTableCell from "./CustomTableCell";
 import CustomInfoCell from "./CustomInfoCell";
+import CustomTableRow from "./CustomTableRow";
 
 
 
@@ -100,32 +101,12 @@ const CustomTable: React.FC = () => {
 
 
   const cells = table.cells.map((_, y) => (
-        <TableRow key={y + 1}>
-          {/* {  */}
-          {/*   <TableCell */}
-          {/*     sx={{ */}
-          {/*       backgroundColor: `${grey[900]} !important`, */}
-          {/*       fontSize: "20px", */}
-          {/*       textAlign: "center", */}
-          {/*       width: "70px", */}
-          {/*     }} */}
-          {/*   > */}
-          {/*     {y + 1} */}
-          {/*   </TableCell> */}
-          {/* } */}
-          <CustomInfoCell content={ (y+1).toString() } />
-
-          {table.cells[y].map((cell: CellClassObjectType, x) => (
-            <CustomTableCell
-              // x={x}
-              // y={y}
-              cell={cell}
-              cloneAndSetTableCell={cloneAndSetTableCell}
-              // getEvaluatedText={getEvaluatedText}
-              key={`td-${x}-${y}`}
-            />
-          ))}
-        </TableRow>
+      <CustomTableRow 
+        key={y + 1}
+        y={y} 
+        rowArr={table.cells[y]} 
+        cloneAndSetTableCell={cloneAndSetTableCell} 
+      />
   ));
 
   return (

@@ -20,8 +20,8 @@ function arePropsEqual(oldProps: Props, newProps: Props){
   };
 
   const areEqual = _.isEqual(oldProps, newProps);
-  console.table(sample);
-  console.log("areEqual: ", areEqual);
+  // console.table(sample);
+  // console.log("areEqual: ", areEqual);
   return areEqual;
 }
 
