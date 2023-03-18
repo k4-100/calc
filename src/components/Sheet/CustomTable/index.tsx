@@ -14,7 +14,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { actions } from "../../../store"
 import { TableClass,  SheetClassObjectType, TableClassObjectType, CellClassObjectType, CellClass } from "../../../utility/Classes";
 import CustomTableCell from "./CustomTableCell";
-import CustomInfoCell from "./CustomInfoCell";
+import { CustomInfoCellMemoized } from "./CustomInfoCell";
 import CustomTableRow from "./CustomTableRow";
 
 
@@ -71,6 +71,9 @@ const CustomTable: React.FC = () => {
   // },[dispatch])
 
 
+  const numberInfoCellContentFunction =  useCallback( (a:number)=>(a+1).toString(),[] );
+  const letterInfoCellContentFunction =  useCallback( (a:number)=> String.fromCharCode(65 + a)  ,[] );
+
 
   const table: TableClass = useMemo(
     () => sheet.tables[tableIndex],
@@ -80,19 +83,8 @@ const CustomTable: React.FC = () => {
   const listTable = useMemo(
     () =>
       table.cells[0].map((_, i) => (
-        <TableCell
-          className="h1"
-          key={i}
-          sx={{
-            backgroundColor: `${grey[900]} !important`,
-            fontSize: "20px",
-            textAlign: "center",
 
-            width: "170px",
-          }}
-        >
-          {String.fromCharCode(65 + i)}
-        </TableCell>
+        <CustomInfoCellMemoized key={i} content={ String.fromCharCode(65 + i) } width={170} />
       )),
     [table.cells]
   );
@@ -106,6 +98,8 @@ const CustomTable: React.FC = () => {
         y={y} 
         rowArr={table.cells[y]} 
         cloneAndSetTableCell={cloneAndSetTableCell} 
+        cellWidth={70}
+        contentFunction={numberInfoCellContentFunction}
       />
   ));
 
