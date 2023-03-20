@@ -1,9 +1,12 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import BorderStyleIcon from "@mui/icons-material/BorderStyle";
 import { Link as RouterLink } from "react-router-dom";
+import { LooksOne } from "@mui/icons-material";
+import Profile from "./Profile";
 
 const Header = () => {
+  const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar sx={{ position: "static" }}>
@@ -51,8 +54,18 @@ const Header = () => {
               Calc
             </Button>
           </Box>
+          <Box>
+            <Button color="info" onClick={ 
+              ()=> setIsProfileVisible(!isProfileVisible)
+            }>
+              <LooksOne />
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
+      {
+        isProfileVisible && <Profile />
+      }
     </Box>
   );
 };

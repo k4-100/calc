@@ -8,7 +8,6 @@ import AboutUs from "./AboutUs";
 import Opinions from "./Opinions";
 import Apps from "./Apps";
 import Saves from "./Saves";
-import AppsWithSaves from "./AppsWithSaves";
 /**
  *
  * @returns Home page
