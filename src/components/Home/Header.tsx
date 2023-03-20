@@ -4,11 +4,15 @@ import BorderStyleIcon from "@mui/icons-material/BorderStyle";
 import { Link as RouterLink } from "react-router-dom";
 import { LooksOne } from "@mui/icons-material";
 import Profile from "./Profile";
+import { grey } from "@mui/material/colors";
 
 const Header = () => {
-  const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
+  const [isProfileVisible, setIsProfileVisible] = useState<boolean>(true);
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ 
+      position: "relative",
+      flexGrow: 1
+    }}>
       <AppBar sx={{ position: "static" }}>
         <Toolbar
           sx={{
@@ -55,7 +59,10 @@ const Header = () => {
             </Button>
           </Box>
           <Box>
-            <Button color="info" onClick={ 
+            <Button color="info" sx={{
+              backgroundColor: isProfileVisible ? `${grey[900]}` : 'initial',
+              borderRadius: 0
+            }} onClick={ 
               ()=> setIsProfileVisible(!isProfileVisible)
             }>
               <LooksOne />
