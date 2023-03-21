@@ -148,9 +148,9 @@ export class SheetClass {
   /**
    * constructs sheet with default table and an id
    */
-  constructor() {
+  constructor(id: number) {
     this.tables = [new TableClass(26, 26, 1)];
-    this.id = 1;
+    this.id = id;
     this.mainTabID = 1;
   }
 
@@ -159,7 +159,7 @@ export class SheetClass {
     return({
       tables: this.tables.map( table => table.getObject() ),
       id: this.id,
-      mainTabID: this.id
+      mainTabID: this.mainTabID
     })
   }
 

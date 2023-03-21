@@ -4,13 +4,11 @@ import { evaluate } from "mathjs";
 import { CellClassObjectType, SheetClass, SheetClassObjectType } from '../utility/Classes';
 
 
-const newSheet: SheetClassObjectType = new SheetClass().getObject();
-
 
 const determineInitialState = (): SheetClassObjectType => {
   const sheetRaw: null | string = localStorage.getItem('sheet');
   if( !sheetRaw ){
-    const newSheet: SheetClassObjectType = new SheetClass().getObject();
+    const newSheet: SheetClassObjectType = new SheetClass(1).getObject();
     localStorage.setItem('sheet', JSON.stringify(newSheet) );
 
     return newSheet;
@@ -18,8 +16,6 @@ const determineInitialState = (): SheetClassObjectType => {
   
   return JSON.parse(sheetRaw) as SheetClassObjectType;
 }
-
-
 
 
 
