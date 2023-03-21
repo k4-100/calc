@@ -75,7 +75,6 @@ export class CellClass {
 }
 
 
-
 /**
  * class representing a table filled with cells in a forn of a pure object
  */
@@ -83,10 +82,8 @@ export type TableClassObjectType = {
   /** 2d array storing cells representing table */
   cells: Array<Array<CellClassObjectType>>;
   /** table id */
-  id: string;
+  id: number;
 }
-
-
 
 
 /**
@@ -96,14 +93,14 @@ export class TableClass {
   /** 2d array storing cells representing table */
   cells: Array<Array<CellClass>>;
   /** table id */
-  id: string;
+  id: number;
   /**
    *
    * @param width horizontal width of an array
    * @param height vertical hight of an array
    * @param id table id
    */
-  constructor(width: number, height: number, id: string) {
+  constructor(width: number, height: number, id: number) {
     /**
      *  dummy cells 2d array for generating stuff
      */
@@ -114,7 +111,6 @@ export class TableClass {
     this.cells = _cells.map((row, y) =>
       row.map((_, x) => new CellClass(x, y, ""))
     );
-
     this.id = id;
   }
 
@@ -135,9 +131,9 @@ export type SheetClassObjectType = {
   /** all tables in the sheet */
   tables: Array<TableClassObjectType>;
   /** sheet id */
-  id: string;
+  id: number;
   /** id of main tab */
-  mainTabID: string;
+  mainTabID: number;
 }
 
 
@@ -145,17 +141,17 @@ export class SheetClass {
   /** all tables in the sheet */
   tables: Array<TableClass>;
   /** sheet id */
-  id: string;
+  id: number;
   /** id of main tab */
-  mainTabID: string;
+  mainTabID: number;
 
   /**
    * constructs sheet with default table and an id
    */
   constructor() {
-    this.tables = [new TableClass(26, 26, "first")];
-    this.id = "first";
-    this.mainTabID = "first";
+    this.tables = [new TableClass(26, 26, 1)];
+    this.id = 1;
+    this.mainTabID = 1;
   }
 
 
