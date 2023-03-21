@@ -6,12 +6,16 @@ import { LooksOne } from "@mui/icons-material";
 import Profile from "./Profile";
 import { grey } from "@mui/material/colors";
 
+const headerHeight: number = 60
+
+
 const Header = () => {
-  const [isProfileVisible, setIsProfileVisible] = useState<boolean>(true);
+  const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
   return (
     <Box sx={{ 
       position: "relative",
-      flexGrow: 1
+      flexGrow: 1,
+      height: `${headerHeight}px`
     }}>
       <AppBar sx={{ position: "static" }}>
         <Toolbar
@@ -58,11 +62,19 @@ const Header = () => {
               Calc
             </Button>
           </Box>
-          <Box>
+          <Box sx={{
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: isProfileVisible ? `${grey[900]}` : 'initial',
+            mt: 1,
+            height: `${headerHeight - 10}px`,
+          }}>
             <Button color="info" sx={{
               backgroundColor: isProfileVisible ? `${grey[900]}` : 'initial',
-              borderRadius: 0
-            }} onClick={ 
+              borderRadius: 0,
+              height: "80%"
+            }} 
+            onClick={ 
               ()=> setIsProfileVisible(!isProfileVisible)
             }>
               <LooksOne />

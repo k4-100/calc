@@ -8,11 +8,11 @@ const Profile = () =>{
     <Box sx={{
       zIndex: 1000,
       position: "absolute",
-      top: "9vh",
+      top: "100%",
       right: "24px",
       width: "20vw",
       height: "200px",
-      background: "Red"
+      background: "red"
     }}>
       <Box sx={{
         backgroundColor: `${grey[900]}`,
