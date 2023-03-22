@@ -9,7 +9,7 @@ import SheetBarButton from "./SheetBarButton";
 
 const SheetBar = () => {
     const sheets = useSelector((state: any) => state);
-    const sheet = sheets;
+    const sheet = sheets[0];
     const dispatch = useDispatch();
     /**
      * adds new table into sheet

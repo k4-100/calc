@@ -89,7 +89,7 @@ const calcSlice = createSlice({
         ) {
             const newState = _.cloneDeep(state);
             const sheetIndex: number = newState.findIndex(
-                (sht: SheetClassObjectType) => sht.id === payload.sheetID
+                (sht: SheetClassObjectType) => sht.id === action.payload.sheetID
             );
 
             if (sheetIndex < 0) {
@@ -100,6 +100,11 @@ const calcSlice = createSlice({
             const tableIndex = newState[sheetIndex].tables.findIndex(
                 (tab: any) => tab.id === newState[sheetIndex].mainTabID
             );
+
+            if (tableIndex < 0) {
+                console.error("ERRROR: TABLE DOESN'T EXIST");
+                return;
+            }
 
             const { payload } = action;
             payload.cell.value = getEvaluatedText(

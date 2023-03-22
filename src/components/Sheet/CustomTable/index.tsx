@@ -33,7 +33,8 @@ import CustomTableRow from "./CustomTableRow";
  * @returns Table with cells
  */
 const CustomTable: React.FC = () => {
-    const sheet = useSelector((state: any) => state);
+    const sheets = useSelector((state: any) => state);
+    const sheet = sheets[0];
     const dispatch = useDispatch();
 
     // /** index of a table inside of the sheet */
@@ -61,7 +62,7 @@ const CustomTable: React.FC = () => {
             // _table.cells[y][x] = _cell;
             // const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
             // _sheet.tables[tableIndex] = _table;
-            dispatch(actions.setCell(_cell));
+            dispatch(actions.setCell({ cell: _cell, sheetID: 1 }));
         },
         [dispatch]
     );
