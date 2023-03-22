@@ -9,7 +9,7 @@ import { actions } from "../../store";
  *
  * @returns SheetBarButton Button in a SheetBar
  */
-const SheetBarButton: React.FC<{ name: string; id: string }> = ({
+const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     name,
     id,
 }) => {
@@ -21,7 +21,7 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
      * deletes table from sheet
      * @param id id of table to be deleted
      */
-    const handleDelClick = (id: string) => {
+    const handleDelClick = (id: number) => {
         const _sheet = _.cloneDeep(sheet);
         const deleteIndex = _sheet.tables.findIndex(
             (tab: any) => tab.id === id
@@ -32,11 +32,12 @@ const SheetBarButton: React.FC<{ name: string; id: string }> = ({
         // setSheet!(_sheet);
         dispatch(actions.setSheet(_sheet));
     };
+
     /**
      * switches to another main table
      * @param id id of a new main table
      */
-    const handleSwitchToNextTable = (id: string) => {
+    const handleSwitchToNextTable = (id: number) => {
         const _sheet = _.cloneDeep(sheet);
         _sheet.mainTabID = id;
         dispatch(actions.setSheet(_sheet));

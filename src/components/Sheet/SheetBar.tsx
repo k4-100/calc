@@ -1,6 +1,5 @@
-import React from "react";
+// import React from "react";
 import _ from "lodash";
-import { v4 as uuidv4 } from "uuid";
 import { Box, Button, Paper } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -17,7 +16,7 @@ const SheetBar = () => {
      */
     const handleTableAdd = () => {
         const _sheet = _.cloneDeep(sheet);
-        _sheet.tables.push(new TableClass(3, 4, uuidv4()).getObject());
+        _sheet.tables.push(new TableClass(3, 4));
         dispatch(actions.setSheet(_sheet));
     };
 

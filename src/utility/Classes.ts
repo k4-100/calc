@@ -1,5 +1,5 @@
 /**
- * id for the cell
+ * id for cells
  */
 let cellIDSrc: number = 0;
 
@@ -72,6 +72,11 @@ export class CellClass {
 }
 
 /**
+ * id for tables
+ */
+let tableIDSrc: number = 0;
+
+/**
  * class representing a table filled with cells in a forn of a pure object
  */
 export type TableClassObjectType = {
@@ -95,7 +100,7 @@ export class TableClass {
      * @param height vertical hight of an array
      * @param id table id
      */
-    constructor(width: number, height: number, id: number) {
+    constructor(width: number, height: number) {
         /**
          *  dummy cells 2d array for generating stuff
          */
@@ -106,7 +111,7 @@ export class TableClass {
         this.cells = _cells.map((row, y) =>
             row.map((_, x) => new CellClass(x, y, ""))
         );
-        this.id = id;
+        this.id = ++tableIDSrc;
     }
 
     getObject(): TableClassObjectType {
@@ -138,7 +143,7 @@ export class SheetClass {
      * constructs sheet with default table and an id
      */
     constructor(id: number) {
-        this.tables = [new TableClass(26, 26, 1)];
+        this.tables = [new TableClass(26, 26)];
         this.id = id;
         this.mainTabID = 1;
     }
