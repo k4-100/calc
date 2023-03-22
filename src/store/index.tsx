@@ -7,16 +7,18 @@ import {
     SheetClassObjectType,
 } from "../utility/Classes";
 
-const determineInitialState = (): SheetClassObjectType => {
-    const sheetRaw: null | string = localStorage.getItem("sheet");
+const determineInitialState = (): Array<SheetClassObjectType> => {
+    const sheetRaw: null | string = localStorage.getItem("sheets");
     if (!sheetRaw) {
-        const newSheet: SheetClassObjectType = new SheetClass(1).getObject();
-        localStorage.setItem("sheet", JSON.stringify(newSheet));
+        const newSheetArr: Array<SheetClassObjectType> = [
+            new SheetClass(1).getObject(),
+        ];
 
-        return newSheet;
+        localStorage.setItem("sheets", JSON.stringify(newSheetArr));
+        return newSheetArr;
     }
 
-    return JSON.parse(sheetRaw) as SheetClassObjectType;
+    return JSON.parse(sheetRaw) as Array<SheetClassObjectType>;
 };
 
 /**
@@ -32,11 +34,10 @@ const getColumnNumberFromColName = (colName: string): number => {
  * @returns evaulated this.text used for display in a table
  */
 const getEvaluatedText = (
-    state: SheetClassObjectType,
+    sheet: SheetClassObjectType,
     tableIndex: number,
     text: string
 ) => {
-    const sheet = _.cloneDeep(state);
     const table = _.cloneDeep(sheet.tables[tableIndex]);
     // if this.text is a mathematical expression:
     if (text[0] === "=") {
@@ -54,6 +55,7 @@ const getEvaluatedText = (
                     const coords = next
                         .split(/([A-Z])/)
                         .filter((str) => str !== "");
+
                     return (prev +=
                         table.cells[Number(coords[1]) - 1][
                             getColumnNumberFromColName(coords[0])
@@ -79,18 +81,35 @@ const calcSlice = createSlice({
             return action.payload;
         },
         setCell(
-            state: SheetClassObjectType,
-            action: { payload: CellClassObjectType; type: string }
+            state: Array<SheetClassObjectType>,
+            action: {
+                payload: { cell: CellClassObjectType; sheetID: number };
+                type: string;
+            }
         ) {
             const newState = _.cloneDeep(state);
-            const tableIndex = state.tables.findIndex(
-                (tab: any) => tab.id === state.mainTabID
+            const sheetIndex: number = newState.findIndex(
+                (sht: SheetClassObjectType) => sht.id === payload.sheetID
+            );
+
+            if (sheetIndex < 0) {
+                console.error("ERRROR: SHEET DOESN'T EXIST");
+                return;
+            }
+
+            const tableIndex = newState[sheetIndex].tables.findIndex(
+                (tab: any) => tab.id === newState[sheetIndex].mainTabID
             );
 
             const { payload } = action;
-            payload.value = getEvaluatedText(state, tableIndex, payload.text);
-            newState.tables[tableIndex].cells[payload.y][payload.x] =
-                _.cloneDeep(action.payload);
+            payload.cell.value = getEvaluatedText(
+                newState[sheetIndex],
+                tableIndex,
+                payload.cell.text
+            );
+            newState[sheetIndex].tables[tableIndex].cells[payload.cell.y][
+                payload.cell.x
+            ] = _.cloneDeep(action.payload.cell);
             localStorage.setItem("sheet", JSON.stringify(newState));
             return newState;
         },
