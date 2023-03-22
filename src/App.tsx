@@ -5,34 +5,29 @@ import Sheet from "./components/Sheet";
 import Home from "./components/Home";
 // import { writeStorage, useLocalStorage } from '@rehooks/local-storage';
 
-
-
 const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
+    palette: {
+        mode: "dark",
+    },
 });
-
 
 let count = 10;
 const App: React.FC = () => {
-  // const localStorageTest = useLocalStorage('test')
-  
+    // const localStorageTest = useLocalStorage('test')
 
-
-  return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="calc" element={<Sheet />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/">
+                        <Route index element={<Home />} />
+                        <Route path="calc" element={<Sheet />} />
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+        </ThemeProvider>
+    );
 };
 
 export default App;

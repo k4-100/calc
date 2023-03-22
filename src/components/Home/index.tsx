@@ -13,61 +13,61 @@ import Saves from "./Saves";
  * @returns Home page
  */
 const Home: React.FC = () => {
-  return (
-    <>
-      <Header />
-      <Introduction />
-      <Apps />
-      <Grid
-        container
-        sx={{
-          mt: 3,
-          px: 3,
-        }}
-      >
-        <Grid
-          item
-          xs={12}
-          md={8}
-          sx={{
-            pr: {
-              xs: 0,
-              sm: 5,
-            },
-          }}
-        >
-          <AboutUs />
-        </Grid>
-        <Grid
-          item
-          xs={12}
-          md={4}
-          sx={{
-            mt: {
-              xs: 5,
-              lg: 0,
-            },
-          }}
-        >
-          <Box>
-            <Opinions />
-            <SocialMedia />
-          </Box>
-        </Grid>
-      </Grid>
-        {/* <AppsWithSaves /> */}
-        <Saves />
-      <Typography
-        variant="subtitle1"
-        align="center"
-        sx={{
-          my: 5,
-        }}
-      >
-        Copyright © XYZ 2022
-      </Typography>
-    </>
-  );
+    return (
+        <>
+            <Header />
+            <Introduction />
+            <Apps />
+            <Grid
+                container
+                sx={{
+                    mt: 3,
+                    px: 3,
+                }}
+            >
+                <Grid
+                    item
+                    xs={12}
+                    md={8}
+                    sx={{
+                        pr: {
+                            xs: 0,
+                            sm: 5,
+                        },
+                    }}
+                >
+                    <AboutUs />
+                </Grid>
+                <Grid
+                    item
+                    xs={12}
+                    md={4}
+                    sx={{
+                        mt: {
+                            xs: 5,
+                            lg: 0,
+                        },
+                    }}
+                >
+                    <Box>
+                        <Opinions />
+                        <SocialMedia />
+                    </Box>
+                </Grid>
+            </Grid>
+            {/* <AppsWithSaves /> */}
+            <Saves />
+            <Typography
+                variant="subtitle1"
+                align="center"
+                sx={{
+                    my: 5,
+                }}
+            >
+                Copyright © XYZ 2022
+            </Typography>
+        </>
+    );
 };
 
 export default Home;
