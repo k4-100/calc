@@ -11,7 +11,6 @@ const darkTheme = createTheme({
     },
 });
 
-let count = 10;
 const App: React.FC = () => {
     // const localStorageTest = useLocalStorage('test')
 

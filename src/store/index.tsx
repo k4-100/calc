@@ -1,5 +1,5 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import _ from "lodash";
+import _, { cloneDeep } from "lodash";
 import { evaluate } from "mathjs";
 import {
     CellClassObjectType,
@@ -76,9 +76,24 @@ const calcSlice = createSlice({
     name: "calc",
     initialState: determineInitialState(),
     reducers: {
-        setSheets(state, action) {
-            localStorage.setItem("sheets", JSON.stringify(action.payload));
-            return action.payload;
+        setSheet(state, action) {
+            const newState = _.cloneDeep(state);
+
+            const sheetIndex: number = newState.findIndex(
+                (sht: SheetClassObjectType) => (sht.id = action.payload)
+            );
+
+            if (sheetIndex < 0) {
+                debugger;
+                console.error(
+                    "ERRROR: SHEET ISN'T PART OF THE STATE IN setSheet"
+                );
+                return;
+            }
+            newState[sheetIndex] = cloneDeep(action.payload);
+
+            localStorage.setItem("sheets", JSON.stringify(newState));
+            return newState;
         },
         setCell(
             state: Array<SheetClassObjectType>,

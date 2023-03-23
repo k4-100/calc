@@ -30,7 +30,7 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
         // ensures there will be always a main tab
         if (_sheet.mainTabID === id) _sheet.mainTabID = _sheet.tables[0].id;
         // setSheet!(_sheet);
-        dispatch(actions.setSheets(_sheet));
+        dispatch(actions.setSheet(_sheet));
     };
 
     /**
@@ -40,7 +40,7 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     const handleSwitchToNextTable = (id: number) => {
         const _sheet = _.cloneDeep(sheet);
         _sheet.mainTabID = id;
-        dispatch(actions.setSheets(_sheet));
+        dispatch(actions.setSheet(_sheet));
     };
 
     return (

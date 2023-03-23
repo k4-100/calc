@@ -36,7 +36,6 @@ const CustomTable: React.FC = () => {
     );
     const sheet = sheets[0];
     const dispatch = useDispatch();
-    debugger;
 
     // /** index of a table inside of the sheet */
     const tableIndex = sheet.tables.findIndex(

@@ -17,7 +17,7 @@ const SheetBar = () => {
     const handleTableAdd = () => {
         const _sheet = _.cloneDeep(sheet);
         _sheet.tables.push(new TableClass(3, 4).getObject());
-        dispatch(actions.setSheets(_sheet));
+        dispatch(actions.setSheet(_sheet));
     };
 
     return (
