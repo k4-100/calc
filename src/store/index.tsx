@@ -76,11 +76,14 @@ const calcSlice = createSlice({
     name: "calc",
     initialState: determineInitialState(),
     reducers: {
-        setSheet(state, action) {
+        setSheet(
+            state: Array<SheetClassObjectType>,
+            action: { payload: SheetClassObjectType; type: string }
+        ) {
             const newState = _.cloneDeep(state);
 
             const sheetIndex: number = newState.findIndex(
-                (sht: SheetClassObjectType) => (sht.id = action.payload)
+                (sht: SheetClassObjectType) => sht.id === action.payload.id
             );
 
             if (sheetIndex < 0) {
@@ -95,6 +98,7 @@ const calcSlice = createSlice({
             localStorage.setItem("sheets", JSON.stringify(newState));
             return newState;
         },
+
         setCell(
             state: Array<SheetClassObjectType>,
             action: {
@@ -130,7 +134,7 @@ const calcSlice = createSlice({
             newState[sheetIndex].tables[tableIndex].cells[payload.cell.y][
                 payload.cell.x
             ] = _.cloneDeep(action.payload.cell);
-            localStorage.setItem("sheet", JSON.stringify(newState));
+            localStorage.setItem("sheets", JSON.stringify(newState));
             return newState;
         },
     },
