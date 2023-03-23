@@ -76,8 +76,8 @@ const calcSlice = createSlice({
     name: "calc",
     initialState: determineInitialState(),
     reducers: {
-        setSheet(state, action) {
-            localStorage.setItem("sheet", JSON.stringify(action.payload));
+        setSheets(state, action) {
+            localStorage.setItem("sheets", JSON.stringify(action.payload));
             return action.payload;
         },
         setCell(

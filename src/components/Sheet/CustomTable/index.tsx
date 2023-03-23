@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import _ from "lodash";
-import { evaluate } from "mathjs";
 import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../../../store";
 import {
@@ -19,7 +18,6 @@ import {
     CellClassObjectType,
     CellClass,
 } from "../../../utility/Classes";
-import CustomTableCell from "./CustomTableCell";
 import { CustomInfoCellMemoized } from "./CustomInfoCell";
 import CustomTableRow from "./CustomTableRow";
 
@@ -33,9 +31,12 @@ import CustomTableRow from "./CustomTableRow";
  * @returns Table with cells
  */
 const CustomTable: React.FC = () => {
-    const sheets = useSelector((state: any) => state);
+    const sheets: Array<SheetClassObjectType> = useSelector(
+        (state: any) => state
+    );
     const sheet = sheets[0];
     const dispatch = useDispatch();
+    debugger;
 
     // /** index of a table inside of the sheet */
     const tableIndex = sheet.tables.findIndex(
@@ -78,12 +79,12 @@ const CustomTable: React.FC = () => {
         (a: number) => (a + 1).toString(),
         []
     );
-    const letterInfoCellContentFunction = useCallback(
-        (a: number) => String.fromCharCode(65 + a),
-        []
-    );
+    // const letterInfoCellContentFunction = useCallback(
+    //     (a: number) => String.fromCharCode(65 + a),
+    //     []
+    // );
 
-    const table: TableClass = useMemo(
+    const table: TableClassObjectType = useMemo(
         () => sheet.tables[tableIndex],
         [sheet.tables, tableIndex]
     );
