@@ -7,14 +7,23 @@ import {
     SheetClassObjectType,
 } from "../utility/Classes";
 
+/**
+ *  determines the initial value of a state which can be either:
+ *  - new array of SheetClassObjectType
+ *  - array saved in local storage
+ */
 const determineInitialState = (): Array<SheetClassObjectType> => {
     const sheetRaw: null | string = localStorage.getItem("sheets");
     if (!sheetRaw) {
+        console.time("run");
         const newSheetArr: Array<SheetClassObjectType> = [
-            new SheetClass(1).getObject(),
+            new SheetClass().getObject(),
+            new SheetClass().getObject(),
+            new SheetClass().getObject(),
         ];
 
         localStorage.setItem("sheets", JSON.stringify(newSheetArr));
+        console.timeEnd("run");
         return newSheetArr;
     }
 

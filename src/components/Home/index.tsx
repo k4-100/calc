@@ -13,7 +13,7 @@ import ErrorPage from "./ErrorPage";
  *
  * @returns Home page
  */
-const Home: React.FC<{ isError: boolean }> = ({ isError }) => {
+const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
     return (
         <>
             <Header />

@@ -122,6 +122,11 @@ export class TableClass {
     }
 }
 
+/**
+ * id for sheets
+ */
+let sheetIDsrc: number = 0;
+
 export type SheetClassObjectType = {
     /** all tables in the sheet */
     tables: Array<TableClassObjectType>;
@@ -142,9 +147,9 @@ export class SheetClass {
     /**
      * constructs sheet with default table and an id
      */
-    constructor(id: number) {
+    constructor() {
         this.tables = [new TableClass(26, 26)];
-        this.id = id;
+        this.id = ++sheetIDsrc;
         this.mainTabID = 1;
     }
 
