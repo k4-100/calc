@@ -1,7 +1,7 @@
 // !
 import React, { useState, useEffect, useRef } from "react";
 import { TableCell } from "@mui/material";
-import _ from "lodash";
+// import _ from "lodash";
 import { CellClassObjectType } from "../../../utility/Classes";
 
 type Props = {
@@ -9,20 +9,20 @@ type Props = {
     cloneAndSetTableCell: Function;
 };
 
-function arePropsEqual(oldProps: Props, newProps: Props) {
-    const sample = {
-        cell: _.isEqual(oldProps.cell, newProps.cell),
-        cloneAndSetTableCell: _.isEqual(
-            oldProps.cloneAndSetTableCell,
-            newProps.cloneAndSetTableCell
-        ),
-    };
+// function arePropsEqual(oldProps: Props, newProps: Props) {
+//     const sample = {
+//         cell: _.isEqual(oldProps.cell, newProps.cell),
+//         cloneAndSetTableCell: _.isEqual(
+//             oldProps.cloneAndSetTableCell,
+//             newProps.cloneAndSetTableCell
+//         ),
+//     };
 
-    const areEqual = _.isEqual(oldProps, newProps);
-    // console.table(sample);
-    // console.log("areEqual: ", areEqual);
-    return areEqual;
-}
+//     const areEqual = _.isEqual(oldProps, newProps);
+//     // console.table(sample);
+//     // console.log("areEqual: ", areEqual);
+//     return areEqual;
+// }
 
 const CustomTableCell: React.FC<Props> = ({ cell, cloneAndSetTableCell }) => {
     const { x, y } = cell;

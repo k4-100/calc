@@ -1,5 +1,5 @@
 // !
-import React, { memo, useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
     Table,
     TableBody,
@@ -12,11 +12,8 @@ import _ from "lodash";
 import { useSelector, useDispatch } from "react-redux";
 import { actions } from "../../../store";
 import {
-    TableClass,
-    SheetClassObjectType,
     TableClassObjectType,
     CellClassObjectType,
-    CellClass,
 } from "../../../utility/Classes";
 import { CustomInfoCellMemoized } from "./CustomInfoCell";
 import CustomTableRow from "./CustomTableRow";
@@ -31,10 +28,8 @@ import CustomTableRow from "./CustomTableRow";
  * @returns Table with cells
  */
 const CustomTable: React.FC = () => {
-    const sheets: Array<SheetClassObjectType> = useSelector(
-        (state: any) => state
-    );
-    const sheet = sheets[0];
+    const { calc } = useSelector((state: any) => state);
+    const sheet = calc[0];
     const dispatch = useDispatch();
 
     // /** index of a table inside of the sheet */

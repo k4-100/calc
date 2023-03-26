@@ -1,4 +1,9 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
+import {
+    combineReducers,
+    configureStore,
+    createSlice,
+    createStore,
+} from "@reduxjs/toolkit";
 import _, { cloneDeep } from "lodash";
 import { evaluate } from "mathjs";
 import {
@@ -8,14 +13,13 @@ import {
 } from "../utility/Classes";
 
 /**
- *  determines the initial value of a state which can be either:
+ *  determines the initial value of a calc state which can be either:
  *  - new array of SheetClassObjectType
  *  - array saved in local storage
  */
-const determineInitialState = (): Array<SheetClassObjectType> => {
+const determineInitialStateCalc = (): Array<SheetClassObjectType> => {
     const sheetRaw: null | string = localStorage.getItem("sheets");
     if (!sheetRaw) {
-        console.time("run");
         const newSheetArr: Array<SheetClassObjectType> = [
             new SheetClass().getObject(),
             new SheetClass().getObject(),
@@ -23,7 +27,6 @@ const determineInitialState = (): Array<SheetClassObjectType> => {
         ];
 
         localStorage.setItem("sheets", JSON.stringify(newSheetArr));
-        console.timeEnd("run");
         return newSheetArr;
     }
 
@@ -83,7 +86,7 @@ const getEvaluatedText = (
 
 const calcSlice = createSlice({
     name: "calc",
-    initialState: determineInitialState(),
+    initialState: determineInitialStateCalc(),
     reducers: {
         setSheet(
             state: Array<SheetClassObjectType>,
@@ -149,13 +152,51 @@ const calcSlice = createSlice({
     },
 });
 
-export const actions = calcSlice.actions;
+// /**
+//  *  determines the initial value of a state which can be either:
+//  *  - new array of SheetClassObjectType
+//  *  - array saved in local storage
+//  */
+// const determineInitialStateProfileNumber = (): Array<SheetClassObjectType> => {
+//     const sheetRaw: null | string = localStorage.getItem("sheets");
+//     if (!sheetRaw) {
+//         const newSheetArr: Array<SheetClassObjectType> = [
+//             new SheetClass().getObject(),
+//             new SheetClass().getObject(),
+//             new SheetClass().getObject(),
+//         ];
 
-const store = configureStore({
-    reducer: calcSlice.reducer,
+//         localStorage.setItem("sheets", JSON.stringify(newSheetArr));
+//         return newSheetArr;
+//     }
+
+//     return JSON.parse(sheetRaw) as Array<SheetClassObjectType>;
+// };
+
+const profileSlice = createSlice({
+    name: "profileNumber",
+    initialState: { profile: 0 } as { profile: number },
+    reducers: {
+        setProfile(state, action: { payload: number; type: string }) {
+            const { payload } = action;
+            if (payload < 0 || payload > 2) {
+                console.error(`ERROR: payload: ${payload} out of bound`);
+                return state;
+            }
+
+            state.profile = payload;
+        },
+    },
 });
 
-export default store;
+export const actions = { ...calcSlice.actions };
+
+const reducer = combineReducers({
+    calc: calcSlice.reducer,
+    profile: profileSlice.reducer,
+});
+
+export default createStore(reducer);
 
 // import { createStore } from 'redux';
 

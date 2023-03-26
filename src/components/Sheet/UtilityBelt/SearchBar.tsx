@@ -11,7 +11,8 @@ import { TableClass, SheetClass } from "../../../utility/Classes";
  * @returns Search Bar
  */
 const SearchBar: React.FC = () => {
-    const sheets = useSelector((state: any) => state);
+    const sheets = useSelector((state: any) => state.calc);
+    // console.log("sdadsadsa", sheets);
     const sheet = sheets[0];
     const dispatch = useDispatch();
 

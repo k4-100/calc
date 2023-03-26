@@ -13,8 +13,8 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     name,
     id,
 }) => {
-    const sheets = useSelector((state: any) => state);
-    const sheet = sheets[0];
+    const { calc } = useSelector((state: any) => state);
+    const sheet = calc[0];
     const dispatch = useDispatch();
 
     /**
