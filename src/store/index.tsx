@@ -175,21 +175,21 @@ const calcSlice = createSlice({
 
 const profileSlice = createSlice({
     name: "profileNumber",
-    initialState: { profile: 0 } as { profile: number },
+    initialState: { index: 1 } as { index: number },
     reducers: {
         setProfile(state, action: { payload: number; type: string }) {
             const { payload } = action;
-            if (payload < 0 || payload > 2) {
+            if (payload < 1 || payload > 3) {
                 console.error(`ERROR: payload: ${payload} out of bound`);
                 return state;
             }
 
-            state.profile = payload;
+            state.index = payload;
         },
     },
 });
 
-export const actions = { ...calcSlice.actions };
+export const actions = { ...calcSlice.actions, ...profileSlice.actions };
 
 const reducer = combineReducers({
     calc: calcSlice.reducer,

@@ -2,8 +2,20 @@ import React from "react";
 import { ArrowLeft, ArrowRight, LooksOne } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../store";
 
-const Profile = () => {
+const Profile: React.FC<{ showCurrentNumber: Function }> = ({
+    showCurrentNumber,
+}) => {
+    const { profile } = useSelector((state: any) => state);
+    const dispatch = useDispatch();
+
+    const handleProfileChange = (difference: number) => {
+        const delta: number = (profile.index + difference) % 3;
+        dispatch(actions.setProfile(delta === 0 ? 3 : delta));
+    };
+
     return (
         <Box
             sx={{
@@ -39,9 +51,13 @@ const Profile = () => {
                         justifyContent: "center",
                         alignItems: "center",
                         mt: 1,
+                        ".profile-index": {
+                            fontSize: "40px",
+                        },
                     }}
                 >
                     <IconButton
+                        onClick={() => handleProfileChange(-1)}
                         sx={{
                             p: 0,
                             borderRadius: 0,
@@ -54,14 +70,9 @@ const Profile = () => {
                         />
                     </IconButton>
 
-                    <LooksOne
-                        color="info"
-                        sx={{
-                            fontSize: "40px",
-                        }}
-                    />
-
+                    {showCurrentNumber()}
                     <IconButton
+                        onClick={() => handleProfileChange(1)}
                         sx={{
                             p: 0,
                             borderRadius: 0,

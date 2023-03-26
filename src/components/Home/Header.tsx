@@ -2,14 +2,30 @@ import React, { useState } from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import BorderStyleIcon from "@mui/icons-material/BorderStyle";
 import { Link as RouterLink } from "react-router-dom";
-import { LooksOne } from "@mui/icons-material";
+import { Looks3, LooksOne, LooksTwo } from "@mui/icons-material";
 import Profile from "./Profile";
 import { grey } from "@mui/material/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../store";
 
 const headerHeight: number = 60;
 
 const Header = () => {
+    const { profile } = useSelector((state: any) => state);
+
     const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
+
+    const showCurrentNumber = () => {
+        switch (profile.index) {
+            case 3:
+                return <Looks3 color="info" className="profile-index" />;
+            case 2:
+                return <LooksTwo color="info" className="profile-index" />;
+            default:
+                return <LooksOne color="info" className="profile-index" />;
+        }
+    };
+
     return (
         <Box
             sx={{
@@ -87,12 +103,15 @@ const Header = () => {
                                 setIsProfileVisible(!isProfileVisible)
                             }
                         >
-                            <LooksOne />
+                            {showCurrentNumber()}
+                            {/* <LooksOne /> */}
                         </Button>
                     </Box>
                 </Toolbar>
             </AppBar>
-            {isProfileVisible && <Profile />}
+            {isProfileVisible && (
+                <Profile showCurrentNumber={showCurrentNumber} />
+            )}
         </Box>
     );
 };
