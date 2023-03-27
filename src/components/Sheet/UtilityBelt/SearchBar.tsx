@@ -5,15 +5,22 @@ import { Search } from "@mui/icons-material";
 import { useSelector, useDispatch } from "react-redux";
 
 import { actions } from "../../../store";
-import { TableClass, SheetClass } from "../../../utility/Classes";
+import {
+    TableClass,
+    SheetClass,
+    SheetClassObjectType,
+    TableClassObjectType,
+} from "../../../utility/Classes";
+import { useParams } from "react-router-dom";
 /**
  *
  * @returns Search Bar
  */
 const SearchBar: React.FC = () => {
-    const sheets = useSelector((state: any) => state.calc);
-    // console.log("sdadsadsa", sheets);
-    const sheet = sheets[0];
+    const index = Number(useParams().index) - 1;
+    const sheet: SheetClassObjectType = useSelector((state: any) => state.calc)[
+        index
+    ];
     const dispatch = useDispatch();
 
     const [searchQuery, setSearchQuery] = useState<string>("");
@@ -29,8 +36,18 @@ const SearchBar: React.FC = () => {
 
     const handleSearchButtonClick = () => {
         if (searchQuery !== "") {
-            let tableChanged = false;
-            const _table: TableClass = _.cloneDeep(sheet.tables[0]);
+            let tableChanged: boolean = false;
+            let tableIndex: number = sheet.tables.findIndex(
+                (tab) => tab.id === sheet.mainTabID
+            );
+
+            if (tableIndex < 0) {
+                console.error("ERROR: no such table index in SearchBar");
+            }
+
+            const _table: TableClassObjectType = _.cloneDeep(
+                sheet.tables[tableIndex]
+            );
             _table.cells.forEach((row) =>
                 row.forEach((cell) => {
                     if (cell.wasFound) cell.wasFound = false;
@@ -40,7 +57,7 @@ const SearchBar: React.FC = () => {
                     }
                 })
             );
-            const _sheet: SheetClass = _.cloneDeep(sheet);
+            const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
             _sheet.tables[tableIndex] = _table;
             dispatch(actions.setSheet(_sheet));
         }
