@@ -100,7 +100,7 @@ export class TableClass {
      * @param height vertical hight of an array
      * @param id table id
      */
-    constructor(width: number, height: number) {
+    constructor(width: number, height: number, id: number = 0) {
         /**
          *  dummy cells 2d array for generating stuff
          */
@@ -111,7 +111,8 @@ export class TableClass {
         this.cells = _cells.map((row, y) =>
             row.map((_, x) => new CellClass(x, y, ""))
         );
-        this.id = ++tableIDSrc;
+
+        this.id = id ? id : 1;
     }
 
     getObject(): TableClassObjectType {

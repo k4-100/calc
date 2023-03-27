@@ -17,6 +17,7 @@ import {
 } from "../../../utility/Classes";
 import { CustomInfoCellMemoized } from "./CustomInfoCell";
 import CustomTableRow from "./CustomTableRow";
+import { useParams } from "react-router-dom";
 
 /**
  * size of td cell with a number (the one used for indexing)
@@ -28,11 +29,11 @@ import CustomTableRow from "./CustomTableRow";
  * @returns Table with cells
  */
 const CustomTable: React.FC = () => {
+    const index = Number(useParams().index) - 1;
     const { calc } = useSelector((state: any) => state);
-    const sheet = calc[0];
+    const sheet = calc[index];
     const dispatch = useDispatch();
-
-    // /** index of a table inside of the sheet */
+    /** index of a table inside of the sheet */
     const tableIndex = sheet.tables.findIndex(
         (tab: any) => tab.id === sheet.mainTabID
     );
@@ -57,9 +58,9 @@ const CustomTable: React.FC = () => {
             // _table.cells[y][x] = _cell;
             // const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
             // _sheet.tables[tableIndex] = _table;
-            dispatch(actions.setCell({ cell: _cell, sheetID: 1 }));
+            dispatch(actions.setCell({ cell: _cell, sheetID: index + 1 }));
         },
-        [dispatch]
+        [dispatch, index]
     );
 
     //#endregion utils

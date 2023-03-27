@@ -21,7 +21,7 @@ const App: React.FC = () => {
                 <Routes>
                     <Route path="/">
                         <Route index element={<Home />} />
-                        <Route path="calc" element={<Sheet />} />
+                        <Route path="calc/:index" element={<Sheet />} />
                         <Route path="*" element={<Home isError />} />
                     </Route>
                 </Routes>

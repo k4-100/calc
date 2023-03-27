@@ -75,7 +75,10 @@ const Header = () => {
                         <Button component={RouterLink} to="/">
                             Home
                         </Button>
-                        <Button component={RouterLink} to="/calc">
+                        <Button
+                            component={RouterLink}
+                            to={`/calc/${profile.index}`}
+                        >
                             Calc
                         </Button>
                     </Box>
