@@ -21,7 +21,7 @@ const Profile: React.FC<{ showCurrentNumber: Function }> = ({
             sx={{
                 zIndex: 1000,
                 position: "absolute",
-                top: "100%",
+                // top: "100%",
                 right: "24px",
                 width: "20vw",
                 height: "200px",

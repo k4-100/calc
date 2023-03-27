@@ -13,12 +13,13 @@ const SheetBar = () => {
     const sheets = useSelector((state: any) => state.calc);
     const sheet = sheets[index];
     const dispatch = useDispatch();
+
     /**
      * adds new table into sheet
      */
     const handleTableAdd = () => {
         const _sheet = _.cloneDeep(sheet);
-        _sheet.tables.push(new TableClass(3, 4).getObject());
+        _sheet.tables.push(new TableClass(26, 26).getObject());
         dispatch(actions.setSheet(_sheet));
     };
 

@@ -5,12 +5,11 @@ import { Link as RouterLink } from "react-router-dom";
 import { Looks3, LooksOne, LooksTwo } from "@mui/icons-material";
 import Profile from "./Profile";
 import { grey } from "@mui/material/colors";
-import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../store";
+import { useSelector } from "react-redux";
 
 const headerHeight: number = 60;
 
-const Header = () => {
+const Header: React.FC = () => {
     const { profile } = useSelector((state: any) => state);
 
     const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
@@ -89,8 +88,7 @@ const Header = () => {
                             backgroundColor: isProfileVisible
                                 ? `${grey[900]}`
                                 : "initial",
-                            mt: 1,
-                            height: `${headerHeight - 10}px`,
+                            height: `${headerHeight + 3}px`,
                         }}
                     >
                         <Button
