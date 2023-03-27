@@ -17,11 +17,24 @@ const Sheet: React.FC = () => {
                 sx={{
                     overflow: "scroll",
                     // firefox
-                    scrollbarColor: "rgb(144, 202, 249) black",
+                    scrollbarColor: "rgb(144, 202, 249)",
+                    // scrollbarColor: "green",
                     // webkit (chrome, edge, opera, safari but not on ios)
-                    // "&::-webkit-scrollbar": {
-                    //   // backgroundColor: "rgb(144, 202, 249)",
-                    // },
+                    "&::-webkit-scrollbar": {
+                        border: "2px solid blue",
+                        width: "10px",
+                        height: "10px",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                        background: "#f1f1f1",
+                    },
+
+                    "&::-webkit-scrollbar-thumb": {
+                        background: "#90CAF9A6",
+                    },
+                    "&::-webkit-scrollbar-thumb:hover": {
+                        background: "#90BAF9",
+                    },
                     height: "calc( 100vh - 53px - 64px - 20px )",
                 }}
             >

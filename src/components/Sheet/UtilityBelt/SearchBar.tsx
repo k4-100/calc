@@ -24,7 +24,6 @@ const SearchBar: React.FC = () => {
     const dispatch = useDispatch();
 
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const tableIndex = 0;
 
     /**
      *

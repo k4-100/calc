@@ -37,7 +37,6 @@ const SheetBar = () => {
             <Box
                 sx={{
                     display: "flex",
-                    overflowX: "scroll",
                     pr: 5,
                     boxSizing: "border-box",
                     // ml: "auto",
