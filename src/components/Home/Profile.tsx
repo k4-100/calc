@@ -21,9 +21,9 @@ const Profile: React.FC<{ showCurrentNumber: Function }> = ({
             sx={{
                 zIndex: 1000,
                 position: "absolute",
-                // top: "100%",
-                right: "24px",
-                width: "20vw",
+                // top: "",
+                right: { sm: "24px", xs: "16px" },
+                width: "250px",
                 height: "200px",
                 background: "red",
             }}
@@ -32,6 +32,7 @@ const Profile: React.FC<{ showCurrentNumber: Function }> = ({
                 sx={{
                     backgroundColor: `${grey[900]}`,
                     height: "100%",
+                    width: "250px",
                 }}
             >
                 <Typography
@@ -41,6 +42,7 @@ const Profile: React.FC<{ showCurrentNumber: Function }> = ({
                     letterSpacing={4}
                     sx={{
                         py: "20px",
+                        width: "100%",
                     }}
                 >
                     Profile:

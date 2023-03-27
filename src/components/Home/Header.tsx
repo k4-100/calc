@@ -36,13 +36,12 @@ const Header: React.FC = () => {
             <AppBar sx={{ position: "static" }}>
                 <Toolbar
                     sx={{
-                        flexDirection: {
-                            sm: "row",
-                            xs: "column",
-                        },
-                        alignItems: {
-                            sm: "center",
-                            xs: "flex-start",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        flexWrap: {
+                            sm: "nowrap",
+                            xs: "wrap",
                         },
                     }}
                 >
@@ -52,7 +51,9 @@ const Header: React.FC = () => {
                         sx={{
                             mr: "auto",
                             display: "flex",
+                            justifyContent: { sm: "initial", xs: "flex-start" },
                             alignItems: "center",
+                            width: { sm: "initial", xs: "100%" },
                         }}
                     >
                         <BorderStyleIcon
