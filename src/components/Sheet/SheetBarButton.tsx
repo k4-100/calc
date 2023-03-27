@@ -4,6 +4,7 @@ import { Box, Button } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
 import { actions } from "../../store";
+import { useParams } from "react-router-dom";
 
 /**
  *
@@ -13,8 +14,9 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     name,
     id,
 }) => {
+    const index = Number(useParams().index) - 1;
     const { calc } = useSelector((state: any) => state);
-    const sheet = calc[0];
+    const sheet = calc[index];
     const dispatch = useDispatch();
 
     /**

@@ -2,14 +2,16 @@
 import _ from "lodash";
 import { Box, Button, Paper } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import { actions } from "../../store";
 import { TableClass, TableClassObjectType } from "../../utility/Classes";
 import SheetBarButton from "./SheetBarButton";
 
 const SheetBar = () => {
+    const index = Number(useParams().index) - 1;
     const sheets = useSelector((state: any) => state.calc);
-    const sheet = sheets[0];
+    const sheet = sheets[index];
     const dispatch = useDispatch();
     /**
      * adds new table into sheet
