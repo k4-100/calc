@@ -3,7 +3,13 @@ import { Box, Typography, Button, Paper } from "@mui/material";
 import { blue, green, orange } from "@mui/material/colors";
 
 // import Save from "./Save";
-import { Build, Calculate, Note, Slideshow } from "@mui/icons-material";
+import {
+    Build,
+    Calculate,
+    Construction,
+    Note,
+    Slideshow,
+} from "@mui/icons-material";
 
 enum AppKind {
     Calc = "calc",
@@ -179,15 +185,15 @@ const Saves: React.FC = () => {
                     sx={{
                         height: "100%",
                         display: "flex",
-                        justifyContent: "space-evenly",
+                        justifyContent: "center",
                         alignItems: "center",
                     }}
                 >
                     <Typography variant="h2">WORK IN PROGRESS </Typography>
-                    <Build
+                    <Construction
                         sx={{
-                            fontSize: "50px",
-                            // transform: "scaleX(-1)",
+                            fontSize: "60px",
+                            ml: "30px",
                         }}
                     />
                 </Paper>
