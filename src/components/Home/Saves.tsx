@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Paper } from "@mui/material";
 import { blue, green, orange } from "@mui/material/colors";
 
-import Save from "./Save";
-import { Calculate, Note, Slideshow } from "@mui/icons-material";
+// import Save from "./Save";
+import { Build, Calculate, Note, Slideshow } from "@mui/icons-material";
 
 enum AppKind {
     Calc = "calc",
@@ -171,20 +171,34 @@ const Saves: React.FC = () => {
             </Box>
             <Box
                 sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
                     p: 2,
-                    minHeight: "418px",
+                    height: "418px",
                 }}
             >
-                {currentApp === AppKind.Calc && (
-                    <>
-                        <Save />
-                        <Save />
-                        <Save />
-                    </>
-                )}
+                <Paper
+                    sx={{
+                        height: "100%",
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                    }}
+                >
+                    <Typography variant="h2">WORK IN PROGRESS </Typography>
+                    <Build
+                        sx={{
+                            fontSize: "50px",
+                            // transform: "scaleX(-1)",
+                        }}
+                    />
+                </Paper>
+
+                {/* {currentApp === AppKind.Calc && ( */}
+                {/*     <> */}
+                {/*         <Save /> */}
+                {/*         <Save /> */}
+                {/*         <Save /> */}
+                {/*     </> */}
+                {/* )} */}
             </Box>
         </Box>
     );
