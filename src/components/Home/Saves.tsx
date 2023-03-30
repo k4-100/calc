@@ -3,13 +3,7 @@ import { Box, Typography, Button, Paper } from "@mui/material";
 import { blue, green, orange } from "@mui/material/colors";
 
 // import Save from "./Save";
-import {
-    Build,
-    Calculate,
-    Construction,
-    Note,
-    Slideshow,
-} from "@mui/icons-material";
+import { Calculate, Construction, Note, Slideshow } from "@mui/icons-material";
 
 enum AppKind {
     Calc = "calc",

@@ -41,6 +41,103 @@ const getColumnNumberFromColName = (colName: string): number => {
     return colName.charCodeAt(0) - 65;
 };
 
+const sheetFunctionRegex: RegExp = /([A-Za-z]+\([^\)]*\))/g;
+
+/**
+ * @param text containing sheet function(s)
+ * @returns string with functions replaced by smaller, much more parsable expressions
+ */
+const parseSheetFunction = (text: string) => {
+    const parenthesesAndColonRegex: RegExp = /[():]/;
+    const chunks = text
+        .trim()
+        .split(sheetFunctionRegex)
+        .filter((str) => str !== "");
+
+    const newChunks: string[] = chunks.map((chunk) => {
+        if (sheetFunctionRegex.test(chunk)) {
+            const expressionParts = chunk
+                .split(parenthesesAndColonRegex)
+                .filter((element) => element);
+            const limiters = [
+                expressionParts[1]
+                    .split(/([A-Z])/)
+                    .filter((element) => element),
+                expressionParts[2]
+                    .split(/([A-Z])/)
+                    .filter((element) => element),
+            ];
+            const numberLimiters = [
+                [
+                    getColumnNumberFromColName(limiters[0][0]),
+                    Number(limiters[0][1]),
+                ],
+                [
+                    getColumnNumberFromColName(limiters[1][0]),
+                    Number(limiters[1][1]),
+                ],
+            ];
+
+            let newText: string = "(";
+            switch (expressionParts[0]) {
+                case "Sum":
+                    for (
+                        let x = numberLimiters[0][0];
+                        x <= numberLimiters[1][0];
+                        x++
+                    ) {
+                        for (
+                            let y = numberLimiters[0][1];
+                            y <= numberLimiters[1][1];
+                            y++
+                        ) {
+                            newText += `${
+                                x === numberLimiters[0][0] &&
+                                y === numberLimiters[0][1]
+                                    ? ""
+                                    : "+"
+                            }${String.fromCharCode(65 + x)}${String(y)}`;
+                        }
+                    }
+
+                    return newText + ")";
+
+                case "Avg":
+                    let count: number = 0;
+                    newText += "(";
+                    for (
+                        let x = numberLimiters[0][0];
+                        x <= numberLimiters[1][0];
+                        x++
+                    ) {
+                        for (
+                            let y = numberLimiters[0][1];
+                            y <= numberLimiters[1][1];
+                            y++
+                        ) {
+                            newText += `${
+                                x === numberLimiters[0][0] &&
+                                y === numberLimiters[0][1]
+                                    ? ""
+                                    : "+"
+                            }${String.fromCharCode(65 + x)}${String(y)}`;
+                            count++;
+                        }
+                    }
+                    return newText + `)/${count})`;
+
+                default:
+                    return "ERR10";
+            }
+        }
+        return chunk;
+    });
+    console.log(newChunks);
+    return newChunks.join("");
+};
+
+// =10-2+Avg(B1:C2)
+
 /**
  * @param text to evaluate
  * @returns evaulated this.text used for display in a table
@@ -50,19 +147,29 @@ const getEvaluatedText = (
     tableIndex: number,
     text: string
 ) => {
+    let rawText = text;
     const table = _.cloneDeep(sheet.tables[tableIndex]);
     // if this.text is a mathematical expression:
-    if (text[0] === "=") {
-        const regex: RegExp = /([A-Z][1-9]+)/;
-        if (regex.test(text)) {
+    if (rawText[0] === "=") {
+        // checks for functions e.g.: Avg(B1:C3), Sum(A2:B7)
+        if (sheetFunctionRegex.test(rawText)) {
+            rawText = parseSheetFunction(rawText);
+            console.log(rawText);
+        }
+        // checks for cell identifiers, e.g.: A1, B5, D2
+        const cellRegex: RegExp = /([A-Z][1-9]+)/;
+        if (cellRegex.test(rawText)) {
             let _text: string = "";
-            const chunks: string[] = text
+            // e.g: ['=','C4','+75.7']
+            const chunks: string[] = rawText
                 .trim()
-                .split(regex)
+                .split(cellRegex)
                 .filter((str) => str !== "");
 
+            // console.table(chunks);
+
             _text = chunks.reduce((prev, next): string => {
-                if (regex.test(next)) {
+                if (cellRegex.test(next)) {
                     // split string
                     const coords = next
                         .split(/([A-Z])/)
@@ -76,9 +183,10 @@ const getEvaluatedText = (
                     return (prev += next);
                 }
             });
+
             return evaluate(_text.substring(1));
         } else {
-            return evaluate(text.substring(1));
+            return evaluate(rawText.substring(1));
         }
     }
     return text;

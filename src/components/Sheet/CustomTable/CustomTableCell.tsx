@@ -80,11 +80,11 @@ const CustomTableCell: React.FC<Props> = ({ cell, cloneAndSetTableCell }) => {
                         x,
                         y,
                         (cl: CellClassObjectType) => {
-                            if (textContent !== cell.text) {
-                                cl.text = textContent;
-                                cl.value = textContent;
-                                // cl.value = getEvaluatedText(textContent);
-                            }
+                            // if (textContent !== cell.text) {
+                            cl.text = textContent;
+                            cl.value = textContent;
+                            // cl.value = getEvaluatedText(textContent);
+                            // }
                         },
                         cell
                     );
@@ -118,7 +118,8 @@ const CustomTableCell: React.FC<Props> = ({ cell, cloneAndSetTableCell }) => {
                 x,
                 y,
                 (cl: CellClassObjectType) => {
-                    if (clicks === 2) {
+                    if (clicks === 2 && cl.text !== textContent) {
+                        console.log("different than before");
                         cl.text = textContent;
                         cl.value = textContent;
                         // cl.value = getEvaluatedText(textContent);
