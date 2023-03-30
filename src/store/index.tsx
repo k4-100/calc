@@ -41,7 +41,7 @@ const getColumnNumberFromColName = (colName: string): number => {
     return colName.charCodeAt(0) - 65;
 };
 
-const sheetFunctionRegex: RegExp = /([A-Za-z]+\([^\)]*\))/g;
+const sheetFunctionRegex: RegExp = /([A-Za-z]+\([^)]*\))/;
 
 /**
  * @param text containing sheet function(s)
@@ -132,7 +132,6 @@ const parseSheetFunction = (text: string) => {
         }
         return chunk;
     });
-    console.log(newChunks);
     return newChunks.join("");
 };
 
@@ -154,7 +153,6 @@ const getEvaluatedText = (
         // checks for functions e.g.: Avg(B1:C3), Sum(A2:B7)
         if (sheetFunctionRegex.test(rawText)) {
             rawText = parseSheetFunction(rawText);
-            console.log(rawText);
         }
         // checks for cell identifiers, e.g.: A1, B5, D2
         const cellRegex: RegExp = /([A-Z][1-9]+)/;
@@ -165,8 +163,6 @@ const getEvaluatedText = (
                 .trim()
                 .split(cellRegex)
                 .filter((str) => str !== "");
-
-            // console.table(chunks);
 
             _text = chunks.reduce((prev, next): string => {
                 if (cellRegex.test(next)) {
@@ -207,7 +203,6 @@ const calcSlice = createSlice({
             );
 
             if (sheetIndex < 0) {
-                debugger;
                 console.error(
                     "ERRROR: SHEET ISN'T PART OF THE STATE IN setSheet"
                 );
