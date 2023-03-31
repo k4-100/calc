@@ -50,7 +50,7 @@ const Apps: React.FC = () => {
                 <AppsButton
                     disabled
                     icon={<Note />}
-                    text="Word (in progress)"
+                    text="Text (in progress)"
                 />
                 <AppsButton
                     disabled
