@@ -5,22 +5,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 import { actions } from "../../store";
-import { TableClass, TableClassObjectType } from "../../utility/Classes";
+import {
+    SheetClassObjectType,
+    TableClass,
+    TableClassObjectType,
+} from "../../utility/Classes";
 import SheetBarButton from "./SheetBarButton";
 
 const SheetBar = () => {
     const index = Number(useParams().index) - 1;
     const sheets = useSelector((state: any) => state.calc);
-    const sheet = sheets[index];
+    const sheet: SheetClassObjectType = sheets[index];
     const dispatch = useDispatch();
+    const reachedLimit: boolean = sheet.tables.length >= 3;
 
     /**
      * adds new table into sheet
      */
     const handleTableAdd = () => {
-        const _sheet = _.cloneDeep(sheet);
-        _sheet.tables.push(new TableClass(26, 26).getObject());
-        dispatch(actions.setSheet(_sheet));
+        if (!reachedLimit) {
+            const _sheet = _.cloneDeep(sheet);
+            _sheet.tables.push(new TableClass(26, 26).getObject());
+            dispatch(actions.setSheet(_sheet));
+        }
     };
 
     return (
@@ -54,11 +61,12 @@ const SheetBar = () => {
                 }}
             >
                 <Button
-                    variant="outlined"
+                    variant="contained"
                     color="success"
+                    disabled={reachedLimit}
                     onClick={() => handleTableAdd()}
                     sx={{
-                        width: "20px",
+                        fontSize: "24px",
                     }}
                 >
                     +

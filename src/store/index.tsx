@@ -211,7 +211,7 @@ const calcSlice = createSlice({
 
             if (sheetIndex < 0) {
                 console.error(
-                    "ERRROR: SHEET ISN'T PART OF THE STATE IN setSheet"
+                    "ERROR: SHEET ISN'T PART OF THE STATE IN setSheet"
                 );
                 return;
             }
