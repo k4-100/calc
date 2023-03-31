@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { actions } from "../../store";
 import { useParams } from "react-router-dom";
+import { SheetClassObjectType } from "../../utility/Classes";
+import { green } from "@mui/material/colors";
 
 /**
  *
@@ -16,7 +18,7 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
 }) => {
     const index = Number(useParams().index) - 1;
     const { calc } = useSelector((state: any) => state);
-    const sheet = calc[index];
+    const sheet: SheetClassObjectType = calc[index];
     const dispatch = useDispatch();
 
     /**
@@ -50,6 +52,10 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
             sx={{
                 display: "flex",
                 mr: 4,
+                border:
+                    sheet.mainTabID === id
+                        ? `3px solid ${green[600]}`
+                        : "initial",
             }}
         >
             <Button
