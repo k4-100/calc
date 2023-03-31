@@ -179,10 +179,17 @@ const getEvaluatedText = (
                     return (prev += next);
                 }
             });
-
-            return evaluate(_text.substring(1));
+            try {
+                return evaluate(_text.substring(1));
+            } catch (error) {
+                return "ERROR";
+            }
         } else {
-            return evaluate(rawText.substring(1));
+            try {
+                return evaluate(rawText.substring(1));
+            } catch (error) {
+                return "ERROR";
+            }
         }
     }
     return text;
