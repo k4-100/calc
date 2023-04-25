@@ -1,8 +1,6 @@
-import { Paper, Typography } from "@mui/material";
+import { Paper, Typography, Box } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { ReactNode } from "react";
-
-import TextareaAutosize from "@mui/base/TextareaAutosize";
 
 type Props = {
     panelName: string;
@@ -13,8 +11,8 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
     return (
         <Paper
             sx={{
+                boxSizing: "border-box",
                 overflow: "hidden",
-                // boxSizing: "border-box",
                 width: "50%",
                 height: "100%",
             }}
@@ -23,8 +21,6 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
                 align="center"
                 variant="h4"
                 sx={{
-                    // px: 1,
-
                     pl: "10px",
                     py: 0.5,
 

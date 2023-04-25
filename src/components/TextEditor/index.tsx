@@ -1,11 +1,20 @@
 import { grey } from "@mui/material/colors";
 import { Box, Paper, Typography } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import UtilityBelt from "../common/UtilityBelt";
 import Panel from "./Panel";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 const TextEditor: React.FC = () => {
+    const [text, setText] = useState<string>("");
+
+    const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setText(e.target.value);
+    };
+
+    const getText = () => text;
+
     return (
         <Box
             sx={{
@@ -31,6 +40,8 @@ const TextEditor: React.FC = () => {
                     <TextareaAutosize
                         aria-label="empty textarea"
                         placeholder="Empty"
+                        value={text}
+                        onChange={(e) => handleTextChange(e)}
                         style={{
                             width: "100%",
                             height: "100%",
@@ -38,6 +49,7 @@ const TextEditor: React.FC = () => {
                             color: "white",
                             padding: "10px",
                             fontSize: "18px",
+                            overflowY: "auto",
                         }}
                     />
                 </Panel>
@@ -46,8 +58,15 @@ const TextEditor: React.FC = () => {
                         sx={{
                             backgroundColor: grey[400],
                             height: "100%",
+                            p: "10px",
+                            overflowY: "auto",
+                            "& > *:first-of-type": {
+                                mt: 0,
+                            },
                         }}
-                    ></Box>
+                    >
+                        <ReactMarkdown children={text} />
+                    </Box>
                 </Panel>
             </Box>
         </Box>
