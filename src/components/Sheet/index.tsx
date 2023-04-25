@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import React, { Suspense } from "react";
 import UtilityBelt from "../common/UtilityBelt";
+import SearchBar from "../common/UtilityBelt/SearchBar";
 import SheetBar from "./SheetBar";
 
 const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
@@ -11,7 +12,9 @@ const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
 const Sheet: React.FC = () => {
     return (
         <>
-            <UtilityBelt />
+            <UtilityBelt>
+                <SearchBar />
+            </UtilityBelt>
             <Box
                 sx={{
                     overflow: "scroll",
