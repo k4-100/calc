@@ -17,9 +17,47 @@ const TextEditor: React.FC = () => {
                 sx={{
                     margin: 2,
                     height: "100%",
-                    maxHeight: "85vh",
+                    maxHeight: "82vh",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    "& > *": {
+                        m: 1,
+                    },
                 }}
             >
+                <Paper
+                    sx={{
+                        boxSizing: "border-box",
+                        width: "50%",
+                        height: "100%",
+                    }}
+                >
+                    <Typography
+                        variant="h4"
+                        sx={{
+                            // px: 1,
+                            pl: "10px",
+                            py: 0.5,
+
+                            color: grey[600],
+                        }}
+                    >
+                        text
+                    </Typography>
+                    <TextareaAutosize
+                        aria-label="empty textarea"
+                        placeholder="Empty"
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            backgroundColor: grey[800],
+                            color: "white",
+                            padding: "10px",
+                            fontSize: "18px",
+                        }}
+                    />
+                </Paper>
+
                 <Paper
                     sx={{
                         boxSizing: "border-box",
