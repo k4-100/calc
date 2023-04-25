@@ -3,6 +3,7 @@ import { Box, Paper, Typography } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import React from "react";
 import UtilityBelt from "../common/UtilityBelt";
+import Panel from "./Panel";
 
 const TextEditor: React.FC = () => {
     return (
@@ -17,7 +18,8 @@ const TextEditor: React.FC = () => {
                 sx={{
                     margin: 2,
                     height: "100%",
-                    maxHeight: "82vh",
+                    maxHeight: "90vh",
+                    overflow: "hidden",
                     display: "flex",
                     justifyContent: "space-between",
                     "& > *": {
@@ -25,25 +27,7 @@ const TextEditor: React.FC = () => {
                     },
                 }}
             >
-                <Paper
-                    sx={{
-                        boxSizing: "border-box",
-                        width: "50%",
-                        height: "100%",
-                    }}
-                >
-                    <Typography
-                        variant="h4"
-                        sx={{
-                            // px: 1,
-                            pl: "10px",
-                            py: 0.5,
-
-                            color: grey[600],
-                        }}
-                    >
-                        text
-                    </Typography>
+                <Panel panelName="text">
                     <TextareaAutosize
                         aria-label="empty textarea"
                         placeholder="Empty"
@@ -56,40 +40,15 @@ const TextEditor: React.FC = () => {
                             fontSize: "18px",
                         }}
                     />
-                </Paper>
-
-                <Paper
-                    sx={{
-                        boxSizing: "border-box",
-                        width: "50%",
-                        height: "100%",
-                    }}
-                >
-                    <Typography
-                        variant="h4"
+                </Panel>
+                <Panel panelName="markdown">
+                    <Box
                         sx={{
-                            // px: 1,
-                            pl: "10px",
-                            py: 0.5,
-
-                            color: grey[600],
-                        }}
-                    >
-                        text
-                    </Typography>
-                    <TextareaAutosize
-                        aria-label="empty textarea"
-                        placeholder="Empty"
-                        style={{
-                            width: "100%",
+                            backgroundColor: grey[400],
                             height: "100%",
-                            backgroundColor: grey[800],
-                            color: "white",
-                            padding: "10px",
-                            fontSize: "18px",
                         }}
-                    />
-                </Paper>
+                    ></Box>
+                </Panel>
             </Box>
         </Box>
     );
