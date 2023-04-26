@@ -12,9 +12,15 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
         <Paper
             sx={{
                 boxSizing: "border-box",
-                overflow: "hidden",
                 width: "50%",
                 height: "100%",
+                maxHeight: "100%",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                // "& > *:nth-of-type(1)": {
+                //     backgroundColor: "red !important",
+                // },
             }}
         >
             <Typography
@@ -23,13 +29,32 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
                 sx={{
                     pl: "10px",
                     py: 0.5,
+                    // mt: 6,
 
                     color: grey[600],
                 }}
             >
                 {panelName}
             </Typography>
-            {children}
+            <Box
+                sx={{
+                    height: "100%",
+
+                    maxHeight: "100% !important",
+                    background: "green",
+                    "& > *": {
+                        p: "10px",
+                        width: "100%",
+                        height: "100% !important",
+
+                        // minHeight: "100% !important",
+                        // maxHeight: "100% !important",
+                        overflowY: "auto !important",
+                    },
+                }}
+            >
+                {children}
+            </Box>
         </Paper>
     );
 };
