@@ -46,7 +46,8 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
                     "& > *": {
                         width: "100%",
                         height: "80% !important",
-                        p: "20px",
+                        py: "40px",
+                        px: "20px",
                         flex: 1,
                         overflowY: "auto !important",
                     },

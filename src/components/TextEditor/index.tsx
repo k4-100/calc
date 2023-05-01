@@ -71,8 +71,17 @@ const TextEditor: React.FC = () => {
                             },
                             "& td": {
                                 border: `1px solid ${grey[800]}`,
-                                // backgroundColor: grey[800],
-                                // backgroundColor: grey[800],
+                            },
+                            "& blockquote": {
+                                borderLeft: `3px solid ${grey[500]}`,
+                                pl: "10px",
+                                // background: grey[600],
+                            },
+                            "& h1": {
+                                mt: "60px !important",
+                                mb: "30px",
+                                pb: "5px",
+                                borderBottom: `2px solid ${grey[600]}`,
                             },
                         }}
                     >
