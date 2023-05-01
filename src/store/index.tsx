@@ -5,9 +5,11 @@ import {
     createStore,
 } from "@reduxjs/toolkit";
 import _, { cloneDeep } from "lodash";
-import { evaluate } from "mathjs";
+import { evaluate, number } from "mathjs";
 import {
     CellClassObjectType,
+    MarkdownPanel,
+    MarkdownPanelObjectType,
     SheetClass,
     SheetClassObjectType,
 } from "../utility/Classes";
@@ -299,7 +301,53 @@ const profileSlice = createSlice({
     },
 });
 
-export const actions = { ...calcSlice.actions, ...profileSlice.actions };
+/**
+ *  determines the initial value of a calc state which can be either:
+ *  - new array of MarkdownPanelObjectType
+ *  - array saved in local storage
+ */
+const determineInitialStateMarkdownPanels =
+    (): Array<MarkdownPanelObjectType> => {
+        const markdownPanelsRaw: null | string =
+            localStorage.getItem("markdownPanels");
+        if (!markdownPanelsRaw) {
+            const newMarkdownPanelArr: Array<MarkdownPanelObjectType> = [
+                new MarkdownPanel().getObject(),
+                new MarkdownPanel().getObject(),
+                new MarkdownPanel().getObject(),
+            ];
+
+            localStorage.setItem(
+                "markdownPanels",
+                JSON.stringify(newMarkdownPanelArr)
+            );
+            return newMarkdownPanelArr;
+        }
+
+        return JSON.parse(markdownPanelsRaw) as Array<MarkdownPanelObjectType>;
+    };
+
+const textEditorSlice = createSlice({
+    name: "textEditor",
+    initialState: determineInitialStateMarkdownPanels(),
+    reducers: {
+        setContentForText(
+            state,
+            action: {
+                payload: { index: number; content: string };
+                type: string;
+            }
+        ) {
+            return state;
+        },
+    },
+});
+
+export const actions = {
+    ...calcSlice.actions,
+    ...profileSlice.actions,
+    ...textEditorSlice.actions,
+};
 
 const reducer = combineReducers({
     calc: calcSlice.reducer,

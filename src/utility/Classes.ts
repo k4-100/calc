@@ -162,3 +162,48 @@ export class SheetClass {
         };
     }
 }
+
+let markdownPanelIDsrc: number = 0;
+
+export type MarkdownPanelObjectType = {
+    index: number;
+    content: string;
+};
+
+export class MarkdownPanel {
+    index: number;
+    content: string;
+
+    constructor() {
+        this.index = ++markdownPanelIDsrc;
+        this.content = "";
+    }
+
+    getObject(): MarkdownPanelObjectType {
+        return {
+            index: this.index,
+            content: this.content,
+        };
+    }
+}
+
+// export type MarkdownPanelsObjectType = {
+//     mainIndex: number;
+//     panels: Array<MarkdownPanelObjectType>;
+// };
+
+// export class MarkdownPanels {
+//     mainIndex: number;
+//     panels: Array<MarkdownPanel>;
+
+//     constructor() {
+//         this.mainIndex = 1;
+//         this.panels = [new MarkdownPanel()];
+//     }
+//     getObject(): MarkdownPanelsObjectType {
+//         return {
+//             mainIndex: this.mainIndex,
+//             panels: this.panels.map((panel) => panel.getObject()),
+//         };
+//     }
+// }
