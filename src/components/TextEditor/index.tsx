@@ -8,6 +8,7 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
+import rehypeRaw from "rehype-raw";
 
 const TextEditor: React.FC = () => {
     const [text, setText] = useState<string>("");
@@ -78,6 +79,7 @@ const TextEditor: React.FC = () => {
                         <ReactMarkdown
                             children={text}
                             remarkPlugins={[remarkGfm]}
+                            rehypePlugins={[rehypeRaw]}
                             components={{
                                 code({
                                     node,
