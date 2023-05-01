@@ -81,6 +81,12 @@ const Header: React.FC = () => {
                         >
                             Calc
                         </Button>
+                        <Button
+                            component={RouterLink}
+                            to={`/text/${profile.index}`}
+                        >
+                            Text
+                        </Button>
                     </Box>
                     <Box
                         sx={{

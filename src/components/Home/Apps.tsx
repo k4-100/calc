@@ -3,8 +3,11 @@ import { Paper, Box } from "@mui/material";
 import { Calculate, Note, Slideshow } from "@mui/icons-material";
 
 import AppsButton from "./AppsButton";
+import { useSelector } from "react-redux";
 
 const Apps: React.FC = () => {
+    const { profile } = useSelector((state: any) => state);
+
     return (
         <Paper
             elevation={2}
@@ -44,12 +47,13 @@ const Apps: React.FC = () => {
             >
                 <AppsButton
                     icon={<Calculate />}
-                    link="/calc"
+                    link={`/calc/${profile.index}`}
                     text="Calc (Sheet)"
                 />
                 <AppsButton
-                    disabled
+                    // disabled
                     icon={<Note />}
+                    link={`/text/${profile.index}`}
                     text="Text (in progress)"
                 />
                 <AppsButton
