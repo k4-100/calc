@@ -13,11 +13,11 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
             sx={{
                 boxSizing: "border-box",
                 width: "50%",
-                height: "100%",
-                maxHeight: "100%",
-                overflow: "hidden",
-                display: "flex",
-                flexDirection: "column",
+                height: "80vh",
+                // maxHeight: "100%",
+                // overflow: "hidden",
+                // display: "flex",
+                // flexDirection: "column",
                 // "& > *:nth-of-type(1)": {
                 //     backgroundColor: "red !important",
                 // },
@@ -39,16 +39,15 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
             <Box
                 sx={{
                     height: "100%",
-
                     maxHeight: "100% !important",
-                    background: "green",
+                    display: "flex",
+                    flexDirection: "column",
+                    // backgroundColor: "red",
                     "& > *": {
-                        p: "10px",
                         width: "100%",
-                        height: "100% !important",
-
-                        // minHeight: "100% !important",
-                        // maxHeight: "100% !important",
+                        height: "80% !important",
+                        p: "20px",
+                        flex: 1,
                         overflowY: "auto !important",
                     },
                 }}

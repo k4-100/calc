@@ -1,4 +1,4 @@
-import { grey } from "@mui/material/colors";
+import { blue, grey, blueGrey } from "@mui/material/colors";
 import { Box } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import React, { ChangeEvent, useState } from "react";
@@ -7,7 +7,7 @@ import Panel from "./Panel";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 const TextEditor: React.FC = () => {
     const [text, setText] = useState<string>("");
@@ -16,27 +16,25 @@ const TextEditor: React.FC = () => {
         setText(e.target.value);
     };
 
-    const getText = () => text;
-
     return (
         <Box
-            sx={{
-                height: "85vh",
-                maxHeight: "85vh",
-            }}
+            sx={
+                {
+                    // height: "85vh",
+                    // maxHeight: "85vh",
+                }
+            }
         >
             <UtilityBelt />
             <Box
                 sx={{
                     margin: 2,
-                    height: "100%",
-                    maxHeight: "90vh",
-                    // overflow: "hidden",
+                    // height: "100%",
+                    maxHeight: "60vh",
                     display: "flex",
                     justifyContent: "space-between",
                     "& > *": {
-                        height: "100%",
-                        maxHeight: "80vh",
+                        // height: "100%",
                         m: 1,
                     },
                 }}
@@ -49,13 +47,10 @@ const TextEditor: React.FC = () => {
                         onChange={(e) => handleTextChange(e)}
                         style={{
                             display: "block",
-                            // width: "100%",
-                            // height: "100%",
                             backgroundColor: grey[800],
                             color: "white",
                             fontSize: "18px",
-                            // overflowY: "scroll",
-                            // overflow: "hidden",
+                            resize: "none",
                         }}
                     />
                 </Panel>
@@ -66,6 +61,18 @@ const TextEditor: React.FC = () => {
 
                             overflowY: "auto",
                             "& > *:first-of-type": { mt: 0 },
+                            "& a": {
+                                color: `${blue[500]} !important`,
+                            },
+                            "& table": {
+                                borderSpacing: 0,
+                                borderCollapse: "collapse",
+                            },
+                            "& td": {
+                                border: `1px solid ${grey[800]}`,
+                                // backgroundColor: grey[800],
+                                // backgroundColor: grey[800],
+                            },
                         }}
                     >
                         <ReactMarkdown
@@ -89,7 +96,7 @@ const TextEditor: React.FC = () => {
                                                 /\n$/,
                                                 ""
                                             )}
-                                            style={dark}
+                                            style={vscDarkPlus}
                                             language={match[1]}
                                             PreTag="div"
                                         />
@@ -109,14 +116,3 @@ const TextEditor: React.FC = () => {
 };
 
 export default TextEditor;
-
-// const SyntaxHighlightRenderer: React.FC<{
-//     value: string;
-//     language: string;
-// }> = ({ value, language }) => {
-//     return (
-//         <SyntaxHighlighter language={language} style={docco}>
-//             {value}
-//         </SyntaxHighlighter>
-//     );
-// };
