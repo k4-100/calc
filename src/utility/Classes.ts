@@ -166,22 +166,22 @@ export class SheetClass {
 let markdownPanelIDsrc: number = 0;
 
 export type MarkdownPanelObjectType = {
-    index: number;
+    id: number;
     content: string;
 };
 
 export class MarkdownPanel {
-    index: number;
+    id: number;
     content: string;
 
     constructor() {
-        this.index = ++markdownPanelIDsrc;
+        this.id = ++markdownPanelIDsrc;
         this.content = "";
     }
 
     getObject(): MarkdownPanelObjectType {
         return {
-            index: this.index,
+            id: this.id,
             content: this.content,
         };
     }

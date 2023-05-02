@@ -236,7 +236,7 @@ const calcSlice = createSlice({
             );
 
             if (sheetIndex < 0) {
-                console.error("ERRROR: SHEET DOESN'T EXIST");
+                console.error("ERROR: SHEET DOESN'T EXIST");
                 return;
             }
 
@@ -245,7 +245,7 @@ const calcSlice = createSlice({
             );
 
             if (tableIndex < 0) {
-                console.error("ERRROR: TABLE DOESN'T EXIST");
+                console.error("ERROR: TABLE DOESN'T EXIST");
                 return;
             }
 
@@ -327,18 +327,36 @@ const determineInitialStateMarkdownPanels =
         return JSON.parse(markdownPanelsRaw) as Array<MarkdownPanelObjectType>;
     };
 
-const textEditorSlice = createSlice({
-    name: "textEditor",
+const markdownPanelsSlice = createSlice({
+    name: "markdownPanels",
     initialState: determineInitialStateMarkdownPanels(),
     reducers: {
-        setContentForText(
+        setContentForPanel(
             state,
             action: {
-                payload: { index: number; content: string };
+                payload: { panelID: number; content: string };
                 type: string;
             }
         ) {
-            return state;
+            const newState = _.cloneDeep(state);
+
+            const { panelID, content } = action.payload;
+            console.log(action.payload);
+            const panelIndex: number = newState.findIndex(
+                (panel: MarkdownPanelObjectType) => panel.id === panelID
+            );
+
+            if (panelIndex < 0) {
+                console.error("ERROR: MARKDOWN PANEL DOESN'T EXIST");
+                return;
+            }
+
+            newState[panelIndex].content = content;
+
+            console.log(newState);
+
+            localStorage.setItem("markdownPanels", JSON.stringify(newState));
+            return newState;
         },
     },
 });
@@ -346,12 +364,13 @@ const textEditorSlice = createSlice({
 export const actions = {
     ...calcSlice.actions,
     ...profileSlice.actions,
-    ...textEditorSlice.actions,
+    ...markdownPanelsSlice.actions,
 };
 
 const reducer = combineReducers({
     calc: calcSlice.reducer,
     profile: profileSlice.reducer,
+    markdownPanels: markdownPanelsSlice.reducer,
 });
 
 export default createStore(reducer);

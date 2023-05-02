@@ -23,7 +23,7 @@ const App: React.FC = () => {
                     <Route path="/">
                         <Route index element={<Home />} />
                         <Route path="calc/:index" element={<Sheet />} />
-                        <Route path="text" element={<TextEditor />} />
+                        <Route path="text/:index" element={<TextEditor />} />
                         <Route path="*" element={<Home isError />} />
                     </Route>
                 </Routes>

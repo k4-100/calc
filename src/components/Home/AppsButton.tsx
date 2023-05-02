@@ -6,6 +6,7 @@ type Props = {
     icon: any;
     text: string;
     link?: string;
+    background?: string;
 };
 
 /**
@@ -21,7 +22,13 @@ const SIZE = 170;
  * @param link link to an app
  * @returns
  */
-const AppsButton: React.FC<Props> = ({ disabled, icon, text, link }) => {
+const AppsButton: React.FC<Props> = ({
+    disabled,
+    icon,
+    text,
+    link,
+    background,
+}) => {
     return (
         <Paper
             elevation={20}
@@ -49,7 +56,7 @@ const AppsButton: React.FC<Props> = ({ disabled, icon, text, link }) => {
                     boxSizing: " content-box",
                     color: "white",
                     borderRadius: 0,
-                    backgroundColor: "primary.dark",
+                    backgroundColor: background || "primary.dark",
                     "& > svg": {
                         fontSize: "50px",
                     },

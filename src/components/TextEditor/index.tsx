@@ -1,7 +1,7 @@
 import { blue, grey, blueGrey } from "@mui/material/colors";
 import { Box } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import UtilityBelt from "../common/UtilityBelt";
 import Panel from "./Panel";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
@@ -9,23 +9,45 @@ import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeRaw from "rehype-raw";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { MarkdownPanelObjectType } from "../../utility/Classes";
+import { actions } from "../../store";
 
 const TextEditor: React.FC = () => {
-    const [text, setText] = useState<string>("");
+    const index = Number(useParams().index) - 1;
+    const { markdownPanels } = useSelector((state: any) => state);
+    const dispatch = useDispatch();
+    const currentPanel: MarkdownPanelObjectType = markdownPanels[index];
+
+    const [text, setText] = useState<string>(currentPanel.content || "");
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
     };
+    // console.log(currentPanel);
+
+    const handlePanelChange = useCallback(() => {
+        console.log(`trying to save id: ${currentPanel.id}`);
+        if (currentPanel.content !== text) {
+            console.log(`saved id: ${currentPanel.id}`);
+            dispatch(
+                actions.setContentForPanel({
+                    panelID: currentPanel.id,
+                    content: text,
+                })
+            );
+        }
+    }, [currentPanel.content, currentPanel.id, dispatch, text]);
+
+    useEffect(() => {
+        let timerID = setTimeout(() => handlePanelChange(), 3000);
+
+        return () => clearTimeout(timerID);
+    }, [handlePanelChange]);
 
     return (
-        <Box
-            sx={
-                {
-                    // height: "85vh",
-                    // maxHeight: "85vh",
-                }
-            }
-        >
+        <Box>
             <UtilityBelt />
             <Box
                 sx={{

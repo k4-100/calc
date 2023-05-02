@@ -51,7 +51,7 @@ const Apps: React.FC = () => {
                     text="Calc (Sheet)"
                 />
                 <AppsButton
-                    // disabled
+                    background="success.dark"
                     icon={<Note />}
                     link={`/text/${profile.index}`}
                     text="Text (in progress)"
