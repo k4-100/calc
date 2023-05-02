@@ -59,17 +59,21 @@ const Header: React.FC = () => {
                         <BorderStyleIcon
                             sx={{
                                 mr: 1,
+                                // mt: 1,
                             }}
                         />
+                        {/* <Box> */}
                         <Typography
                             variant="h5"
                             component="div"
                             sx={{
                                 height: "25px",
+                                lineHeight: "initial",
                             }}
                         >
                             Sheet
                         </Typography>
+                        {/* </Box> */}
                     </Button>
                     <Box>
                         <Button component={RouterLink} to="/">
