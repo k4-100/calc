@@ -10,8 +10,9 @@ type Props = {
 };
 
 /**
- *
- * @returns Belt with Utilities
+ * @param children children of UtilityBelt (e.g.: SearchBar)
+ * @param helpChildren children of Help component
+ * @returns Belt with Utilities (Basically a header, but different)
  */
 const UtilityBelt: React.FC<Props> = ({ children, helpChildren }) => {
     const [displayHelp, setDisplayHelp] = useState(false);

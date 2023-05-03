@@ -3,6 +3,9 @@ import { Box } from "@mui/system";
 import { Button, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
+/**
+ * @returns Component with link to a front page, displayed in case of an incorrect url
+ */
 const ErrorPage: React.FC = () => {
     return (
         <Box

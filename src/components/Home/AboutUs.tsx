@@ -1,6 +1,8 @@
 import React from "react";
 import { Divider, Typography } from "@mui/material";
-
+/**
+ *  @returns info section about "our" app
+ * */
 const AboutUs: React.FC = () => {
     return (
         <>

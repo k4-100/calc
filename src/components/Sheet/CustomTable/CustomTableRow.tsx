@@ -17,6 +17,14 @@ function arePropsEqual(oldProps: Props, newProps: Props) {
     return _.isEqual(oldProps, newProps);
 }
 
+/**
+ * @param y position
+ * @param rowArr
+ * @param cloneAndSetTableCell self-explanatory, based down to CustomTableCell
+ * @param cellWidth width of the cell
+ * @param contentFunction check numberInfoCellContentFunction function inside Sheet/CustomTable/index.tsx
+ * @returns Custom Table Row with memorization, extremely important for performance
+ */
 const CustomTableRow: React.FC<Props> = memo(
     ({ y, rowArr, cloneAndSetTableCell, cellWidth, contentFunction }) => {
         return (

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 
+/**
+ * @returns introduction to the page
+ */
 const Introduction: React.FC = () => {
     const [isTextToggled, setIsTextToggled] = useState(false);
 

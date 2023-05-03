@@ -9,7 +9,9 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
 import SliderCard from "./SliderCard";
-
+/**
+ * Automatically Swaping Slides with opinions
+ */
 const Opinions: React.FC = () => {
     return (
         <Paper

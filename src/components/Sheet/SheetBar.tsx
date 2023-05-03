@@ -12,6 +12,9 @@ import {
 } from "../../utility/Classes";
 import SheetBarButton from "./SheetBarButton";
 
+/**
+ * @returns bar containing other tables buttons, as well as allowing to remove/add them
+ */
 const SheetBar = () => {
     const index = Number(useParams().index) - 1;
     const sheets = useSelector((state: any) => state.calc);

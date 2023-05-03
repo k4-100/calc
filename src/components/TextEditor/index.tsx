@@ -14,6 +14,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { MarkdownPanelObjectType } from "../../utility/Classes";
 import { actions } from "../../store";
 
+/**
+ * Editor for markdown, with preview on the right side
+ */
 const TextEditor: React.FC = () => {
     const index = Number(useParams().index) - 1;
     const { markdownPanels } = useSelector((state: any) => state);

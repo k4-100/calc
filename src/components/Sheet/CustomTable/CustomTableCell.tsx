@@ -22,6 +22,11 @@ type Props = {
 //     return areEqual;
 // }
 
+/**
+ * @param cell current cell data
+ * @param cloneAndSetTableCell self-explanatory
+ * @returns Table cell containing changeable values
+ */
 const CustomTableCell: React.FC<Props> = ({ cell, cloneAndSetTableCell }) => {
     const { x, y } = cell;
     const [clicks, setClicks] = useState<number>(0);

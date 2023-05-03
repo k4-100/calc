@@ -5,6 +5,9 @@ import { Calculate, Note, Slideshow } from "@mui/icons-material";
 import AppsButton from "./AppsButton";
 import { useSelector } from "react-redux";
 
+/**
+ * @returns additional links to different apps in form of buttons with icons
+ * */
 const Apps: React.FC = () => {
     const { profile } = useSelector((state: any) => state);
 

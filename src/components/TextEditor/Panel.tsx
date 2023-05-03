@@ -6,7 +6,11 @@ type Props = {
     panelName: string;
     children?: ReactNode;
 };
-
+/**
+ * @param panelname name of the panel
+ * @children could be either text editor, or markdown preview
+ * @returns Panel inside TextEditor
+ */
 const Panel: React.FC<Props> = ({ panelName, children }) => {
     return (
         <Paper

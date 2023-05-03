@@ -19,13 +19,8 @@ import CustomTableRow from "./CustomTableRow";
 import { useParams } from "react-router-dom";
 
 /**
- * size of td cell with a number (the one used for indexing)
- */
-// const numberTdSize = 100;
-
-/**
  *
- * @returns Table with cells
+ * @returns Table with editable cells, which are in turn saved to local storage using redux
  */
 const CustomTable: React.FC = () => {
     const index = Number(useParams().index) - 1;
@@ -64,25 +59,18 @@ const CustomTable: React.FC = () => {
 
     //#endregion utils
 
-    // useEffect( ()=>{
-    //   const _cell = new CellClass(0,0, "textt").getObject();
-    //   dispatch( actions.setCell(_cell) );
-    // },[dispatch])
-
     const numberInfoCellContentFunction = useCallback(
         (a: number) => (a + 1).toString(),
         []
     );
-    // const letterInfoCellContentFunction = useCallback(
-    //     (a: number) => String.fromCharCode(65 + a),
-    //     []
-    // );
 
+    /** memorised current table */
     const table: TableClassObjectType = useMemo(
         () => sheet.tables[tableIndex],
         [sheet.tables, tableIndex]
     );
 
+    /** memorised letters at top of a table */
     const listTable = useMemo(
         () =>
             table.cells[0].map((_, i) => (
@@ -95,6 +83,7 @@ const CustomTable: React.FC = () => {
         [table.cells]
     );
 
+    /** all the cell in form of jsx array */
     const cells = table.cells.map((_, y) => (
         <CustomTableRow
             key={y + 1}

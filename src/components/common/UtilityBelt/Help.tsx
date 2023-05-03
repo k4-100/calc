@@ -8,6 +8,11 @@ interface Props {
     children: React.ReactNode;
 }
 
+/**
+ * @param handleXClick function handling clicking X button (closing by default)
+ * @param children set of advices/rules regarding App
+ * @returns button used to toggle modal with helpful info regarding app's functionality
+ */
 const Help = ({ handleXClick, children }: Props) => {
     return (
         <Box

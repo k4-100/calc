@@ -4,7 +4,10 @@ import { Box, IconButton, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../store";
-
+/**
+ * @param showCurrentNumber displays current number
+ * @returns simple way of changing profile numbers between 1,2 and 3
+ */
 const Profile: React.FC<{ showCurrentNumber: Function }> = ({
     showCurrentNumber,
 }) => {

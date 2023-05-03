@@ -6,7 +6,9 @@ type Props = {
     content: string;
     width: number;
 };
-
+/**
+ *
+ */
 const CustomInfoCell: React.FC<Props> = ({ content, width }) => {
     const widthCSS = useMemo(() => `${width}px`, [width]);
     return (

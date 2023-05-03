@@ -8,7 +8,9 @@ import { grey } from "@mui/material/colors";
 import { useSelector } from "react-redux";
 
 const headerHeight: number = 60;
-
+/**
+ * @returns Basic Header with links used inside Home component
+ */
 const Header: React.FC = () => {
     const { profile } = useSelector((state: any) => state);
 

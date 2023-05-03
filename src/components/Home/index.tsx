@@ -10,8 +10,8 @@ import Apps from "./Apps";
 import Saves from "./Saves";
 import ErrorPage from "./ErrorPage";
 /**
- *
- * @returns Home page
+ * @param isError determines if there was an error or not
+ * @returns Home page, if isError === true returns ErrorPage instead
  */
 const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
     return (

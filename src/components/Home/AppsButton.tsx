@@ -20,7 +20,8 @@ const SIZE = 170;
  * @param icon icon inside button
  * @param text text below button
  * @param link link to an app
- * @returns
+ * @param background color of the background
+ * @returns Fancy Button with a link to one of the apps
  */
 const AppsButton: React.FC<Props> = ({
     disabled,

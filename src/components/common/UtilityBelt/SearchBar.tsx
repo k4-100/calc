@@ -12,7 +12,7 @@ import {
 import { useParams } from "react-router-dom";
 /**
  *
- * @returns Search Bar
+ * @returns Search Bar used in Calc app
  */
 const SearchBar: React.FC = () => {
     const index = Number(useParams().index) - 1;

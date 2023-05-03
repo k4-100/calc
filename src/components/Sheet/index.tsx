@@ -4,10 +4,11 @@ import UtilityBelt from "../common/UtilityBelt";
 import SearchBar from "../common/UtilityBelt/SearchBar";
 import SheetBar from "./SheetBar";
 
+/** lazy loaded */
 const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
 /**
  *
- * @returns Sheet component
+ * @returns Sheet component with editable columns, ability to search for text, calculate values in single and several rows, as well as ability to add more Tables
  */
 const Sheet: React.FC = () => {
     return (

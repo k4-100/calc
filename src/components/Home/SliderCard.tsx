@@ -10,7 +10,6 @@ import {
 import { AccountCircle } from "@mui/icons-material";
 
 /**
- *
  * @returns card with customer's opinions inside of a slider
  */
 const SliderCard: React.FC = () => {

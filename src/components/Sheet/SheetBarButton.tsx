@@ -10,7 +10,7 @@ import { green } from "@mui/material/colors";
 
 /**
  *
- * @returns SheetBarButton Button in a SheetBar
+ * @returns SheetBarButton Button in a SheetBar representing Table
  */
 const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     name,
