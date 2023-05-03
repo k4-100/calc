@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sheet from "./components/Sheet";
 import Home from "./components/Home";
 import TextEditor from "./components/TextEditor";
-// import { writeStorage, useLocalStorage } from '@rehooks/local-storage';
 
 const darkTheme = createTheme({
     palette: {
@@ -13,8 +12,6 @@ const darkTheme = createTheme({
 });
 
 const App: React.FC = () => {
-    // const localStorageTest = useLocalStorage('test')
-
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />

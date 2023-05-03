@@ -1,7 +1,5 @@
-// !
 import React, { useState, useEffect, useRef } from "react";
 import { TableCell } from "@mui/material";
-// import _ from "lodash";
 import { CellClassObjectType } from "../../../utility/Classes";
 
 type Props = {

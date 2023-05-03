@@ -1,11 +1,6 @@
-import {
-    combineReducers,
-    configureStore,
-    createSlice,
-    createStore,
-} from "@reduxjs/toolkit";
+import { combineReducers, createSlice, createStore } from "@reduxjs/toolkit";
 import _, { cloneDeep } from "lodash";
-import { evaluate, number } from "mathjs";
+import { evaluate } from "mathjs";
 import {
     CellClassObjectType,
     MarkdownPanel,

@@ -1,5 +1,5 @@
 import { blue, grey } from "@mui/material/colors";
-import { Box, ListItem, Typography } from "@mui/material";
+import { Box, ListItem } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
 import UtilityBelt from "../common/UtilityBelt";

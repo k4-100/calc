@@ -1,5 +1,4 @@
 import React, { memo, useMemo } from "react";
-import _ from "lodash";
 import { TableCell } from "@mui/material";
 import { grey } from "@mui/material/colors";
 

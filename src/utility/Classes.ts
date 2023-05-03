@@ -186,24 +186,3 @@ export class MarkdownPanel {
         };
     }
 }
-
-// export type MarkdownPanelsObjectType = {
-//     mainIndex: number;
-//     panels: Array<MarkdownPanelObjectType>;
-// };
-
-// export class MarkdownPanels {
-//     mainIndex: number;
-//     panels: Array<MarkdownPanel>;
-
-//     constructor() {
-//         this.mainIndex = 1;
-//         this.panels = [new MarkdownPanel()];
-//     }
-//     getObject(): MarkdownPanelsObjectType {
-//         return {
-//             mainIndex: this.mainIndex,
-//             panels: this.panels.map((panel) => panel.getObject()),
-//         };
-//     }
-// }

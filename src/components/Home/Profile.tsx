@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowLeft, ArrowRight, LooksOne } from "@mui/icons-material";
+import { ArrowLeft, ArrowRight } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";

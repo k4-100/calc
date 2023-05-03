@@ -6,8 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { actions } from "../../../store";
 import {
-    TableClass,
-    SheetClass,
     SheetClassObjectType,
     TableClassObjectType,
 } from "../../../utility/Classes";
@@ -82,14 +80,6 @@ const SearchBar: React.FC = () => {
                 >
                     <Search />
                 </Button>
-                {/* <input
-          className="form-control w-25"
-          type="search"
-          placeholder="Search"
-          aria-label="Search"
-          value={searchQuery}
-          onChange={(e) => handleTextChange(e)}
-        /> */}
                 <TextField
                     label="Search"
                     value={searchQuery}

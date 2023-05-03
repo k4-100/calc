@@ -1,8 +1,7 @@
-// !
 import React from "react";
 import { Box, IconButton, List, ListItem, Typography } from "@mui/material";
 import { grey, red } from "@mui/material/colors";
-import { Cancel, LooksOne } from "@mui/icons-material";
+import { Cancel } from "@mui/icons-material";
 
 interface Props {
     handleXClick: () => void;
