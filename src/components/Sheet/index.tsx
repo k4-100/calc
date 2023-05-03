@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, ListItem, Typography } from "@mui/material";
 import React, { Suspense } from "react";
 import UtilityBelt from "../common/UtilityBelt";
 import SearchBar from "../common/UtilityBelt/SearchBar";
@@ -12,7 +12,47 @@ const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
 const Sheet: React.FC = () => {
     return (
         <>
-            <UtilityBelt>
+            <UtilityBelt
+                helpChildren={
+                    <>
+                        <ListItem>
+                            To change text, click twice on a cell and start
+                            typing, and save by clicking Enter/clicking
+                            somewhere else.
+                        </ListItem>
+                        <ListItem>
+                            To perform calculation, begin by typing `=`, for
+                            example: =10-5
+                        </ListItem>
+                        <ListItem>
+                            You can access cell for use in mathematical
+                            expression by its "name" (for example: A1, B3, C2),
+                            by typing `=` before it (like: =A2, =B3).
+                        </ListItem>
+                        <ListItem>
+                            To change current profile/sheet, press the number in
+                            header and switch to another one.
+                        </ListItem>
+                        <ListItem
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                alignItems: "flex-start",
+                            }}
+                        >
+                            You can use functions operating on numbers in cells:
+                            <Typography>
+                                Sum(x:y) {"<"}- sums up numbers in x:y range
+                                (for example: Sum(A1:B2) )
+                            </Typography>
+                            <Typography>
+                                Avg(x:y) {"<"}- returns an average of numbers in
+                                x:y range (for example: Avg(E4:H10) )
+                            </Typography>
+                        </ListItem>
+                    </>
+                }
+            >
                 <SearchBar />
             </UtilityBelt>
             <Box

@@ -56,7 +56,7 @@ const TextEditor: React.FC = () => {
                             be automatically converted.
                         </ListItem>
                         <ListItem>
-                            App saves text automatically every 3 seconds (if
+                            App saves text automatically, every 3 seconds (if
                             change occurs).
                         </ListItem>
                     </>
