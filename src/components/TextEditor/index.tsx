@@ -47,7 +47,30 @@ const TextEditor: React.FC = () => {
     }, [handlePanelChange]);
 
     return (
-        <Box>
+        <Box
+            sx={{
+                // firefox
+                scrollbarColor: "rgb(144, 202, 249)",
+                // scrollbarColor: "green",
+                // webkit (chrome, edge, opera, safari but not on ios)
+                "& *::-webkit-scrollbar": {
+                    border: "2px solid blue",
+                    width: "10px",
+                    height: "10px",
+                    cursor: "auto",
+                },
+                "& *::-webkit-scrollbar-track": {
+                    background: "#f1f1f1",
+                },
+
+                "& *::-webkit-scrollbar-thumb": {
+                    background: "#90CAF9A6",
+                },
+                "& *::-webkit-scrollbar-thumb:hover": {
+                    background: "#90BAF9",
+                },
+            }}
+        >
             <UtilityBelt
                 helpChildren={
                     <>
