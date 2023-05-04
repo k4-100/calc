@@ -60,7 +60,6 @@ const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
                             </Box>
                         </Grid>
                     </Grid>
-                    {/* <AppsWithSaves /> */}
                     <Saves />
                     <Typography
                         variant="subtitle1"

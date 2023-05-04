@@ -91,7 +91,7 @@ const Header: React.FC = () => {
                             component={RouterLink}
                             to={`/text/${profile.index}`}
                         >
-                            Text
+                            Mark
                         </Button>
                     </Box>
                     <Box

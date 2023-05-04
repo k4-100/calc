@@ -132,10 +132,10 @@ const parseSheetFunction = (text: string) => {
     return newChunks.join("");
 };
 
-// =10-2+Avg(B1:C2)
-
 /**
  * @param text to evaluate
+ * @sheet sheet to evaluate from
+ * @tableIndex index of a table to evaluate from
  * @returns evaulated this.text used for display in a table
  */
 const getEvaluatedText = (
@@ -196,6 +196,10 @@ const calcSlice = createSlice({
     name: "calc",
     initialState: determineInitialStateCalc(),
     reducers: {
+        /**
+         * @description replaces whole sheet with one another
+         * @param action payload is SheetClassObjectType instance
+         */
         setSheet(
             state: Array<SheetClassObjectType>,
             action: { payload: SheetClassObjectType; type: string }
@@ -218,6 +222,10 @@ const calcSlice = createSlice({
             return newState;
         },
 
+        /**
+         * @description replaces given cell with a new one
+         * @param action payload is CellClassObjectType instance, and a proper sheetID
+         */
         setCell(
             state: Array<SheetClassObjectType>,
             action: {
@@ -258,27 +266,6 @@ const calcSlice = createSlice({
         },
     },
 });
-
-// /**
-//  *  determines the initial value of a state which can be either:
-//  *  - new array of SheetClassObjectType
-//  *  - array saved in local storage
-//  */
-// const determineInitialStateProfileNumber = (): Array<SheetClassObjectType> => {
-//     const sheetRaw: null | string = localStorage.getItem("sheets");
-//     if (!sheetRaw) {
-//         const newSheetArr: Array<SheetClassObjectType> = [
-//             new SheetClass().getObject(),
-//             new SheetClass().getObject(),
-//             new SheetClass().getObject(),
-//         ];
-
-//         localStorage.setItem("sheets", JSON.stringify(newSheetArr));
-//         return newSheetArr;
-//     }
-
-//     return JSON.parse(sheetRaw) as Array<SheetClassObjectType>;
-// };
 
 const profileSlice = createSlice({
     name: "profileNumber",
@@ -375,7 +362,7 @@ React is [MIT licensed](./LICENSE).
 `;
 
 /**
- *  determines the initial value of a calc state which can be either:
+ *  determines the initial value of a markdownPanels state which can be either:
  *  - new array of MarkdownPanelObjectType
  *  - array saved in local storage
  */

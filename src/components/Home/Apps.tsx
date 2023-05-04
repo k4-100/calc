@@ -57,7 +57,7 @@ const Apps: React.FC = () => {
                     background="success.dark"
                     icon={<Note />}
                     link={`/text/${profile.index}`}
-                    text="Text (in progress)"
+                    text="Mark (Markdown)"
                 />
                 <AppsButton
                     disabled

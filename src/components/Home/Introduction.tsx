@@ -56,7 +56,7 @@ const Introduction: React.FC = () => {
                             md: 1 / 2,
                         },
                         my: 2,
-                        mb: 5,
+                        mb: 7,
                         fontSize: "clamp(12px, 3vw, 24px)",
                     }}
                 >
