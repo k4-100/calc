@@ -49,6 +49,16 @@ const TextEditor: React.FC = () => {
         return () => clearTimeout(timerID);
     }, [handlePanelChange]);
 
+    useEffect(() => {
+        const handleWarningAlert = () => {
+            alert(
+                "WARNING: make sure html in markdown you paste is safe, additional security will be implemented in the future"
+            );
+        };
+        let id: number = setTimeout(() => handleWarningAlert(), 1000);
+        return () => clearTimeout(id);
+    }, []);
+
     return (
         <Box
             sx={{
