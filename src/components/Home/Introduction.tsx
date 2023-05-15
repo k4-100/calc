@@ -24,7 +24,8 @@ const Introduction: React.FC = () => {
                     sm: 5,
                     xs: 1,
                 },
-                m: 3,
+                mx: 3,
+                my: 1,
             }}
         >
             <Typography
