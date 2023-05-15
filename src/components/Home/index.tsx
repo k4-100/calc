@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
-
 import Header from "./Header";
 import SocialMedia from "./SocialMedia";
 import Introduction from "./Introduction";
@@ -9,7 +8,8 @@ import Opinions from "./Opinions";
 import Apps from "./Apps";
 import Saves from "./Saves";
 import ErrorPage from "./ErrorPage";
-import ModeSwitcher from "./SwitchMode";
+import ModeSwitcher from "./ModeSwitcher";
+
 /**
  * @param isError determines if there was an error or not
  * @returns Home page, if isError === true returns ErrorPage instead
