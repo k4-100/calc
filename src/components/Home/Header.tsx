@@ -14,7 +14,7 @@ const headerHeight: number = 60;
 const Header: React.FC = () => {
     const { profile } = useSelector((state: any) => state);
 
-    const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
+    const [isProfileVisible, setIsProfileVisible] = useState<boolean>(true);
 
     const showCurrentNumber = () => {
         switch (profile.index) {
