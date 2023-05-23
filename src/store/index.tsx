@@ -5,6 +5,7 @@ import {
     CellClassObjectType,
     MarkdownPanel,
     MarkdownPanelObjectType,
+    ProfileVariantEnum,
     SheetClass,
     SheetClassObjectType,
 } from "../utility/Classes";
@@ -423,16 +424,34 @@ const markdownPanelsSlice = createSlice({
     },
 });
 
+const modeSlice = createSlice({
+    name: "mode",
+    initialState: ProfileVariantEnum.Local,
+    reducers: {
+        setMode(
+            state: ProfileVariantEnum,
+            action: {
+                payload: ProfileVariantEnum;
+                type: string;
+            }
+        ) {
+            return action.payload;
+        },
+    },
+});
+
 export const actions = {
     ...calcSlice.actions,
     ...profileSlice.actions,
     ...markdownPanelsSlice.actions,
+    ...modeSlice.actions,
 };
 
 const reducer = combineReducers({
     calc: calcSlice.reducer,
     profile: profileSlice.reducer,
     markdownPanels: markdownPanelsSlice.reducer,
+    mode: modeSlice.reducer,
 });
 
 export default createStore(reducer);

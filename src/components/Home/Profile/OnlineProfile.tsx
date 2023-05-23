@@ -19,7 +19,7 @@ const OnlineProfile: React.FC = () => {
                     flexDirection: "column",
                     p: 1,
                     "& > *": {
-                        my: "5px",
+                        my: 0.5,
                     },
                 }}
             >

@@ -189,3 +189,8 @@ export class MarkdownPanel {
         };
     }
 }
+
+export enum ProfileVariantEnum {
+    Local,
+    Online,
+}

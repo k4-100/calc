@@ -2,21 +2,24 @@ import React, { useState } from "react";
 import { AppBar, Box, Button, Toolbar, Typography } from "@mui/material";
 import BorderStyleIcon from "@mui/icons-material/BorderStyle";
 import { Link as RouterLink } from "react-router-dom";
-import { Looks3, LooksOne, LooksTwo } from "@mui/icons-material";
+import { Looks3, LooksOne, LooksTwo, Person } from "@mui/icons-material";
 import Profile from "./Profile";
 import { grey } from "@mui/material/colors";
 import { useSelector } from "react-redux";
+import { ProfileVariantEnum } from "../../utility/Classes";
 
 const headerHeight: number = 60;
 /**
  * @returns Basic Header with links used inside Home component
  */
 const Header: React.FC = () => {
-    const { profile } = useSelector((state: any) => state);
+    const { profile, mode } = useSelector((state: any) => state);
 
     const [isProfileVisible, setIsProfileVisible] = useState<boolean>(true);
 
     const showCurrentNumber = () => {
+        if (mode === ProfileVariantEnum.Online)
+            return <Person color="info" className="profile-index" />;
         switch (profile.index) {
             case 3:
                 return <Looks3 color="info" className="profile-index" />;

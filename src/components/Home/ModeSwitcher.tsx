@@ -6,15 +6,26 @@ import {
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../store";
+import { ProfileVariantEnum } from "../../utility/Classes";
 
 const ModeSwitcher: React.FC = () => {
-    const [alignment, setAlignment] = useState<string>("local");
+    const { mode } = useSelector((state: any) => state);
+    const dispatch = useDispatch();
+
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,
         newAlignment: string
     ) => {
         if (newAlignment !== null) {
-            setAlignment(newAlignment);
+            dispatch(
+                actions.setMode(
+                    newAlignment === "local"
+                        ? ProfileVariantEnum.Local
+                        : ProfileVariantEnum.Online
+                )
+            );
         }
     };
 
@@ -42,7 +53,7 @@ const ModeSwitcher: React.FC = () => {
             </Typography>
             <ToggleButtonGroup
                 color="primary"
-                value={alignment}
+                value={mode == ProfileVariantEnum.Local ? "local" : "online"}
                 exclusive
                 onChange={handleChange}
                 aria-label="Platform"

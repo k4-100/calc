@@ -5,11 +5,7 @@ import { grey } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../../store";
 import OnlineProfile from "./OnlineProfile";
-
-enum ProfileVariantEnum {
-    Local,
-    Online,
-}
+import { ProfileVariantEnum } from "../../../utility/Classes";
 
 /**
  * @param showCurrentNumber displays current number
@@ -18,12 +14,8 @@ enum ProfileVariantEnum {
 const Profile: React.FC<{ showCurrentNumber: Function }> = ({
     showCurrentNumber,
 }) => {
-    const { profile } = useSelector((state: any) => state);
+    const { profile, mode } = useSelector((state: any) => state);
     const dispatch = useDispatch();
-
-    const [profileVariant, setProfileVariant] = useState<ProfileVariantEnum>(
-        ProfileVariantEnum.Online
-    );
 
     const handleProfileChange = (difference: number) => {
         const delta: number = (profile.index + difference) % 3;
@@ -39,7 +31,7 @@ const Profile: React.FC<{ showCurrentNumber: Function }> = ({
                 right: { sm: "24px", xs: "16px" },
                 width: "250px",
                 height: "200px",
-                background: "red",
+                backgroundColor: `${grey[900]}`,
             }}
         >
             <Box
@@ -49,7 +41,7 @@ const Profile: React.FC<{ showCurrentNumber: Function }> = ({
                     width: "250px",
                 }}
             >
-                {profileVariant === ProfileVariantEnum.Online ? (
+                {mode === ProfileVariantEnum.Online ? (
                     <>
                         <OnlineProfile />
                     </>
