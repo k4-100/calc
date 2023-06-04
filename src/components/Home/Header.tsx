@@ -15,7 +15,7 @@ const headerHeight: number = 60;
 const Header: React.FC = () => {
     const { profile, mode } = useSelector((state: any) => state);
 
-    const [isProfileVisible, setIsProfileVisible] = useState<boolean>(true);
+    const [isProfileVisible, setIsProfileVisible] = useState<boolean>(false);
 
     const showCurrentNumber = () => {
         if (mode === ProfileVariantEnum.Online)
