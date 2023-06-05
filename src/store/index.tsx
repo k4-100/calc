@@ -1,4 +1,9 @@
-import { combineReducers, createSlice, createStore } from "@reduxjs/toolkit";
+import {
+    combineReducers,
+    configureStore,
+    createSlice,
+    createStore,
+} from "@reduxjs/toolkit";
 import _, { cloneDeep } from "lodash";
 import { evaluate } from "mathjs";
 import {
@@ -472,4 +477,7 @@ const reducer = combineReducers({
     token: tokenSlice.reducer,
 });
 
-export default createStore(reducer);
+const store = configureStore({ reducer });
+
+export default store;
+// export default createStore(reducer);

@@ -14,10 +14,33 @@ const OnlineProfile: React.FC = () => {
         setPassword(e.target.value);
     };
 
-    // const handleLogIn = async () => {
-    //     // const result = await fetch("http://localhost:5000/login").then(
-    //     // );
-    // };
+    const handleLogIn = async () => {
+        const result = await fetch("http://localhost:5000/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        })
+            .then(async (data) => {
+                const parsed = await data.json();
+                setLogMessage(parsed.message);
+                return parsed;
+            })
+            .catch((err) => {
+                console.log("ERROR WHEN LOGGING: ", err);
+                setLogMessage(err);
+            });
+
+        if (result.accesstoken) {
+            console.log("accesstoken: ", result.accesstoken);
+        } else {
+            console.log(result.error);
+        }
+    };
 
     const handleRegister = async () => {
         const result = await fetch("http://localhost:5000/register", {
@@ -37,7 +60,7 @@ const OnlineProfile: React.FC = () => {
                 return parsed;
             })
             .catch((err) => {
-                console.log("ERROR WHEN LOGGING: ", err);
+                console.log("ERROR WHEN REGISTERING: ", err);
                 setLogMessage(err);
             });
     };
@@ -88,7 +111,7 @@ const OnlineProfile: React.FC = () => {
                         justifyContent: "space-between",
                     }}
                 >
-                    <Button>log in</Button>
+                    <Button onClick={handleLogIn}>log in</Button>
                     <Button onClick={handleRegister}>register</Button>
                 </Box>
             </Box>
