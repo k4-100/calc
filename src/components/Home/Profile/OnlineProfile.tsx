@@ -1,9 +1,10 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 
 const OnlineProfile: React.FC = () => {
     const [username, setUsername] = useState<string>("");
     const [password, setPassword] = useState<string>("");
+    const [logMessage, setLogMessage] = useState<string>("");
 
     const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -11,6 +12,34 @@ const OnlineProfile: React.FC = () => {
 
     const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
         setPassword(e.target.value);
+    };
+
+    // const handleLogIn = async () => {
+    //     // const result = await fetch("http://localhost:5000/login").then(
+    //     // );
+    // };
+
+    const handleRegister = async () => {
+        const result = await fetch("http://localhost:5000/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                username,
+                password,
+            }),
+        })
+            .then(async (data) => {
+                const parsed = await data.json();
+
+                setLogMessage(parsed.message);
+                return parsed;
+            })
+            .catch((err) => {
+                console.log("ERROR WHEN LOGGING: ", err);
+                setLogMessage(err);
+            });
     };
 
     return (
@@ -30,7 +59,7 @@ const OnlineProfile: React.FC = () => {
                     flexDirection: "column",
                     p: 1,
                     "& > *": {
-                        my: 0.5,
+                        my: "10px !important",
                     },
                 }}
             >
@@ -60,9 +89,19 @@ const OnlineProfile: React.FC = () => {
                     }}
                 >
                     <Button>log in</Button>
-                    <Button>register</Button>
+                    <Button onClick={handleRegister}>register</Button>
                 </Box>
             </Box>
+            <Paper
+                elevation={20}
+                sx={{
+                    textAlign: "center",
+                    p: 1,
+                    minHeight: "40px !important",
+                }}
+            >
+                {logMessage || "."}
+            </Paper>
         </Box>
     );
 };
