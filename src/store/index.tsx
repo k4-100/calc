@@ -440,11 +440,28 @@ const modeSlice = createSlice({
     },
 });
 
+const tokenSlice = createSlice({
+    name: "token",
+    initialState: "",
+    reducers: {
+        setAccessToken(
+            _state,
+            action: {
+                payload: string;
+                type: string;
+            }
+        ) {
+            return action.payload;
+        },
+    },
+});
+
 export const actions = {
     ...calcSlice.actions,
     ...profileSlice.actions,
     ...markdownPanelsSlice.actions,
     ...modeSlice.actions,
+    ...tokenSlice.actions,
 };
 
 const reducer = combineReducers({
@@ -452,6 +469,7 @@ const reducer = combineReducers({
     profile: profileSlice.reducer,
     markdownPanels: markdownPanelsSlice.reducer,
     mode: modeSlice.reducer,
+    token: tokenSlice.reducer,
 });
 
 export default createStore(reducer);
