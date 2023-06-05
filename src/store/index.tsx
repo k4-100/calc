@@ -445,14 +445,24 @@ const modeSlice = createSlice({
     },
 });
 
+type TokenSliceType = {
+    id: string;
+    username: string;
+    accesstoken: string;
+};
+
 const tokenSlice = createSlice({
     name: "token",
-    initialState: "",
+    initialState: {
+        id: "",
+        username: "",
+        accesstoken: "",
+    } as TokenSliceType,
     reducers: {
         setAccessToken(
             _state,
             action: {
-                payload: string;
+                payload: TokenSliceType;
                 type: string;
             }
         ) {
