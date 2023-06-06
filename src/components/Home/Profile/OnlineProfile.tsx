@@ -40,18 +40,20 @@ const OnlineProfile: React.FC = () => {
                 setLogMessage(err);
             });
 
-        if (result.accesstoken) {
-            console.log("accesstoken: ", result);
-            const { id, username, accesstoken } = result;
-            dispatch(
-                actions.setAccessToken({
-                    id,
-                    username,
-                    accesstoken,
-                })
-            );
-        } else {
-            console.log(result.error);
+        if (result) {
+            if (result.accesstoken) {
+                console.log("accesstoken: ", result);
+                const { id, username, accesstoken } = result;
+                dispatch(
+                    actions.setAccessToken({
+                        id,
+                        username,
+                        accesstoken,
+                    })
+                );
+            } else {
+                console.log(result.error);
+            }
         }
     };
 
