@@ -22,6 +22,7 @@ const OnlineProfile: React.FC = () => {
     const handleLogIn = async () => {
         const result = await fetch("http://localhost:5000/login", {
             method: "POST",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
