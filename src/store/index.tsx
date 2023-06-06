@@ -468,6 +468,18 @@ const tokenSlice = createSlice({
         ) {
             return action.payload;
         },
+
+        setAccessTokenOnly(
+            state: TokenSliceType,
+            action: {
+                payload: string;
+                type: string;
+            }
+        ) {
+            const newState = _.cloneDeep(state);
+            newState.accesstoken = action.payload;
+            return newState;
+        },
     },
 });
 

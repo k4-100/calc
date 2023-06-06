@@ -55,6 +55,8 @@ const OnlineProfile: React.FC = () => {
             } else {
                 console.log(result.error);
             }
+        } else {
+            console.log(result.error);
         }
     };
 
