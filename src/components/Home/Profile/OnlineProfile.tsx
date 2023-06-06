@@ -37,7 +37,7 @@ const OnlineProfile: React.FC = () => {
             })
             .catch((err) => {
                 console.log("ERROR WHEN LOGGING: ", err);
-                setLogMessage(err);
+                setLogMessage(err.message);
             });
 
         if (result) {
@@ -75,7 +75,7 @@ const OnlineProfile: React.FC = () => {
             })
             .catch((err) => {
                 console.log("ERROR WHEN REGISTERING: ", err);
-                setLogMessage(err);
+                setLogMessage(err.message);
             });
     };
 
@@ -98,7 +98,7 @@ const OnlineProfile: React.FC = () => {
             })
             .catch((err) => {
                 console.log("ERROR WHEN REGISTERING: ", err);
-                setLogMessage(err);
+                setLogMessage(err.message);
             });
     };
 
