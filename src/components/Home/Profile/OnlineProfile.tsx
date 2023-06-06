@@ -61,6 +61,7 @@ const OnlineProfile: React.FC = () => {
     const handleLogOut = () => {
         fetch("http://localhost:5000/logout", {
             method: "POST",
+            credentials: "include",
         })
             .then(async (data) => {
                 const parsed = await data.json();
