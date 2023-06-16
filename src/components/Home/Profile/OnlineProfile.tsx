@@ -2,6 +2,7 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../../store";
+import ROUTES from "../../../utility/constants";
 
 const OnlineProfile: React.FC = () => {
     const { token } = useSelector((state: any) => state);
@@ -20,7 +21,7 @@ const OnlineProfile: React.FC = () => {
     };
 
     const handleLogIn = async () => {
-        const result = await fetch("http://localhost:5000/login", {
+        const result = await fetch(`${ROUTES.ROOT}/${ROUTES.ACCOUNTS}/login`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -61,7 +62,7 @@ const OnlineProfile: React.FC = () => {
     };
 
     const handleLogOut = () => {
-        fetch("http://localhost:5000/logout", {
+        fetch(`${ROUTES.ROOT}/${ROUTES.ACCOUNTS}/logout`, {
             method: "POST",
             credentials: "include",
         })
@@ -84,7 +85,7 @@ const OnlineProfile: React.FC = () => {
     };
 
     const handleRegister = async () => {
-        await fetch("http://localhost:5000/register", {
+        await fetch(`${ROUTES.ROOT}/${ROUTES.ACCOUNTS}/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -7,6 +7,7 @@ import TextEditor from "./components/TextEditor";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "./store";
 import jwtDecode from "jwt-decode";
+import ROUTES from "./utility/constants";
 
 const darkTheme = createTheme({
     palette: {
@@ -28,9 +29,9 @@ const App: React.FC = () => {
             // checks if gonna be expired in 15 seconds
             const isExpired = Date.now() >= ((decoded as any).exp - 15) * 1000;
             if (isExpired) {
-                console.log("expired");
+                // console.log("expired");
                 const result = await fetch(
-                    "http://localhost:5000/refresh_token",
+                    `${ROUTES.ROOT}/${ROUTES.ACCOUNTS}/refresh_token`,
                     {
                         method: "POST",
                         credentials: "include", // Needed to include the cookie
@@ -43,7 +44,7 @@ const App: React.FC = () => {
                     .catch((err) =>
                         console.log("error while refreshing accesstoken: ", err)
                     );
-                console.log("res: ", result);
+                // console.log("res: ", result);
                 const { accesstoken } = result;
                 dispatch(actions.setAccessTokenOnly(accesstoken));
             }
