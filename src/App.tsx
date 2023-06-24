@@ -27,7 +27,7 @@ const App: React.FC = () => {
             }
             const decoded = jwtDecode(token.accesstoken);
             // checks if gonna be expired in 15 seconds
-            const isExpired = Date.now() >= ((decoded as any).exp - 15) * 1000;
+            const isExpired = Date.now() >= ((decoded as any).exp - 5) * 1000;
             if (isExpired) {
                 // console.log("expired");
                 const result = await fetch(
