@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import {
     Table,
     TableBody,
@@ -15,7 +15,6 @@ import {
     CellClassObjectType,
     ProfileVariantEnum,
     SheetClassObjectType,
-    TableClass,
 } from "../../../utility/Classes";
 import { CustomInfoCellMemoized } from "./CustomInfoCell";
 import CustomTableRow from "./CustomTableRow";
@@ -28,7 +27,6 @@ import { useParams } from "react-router-dom";
 const CustomTable: React.FC = () => {
     const { mode, calc, calcRemote } = useSelector((state: any) => state);
     const index = Number(useParams().index) - 1;
-    const [loading, setLoading] = useState(true);
 
     console.log("calcRemote: ", calcRemote);
 
@@ -64,8 +62,8 @@ const CustomTable: React.FC = () => {
             // _sheet.tables[tableIndex] = _table;
             if (mode === ProfileVariantEnum.Local) {
                 dispatch(actions.setCell({ cell: _cell, sheetID: index + 1 }));
-            } else if (mode === ProfileVariantEnum.Local) {
-                actions.setCellRemote({ cell: _cell });
+            } else if (mode === ProfileVariantEnum.Online) {
+                dispatch(actions.setCellRemote({ cell: _cell }));
             }
         },
         [dispatch, index, mode]

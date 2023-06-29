@@ -245,6 +245,7 @@ const calcRemoteSlice = createSlice({
             newState.sheet.tables[tableIndex].cells[payload.cell.y][
                 payload.cell.x
             ] = _.cloneDeep(action.payload.cell);
+
             return newState;
         },
     },
