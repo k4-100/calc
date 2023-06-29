@@ -194,3 +194,10 @@ export enum ProfileVariantEnum {
     Local,
     Online,
 }
+
+export type SheetClassObjectTypeWithChecksum = {
+    /** sheet containg tables used in calc */
+    sheet: SheetClassObjectType;
+    /** checksum ensuring  */
+    checksum: string;
+};

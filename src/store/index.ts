@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import calcSlice from "./calc";
+import calcRemoteSlice from "./calcRemote";
 import markdownPanelsSlice from "./markdownPanels";
 import modeSlice from "./mode";
 import profileSlice from "./profile";
@@ -11,6 +12,7 @@ export const actions = {
     ...markdownPanelsSlice.actions,
     ...modeSlice.actions,
     ...tokenSlice.actions,
+    ...calcRemoteSlice.actions,
 };
 
 const reducer = combineReducers({
@@ -19,6 +21,7 @@ const reducer = combineReducers({
     markdownPanels: markdownPanelsSlice.reducer,
     mode: modeSlice.reducer,
     token: tokenSlice.reducer,
+    calcRemote: calcRemoteSlice.reducer,
 });
 
 const store = configureStore({ reducer });

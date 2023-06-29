@@ -1,5 +1,9 @@
 import { Box, ListItem, Typography } from "@mui/material";
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../store";
+import { ProfileVariantEnum } from "../../utility/Classes";
+import { fetchInitialStateCalcRemote } from "../../utility/functions";
 import UtilityBelt from "../common/UtilityBelt";
 import SearchBar from "../common/UtilityBelt/SearchBar";
 import SheetBar from "./SheetBar";
@@ -11,6 +15,19 @@ const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
  * @returns Sheet component with editable columns, ability to search for text, calculate values in single and several rows, as well as ability to add more Tables
  */
 const Sheet: React.FC = () => {
+    const { mode, calcRemote, token } = useSelector((state: any) => state);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        const fetchCalcRemote = async () => {
+            const res = await fetchInitialStateCalcRemote(token.accesstoken);
+            dispatch(actions.setSheetRemote(res));
+        };
+        if (calcRemote.id !== 0) {
+            console.log("run");
+        }
+        fetchCalcRemote();
+    }, [dispatch, token.accesstoken, calcRemote.id]);
+    // debugger;
     return (
         <>
             <UtilityBelt
@@ -82,7 +99,14 @@ const Sheet: React.FC = () => {
                 }}
             >
                 <Suspense fallback={<h1>Loading Table...</h1>}>
-                    <SuspensendedCustomTable />
+                    {mode === ProfileVariantEnum.Online &&
+                    calcRemote.id === 0 ? (
+                        <>...fetching</>
+                    ) : (
+                        <>
+                            <SuspensendedCustomTable />
+                        </>
+                    )}
                 </Suspense>
             </Box>
             <SheetBar />
