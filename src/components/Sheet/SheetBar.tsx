@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 import { actions } from "../../store";
 import {
+    ProfileVariantEnum,
     SheetClassObjectType,
     TableClass,
     TableClassObjectType,
@@ -16,9 +17,11 @@ import SheetBarButton from "./SheetBarButton";
  * @returns bar containing other tables buttons, as well as allowing to remove/add them
  */
 const SheetBar = () => {
-    const index = Number(useParams().index) - 1;
+    const { mode, calcRemote } = useSelector((state: any) => state);
     const sheets = useSelector((state: any) => state.calc);
-    const sheet: SheetClassObjectType = sheets[index];
+    const index = Number(useParams().index) - 1;
+    const sheet: SheetClassObjectType =
+        mode === ProfileVariantEnum.Local ? sheets[index] : calcRemote.sheet;
     const dispatch = useDispatch();
     const reachedLimit: boolean = sheet.tables.length >= 3;
 

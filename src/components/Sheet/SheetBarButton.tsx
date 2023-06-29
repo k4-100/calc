@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { actions } from "../../store";
 import { useParams } from "react-router-dom";
-import { SheetClassObjectType } from "../../utility/Classes";
+import {
+    ProfileVariantEnum,
+    SheetClassObjectType,
+} from "../../utility/Classes";
 import { green } from "@mui/material/colors";
 
 /**
@@ -17,8 +20,9 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     id,
 }) => {
     const index = Number(useParams().index) - 1;
-    const { calc } = useSelector((state: any) => state);
-    const sheet: SheetClassObjectType = calc[index];
+    const { mode, calc, calcRemote } = useSelector((state: any) => state);
+    const sheet: SheetClassObjectType =
+        mode === ProfileVariantEnum.Local ? calc[index] : calcRemote.sheet;
     const dispatch = useDispatch();
 
     /**
@@ -44,7 +48,9 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     const handleSwitchToNextTable = (id: number) => {
         const _sheet = _.cloneDeep(sheet);
         _sheet.mainTabID = id;
-        dispatch(actions.setSheet(_sheet));
+        if (ProfileVariantEnum.Online)
+            dispatch(actions.setSheetRemote({ sheet: _sheet, checksum: "" }));
+        else if (ProfileVariantEnum.Local) dispatch(actions.setSheet(_sheet));
     };
 
     return (
@@ -70,7 +76,9 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
             <Button
                 variant="contained"
                 color="error"
-                onClick={() => handleDelClick(id)}
+                onClick={() => {
+                    if (mode === ProfileVariantEnum.Local) handleDelClick(id);
+                }}
                 sx={{
                     borderRadius: 0,
                 }}

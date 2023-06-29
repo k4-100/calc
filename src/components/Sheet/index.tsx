@@ -1,5 +1,5 @@
 import { Box, ListItem, Typography } from "@mui/material";
-import React, { Suspense, useEffect, useMemo, useState } from "react";
+import React, { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../store";
 import { ProfileVariantEnum } from "../../utility/Classes";
@@ -10,6 +10,7 @@ import SheetBar from "./SheetBar";
 
 /** lazy loaded */
 const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
+
 /**
  *
  * @returns Sheet component with editable columns, ability to search for text, calculate values in single and several rows, as well as ability to add more Tables
