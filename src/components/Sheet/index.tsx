@@ -74,7 +74,8 @@ const Sheet: React.FC = () => {
                 }
             >
                 <SearchBar />
-                {/* {mode === ProfileVariantEnum.Online && <SaveButton />} */}
+
+                {mode === ProfileVariantEnum.Online && <SaveButton />}
             </UtilityBelt>
 
             <Box

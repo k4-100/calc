@@ -1,9 +1,18 @@
+import { Save } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import React from "react";
 
 const SaveButton: React.FC = () => {
     return (
         <>
-            <h1>dsa</h1>
+            <Button>
+                <Save
+                    color="success"
+                    sx={{
+                        fontSize: "40px",
+                    }}
+                />
+            </Button>
         </>
     );
 };
