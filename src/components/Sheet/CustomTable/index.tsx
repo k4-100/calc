@@ -76,6 +76,7 @@ const CustomTable: React.FC = () => {
         []
     );
 
+    // debugger;
     /** memoized current table */
     const table: TableClassObjectType = useMemo(
         () => sheet.tables[tableIndex],

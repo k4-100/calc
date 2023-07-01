@@ -6,6 +6,7 @@ import { ProfileVariantEnum } from "../../utility/Classes";
 import { fetchInitialStateCalcRemote } from "../../utility/functions";
 import UtilityBelt from "../common/UtilityBelt";
 import SearchBar from "../common/UtilityBelt/SearchBar";
+import SaveButton from "./SaveButton";
 import SheetBar from "./SheetBar";
 
 /** lazy loaded */
@@ -26,8 +27,8 @@ const Sheet: React.FC = () => {
         if (calcRemote.id !== 0) {
             console.log("run");
         }
-        fetchCalcRemote();
-    }, [dispatch, token.accesstoken, calcRemote.id]);
+        if (mode === ProfileVariantEnum.Online) fetchCalcRemote();
+    }, [dispatch, token.accesstoken, calcRemote.id, mode]);
     // debugger;
     return (
         <>
@@ -73,7 +74,9 @@ const Sheet: React.FC = () => {
                 }
             >
                 <SearchBar />
+                {/* {mode === ProfileVariantEnum.Online && <SaveButton />} */}
             </UtilityBelt>
+
             <Box
                 sx={{
                     overflow: "scroll",
