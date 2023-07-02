@@ -198,6 +198,6 @@ export enum ProfileVariantEnum {
 export type SheetClassObjectTypeWithChecksum = {
     /** sheet containg tables used in calc */
     sheet: SheetClassObjectType;
-    /** checksum ensuring  */
-    checksum: string;
+    /** checksums ensuring data validity */
+    checksums: string[];
 };

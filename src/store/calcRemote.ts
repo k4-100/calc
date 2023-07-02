@@ -198,7 +198,7 @@ const calcRemoteSlice = createSlice({
             id: 0,
             mainTabID: 0,
         },
-        checksum: "",
+        checksums: ["", "", ""],
     } as SheetClassObjectTypeWithChecksum,
     // determineInitialStateRemoteCalc() as unknown as SheetClassObjectType,
     reducers: {
