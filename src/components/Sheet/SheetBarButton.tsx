@@ -9,7 +9,8 @@ import {
     ProfileVariantEnum,
     SheetClassObjectType,
 } from "../../utility/Classes";
-import { green } from "@mui/material/colors";
+import { blue, green } from "@mui/material/colors";
+import { Delete, DeleteOutline } from "@mui/icons-material";
 
 /**
  *
@@ -59,11 +60,14 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
         <Box
             sx={{
                 display: "flex",
-                mr: 4,
-                border:
-                    sheet.mainTabID === id
-                        ? `3px solid ${green[600]}`
-                        : "initial",
+                flex: 1,
+                mx: 0.5,
+                // p: 1,
+                // mr: 4,
+                // border:
+                //     sheet.mainTabID === id
+                //         ? `3px solid ${green[600]}`
+                //         : "initial",
             }}
         >
             <Button
@@ -71,6 +75,9 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
                 onClick={() => handleSwitchToNextTable(id)}
                 sx={{
                     borderRadius: 0,
+                    width: 1,
+                    backgroundColor:
+                        sheet.mainTabID !== id ? "" : `${blue[600]}`,
                 }}
             >
                 {name}
@@ -82,11 +89,14 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
                 //     if (mode === ProfileVariantEnum.Local) handleDelClick(id);
                 // }}
                 sx={{
+                    minWidth: "0",
                     borderRadius: 0,
+                    width: "50px",
+                    p: 0,
                 }}
                 disabled={sheet.tables.length < 2}
             >
-                X
+                <DeleteOutline sx={{}} />
             </Button>
         </Box>
     );

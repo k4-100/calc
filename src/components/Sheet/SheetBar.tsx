@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import {
     ProfileVariantEnum,
     SheetClassObjectType,
-    TableClass,
     TableClassObjectType,
 } from "../../utility/Classes";
 import SheetBarButton from "./SheetBarButton";
@@ -41,17 +40,18 @@ const SheetBar = () => {
             elevation={2}
             sx={{
                 display: "flex",
-                position: "fixed",
-                bottom: 0,
-                p: 1,
+                // position: "fixed",
+                p: 2,
                 width: "100%",
             }}
         >
             <Box
                 sx={{
                     display: "flex",
-                    pr: 5,
+                    justifyContent: "space-between",
+
                     boxSizing: "border-box",
+                    width: "100%",
                     // ml: "auto",
                 }}
             >
