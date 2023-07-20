@@ -2,7 +2,10 @@ import { Box, ListItem, Typography } from "@mui/material";
 import React, { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../store";
-import { ProfileVariantEnum } from "../../utility/Classes";
+import {
+    ProfileVariantEnum,
+    SheetClassObjectType,
+} from "../../utility/Classes";
 import { fetchInitialStateCalcRemote } from "../../utility/functions";
 import UtilityBelt from "../common/UtilityBelt";
 import SearchBar from "../common/UtilityBelt/SearchBar";
@@ -18,18 +21,28 @@ const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
  */
 const Sheet: React.FC = () => {
     const { mode, calcRemote, token } = useSelector((state: any) => state);
+    // const { id } = calcRemote.sheet;
     const dispatch = useDispatch();
+    // console.log("id", calcRemote.sheet.id);
     useEffect(() => {
         const fetchCalcRemote = async () => {
             const res = await fetchInitialStateCalcRemote(token.accesstoken);
-            dispatch(actions.setSheetRemote(res));
+
+            dispatch(
+                actions.setSheetRemote({
+                    ...res,
+                    checksums: [],
+                })
+            );
         };
-        if (calcRemote.id !== 0) {
+        if (calcRemote.sheet.id !== 0) {
             console.log("run");
         }
-        if (mode === ProfileVariantEnum.Online) fetchCalcRemote();
-    }, [dispatch, token.accesstoken, calcRemote.id, mode]);
-    // debugger;
+        if (mode === ProfileVariantEnum.Online) {
+            fetchCalcRemote();
+        }
+    }, [dispatch, token.accesstoken, calcRemote.sheet.id, mode]);
+
     return (
         <>
             <UtilityBelt
@@ -105,7 +118,7 @@ const Sheet: React.FC = () => {
             >
                 <Suspense fallback={<h1>Loading Table...</h1>}>
                     {mode === ProfileVariantEnum.Online &&
-                    calcRemote.id === 0 ? (
+                    !calcRemote.sheet.id ? (
                         <>...fetching</>
                     ) : (
                         <>

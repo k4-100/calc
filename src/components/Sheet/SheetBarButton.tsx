@@ -29,28 +29,30 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
      * deletes table from sheet
      * @param id id of table to be deleted
      */
-    const handleDelClick = (id: number) => {
-        const _sheet = _.cloneDeep(sheet);
-        const deleteIndex = _sheet.tables.findIndex(
-            (tab: any) => tab.id === id
-        );
-        _sheet.tables.splice(deleteIndex, 1);
-        // ensures there will be always a main tab
-        if (_sheet.mainTabID === id) _sheet.mainTabID = _sheet.tables[0].id;
-        // setSheet!(_sheet);
-        dispatch(actions.setSheet(_sheet));
-    };
+    // const handleDelClick = (id: number) => {
+    //     const _sheet = _.cloneDeep(sheet);
+    //     const deleteIndex = _sheet.tables.findIndex(
+    //         (tab: any) => tab.id === id
+    //     );
+    //     _sheet.tables.splice(deleteIndex, 1);
+    //     // ensures there will be always a main tab
+    //     if (_sheet.mainTabID === id) _sheet.mainTabID = _sheet.tables[0].id;
+    //     // setSheet!(_sheet);
+    //     dispatch(actions.setSheet(_sheet));
+    // };
 
     /**
      * switches to another main table
      * @param id id of a new main table
      */
     const handleSwitchToNextTable = (id: number) => {
+        console.log(id);
         const _sheet = _.cloneDeep(sheet);
         _sheet.mainTabID = id;
-        if (ProfileVariantEnum.Online)
-            dispatch(actions.setSheetRemote({ sheet: _sheet, checksum: "" }));
-        else if (ProfileVariantEnum.Local) dispatch(actions.setSheet(_sheet));
+        if (mode === ProfileVariantEnum.Online)
+            dispatch(actions.setSheetRemote({ sheet: _sheet, checksums: [] }));
+        else if (mode === ProfileVariantEnum.Local)
+            dispatch(actions.setSheet(_sheet));
     };
 
     return (
@@ -76,9 +78,9 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
             <Button
                 variant="contained"
                 color="error"
-                onClick={() => {
-                    if (mode === ProfileVariantEnum.Local) handleDelClick(id);
-                }}
+                // onClick={() => {
+                //     if (mode === ProfileVariantEnum.Local) handleDelClick(id);
+                // }}
                 sx={{
                     borderRadius: 0,
                 }}

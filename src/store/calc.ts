@@ -215,7 +215,6 @@ const calcSlice = createSlice({
                 return;
             }
             newState[sheetIndex] = cloneDeep(action.payload);
-
             localStorage.setItem("sheets", JSON.stringify(newState));
             return newState;
         },

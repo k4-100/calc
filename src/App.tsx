@@ -30,13 +30,16 @@ const App: React.FC = () => {
             const isExpired = Date.now() >= ((decoded as any).exp - 5) * 1000;
             if (isExpired) {
                 // console.log("expired");
-                const result = await fetch(`${ROUTES.ROOT}/${ROUTES.CALC}/g`, {
-                    method: "POST",
-                    // credentials: "include", // Needed to include the cookie
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                })
+                const result = await fetch(
+                    `${ROUTES.ROOT}/${ROUTES.CALC}/refresh_token`,
+                    {
+                        method: "POST",
+                        // credentials: "include", // Needed to include the cookie
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
                     .then((data) => data.json())
                     .catch((err) =>
                         console.log("error while fetching data: ", err)

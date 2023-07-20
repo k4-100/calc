@@ -210,7 +210,6 @@ const calcRemoteSlice = createSlice({
             _state: SheetClassObjectTypeWithChecksum,
             action: { payload: SheetClassObjectTypeWithChecksum; type: string }
         ) {
-            // const newState = cloneDeep(action.payload);
             return action.payload;
         },
 

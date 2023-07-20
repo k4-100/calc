@@ -4,7 +4,7 @@ import { Box, Button, Paper } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import { actions } from "../../store";
+// import { actions } from "../../store";
 import {
     ProfileVariantEnum,
     SheetClassObjectType,
@@ -22,19 +22,19 @@ const SheetBar = () => {
     const index = Number(useParams().index) - 1;
     const sheet: SheetClassObjectType =
         mode === ProfileVariantEnum.Local ? sheets[index] : calcRemote.sheet;
-    const dispatch = useDispatch();
-    const reachedLimit: boolean = sheet.tables.length >= 3;
+    // const dispatch = useDispatch();
+    // const reachedLimit: boolean = sheet.tables.length >= 3;
 
     /**
      * adds new table into sheet
      */
-    const handleTableAdd = () => {
-        if (!reachedLimit) {
-            const _sheet = _.cloneDeep(sheet);
-            _sheet.tables.push(new TableClass(26, 26).getObject());
-            dispatch(actions.setSheet(_sheet));
-        }
-    };
+    // const handleTableAdd = () => {
+    //     if (!reachedLimit) {
+    //         const _sheet = _.cloneDeep(sheet);
+    //         _sheet.tables.push(new TableClass(26, 26).getObject());
+    //         dispatch(actions.setSheet(_sheet));
+    //     }
+    // };
 
     return (
         <Paper
@@ -60,24 +60,24 @@ const SheetBar = () => {
                         <SheetBarButton name={`${i + 1}`} id={tab.id} key={i} />
                     ))}
             </Box>
-            <Box
-                sx={{
-                    ml: "auto",
-                    pl: 5,
-                }}
-            >
-                <Button
-                    variant="contained"
-                    color="success"
-                    disabled={reachedLimit}
-                    onClick={() => handleTableAdd()}
-                    sx={{
-                        fontSize: "24px",
-                    }}
-                >
-                    +
-                </Button>
-            </Box>
+            {/* <Box */}
+            {/*     sx={{ */}
+            {/*         ml: "auto", */}
+            {/*         pl: 5, */}
+            {/*     }} */}
+            {/* > */}
+            {/*     <Button */}
+            {/*         variant="contained" */}
+            {/*         color="success" */}
+            {/*         disabled={reachedLimit} */}
+            {/*         onClick={() => handleTableAdd()} */}
+            {/*         sx={{ */}
+            {/*             fontSize: "24px", */}
+            {/*         }} */}
+            {/*     > */}
+            {/*         + */}
+            {/*     </Button> */}
+            {/* </Box> */}
         </Paper>
     );
 };

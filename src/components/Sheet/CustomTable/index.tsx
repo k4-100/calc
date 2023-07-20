@@ -76,7 +76,6 @@ const CustomTable: React.FC = () => {
         []
     );
 
-    // debugger;
     /** memoized current table */
     const table: TableClassObjectType = useMemo(
         () => sheet.tables[tableIndex],
@@ -85,6 +84,14 @@ const CustomTable: React.FC = () => {
 
     /** memoized letters at top of a table */
     const listTable = useMemo(() => {
+        if (!table.cells)
+            return [
+                <CustomInfoCellMemoized
+                    key={0}
+                    content={String.fromCharCode(65 + 0)}
+                    width={170}
+                />,
+            ];
         return table.cells[0].map((_, i) => (
             <CustomInfoCellMemoized
                 key={i}
@@ -93,6 +100,8 @@ const CustomTable: React.FC = () => {
             />
         ));
     }, [table.cells]);
+
+    if (!table.cells) return <> </>;
 
     /** all the cell in form of jsx array */
     const cells = table.cells.map((_, y) => (

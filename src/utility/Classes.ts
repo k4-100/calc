@@ -149,7 +149,11 @@ export class SheetClass {
      * constructs sheet with default table and an id
      */
     constructor() {
-        this.tables = [new TableClass(26, 26)];
+        this.tables = [
+            new TableClass(26, 26),
+            new TableClass(26, 26),
+            new TableClass(26, 26),
+        ];
         this.id = ++sheetIDsrc;
         this.mainTabID = this.tables[0].id;
     }
