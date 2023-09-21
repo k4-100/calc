@@ -44,7 +44,11 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
                     new CellClass(x, y, "").getObject()
                 )
         );
-        dispatch(actions.setSheet(_sheet));
+
+        if (mode === ProfileVariantEnum.Online)
+            dispatch(actions.setSheetRemote({ sheet: _sheet, checksums: [] }));
+        else if (mode === ProfileVariantEnum.Local)
+            dispatch(actions.setSheet(_sheet));
     };
 
     /**
