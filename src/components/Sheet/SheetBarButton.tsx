@@ -1,16 +1,18 @@
 import React from "react";
 import _ from "lodash";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
 import { actions } from "../../store";
 import { useParams } from "react-router-dom";
 import {
+    CellClass,
     ProfileVariantEnum,
     SheetClassObjectType,
+    TableClassObjectType,
 } from "../../utility/Classes";
-import { blue, green } from "@mui/material/colors";
-import { Delete, DeleteOutline } from "@mui/icons-material";
+import { blue } from "@mui/material/colors";
+import { DeleteOutline } from "@mui/icons-material";
 
 /**
  *
@@ -30,17 +32,20 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
      * deletes table from sheet
      * @param id id of table to be deleted
      */
-    // const handleDelClick = (id: number) => {
-    //     const _sheet = _.cloneDeep(sheet);
-    //     const deleteIndex = _sheet.tables.findIndex(
-    //         (tab: any) => tab.id === id
-    //     );
-    //     _sheet.tables.splice(deleteIndex, 1);
-    //     // ensures there will be always a main tab
-    //     if (_sheet.mainTabID === id) _sheet.mainTabID = _sheet.tables[0].id;
-    //     // setSheet!(_sheet);
-    //     dispatch(actions.setSheet(_sheet));
-    // };
+    const handleEraseClick = (id: number) => {
+        const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
+        const eraseIndex = _sheet.tables.findIndex(
+            (tab: TableClassObjectType) => tab.id === id
+        );
+        console.log(eraseIndex);
+        _sheet.tables[eraseIndex].cells = _sheet.tables[eraseIndex].cells.map(
+            (row: any) =>
+                row.map(({ x, y }: { x: number; y: number }) =>
+                    new CellClass(x, y, "").getObject()
+                )
+        );
+        dispatch(actions.setSheet(_sheet));
+    };
 
     /**
      * switches to another main table
@@ -62,17 +67,11 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
                 display: "flex",
                 flex: 1,
                 mx: 0.5,
-                // p: 1,
-                // mr: 4,
-                // border:
-                //     sheet.mainTabID === id
-                //         ? `3px solid ${green[600]}`
-                //         : "initial",
             }}
         >
             <Button
-                variant="contained"
                 onClick={() => handleSwitchToNextTable(id)}
+                variant="contained"
                 sx={{
                     borderRadius: 0,
                     width: 1,
@@ -82,22 +81,22 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
             >
                 {name}
             </Button>
-            <Button
-                variant="contained"
-                color="error"
-                // onClick={() => {
-                //     if (mode === ProfileVariantEnum.Local) handleDelClick(id);
-                // }}
-                sx={{
-                    minWidth: "0",
-                    borderRadius: 0,
-                    width: "50px",
-                    p: 0,
-                }}
-                disabled={sheet.tables.length < 2}
-            >
-                <DeleteOutline sx={{}} />
-            </Button>
+            <Tooltip title="Erase content">
+                <Button
+                    onClick={() => handleEraseClick(id)}
+                    variant="contained"
+                    color="error"
+                    sx={{
+                        minWidth: "0",
+                        borderRadius: 0,
+                        width: "50px",
+                        p: 0,
+                    }}
+                    disabled={sheet.tables.length < 2}
+                >
+                    <DeleteOutline sx={{}} />
+                </Button>
+            </Tooltip>
         </Box>
     );
 };

@@ -207,7 +207,6 @@ const calcSlice = createSlice({
             const sheetIndex: number = newState.findIndex(
                 (sht: SheetClassObjectType) => sht.id === action.payload.id
             );
-
             if (sheetIndex < 0) {
                 console.error(
                     "ERROR: SHEET ISN'T PART OF THE STATE IN setSheet"
