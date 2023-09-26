@@ -2,7 +2,7 @@ import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../../store";
-import ROUTES from "../../../utility/constants";
+import { ROUTES } from "../../../utility/constants";
 
 const OnlineProfile: React.FC = () => {
     const { token } = useSelector((state: any) => state);

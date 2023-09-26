@@ -2,7 +2,7 @@ import { Save } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
-import ROUTES from "../../utility/constants";
+import { ROUTES } from "../../utility/constants";
 
 const SaveButton: React.FC = () => {
     const { mode, calcRemote, token } = useSelector((state: any) => state);

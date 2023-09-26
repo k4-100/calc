@@ -6,7 +6,7 @@ import {
     SheetClassObjectType,
     SheetClassObjectTypeWithChecksum,
 } from "./Classes";
-import ROUTES from "./constants";
+import { ROUTES } from "./constants";
 
 //#region utils
 /**

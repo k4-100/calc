@@ -7,7 +7,7 @@ import TextEditor from "./components/TextEditor";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "./store";
 import jwtDecode from "jwt-decode";
-import ROUTES from "./utility/constants";
+import { ROUTES } from "./utility/constants";
 
 const darkTheme = createTheme({
     palette: {
