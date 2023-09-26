@@ -7,6 +7,7 @@ import { actions } from "../../../store";
 import { useParams } from "react-router-dom";
 import {
     CellClass,
+    MarkdownPanelObjectType,
     MarkdownPanelSheetObjectType,
     ProfileVariantEnum,
     SheetClassObjectType,
@@ -33,24 +34,16 @@ const MarkdownBarButton: React.FC<{ name: string; id: number }> = ({
      * erases data from the panel with matching id
      * @param id id of the panel to clear
      */
-    // const handleEraseClick = (id: number) => {
-    //     const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
-    //     const eraseIndex = _sheet.tables.findIndex(
-    //         (tab: TableClassObjectType) => tab.id === id
-    //     );
-    //     console.log(eraseIndex);
-    //     _sheet.tables[eraseIndex].cells = _sheet.tables[eraseIndex].cells.map(
-    //         (row: any) =>
-    //             row.map(({ x, y }: { x: number; y: number }) =>
-    //                 new CellClass(x, y, "").getObject()
-    //             )
-    //     );
+    const handleEraseClick = (id: number) => {
+        const _sheet: MarkdownPanelSheetObjectType = _.cloneDeep(sheet);
+        const eraseIndex = _sheet.panels.findIndex(
+            (tab: MarkdownPanelObjectType) => tab.id === id
+        );
+        console.log(eraseIndex);
+        _sheet.panels[eraseIndex].content = "";
 
-    //     if (mode === ProfileVariantEnum.Online)
-    //         dispatch(actions.setSheetRemote({ sheet: _sheet, checksums: [] }));
-    //     else if (mode === ProfileVariantEnum.Local)
-    //         dispatch(actions.setSheet(_sheet));
-    // };
+        dispatch(actions.setMarkdownSheet(_sheet));
+    };
 
     /**
      * switches to another main table
@@ -86,7 +79,7 @@ const MarkdownBarButton: React.FC<{ name: string; id: number }> = ({
             </Button>
             <Tooltip title="Erase content">
                 <Button
-                    // onClick={() => handleEraseClick(id)}
+                    onClick={() => handleEraseClick(id)}
                     variant="contained"
                     color="error"
                     sx={{

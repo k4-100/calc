@@ -11,6 +11,7 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeRaw from "rehype-raw";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import _ from "lodash";
 import {
     AppVariantEnum,
     MarkdownPanelObjectType,
@@ -29,14 +30,12 @@ const TextEditor: React.FC = () => {
 
     const currentPanelSheet: MarkdownPanelSheetObjectType =
         markdownPanels[index];
+    const currentPanelIndex: number = currentPanelSheet.panels.findIndex(
+        (panel) => panel.id === currentPanelSheet.mainTabID
+    );
     const currentPanel: MarkdownPanelObjectType =
-        currentPanelSheet.panels[
-            currentPanelSheet.panels.findIndex(
-                (panel) => panel.id === currentPanelSheet.mainTabID
-            )
-        ];
+        currentPanelSheet.panels[currentPanelIndex];
     const [text, setText] = useState<string>("");
-    // const [text, setText] = useState<string>(currentPanel.content || "");
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
@@ -45,15 +44,20 @@ const TextEditor: React.FC = () => {
     const handlePanelChange = useCallback(() => {
         console.log(`trying to save id: ${currentPanel.id}`);
         if (currentPanel.content !== text) {
-            console.log(`saved id: ${currentPanel.id}`);
-            // dispatch(
-            //     actions.setMarkdownSheet({
-            //         panelID: currentPanel.id,
-            //         content: text,
-            //     })
-            // );
+            const newSheet: MarkdownPanelSheetObjectType =
+                _.cloneDeep(currentPanelSheet);
+            newSheet.panels[currentPanelIndex].content = text;
+
+            dispatch(actions.setMarkdownSheet(newSheet));
         }
-    }, [currentPanel.content, currentPanel.id, dispatch, text]);
+    }, [
+        currentPanel.content,
+        currentPanel.id,
+        dispatch,
+        text,
+        currentPanelIndex,
+        currentPanelSheet,
+    ]);
 
     useEffect(() => {
         let timerID = setTimeout(() => handlePanelChange(), 3000);
