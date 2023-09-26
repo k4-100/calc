@@ -3,14 +3,14 @@ import _ from "lodash";
 import { Box, Button, Tooltip } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 
-import { actions } from "../../store";
+import { actions } from "../../../store";
 import { useParams } from "react-router-dom";
 import {
     CellClass,
     ProfileVariantEnum,
     SheetClassObjectType,
     TableClassObjectType,
-} from "../../utility/Classes";
+} from "../../../utility/Classes";
 import { blue } from "@mui/material/colors";
 import { DeleteOutline } from "@mui/icons-material";
 

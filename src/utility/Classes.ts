@@ -1,7 +1,26 @@
 /**
- * id for cells
+ * id src for cells
  */
 let cellIDSrc: number = 0;
+/**
+ * id src for tables
+ */
+let tableIDSrc: number = 0;
+
+/**
+ * id src for sheets
+ */
+let sheetIDsrc: number = 0;
+
+/**
+ * id src for MarkdownPanel
+ */
+let markdownPanelIDsrc: number = 0;
+
+/**
+ * id src for MarkdownPanel
+ */
+let markdownPanelSheetIDsrc: number = 0;
 
 /**
  * represents Cell inside a table in form of a pure object
@@ -72,11 +91,6 @@ export class CellClass {
 }
 
 /**
- * id for tables
- */
-let tableIDSrc: number = 0;
-
-/**
  * class representing a table filled with cells in a forn of a pure object
  */
 export type TableClassObjectType = {
@@ -123,11 +137,6 @@ export class TableClass {
     }
 }
 
-/**
- * id for sheets
- */
-let sheetIDsrc: number = 0;
-
 export type SheetClassObjectType = {
     /** all tables in the sheet */
     tables: Array<TableClassObjectType>;
@@ -167,10 +176,12 @@ export class SheetClass {
     }
 }
 
-/**
- * id src for MarkdownPanel
- */
-let markdownPanelIDsrc: number = 0;
+export type SheetClassObjectTypeWithChecksum = {
+    /** sheet containg tables used in calc */
+    sheet: SheetClassObjectType;
+    /** checksums ensuring data validity */
+    checksums: string[];
+};
 
 export type MarkdownPanelObjectType = {
     id: number;
@@ -194,14 +205,51 @@ export class MarkdownPanel {
     }
 }
 
+export type MarkdownPanelSheetObjectType = {
+    /** all panels in the sheet */
+    panels: Array<MarkdownPanelObjectType>;
+    /** sheet id */
+    id: number;
+    /** id of main tab */
+    mainTabID: number;
+};
+
+export class MarkdownPanelSheet {
+    /** all panels in the sheet */
+    panels: Array<MarkdownPanel>;
+    /** sheet id */
+    id: number;
+    /** id of main tab */
+    mainTabID: number;
+
+    /**
+     * constructs sheet with default table and an id
+     */
+    constructor() {
+        this.panels = [
+            new MarkdownPanel(),
+            new MarkdownPanel(),
+            new MarkdownPanel(),
+        ];
+        this.id = ++sheetIDsrc;
+        this.mainTabID = this.panels[0].id;
+    }
+
+    getObject(): MarkdownPanelSheetObjectType {
+        return {
+            panels: this.panels.map((panel) => panel.getObject()),
+            id: this.id,
+            mainTabID: this.mainTabID,
+        };
+    }
+}
+
 export enum ProfileVariantEnum {
     Local,
     Online,
 }
 
-export type SheetClassObjectTypeWithChecksum = {
-    /** sheet containg tables used in calc */
-    sheet: SheetClassObjectType;
-    /** checksums ensuring data validity */
-    checksums: string[];
-};
+export enum AppVariantEnum {
+    Calc,
+    Markdown,
+}

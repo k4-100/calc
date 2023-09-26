@@ -18,13 +18,6 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
                 boxSizing: "border-box",
                 width: "50%",
                 height: "80vh",
-                // maxHeight: "100%",
-                // overflow: "hidden",
-                // display: "flex",
-                // flexDirection: "column",
-                // "& > *:nth-of-type(1)": {
-                //     backgroundColor: "red !important",
-                // },
             }}
         >
             <Typography
@@ -33,8 +26,6 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
                 sx={{
                     pl: "10px",
                     py: 0.5,
-                    // mt: 6,
-
                     color: grey[600],
                 }}
             >
@@ -46,7 +37,6 @@ const Panel: React.FC<Props> = ({ panelName, children }) => {
                     maxHeight: "100% !important",
                     display: "flex",
                     flexDirection: "column",
-                    // backgroundColor: "red",
                     "& > *": {
                         width: "100%",
                         height: "80% !important",

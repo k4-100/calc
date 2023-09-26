@@ -3,14 +3,15 @@ import React, { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actions } from "../../store";
 import {
+    AppVariantEnum,
     ProfileVariantEnum,
     SheetClassObjectType,
 } from "../../utility/Classes";
 import { fetchInitialStateCalcRemote } from "../../utility/functions";
+import SaveBar from "../common/SaveBar";
 import UtilityBelt from "../common/UtilityBelt";
 import SearchBar from "../common/UtilityBelt/SearchBar";
 import SaveButton from "./SaveButton";
-import SheetBar from "./SheetBar";
 
 /** lazy loaded */
 const SuspensendedCustomTable = React.lazy(() => import("./CustomTable"));
@@ -127,7 +128,7 @@ const Sheet: React.FC = () => {
                     )}
                 </Suspense>
             </Box>
-            <SheetBar />
+            <SaveBar app={AppVariantEnum.Calc} />
         </>
     );
 };
