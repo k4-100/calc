@@ -7,6 +7,7 @@ import { actions } from "../../../store";
 import { useParams } from "react-router-dom";
 import {
     CellClass,
+    MarkdownPanelSheetObjectType,
     ProfileVariantEnum,
     SheetClassObjectType,
     TableClassObjectType,
@@ -16,53 +17,51 @@ import { DeleteOutline } from "@mui/icons-material";
 
 /**
  *
- * @returns SheetBarButton Button in a SheetBar representing Table
+ * @returns MarkdownBarButton Button in a Save representing MarkdownPanel
  */
-const SheetBarButton: React.FC<{ name: string; id: number }> = ({
+const MarkdownBarButton: React.FC<{ name: string; id: number }> = ({
     name,
     id,
 }) => {
     const index = Number(useParams().index) - 1;
-    const { mode, calc, calcRemote } = useSelector((state: any) => state);
-    const sheet: SheetClassObjectType =
-        mode === ProfileVariantEnum.Local ? calc[index] : calcRemote.sheet;
+    const { mode, markdownPanels } = useSelector((state: any) => state);
+    const sheet: MarkdownPanelSheetObjectType = markdownPanels[index];
+
     const dispatch = useDispatch();
 
     /**
-     * erases data from the table with matching id
-     * @param id id of the table to clear
+     * erases data from the panel with matching id
+     * @param id id of the panel to clear
      */
-    const handleEraseClick = (id: number) => {
-        const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
-        const eraseIndex = _sheet.tables.findIndex(
-            (tab: TableClassObjectType) => tab.id === id
-        );
-        console.log(eraseIndex);
-        _sheet.tables[eraseIndex].cells = _sheet.tables[eraseIndex].cells.map(
-            (row: any) =>
-                row.map(({ x, y }: { x: number; y: number }) =>
-                    new CellClass(x, y, "").getObject()
-                )
-        );
+    // const handleEraseClick = (id: number) => {
+    //     const _sheet: SheetClassObjectType = _.cloneDeep(sheet);
+    //     const eraseIndex = _sheet.tables.findIndex(
+    //         (tab: TableClassObjectType) => tab.id === id
+    //     );
+    //     console.log(eraseIndex);
+    //     _sheet.tables[eraseIndex].cells = _sheet.tables[eraseIndex].cells.map(
+    //         (row: any) =>
+    //             row.map(({ x, y }: { x: number; y: number }) =>
+    //                 new CellClass(x, y, "").getObject()
+    //             )
+    //     );
 
-        if (mode === ProfileVariantEnum.Online)
-            dispatch(actions.setSheetRemote({ sheet: _sheet, checksums: [] }));
-        else if (mode === ProfileVariantEnum.Local)
-            dispatch(actions.setSheet(_sheet));
-    };
+    //     if (mode === ProfileVariantEnum.Online)
+    //         dispatch(actions.setSheetRemote({ sheet: _sheet, checksums: [] }));
+    //     else if (mode === ProfileVariantEnum.Local)
+    //         dispatch(actions.setSheet(_sheet));
+    // };
 
     /**
      * switches to another main table
      * @param id id of a new main table
      */
-    const handleSwitchToNextTable = (id: number) => {
+    const handleSwitchToNext = (id: number) => {
         console.log(id);
         const _sheet = _.cloneDeep(sheet);
         _sheet.mainTabID = id;
-        if (mode === ProfileVariantEnum.Online)
-            dispatch(actions.setSheetRemote({ sheet: _sheet, checksums: [] }));
-        else if (mode === ProfileVariantEnum.Local)
-            dispatch(actions.setSheet(_sheet));
+
+        dispatch(actions.setMarkdownSheet(_sheet));
     };
 
     return (
@@ -74,7 +73,7 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
             }}
         >
             <Button
-                onClick={() => handleSwitchToNextTable(id)}
+                onClick={() => handleSwitchToNext(id)}
                 variant="contained"
                 sx={{
                     borderRadius: 0,
@@ -87,7 +86,7 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
             </Button>
             <Tooltip title="Erase content">
                 <Button
-                    onClick={() => handleEraseClick(id)}
+                    // onClick={() => handleEraseClick(id)}
                     variant="contained"
                     color="error"
                     sx={{
@@ -96,7 +95,7 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
                         width: "50px",
                         p: 0,
                     }}
-                    disabled={sheet.tables.length < 2}
+                    disabled={sheet.panels.length < 2}
                 >
                     <DeleteOutline sx={{}} />
                 </Button>
@@ -105,4 +104,4 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     );
 };
 
-export default SheetBarButton;
+export default MarkdownBarButton;

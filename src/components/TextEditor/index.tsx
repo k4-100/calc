@@ -11,7 +11,12 @@ import { vscDarkPlus } from "react-syntax-highlighter/dist/esm/styles/prism";
 import rehypeRaw from "rehype-raw";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { MarkdownPanelObjectType } from "../../utility/Classes";
+import {
+    AppVariantEnum,
+    MarkdownPanelObjectType,
+    MarkdownPanelSheetObjectType,
+} from "../../utility/Classes";
+import SaveBar from "../common/SaveBar";
 import { actions } from "../../store";
 
 /**
@@ -21,25 +26,32 @@ const TextEditor: React.FC = () => {
     const index = Number(useParams().index) - 1;
     const { markdownPanels } = useSelector((state: any) => state);
     const dispatch = useDispatch();
-    const currentPanel: MarkdownPanelObjectType = markdownPanels[index];
 
-    const [text, setText] = useState<string>(currentPanel.content || "");
+    const currentPanelSheet: MarkdownPanelSheetObjectType =
+        markdownPanels[index];
+    const currentPanel: MarkdownPanelObjectType =
+        currentPanelSheet.panels[
+            currentPanelSheet.panels.findIndex(
+                (panel) => panel.id === currentPanelSheet.mainTabID
+            )
+        ];
+    const [text, setText] = useState<string>("");
+    // const [text, setText] = useState<string>(currentPanel.content || "");
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
     };
-    // console.log(currentPanel);
 
     const handlePanelChange = useCallback(() => {
         console.log(`trying to save id: ${currentPanel.id}`);
         if (currentPanel.content !== text) {
             console.log(`saved id: ${currentPanel.id}`);
-            dispatch(
-                actions.setContentForPanel({
-                    panelID: currentPanel.id,
-                    content: text,
-                })
-            );
+            // dispatch(
+            //     actions.setMarkdownSheet({
+            //         panelID: currentPanel.id,
+            //         content: text,
+            //     })
+            // );
         }
     }, [currentPanel.content, currentPanel.id, dispatch, text]);
 
@@ -49,19 +61,26 @@ const TextEditor: React.FC = () => {
         return () => clearTimeout(timerID);
     }, [handlePanelChange]);
 
+    // useEffect(() => {
+    //     const handleWarningAlert = () => {
+    //         alert(
+    //             "WARNING: make sure html in markdown you paste is safe, additional security will be implemented in the future"
+    //         );
+    //     };
+    //     let id: number = setTimeout(() => handleWarningAlert(), 1000);
+    //     return () => clearTimeout(id);
+    // }, []);
+
     useEffect(() => {
-        const handleWarningAlert = () => {
-            alert(
-                "WARNING: make sure html in markdown you paste is safe, additional security will be implemented in the future"
-            );
-        };
-        let id: number = setTimeout(() => handleWarningAlert(), 1000);
-        return () => clearTimeout(id);
-    }, []);
+        setText(currentPanel.content || "");
+    }, [currentPanel]);
 
     return (
         <Box
             sx={{
+                display: "flex",
+                flexDirection: "column",
+                // height: "100vh",
                 // firefox
                 scrollbarColor: "rgb(144, 202, 249)",
                 // scrollbarColor: "green",
@@ -102,12 +121,20 @@ const TextEditor: React.FC = () => {
                 sx={{
                     margin: 2,
                     // height: "100%",
-                    maxHeight: "60vh",
+                    // maxHeight: "60vh",
                     display: "flex",
                     justifyContent: "space-between",
                     "& > *": {
-                        // height: "100%",
+                        height: "78vh",
                         m: 1,
+                        // p: 1,
+                        // height: 0,
+                        "& > div": {
+                            // p: 1,
+                            // maxHeight: "50%",
+                            height: "85%",
+                            overflow: "hidden",
+                        },
                     },
                 }}
             >
@@ -119,6 +146,7 @@ const TextEditor: React.FC = () => {
                         onChange={(e) => handleTextChange(e)}
                         style={{
                             display: "block",
+                            // height: "50vh !important",
                             backgroundColor: grey[800],
                             color: "white",
                             fontSize: "18px",
@@ -193,6 +221,7 @@ const TextEditor: React.FC = () => {
                     </Box>
                 </Panel>
             </Box>
+            <SaveBar app={AppVariantEnum.Markdown} />
         </Box>
     );
 };

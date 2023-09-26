@@ -29,8 +29,8 @@ const SheetBarButton: React.FC<{ name: string; id: number }> = ({
     const dispatch = useDispatch();
 
     /**
-     * erases data from the table with matching id
-     * @param id id of the table to clear
+     * deletes table from sheet
+     * @param id id of table to be deleted
      */
     const handleEraseClick = (id: number) => {
         const _sheet: SheetClassObjectType = _.cloneDeep(sheet);

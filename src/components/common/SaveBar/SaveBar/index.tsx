@@ -6,14 +6,11 @@ import { useParams } from "react-router-dom";
 
 import {
     AppVariantEnum,
-    MarkdownPanelObjectType,
-    MarkdownPanelSheetObjectType,
     ProfileVariantEnum,
     SheetClassObjectType,
     TableClassObjectType,
 } from "../../../utility/Classes";
 import SheetBarButton from "./SheetBarButton";
-import MarkdownBarButton from "./MarkdownBarButton";
 
 /**
  * @param app app variant
@@ -22,12 +19,8 @@ import MarkdownBarButton from "./MarkdownBarButton";
 const SaveBar: React.FC<{ app: AppVariantEnum }> = ({ app }) => {
     const index = Number(useParams().index) - 1;
 
-    const { mode, calcRemote, markdownPanels } = useSelector(
-        (state: any) => state
-    );
-
+    const { mode, calcRemote } = useSelector((state: any) => state);
     const sheets = useSelector((state: any) => state.calc);
-    const markdownSheets = useSelector((state: any) => state.markdownPanels);
 
     if (app === AppVariantEnum.Calc) {
         const sheet: SheetClassObjectType =
@@ -58,43 +51,6 @@ const SaveBar: React.FC<{ app: AppVariantEnum }> = ({ app }) => {
                         sheet.tables.map(
                             (tab: TableClassObjectType, i: number) => (
                                 <SheetBarButton
-                                    name={`${i + 1}`}
-                                    id={tab.id}
-                                    key={i}
-                                />
-                            )
-                        )}
-                </Box>
-            </Paper>
-        );
-    }
-
-    if (app === AppVariantEnum.Markdown) {
-        const sheet: MarkdownPanelSheetObjectType = markdownSheets[index];
-
-        return (
-            <Paper
-                elevation={2}
-                sx={{
-                    display: "flex",
-                    p: 2,
-                    width: "100%",
-                }}
-            >
-                <Box
-                    sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-
-                        boxSizing: "border-box",
-                        width: "100%",
-                        // ml: "auto",
-                    }}
-                >
-                    {sheet.panels.length &&
-                        sheet.panels.map(
-                            (tab: MarkdownPanelObjectType, i: number) => (
-                                <MarkdownBarButton
                                     name={`${i + 1}`}
                                     id={tab.id}
                                     key={i}
