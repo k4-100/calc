@@ -1,3 +1,5 @@
+import { MARKDOWN_PLACEHOLDER } from "./constants";
+
 /**
  * id src for cells
  */
@@ -233,6 +235,7 @@ export class MarkdownPanelSheet {
         ];
         this.id = ++sheetIDsrc;
         this.mainTabID = this.panels[0].id;
+        this.panels[0].content = MARKDOWN_PLACEHOLDER;
     }
 
     getObject(): MarkdownPanelSheetObjectType {

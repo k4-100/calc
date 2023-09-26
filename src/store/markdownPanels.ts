@@ -13,7 +13,7 @@ import {
  *  - array saved in local storage
  */
 const determineInitialStateMarkdownPanels =
-    (): Array<MarkdownPanelObjectType> => {
+    (): Array<MarkdownPanelSheetObjectType> => {
         const markdownPanelsRaw: null | string =
             localStorage.getItem("markdownPanels");
         if (!markdownPanelsRaw) {
@@ -21,12 +21,7 @@ const determineInitialStateMarkdownPanels =
                 new MarkdownPanelSheet().getObject(),
                 new MarkdownPanelSheet().getObject(),
                 new MarkdownPanelSheet().getObject(),
-                // new MarkdownPanel().getObject(),
-                // new MarkdownPanel().getObject(),
-                // new MarkdownPanel().getObject(),
             ];
-
-            newMarkdownPanelArr[0].content = markdownPlacehoder;
 
             localStorage.setItem(
                 "markdownPanels",
@@ -35,38 +30,112 @@ const determineInitialStateMarkdownPanels =
             return newMarkdownPanelArr;
         }
 
-        return JSON.parse(markdownPanelsRaw) as Array<MarkdownPanelObjectType>;
+        return JSON.parse(
+            markdownPanelsRaw
+        ) as Array<MarkdownPanelSheetObjectType>;
     };
 
 const markdownPanelsSlice = createSlice({
     name: "markdownPanels",
     initialState: determineInitialStateMarkdownPanels(),
     reducers: {
-        setContentForPanel(
+        // setCell(
+        //     state: Array<SheetClassObjectType>,
+        //     action: {
+        //         payload: { cell: CellClassObjectType; sheetID: number };
+        //         type: string;
+        //     }
+        // ) {
+        //     const newState = _.cloneDeep(state);
+        //     const sheetIndex: number = newState.findIndex(
+        //         (sht: SheetClassObjectType) => sht.id === action.payload.sheetID
+        //     );
+
+        //     if (sheetIndex < 0) {
+        //         console.error("ERROR: SHEET DOESN'T EXIST");
+        //         return;
+        //     }
+
+        //     const tableIndex = newState[sheetIndex].tables.findIndex(
+        //         (tab: any) => tab.id === newState[sheetIndex].mainTabID
+        //     );
+
+        //     if (tableIndex < 0) {
+        //         console.error("ERROR: TABLE DOESN'T EXIST");
+        //         return;
+        //     }
+
+        //     const { payload } = action;
+        //     payload.cell.value = getEvaluatedText(
+        //         newState[sheetIndex],
+        //         tableIndex,
+        //         payload.cell.text
+        //     );
+        //     newState[sheetIndex].tables[tableIndex].cells[payload.cell.y][
+        //         payload.cell.x
+        //     ] = _.cloneDeep(action.payload.cell);
+        //     localStorage.setItem("sheets", JSON.stringify(newState));
+        //     return newState;
+        // },
+
+        // setContentForPanel(
+        //     state,
+        //     action: {
+        //         payload: { panelID: number; content: string };
+        //         type: string;
+        //     }
+        // ) {
+        //     const newState = _.cloneDeep(state);
+
+        //     const { panelID, content } = action.payload;
+        //     console.log(action.payload);
+        //     const panelIndex: number = newState.findIndex(
+        //         (panel: MarkdownPanelObjectType) => panel.id === panelID
+        //     );
+
+        //     if (panelIndex < 0) {
+        //         console.error("ERROR: MARKDOWN PANEL DOESN'T EXIST");
+        //         return;
+        //     }
+
+        //     newState[panelIndex].content = content;
+
+        //     console.log(newState);
+
+        //     localStorage.setItem("markdownPanels", JSON.stringify(newState));
+        //     return newState;
+        // },
+
+        setMarkdownSheet(
             state,
             action: {
-                payload: { panelID: number; content: string };
+                payload: MarkdownPanelSheetObjectType;
                 type: string;
             }
         ) {
             const newState = _.cloneDeep(state);
 
-            const { panelID, content } = action.payload;
-            console.log(action.payload);
-            const panelIndex: number = newState.findIndex(
-                (panel: MarkdownPanelObjectType) => panel.id === panelID
+            const sheetIndex: number = newState.findIndex(
+                (sht: MarkdownPanelSheetObjectType) =>
+                    sht.id === action.payload.id
             );
 
-            if (panelIndex < 0) {
-                console.error("ERROR: MARKDOWN PANEL DOESN'T EXIST");
+            if (sheetIndex < 0) {
+                console.error(
+                    "ERROR: SHEET ISN'T PART OF THE STATE IN setMarkdownSheet"
+                );
                 return;
             }
 
-            newState[panelIndex].content = content;
-
-            console.log(newState);
-
+            if (sheetIndex < 0) {
+                console.error(
+                    "ERROR: SHEET ISN'T PART OF THE STATE IN setSheet"
+                );
+                return;
+            }
+            newState[sheetIndex] = _.cloneDeep(action.payload);
             localStorage.setItem("markdownPanels", JSON.stringify(newState));
+
             return newState;
         },
     },

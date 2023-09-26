@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import _, { cloneDeep } from "lodash";
+import _ from "lodash";
 import { evaluate } from "mathjs";
 import {
     CellClassObjectType,
@@ -213,7 +213,7 @@ const calcSlice = createSlice({
                 );
                 return;
             }
-            newState[sheetIndex] = cloneDeep(action.payload);
+            newState[sheetIndex] = _.cloneDeep(action.payload);
             localStorage.setItem("sheets", JSON.stringify(newState));
             return newState;
         },
