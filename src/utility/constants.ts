@@ -2,6 +2,7 @@ export const ROUTES = {
     ROOT: "http://localhost:5000",
     ACCOUNTS: "accounts",
     CALC: "calc",
+    MARKDOWN: "markdown",
 };
 
 export const MARKDOWN_PLACEHOLDER: string = `

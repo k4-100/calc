@@ -43,7 +43,6 @@ const UtilityBelt: React.FC<Props> = ({ children, helpChildren }) => {
                 </Button>
                 {children}
 
-                {/* <SearchBar /> */}
                 <Button
                     sx={{
                         width: "50px",

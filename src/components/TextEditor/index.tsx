@@ -19,6 +19,7 @@ import {
 } from "../../utility/Classes";
 import SaveBar from "../common/SaveBar";
 import { actions } from "../../store";
+import SaveButton from "./SaveButton";
 
 /**
  * Editor for markdown, with preview on the right side
@@ -112,15 +113,17 @@ const TextEditor: React.FC = () => {
                     <>
                         <ListItem>
                             Type/paste markdown code into "text" panel, it will
-                            be automatically converted.
+                            preview automatically.
                         </ListItem>
                         <ListItem>
                             App saves text automatically every 3 seconds (if
-                            change occurs).
+                            change occurs and in local mode).
                         </ListItem>
                     </>
                 }
-            />
+            >
+                <SaveButton />
+            </UtilityBelt>
             <Box
                 sx={{
                     margin: 2,

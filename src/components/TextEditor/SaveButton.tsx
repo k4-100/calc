@@ -9,7 +9,7 @@ const SaveButton: React.FC = () => {
 
     const saveSheetToDB = async () => {
         console.log(JSON.stringify(calcRemote));
-        await fetch(`${ROUTES.ROOT}/${ROUTES.CALC}/save`, {
+        await fetch(`${ROUTES.ROOT}/${ROUTES.MARKDOWN}/save`, {
             method: "PUT",
             // credentials: "include", // Needed to include the cookie
             headers: {
