@@ -27,7 +27,31 @@ import SaveButton from "./SaveButton";
 const TextEditor: React.FC = () => {
     const index = Number(useParams().index) - 1;
     const { markdownPanels } = useSelector((state: any) => state);
+
+    const { mode, markdownPanelsRemote, token } = useSelector(
+        (state: any) => state
+    );
+    // const { id } = calcRemote.sheet;
     const dispatch = useDispatch();
+    // console.log("id", calcRemote.sheet.id);
+    useEffect(() => {
+        const fetchCalcRemote = async () => {
+            const res = await fetchInitialStateCalcRemote(token.accesstoken);
+
+            dispatch(
+                actions.setSheetRemote({
+                    ...res,
+                    checksums: [],
+                })
+            );
+        };
+        if (calcRemote.sheet.id !== 0) {
+            console.log("run");
+        }
+        if (mode === ProfileVariantEnum.Online) {
+            fetchCalcRemote();
+        }
+    }, [dispatch, token.accesstoken, calcRemote.sheet.id, mode]);
 
     const currentPanelSheet: MarkdownPanelSheetObjectType =
         markdownPanels[index];
