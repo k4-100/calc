@@ -16,79 +16,104 @@ import {
     AppVariantEnum,
     MarkdownPanelObjectType,
     MarkdownPanelSheetObjectType,
+    ProfileVariantEnum,
 } from "../../utility/Classes";
 import SaveBar from "../common/SaveBar";
 import { actions } from "../../store";
 import SaveButton from "./SaveButton";
+import { fetchInitialStateMarkdownRemote } from "../../utility/functions";
 
 /**
  * Editor for markdown, with preview on the right side
  */
 const TextEditor: React.FC = () => {
     const index = Number(useParams().index) - 1;
-    const { markdownPanels } = useSelector((state: any) => state);
+    const [text, setText] = useState<string>("");
+    const [loading, setLoading] = useState<boolean>(true);
+    const [currentPanelSheet, setCurrentPanelSheet] =
+        useState<null | MarkdownPanelSheetObjectType>(null);
+    const [currentPanelIndex, setCurrentPanelIndex] = useState<null | number>(
+        null
+    );
+    const [currentPanel, setCurrentPanel] =
+        useState<null | MarkdownPanelObjectType>(null);
 
-    const { mode, markdownPanelsRemote, token } = useSelector(
+    const { mode, markdownPanels, markdownPanelsRemote, token } = useSelector(
         (state: any) => state
     );
-    // const { id } = calcRemote.sheet;
     const dispatch = useDispatch();
-    // console.log("id", calcRemote.sheet.id);
-    // useEffect(() => {
-    //     const fetchCalcRemote = async () => {
-    //         const res = await fetchInitialStateCalcRemote(token.accesstoken);
 
-    //         dispatch(
-    //             actions.setSheetRemote({
-    //                 ...res,
-    //                 checksums: [],
-    //             })
-    //         );
-    //     };
-    //     if (calcRemote.sheet.id !== 0) {
-    //         console.log("run");
-    //     }
-    //     if (mode === ProfileVariantEnum.Online) {
-    //         fetchCalcRemote();
-    //     }
-    // }, [dispatch, token.accesstoken, calcRemote.sheet.id, mode]);
+    // const currentPanelSheet: MarkdownPanelSheetObjectType =
+    //     mode === ProfileVariantEnum.Local
+    //         ? markdownPanels[index]
+    //         : markdownPanelsRemote[index];
 
-    const currentPanelSheet: MarkdownPanelSheetObjectType =
-        markdownPanels[index];
-    const currentPanelIndex: number = currentPanelSheet.panels.findIndex(
-        (panel) => panel.id === currentPanelSheet.mainTabID
-    );
-    const currentPanel: MarkdownPanelObjectType =
-        currentPanelSheet.panels[currentPanelIndex];
-    const [text, setText] = useState<string>("");
+    // const currentPanelIndex: number = currentPanelSheet.panels.findIndex(
+    //     (panel) => panel.id === currentPanelSheet.mainPanelID
+    // );
+    // const currentPanel: MarkdownPanelObjectType =
+    //     currentPanelSheet.panels[currentPanelIndex];
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
     };
 
-    const handlePanelChange = useCallback(() => {
-        console.log(`trying to save id: ${currentPanel.id}`);
-        if (currentPanel.content !== text) {
-            const newSheet: MarkdownPanelSheetObjectType =
-                _.cloneDeep(currentPanelSheet);
-            newSheet.panels[currentPanelIndex].content = text;
+    useEffect(() => {
+        const fetchMarkdownRemote = async () => {
+            const res = await fetchInitialStateMarkdownRemote(
+                token.accesstoken
+            );
 
-            dispatch(actions.setMarkdownSheet(newSheet));
+            dispatch(actions.setMarkdownSheetRemote(res));
+        };
+        if (mode === ProfileVariantEnum.Online) {
+            fetchMarkdownRemote();
         }
-    }, [
-        currentPanel.content,
-        currentPanel.id,
-        dispatch,
-        text,
-        currentPanelIndex,
-        currentPanelSheet,
-    ]);
+    }, [dispatch, token.accesstoken, mode]);
 
     useEffect(() => {
-        let timerID = setTimeout(() => handlePanelChange(), 3000);
+        if (mode === ProfileVariantEnum.Local && markdownPanels) {
+            setCurrentPanelSheet(markdownPanels[index]);
+        }
 
-        return () => clearTimeout(timerID);
-    }, [handlePanelChange]);
+        if (mode === ProfileVariantEnum.Online && markdownPanelsRemote) {
+            setCurrentPanelSheet(markdownPanelsRemote);
+        }
+    }, [index, markdownPanels, markdownPanelsRemote, mode]);
+
+    useEffect(() => {
+        if (currentPanelSheet && !currentPanelIndex) {
+            const _currentPanelIndex = currentPanelSheet.panels.findIndex(
+                (panel) => panel.id === currentPanelSheet.mainPanelID
+            );
+            setCurrentPanelIndex(_currentPanelIndex);
+            setCurrentPanel(
+                currentPanelSheet.panels[_currentPanelIndex as number]
+            );
+            // debugger;
+        }
+    }, [currentPanelIndex, currentPanelSheet]);
+
+    useEffect(() => {
+        const handlePanelChange = () => {
+            // console.log(`trying to save id: ${currentPanel.id}`);
+            if (currentPanelSheet != null) {
+                if (
+                    (currentPanel as MarkdownPanelObjectType).content !== text
+                ) {
+                    const newSheet: MarkdownPanelSheetObjectType = _.cloneDeep(
+                        currentPanelSheet
+                    ) as MarkdownPanelSheetObjectType;
+                    newSheet.panels[currentPanelIndex as number].content = text;
+
+                    dispatch(actions.setMarkdownSheet(newSheet));
+                }
+            }
+        };
+
+        // let timerID = setTimeout(() => handlePanelChange(), 3000);
+        // return () => clearTimeout(timerID);
+    }, [currentPanel, currentPanelIndex, currentPanelSheet, dispatch, text]);
 
     // useEffect(() => {
     //     const handleWarningAlert = () => {
@@ -101,8 +126,19 @@ const TextEditor: React.FC = () => {
     // }, []);
 
     useEffect(() => {
-        setText(currentPanel.content || "");
+        if (currentPanel) {
+            console.log("if (currentPanel) {");
+            debugger;
+            setText(
+                mode === ProfileVariantEnum.Local
+                    ? currentPanel.content
+                    : (currentPanel as any).compressed_content
+            );
+            setLoading(false);
+        }
     }, [currentPanel]);
+
+    if (loading) return <> loading...</>;
 
     return (
         <Box

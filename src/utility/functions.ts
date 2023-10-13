@@ -70,28 +70,32 @@ export const fetchInitialStateCalcRemote = async (
 /**
  *  fetches the initial value of a calcRemote state, same as the state in db
  */
-export const fetchInitialStateMarkdownPanelsRemote = async (
+export const fetchInitialStateMarkdownRemote = async (
     accesstoken: string
 ): Promise<MarkdownPanelSheetObjectType> => {
-    const queryParsed: any = await fetch(`${ROUTES.ROOT}/${ROUTES.CALC}/load`, {
-        method: "POST",
-        // credentials: "include", // Needed to include the cookie
-        headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${accesstoken}`,
-        },
-    })
+    const queryParsed: any = await fetch(
+        `${ROUTES.ROOT}/${ROUTES.MARKDOWN}/load`,
+        {
+            method: "POST",
+            // credentials: "include", // Needed to include the cookie
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${accesstoken}`,
+            },
+        }
+    )
         .then((data) => data.json())
-        .catch((err) => console.log("error while loading sheet: ", err));
-
+        .catch((err) =>
+            console.log("error while loading markdownSheet: ", err)
+        );
     const newState: MarkdownPanelSheetObjectType = {
-        id: Number(queryParsed.data[0].calc_sheets_id),
-        panels: (queryParsed.data as Array<any>).map((table) => {
-            const parsedTable = JSON.parse(table.compressed_content);
-            parsedTable.id = Number(table.calc_tables_id);
-            return parsedTable;
+        id: Number(queryParsed.data[0].markdown_sheets_id),
+        panels: (queryParsed.data as Array<any>).map((panel) => {
+            const parsedPanel = panel;
+            parsedPanel.id = Number(panel.markdown_panels_id);
+            return parsedPanel;
         }),
-        mainTabID: Number(queryParsed.data[0].calc_tables_id),
+        mainPanelID: Number(queryParsed.data[0].markdown_panels_id),
     };
     console.log(newState);
     return newState;

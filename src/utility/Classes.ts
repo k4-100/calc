@@ -212,8 +212,8 @@ export type MarkdownPanelSheetObjectType = {
     panels: Array<MarkdownPanelObjectType>;
     /** sheet id */
     id: number;
-    /** id of main tab */
-    mainTabID: number;
+    /** id of main panel */
+    mainPanelID: number;
 };
 
 export class MarkdownPanelSheet {
@@ -221,8 +221,8 @@ export class MarkdownPanelSheet {
     panels: Array<MarkdownPanel>;
     /** sheet id */
     id: number;
-    /** id of main tab */
-    mainTabID: number;
+    /** id of main panel */
+    mainPanelID: number;
 
     /**
      * constructs sheet with default table and an id
@@ -234,7 +234,7 @@ export class MarkdownPanelSheet {
             new MarkdownPanel(),
         ];
         this.id = ++sheetIDsrc;
-        this.mainTabID = this.panels[0].id;
+        this.mainPanelID = this.panels[0].id;
         this.panels[0].content = MARKDOWN_PLACEHOLDER;
     }
 
@@ -242,7 +242,7 @@ export class MarkdownPanelSheet {
         return {
             panels: this.panels.map((panel) => panel.getObject()),
             id: this.id,
-            mainTabID: this.mainTabID,
+            mainPanelID: this.mainPanelID,
         };
     }
 }
