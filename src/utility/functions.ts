@@ -84,15 +84,22 @@ export const fetchInitialStateMarkdownRemote = async (
             },
         }
     )
-        .then((data) => data.json())
+        .then(async (data) => {
+            const d_parsed = await data.json();
+            return d_parsed;
+        })
         .catch((err) =>
             console.log("error while loading markdownSheet: ", err)
         );
+    console.log(queryParsed);
     const newState: MarkdownPanelSheetObjectType = {
         id: Number(queryParsed.data[0].markdown_sheets_id),
         panels: (queryParsed.data as Array<any>).map((panel) => {
             const parsedPanel = panel;
             parsedPanel.id = Number(panel.markdown_panels_id);
+            parsedPanel.content = parsedPanel.compressed_content;
+            delete parsedPanel.compressed_content;
+            // debugger;
             return parsedPanel;
         }),
         mainPanelID: Number(queryParsed.data[0].markdown_panels_id),

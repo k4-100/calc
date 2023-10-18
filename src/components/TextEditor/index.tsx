@@ -90,7 +90,6 @@ const TextEditor: React.FC = () => {
             setCurrentPanel(
                 currentPanelSheet.panels[_currentPanelIndex as number]
             );
-            // debugger;
         }
     }, [currentPanelIndex, currentPanelSheet]);
 
@@ -106,14 +105,23 @@ const TextEditor: React.FC = () => {
                     ) as MarkdownPanelSheetObjectType;
                     newSheet.panels[currentPanelIndex as number].content = text;
 
-                    dispatch(actions.setMarkdownSheet(newSheet));
+                    if (mode === ProfileVariantEnum.Local)
+                        dispatch(actions.setMarkdownSheet(newSheet));
+                    else dispatch(actions.setMarkdownSheetRemote(newSheet));
                 }
             }
         };
 
-        // let timerID = setTimeout(() => handlePanelChange(), 3000);
-        // return () => clearTimeout(timerID);
-    }, [currentPanel, currentPanelIndex, currentPanelSheet, dispatch, text]);
+        let timerID = setTimeout(() => handlePanelChange(), 1000);
+        return () => clearTimeout(timerID);
+    }, [
+        mode,
+        currentPanel,
+        currentPanelIndex,
+        currentPanelSheet,
+        dispatch,
+        text,
+    ]);
 
     // useEffect(() => {
     //     const handleWarningAlert = () => {
@@ -127,16 +135,22 @@ const TextEditor: React.FC = () => {
 
     useEffect(() => {
         if (currentPanel) {
-            console.log("if (currentPanel) {");
-            debugger;
-            setText(
-                mode === ProfileVariantEnum.Local
-                    ? currentPanel.content
-                    : (currentPanel as any).compressed_content
-            );
+            // console.log("if (currentPanel) {");
+            const c_panel =
+                currentPanelSheet?.panels[
+                    currentPanelSheet.panels.findIndex(
+                        (panel) => panel.id === currentPanelSheet.mainPanelID
+                    )
+                ];
+            console.log(c_panel);
+            setText(c_panel?.content as string);
             setLoading(false);
         }
-    }, [currentPanel]);
+    }, [
+        currentPanel,
+        currentPanelSheet?.mainPanelID,
+        currentPanelSheet?.panels,
+    ]);
 
     if (loading) return <> loading...</>;
 

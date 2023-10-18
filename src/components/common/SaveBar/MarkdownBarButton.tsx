@@ -52,7 +52,7 @@ const MarkdownBarButton: React.FC<{ name: string; id: number }> = ({
     const handleSwitchToNext = (id: number) => {
         console.log(id);
         const _sheet = _.cloneDeep(sheet);
-        _sheet.mainTabID = id;
+        _sheet.mainPanelID = id;
 
         dispatch(actions.setMarkdownSheet(_sheet));
     };
@@ -72,7 +72,7 @@ const MarkdownBarButton: React.FC<{ name: string; id: number }> = ({
                     borderRadius: 0,
                     width: 1,
                     backgroundColor:
-                        sheet.mainTabID !== id ? "" : `${blue[600]}`,
+                        sheet.mainPanelID !== id ? "" : `${blue[600]}`,
                 }}
             >
                 {name}

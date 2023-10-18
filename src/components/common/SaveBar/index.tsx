@@ -22,18 +22,12 @@ import MarkdownBarButton from "./MarkdownBarButton";
 const SaveBar: React.FC<{ app: AppVariantEnum }> = ({ app }) => {
     const index = Number(useParams().index) - 1;
 
-    const { mode, calcRemote, markdownPanels } = useSelector(
-        (state: any) => state
-    );
-
-    const sheets = useSelector((state: any) => state.calc);
-    const markdownSheets = useSelector((state: any) => state.markdownPanels);
+    const { mode, calc, calcRemote, markdownPanels, markdownPanelsRemote } =
+        useSelector((state: any) => state);
 
     if (app === AppVariantEnum.Calc) {
         const sheet: SheetClassObjectType =
-            mode === ProfileVariantEnum.Local
-                ? sheets[index]
-                : calcRemote.sheet;
+            mode === ProfileVariantEnum.Local ? calc[index] : calcRemote.sheet;
 
         return (
             <Paper
@@ -70,7 +64,10 @@ const SaveBar: React.FC<{ app: AppVariantEnum }> = ({ app }) => {
     }
 
     if (app === AppVariantEnum.Markdown) {
-        const sheet: MarkdownPanelSheetObjectType = markdownSheets[index];
+        const sheet: MarkdownPanelSheetObjectType =
+            mode === ProfileVariantEnum.Local
+                ? markdownPanels[index]
+                : markdownPanelsRemote[index].panels;
 
         return (
             <Paper
@@ -85,7 +82,6 @@ const SaveBar: React.FC<{ app: AppVariantEnum }> = ({ app }) => {
                     sx={{
                         display: "flex",
                         justifyContent: "space-between",
-
                         boxSizing: "border-box",
                         width: "100%",
                         // ml: "auto",
