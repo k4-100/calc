@@ -25,9 +25,13 @@ const MarkdownBarButton: React.FC<{ name: string; id: number }> = ({
     id,
 }) => {
     const index = Number(useParams().index) - 1;
-    const { mode, markdownPanels } = useSelector((state: any) => state);
-    const sheet: MarkdownPanelSheetObjectType = markdownPanels[index];
-
+    const { mode, markdownPanels, markdownPanelsRemote } = useSelector(
+        (state: any) => state
+    );
+    const sheet: MarkdownPanelSheetObjectType =
+        mode === ProfileVariantEnum.Local
+            ? markdownPanels[index]
+            : markdownPanelsRemote;
     const dispatch = useDispatch();
 
     /**
@@ -53,8 +57,10 @@ const MarkdownBarButton: React.FC<{ name: string; id: number }> = ({
         console.log(id);
         const _sheet = _.cloneDeep(sheet);
         _sheet.mainPanelID = id;
-
-        dispatch(actions.setMarkdownSheet(_sheet));
+        if (mode === ProfileVariantEnum.Local)
+            dispatch(actions.setMarkdownSheet(_sheet));
+        if (mode === ProfileVariantEnum.Online)
+            dispatch(actions.setMarkdownSheetRemote(_sheet));
     };
 
     return (

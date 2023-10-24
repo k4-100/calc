@@ -50,7 +50,7 @@ const App: React.FC = () => {
             }
         }
 
-        const id = setInterval(() => checkRefreshToken(), 5000);
+        const id = setInterval(() => checkRefreshToken(), 1000);
         return () => clearInterval(id);
     }, [dispatch, token.accesstoken]);
 

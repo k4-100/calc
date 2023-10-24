@@ -1,7 +1,7 @@
 import { blue, grey } from "@mui/material/colors";
 import { Box, ListItem } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
-import React, { ChangeEvent, useCallback, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import UtilityBelt from "../common/UtilityBelt";
 import Panel from "./Panel";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
@@ -30,29 +30,17 @@ const TextEditor: React.FC = () => {
     const index = Number(useParams().index) - 1;
     const [text, setText] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
-    const [currentPanelSheet, setCurrentPanelSheet] =
-        useState<null | MarkdownPanelSheetObjectType>(null);
-    const [currentPanelIndex, setCurrentPanelIndex] = useState<null | number>(
-        null
-    );
-    const [currentPanel, setCurrentPanel] =
-        useState<null | MarkdownPanelObjectType>(null);
-
+    // const [currentPanelSheet, setCurrentPanelSheet] =
+    //     useState<null | MarkdownPanelSheetObjectType>(null);
     const { mode, markdownPanels, markdownPanelsRemote, token } = useSelector(
         (state: any) => state
     );
     const dispatch = useDispatch();
 
-    // const currentPanelSheet: MarkdownPanelSheetObjectType =
-    //     mode === ProfileVariantEnum.Local
-    //         ? markdownPanels[index]
-    //         : markdownPanelsRemote[index];
-
-    // const currentPanelIndex: number = currentPanelSheet.panels.findIndex(
-    //     (panel) => panel.id === currentPanelSheet.mainPanelID
-    // );
-    // const currentPanel: MarkdownPanelObjectType =
-    //     currentPanelSheet.panels[currentPanelIndex];
+    const currentPanelSheet: null | MarkdownPanelSheetObjectType =
+        mode === ProfileVariantEnum.Online ? null : markdownPanels[index];
+    // : markdownPanelsRemote.panels[index];
+    debugger;
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
@@ -71,86 +59,60 @@ const TextEditor: React.FC = () => {
         }
     }, [dispatch, token.accesstoken, mode]);
 
-    useEffect(() => {
-        if (mode === ProfileVariantEnum.Local && markdownPanels) {
-            setCurrentPanelSheet(markdownPanels[index]);
-        }
+    useEffect(
+        () => {
+            const handlePanelChange = () => {
+                // console.log(`trying to save id: ${currentPanel.id}`);
+                if (currentPanelSheet) {
+                    const currentPanelIndex =
+                        currentPanelSheet.panels.findIndex(
+                            (panel) =>
+                                panel.id === currentPanelSheet.mainPanelID
+                        );
+                    console.log("currentPanelIndex: ", currentPanelIndex);
+                    if (currentPanelIndex < 0) {
+                        console.error(
+                            "ERROR: index is wrong in handlePanelChange"
+                        );
+                    } else if (
+                        (
+                            currentPanelSheet.panels[
+                                currentPanelIndex
+                            ] as MarkdownPanelObjectType
+                        ).content !== text
+                    ) {
+                        const newSheet: MarkdownPanelSheetObjectType =
+                            _.cloneDeep(
+                                currentPanelSheet
+                            ) as MarkdownPanelSheetObjectType;
+                        newSheet.panels[currentPanelIndex].content = text;
 
-        if (mode === ProfileVariantEnum.Online && markdownPanelsRemote) {
-            setCurrentPanelSheet(markdownPanelsRemote);
-        }
-    }, [index, markdownPanels, markdownPanelsRemote, mode]);
-
-    useEffect(() => {
-        if (currentPanelSheet && !currentPanelIndex) {
-            const _currentPanelIndex = currentPanelSheet.panels.findIndex(
-                (panel) => panel.id === currentPanelSheet.mainPanelID
-            );
-            setCurrentPanelIndex(_currentPanelIndex);
-            setCurrentPanel(
-                currentPanelSheet.panels[_currentPanelIndex as number]
-            );
-        }
-    }, [currentPanelIndex, currentPanelSheet]);
-
-    useEffect(() => {
-        const handlePanelChange = () => {
-            // console.log(`trying to save id: ${currentPanel.id}`);
-            if (currentPanelSheet != null) {
-                if (
-                    (currentPanel as MarkdownPanelObjectType).content !== text
-                ) {
-                    const newSheet: MarkdownPanelSheetObjectType = _.cloneDeep(
-                        currentPanelSheet
-                    ) as MarkdownPanelSheetObjectType;
-                    newSheet.panels[currentPanelIndex as number].content = text;
-
-                    if (mode === ProfileVariantEnum.Local)
-                        dispatch(actions.setMarkdownSheet(newSheet));
-                    else dispatch(actions.setMarkdownSheetRemote(newSheet));
+                        if (mode === ProfileVariantEnum.Local)
+                            dispatch(actions.setMarkdownSheet(newSheet));
+                        else dispatch(actions.setMarkdownSheetRemote(newSheet));
+                    }
                 }
-            }
-        };
+            };
 
-        let timerID = setTimeout(() => handlePanelChange(), 1000);
-        return () => clearTimeout(timerID);
-    }, [
-        mode,
-        currentPanel,
-        currentPanelIndex,
-        currentPanelSheet,
-        dispatch,
-        text,
-    ]);
-
-    // useEffect(() => {
-    //     const handleWarningAlert = () => {
-    //         alert(
-    //             "WARNING: make sure html in markdown you paste is safe, additional security will be implemented in the future"
-    //         );
-    //     };
-    //     let id: number = setTimeout(() => handleWarningAlert(), 1000);
-    //     return () => clearTimeout(id);
-    // }, []);
+            let timerID = setTimeout(() => handlePanelChange(), 1000);
+            return () => clearTimeout(timerID);
+        },
+        [currentPanelSheet, dispatch, index, mode, text]
+        // [index, mode, currentPanelSheet, dispatch, text]
+    );
 
     useEffect(() => {
-        if (currentPanel) {
-            // console.log("if (currentPanel) {");
-            const c_panel =
+        if (currentPanelSheet) {
+            const currentPanel =
                 currentPanelSheet?.panels[
                     currentPanelSheet.panels.findIndex(
                         (panel) => panel.id === currentPanelSheet.mainPanelID
                     )
                 ];
-            console.log(c_panel);
-            setText(c_panel?.content as string);
+            setText(currentPanel?.content as string);
             setLoading(false);
         }
-    }, [
-        currentPanel,
-        currentPanelSheet?.mainPanelID,
-        currentPanelSheet?.panels,
-    ]);
+    }, [currentPanelSheet]);
 
     if (loading) return <> loading...</>;
 

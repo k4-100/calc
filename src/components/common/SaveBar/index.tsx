@@ -64,11 +64,10 @@ const SaveBar: React.FC<{ app: AppVariantEnum }> = ({ app }) => {
     }
 
     if (app === AppVariantEnum.Markdown) {
-        const sheet: MarkdownPanelSheetObjectType =
+        const markdownSheet: MarkdownPanelSheetObjectType =
             mode === ProfileVariantEnum.Local
                 ? markdownPanels[index]
-                : markdownPanelsRemote[index].panels;
-
+                : markdownPanelsRemote;
         return (
             <Paper
                 elevation={2}
@@ -87,8 +86,8 @@ const SaveBar: React.FC<{ app: AppVariantEnum }> = ({ app }) => {
                         // ml: "auto",
                     }}
                 >
-                    {sheet.panels.length &&
-                        sheet.panels.map(
+                    {markdownSheet.panels.length &&
+                        markdownSheet.panels.map(
                             (tab: MarkdownPanelObjectType, i: number) => (
                                 <MarkdownBarButton
                                     name={`${i + 1}`}

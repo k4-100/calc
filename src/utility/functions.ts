@@ -99,7 +99,6 @@ export const fetchInitialStateMarkdownRemote = async (
             parsedPanel.id = Number(panel.markdown_panels_id);
             parsedPanel.content = parsedPanel.compressed_content;
             delete parsedPanel.compressed_content;
-            // debugger;
             return parsedPanel;
         }),
         mainPanelID: Number(queryParsed.data[0].markdown_panels_id),

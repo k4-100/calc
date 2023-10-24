@@ -17,26 +17,6 @@ const markdownPanelsRemoteSlice = createSlice({
             }
         ) {
             return action.payload;
-            // const newState = _.cloneDeep(state);
-            // const sheetIndex: number = newState.findIndex(
-            //     (sht: MarkdownPanelSheetObjectType) =>
-            //         sht.id === action.payload.id
-            // );
-            // if (sheetIndex < 0) {
-            //     console.error(
-            //         "ERROR: MARKDOWN SHEET ISN'T PART OF THE STATE IN setMarkdownSheet"
-            //     );
-            //     return;
-            // }
-            // // if (sheetIndex < 0) {
-            // //     console.error(
-            // //         "ERROR: SHEET ISN'T PART OF THE STATE IN setSheet"
-            // //     );
-            // //     return;
-            // // }
-            // newState[sheetIndex] = _.cloneDeep(action.payload);
-            // localStorage.setItem("markdownPanels", JSON.stringify(newState));
-            // return newState;
         },
     },
 });

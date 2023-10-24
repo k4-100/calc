@@ -1,0 +1,13 @@
+react-dom.development.js:86 Warning: Cannot update a component (`ForwardRef(TouchRipple2)`) while rendering a different component (`TextEditor`). To locate the bad setState() call inside `TextEditor`, follow the stack trace as described in https://reactjs.org/link/setstate-in-render
+    at TextEditor (http://localhost:5173/src/components/TextEditor/index.tsx?t=1698161678957:34:26)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=e56d1028:2975:5)
+    at RenderedRoute (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=e56d1028:2975:5)
+    at Routes (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=e56d1028:3320:5)
+    at Router (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=e56d1028:3267:15)
+    at BrowserRouter (http://localhost:5173/node_modules/.vite/deps/react-router-dom.js?v=e56d1028:3680:5)
+    at InnerThemeProvider (http://localhost:5173/node_modules/.vite/deps/chunk-HH2EMSXR.js?v=e56d1028:4599:17)
+    at ThemeProvider2 (http://localhost:5173/node_modules/.vite/deps/chunk-HH2EMSXR.js?v=e56d1028:3920:5)
+    at ThemeProvider3 (http://localhost:5173/node_modules/.vite/deps/chunk-HH2EMSXR.js?v=e56d1028:4607:5)
+    at App (http://localhost:5173/src/App.tsx?t=1698161678957:28:24)
+    at CookiesProvider2 (http://localhost:5173/node_modules/.vite/deps/react-cookie.js?v=e56d1028:295:26)
+    at Provider (http://localhost:5173/node_modules/.vite/deps/react-redux.js?v=e56d1028:989:3)
