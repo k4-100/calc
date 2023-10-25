@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import Header from "./Header";
 import SocialMedia from "./SocialMedia";
@@ -9,12 +9,15 @@ import Apps from "./Apps";
 import Saves from "./Saves";
 import ErrorPage from "./ErrorPage";
 import ModeSwitcher from "./ModeSwitcher";
+import ModePickingModal from "./ModePickingModal";
 
 /**
  * @param isError determines if there was an error or not
  * @returns Home page, if isError === true returns ErrorPage instead
  */
 const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
+    const [wasModePicked, setWasModePicked] = useState<boolean>(false);
+
     return (
         <>
             <Header />
@@ -72,6 +75,7 @@ const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
                     >
                         Copyright © XYZ 2022
                     </Typography>
+                    {!wasModePicked && <ModePickingModal />}
                 </>
             )}
         </>
