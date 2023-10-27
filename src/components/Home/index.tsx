@@ -18,6 +18,8 @@ import ModePickingModal from "./ModePickingModal";
 const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
     const [wasModePicked, setWasModePicked] = useState<boolean>(false);
 
+    const handleModalClose = () => setWasModePicked(true);
+
     return (
         <>
             <Header />
@@ -75,7 +77,9 @@ const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
                     >
                         Copyright © XYZ 2022
                     </Typography>
-                    {!wasModePicked && <ModePickingModal />}
+                    {!wasModePicked && (
+                        <ModePickingModal handleModalClose={handleModalClose} />
+                    )}
                 </>
             )}
         </>

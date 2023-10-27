@@ -12,27 +12,51 @@ import {
     DesktopWindowsOutlined,
 } from "@mui/icons-material";
 import { Stack } from "@mui/system";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../store";
+import { ProfileVariantEnum } from "../../utility/Classes";
+import { grey } from "@mui/material/colors";
 
-type Props = {};
+type Props = {
+    handleModalClose: Function;
+};
 
 const options = [
     {
         heading: "hover to check",
-        description: "click to choose",
+        description: [
+            "click to choose",
+            'you can change it later in "current mode"',
+        ],
     },
     {
         heading: "Locally",
-        description: "Saves data in browser's local storage",
+        // description: "Saves data in browser's local storage",
+        description: [
+            "Saves data in browser's local storage",
+            "click at the number to switch to another sheet",
+        ],
     },
-
     {
         heading: "Remotely",
-        description: "Saves data in a server account",
+        description: [
+            "Saves data in a server account",
+            "create or log into account to access wherever",
+        ],
     },
 ];
 
-const ModePickingModal: React.FC<Props> = () => {
+const ModePickingModal: React.FC<Props> = ({ handleModalClose }) => {
     const [currentHoverIndex, setCurrentHoverIndex] = useState<number>(0);
+
+    const { mode } = useSelector((state: any) => state);
+    const dispatch = useDispatch();
+
+    const handleClick = (variant: ProfileVariantEnum) => {
+        dispatch(actions.setMode(variant));
+        handleModalClose();
+    };
+
     return (
         <Dialog
             open={true}
@@ -64,6 +88,7 @@ const ModePickingModal: React.FC<Props> = () => {
                 <IconButton
                     onMouseEnter={() => setCurrentHoverIndex(1)}
                     onMouseLeave={() => setCurrentHoverIndex(0)}
+                    onClick={() => handleClick(ProfileVariantEnum.Local)}
                 >
                     <DesktopWindowsOutlined />
                 </IconButton>
@@ -75,6 +100,7 @@ const ModePickingModal: React.FC<Props> = () => {
                 <IconButton
                     onMouseEnter={() => setCurrentHoverIndex(2)}
                     onMouseLeave={() => setCurrentHoverIndex(0)}
+                    onClick={() => handleClick(ProfileVariantEnum.Online)}
                 >
                     <StorageIcon />
                 </IconButton>
@@ -84,8 +110,15 @@ const ModePickingModal: React.FC<Props> = () => {
                     {options[currentHoverIndex].heading}
                 </Typography>
 
-                <Typography variant="subtitle1" align="center" gutterBottom>
-                    {options[currentHoverIndex].description}
+                <Typography variant="subtitle1" align="center">
+                    {options[currentHoverIndex].description[0]}
+                </Typography>
+                <Typography
+                    variant="subtitle2"
+                    align="center"
+                    color={grey[500]}
+                >
+                    {options[currentHoverIndex].description[1]}
                 </Typography>
             </Box>
         </Dialog>
