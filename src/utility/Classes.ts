@@ -259,4 +259,5 @@ export enum AppVariantEnum {
 
 export type MiscellaneousType = {
     pickedMode: boolean;
+    loadedRemoteMarkdown: boolean;
 };

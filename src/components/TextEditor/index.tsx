@@ -30,17 +30,18 @@ const TextEditor: React.FC = () => {
     const index = Number(useParams().index) - 1;
     const [text, setText] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
+
     // const [currentPanelSheet, setCurrentPanelSheet] =
     //     useState<null | MarkdownPanelSheetObjectType>(null);
-    const { mode, markdownPanels, markdownPanelsRemote, token } = useSelector(
-        (state: any) => state
-    );
+    const { mode, markdownPanels, markdownPanelsRemote, token, miscellaneous } =
+        useSelector((state: any) => state);
     const dispatch = useDispatch();
 
     const currentPanelSheet: null | MarkdownPanelSheetObjectType =
-        mode === ProfileVariantEnum.Online ? null : markdownPanels[index];
+        mode === ProfileVariantEnum.Online
+            ? markdownPanelsRemote
+            : markdownPanels[index];
     // : markdownPanelsRemote.panels[index];
-    debugger;
 
     const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setText(e.target.value);
