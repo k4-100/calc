@@ -3,6 +3,7 @@ import calcSlice from "./calc";
 import calcRemoteSlice from "./calcRemote";
 import markdownPanelsSlice from "./markdownPanels";
 import markdownPanelsRemoteSlice from "./markdownPanelsRemote";
+import miscellaneousSlice from "./miscellaneous";
 import modeSlice from "./mode";
 import profileSlice from "./profile";
 import tokenSlice from "./token";
@@ -15,6 +16,7 @@ export const actions = {
     ...tokenSlice.actions,
     ...calcRemoteSlice.actions,
     ...markdownPanelsRemoteSlice.actions,
+    ...miscellaneousSlice.actions,
 };
 
 const reducer = combineReducers({
@@ -25,6 +27,7 @@ const reducer = combineReducers({
     token: tokenSlice.reducer,
     calcRemote: calcRemoteSlice.reducer,
     markdownPanelsRemote: markdownPanelsRemoteSlice.reducer,
+    miscellaneous: miscellaneousSlice.reducer,
 });
 
 const store = configureStore({ reducer });

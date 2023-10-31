@@ -1,5 +1,5 @@
 import { blue, grey } from "@mui/material/colors";
-import { Box, ListItem } from "@mui/material";
+import { Box, ListItem, Typography } from "@mui/material";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import UtilityBelt from "../common/UtilityBelt";
@@ -114,7 +114,7 @@ const TextEditor: React.FC = () => {
         }
     }, [currentPanelSheet]);
 
-    if (loading) return <> loading...</>;
+    // if (loading) return <> loading...</>;
 
     return (
         <Box
@@ -181,88 +181,96 @@ const TextEditor: React.FC = () => {
                     },
                 }}
             >
-                <Panel panelName="text">
-                    <TextareaAutosize
-                        aria-label="empty textarea"
-                        placeholder="Empty"
-                        value={text}
-                        onChange={(e) => handleTextChange(e)}
-                        style={{
-                            display: "block",
-                            // height: "50vh !important",
-                            backgroundColor: grey[800],
-                            color: "white",
-                            fontSize: "18px",
-                            resize: "none",
-                        }}
-                    />
-                </Panel>
-                <Panel panelName="markdown">
-                    <Box
-                        sx={{
-                            backgroundColor: grey[900],
+                {loading ? (
+                    <Typography> Loading...</Typography>
+                ) : (
+                    <>
+                        <Panel panelName="text">
+                            <TextareaAutosize
+                                aria-label="empty textarea"
+                                placeholder="Empty"
+                                value={text}
+                                onChange={(e) => handleTextChange(e)}
+                                style={{
+                                    display: "block",
+                                    // height: "50vh !important",
+                                    backgroundColor: grey[800],
+                                    color: "white",
+                                    fontSize: "18px",
+                                    resize: "none",
+                                }}
+                            />
+                        </Panel>
+                        <Panel panelName="markdown">
+                            <Box
+                                sx={{
+                                    backgroundColor: grey[900],
 
-                            overflowY: "auto",
-                            "& > *:first-of-type": { mt: 0 },
-                            "& a": {
-                                color: `${blue[500]} !important`,
-                            },
-                            "& table": {
-                                borderSpacing: 0,
-                                borderCollapse: "collapse",
-                            },
-                            "& td": {
-                                border: `1px solid ${grey[800]}`,
-                            },
-                            "& blockquote": {
-                                borderLeft: `3px solid ${grey[500]}`,
-                                pl: "10px",
-                                // background: grey[600],
-                            },
-                            "& h1": {
-                                mt: "60px !important",
-                                mb: "30px",
-                                pb: "5px",
-                                borderBottom: `2px solid ${grey[600]}`,
-                            },
-                        }}
-                    >
-                        <ReactMarkdown
-                            children={text}
-                            remarkPlugins={[remarkGfm]}
-                            rehypePlugins={[rehypeRaw]}
-                            components={{
-                                code({
-                                    node,
-                                    inline,
-                                    className,
-                                    children,
-                                    ...props
-                                }) {
-                                    const match = /language-(\w+)/.exec(
-                                        className || ""
-                                    );
-                                    return !inline && match ? (
-                                        <SyntaxHighlighter
-                                            {...props}
-                                            children={String(children).replace(
-                                                /\n$/,
-                                                ""
-                                            )}
-                                            style={vscDarkPlus}
-                                            language={match[1]}
-                                            PreTag="div"
-                                        />
-                                    ) : (
-                                        <code {...props} className={className}>
-                                            {children}
-                                        </code>
-                                    );
-                                },
-                            }}
-                        />
-                    </Box>
-                </Panel>
+                                    overflowY: "auto",
+                                    "& > *:first-of-type": { mt: 0 },
+                                    "& a": {
+                                        color: `${blue[500]} !important`,
+                                    },
+                                    "& table": {
+                                        borderSpacing: 0,
+                                        borderCollapse: "collapse",
+                                    },
+                                    "& td": {
+                                        border: `1px solid ${grey[800]}`,
+                                    },
+                                    "& blockquote": {
+                                        borderLeft: `3px solid ${grey[500]}`,
+                                        pl: "10px",
+                                        // background: grey[600],
+                                    },
+                                    "& h1": {
+                                        mt: "60px !important",
+                                        mb: "30px",
+                                        pb: "5px",
+                                        borderBottom: `2px solid ${grey[600]}`,
+                                    },
+                                }}
+                            >
+                                <ReactMarkdown
+                                    children={text}
+                                    remarkPlugins={[remarkGfm]}
+                                    rehypePlugins={[rehypeRaw]}
+                                    components={{
+                                        code({
+                                            node,
+                                            inline,
+                                            className,
+                                            children,
+                                            ...props
+                                        }) {
+                                            const match = /language-(\w+)/.exec(
+                                                className || ""
+                                            );
+                                            return !inline && match ? (
+                                                <SyntaxHighlighter
+                                                    {...props}
+                                                    children={String(
+                                                        children
+                                                    ).replace(/\n$/, "")}
+                                                    style={vscDarkPlus}
+                                                    language={match[1]}
+                                                    PreTag="div"
+                                                />
+                                            ) : (
+                                                <code
+                                                    {...props}
+                                                    className={className}
+                                                >
+                                                    {children}
+                                                </code>
+                                            );
+                                        },
+                                    }}
+                                />
+                            </Box>
+                        </Panel>
+                    </>
+                )}
             </Box>
             <SaveBar app={AppVariantEnum.Markdown} />
         </Box>

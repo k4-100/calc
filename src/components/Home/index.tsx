@@ -10,15 +10,18 @@ import Saves from "./Saves";
 import ErrorPage from "./ErrorPage";
 import ModeSwitcher from "./ModeSwitcher";
 import ModePickingModal from "./ModePickingModal";
+import { useDispatch, useSelector } from "react-redux";
+import { actions } from "../../store";
 
 /**
  * @param isError determines if there was an error or not
  * @returns Home page, if isError === true returns ErrorPage instead
  */
 const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
-    const [wasModePicked, setWasModePicked] = useState<boolean>(false);
+    const { miscellaneous } = useSelector((state: any) => state);
+    const dispatch = useDispatch();
 
-    const handleModalClose = () => setWasModePicked(true);
+    const handleModalClose = () => dispatch(actions.setPickedMode(true));
 
     return (
         <>
@@ -77,7 +80,7 @@ const Home: React.FC<{ isError?: boolean }> = ({ isError }) => {
                     >
                         Copyright © XYZ 2022
                     </Typography>
-                    {!wasModePicked && (
+                    {!miscellaneous.pickedMode && (
                         <ModePickingModal handleModalClose={handleModalClose} />
                     )}
                 </>

@@ -256,3 +256,7 @@ export enum AppVariantEnum {
     Calc,
     Markdown,
 }
+
+export type MiscellaneousType = {
+    pickedMode: boolean;
+};
