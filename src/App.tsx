@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actions } from "./store";
 import jwtDecode from "jwt-decode";
 import { ROUTES } from "./utility/constants";
+import { useCookies } from "react-cookie";
 
 const darkTheme = createTheme({
     palette: {
@@ -16,8 +17,13 @@ const darkTheme = createTheme({
 });
 
 const App: React.FC = () => {
+    const [cookies, setCookie, _removeCookie] = useCookies(["accesstoken"]);
     const { token } = useSelector((state: any) => state);
     const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     console.log(cookies);
+    // });
 
     // First thing, check if a refreshtoken exist
     useEffect(() => {
@@ -31,10 +37,10 @@ const App: React.FC = () => {
             if (isExpired) {
                 // console.log("expired");
                 const result = await fetch(
-                    `${ROUTES.ROOT}/${ROUTES.CALC}/refresh_token`,
+                    `${ROUTES.ROOT}/${ROUTES.ACCOUNTS}/refresh_token`,
                     {
                         method: "POST",
-                        // credentials: "include", // Needed to include the cookie
+                        credentials: "include", // Needed to include the cookie
                         headers: {
                             "Content-Type": "application/json",
                         },
