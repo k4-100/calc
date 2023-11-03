@@ -34,7 +34,6 @@ const App: React.FC = () => {
                 token.username === "" &&
                 token.accesstoken === ""
             ) {
-                debugger;
                 dispatch(
                     actions.setAccessToken({
                         id: userid,
