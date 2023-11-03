@@ -18,7 +18,7 @@ const darkTheme = createTheme({
 });
 
 const App: React.FC = () => {
-    const [cookies, setCookie, _removeCookie] = useCookies([
+    const [cookies, _setCookie, _removeCookie] = useCookies([
         "accesstoken",
         "userid",
         "username",
@@ -27,8 +27,8 @@ const App: React.FC = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const { accesstoken, userid, username } = cookies;
-        if (token) {
+        if (cookies && token) {
+            const { accesstoken, userid, username } = cookies;
             if (
                 token.id === "" &&
                 token.username === "" &&
@@ -44,7 +44,7 @@ const App: React.FC = () => {
                 );
             }
         }
-    }, [cookies, dispatch]);
+    }, [cookies, token, dispatch]);
 
     // First thing, check if a refreshtoken exist
     useEffect(() => {
