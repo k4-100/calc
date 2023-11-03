@@ -9,6 +9,7 @@ import { actions } from "./store";
 import jwtDecode from "jwt-decode";
 import { ROUTES } from "./utility/constants";
 import { useCookies } from "react-cookie";
+import _ from "lodash";
 
 const darkTheme = createTheme({
     palette: {
@@ -17,13 +18,33 @@ const darkTheme = createTheme({
 });
 
 const App: React.FC = () => {
-    const [cookies, setCookie, _removeCookie] = useCookies(["accesstoken"]);
+    const [cookies, setCookie, _removeCookie] = useCookies([
+        "accesstoken",
+        "userid",
+        "username",
+    ]);
     const { token } = useSelector((state: any) => state);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     console.log(cookies);
-    // });
+    useEffect(() => {
+        const { accesstoken, userid, username } = cookies;
+        if (token) {
+            if (
+                token.id === "" &&
+                token.username === "" &&
+                token.accesstoken === ""
+            ) {
+                debugger;
+                dispatch(
+                    actions.setAccessToken({
+                        id: userid,
+                        username,
+                        accesstoken,
+                    })
+                );
+            }
+        }
+    }, [cookies, dispatch]);
 
     // First thing, check if a refreshtoken exist
     useEffect(() => {
